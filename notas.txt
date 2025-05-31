@@ -1,0 +1,19 @@
+Objetos a grandes razgos que va a manejar el sistema:
+
+Clases:
+- Pedido: Podría almacenar toda la información del pedido, va estrictamente relacionado con una Mesa, podría ser el registro que se guarde en la base de datos
+Posibles atributos: 
+Menú (Platos o Bebidas), Mozo que atendió el pedido
+
+- Mesa: Podría ser para almacenar la cantidad de comensales, estado de la mesa (si está ocupada o no), tiempo transcurrido, otro estado, del estado actual de la mesa, (Pensando el menú, espera del menú, comiendo, espera de la cuenta), monto total del menú.
+Mesero Asignado a la mesa.
+
+- Plato / ítem: Para guardar información de un plato, tendrá un precio, tiempo de cocción, etc.
+
+- Empleado: Es una persona física dentro del local, tendrá asociado un USUARIO, y ese USUARIO tendrá asociado un tipo de PERFIL (Mesero / Gerente)
+
+- Mesero: Es un perfil de usuario
+
+- Gerente: Es un perfil de usuario
+
+- Usuario: Para el sistema de login, tendrá Nombre de Usuario (podría ser el Legajo del EMPLEADO) y una contraseña.
