@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace negocio
 {
-    public class database
+    public class Database
     {
         private SqlConnection connection;
         private SqlCommand command;
@@ -18,7 +18,7 @@ namespace negocio
             get { return reader; }
         }
 
-        public database()
+        public Database()
         {
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             command = new SqlCommand();

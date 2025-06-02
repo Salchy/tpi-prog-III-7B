@@ -9,7 +9,7 @@ namespace dominio
     public class Usuario
     {
         // Astributos
-        public int Dni { get; }
+        public string Dni { get; }
         private string Nombre;
         private Perfil TipoUsuario;
 
@@ -28,11 +28,11 @@ namespace dominio
             return false;
         }
 
-        public Permiso GetPerfil()
+        public Perfil GetPerfil()
         {
             return TipoUsuario;
         }
-        public bool setPerfil(Permiso tipoUsuario)
+        public bool setPerfil(Perfil tipoUsuario)
         {
             if (tipoUsuario != null)
             {
@@ -46,7 +46,7 @@ namespace dominio
 
 
         // Constructor
-        public Usuario(int dni, string nombre, Permiso perfil)
+        public Usuario(string dni, string nombre, Perfil perfil)
         {
             Dni = dni;
             Nombre = nombre;
