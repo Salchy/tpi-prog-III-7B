@@ -11,7 +11,7 @@ namespace AppWeb
 {
 
 
-    public partial class _Default
+    public partial class WebForm1
     {
     }
 }
