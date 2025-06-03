@@ -36,7 +36,7 @@ namespace dominio
         {
             if (tipoUsuario != null)
             {
-                TipoUsuario = TipoUsuario;
+                TipoUsuario = tipoUsuario;
                 return true;
             }
             return false;
