@@ -17,3 +17,5 @@ Mesero Asignado a la mesa.
 - Gerente: Es un perfil de usuario
 
 - Usuario: Para el sistema de login, tendrá Nombre de Usuario (podría ser el Legajo del EMPLEADO) y una contraseña.
+
+Ordenes y Pedidos tendran un estado en C# (UML)
