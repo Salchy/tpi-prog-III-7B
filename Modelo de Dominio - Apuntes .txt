@@ -1,0 +1,34 @@
+Clases:
+
+Pedido:
+- Atributos
+	idPedido
+	idMesa
+	menus
+- Métodos:
+	
+Mesa:
+- Atributos
+	numeroMesa
+	cantComensales
+	estado
+	meseroAsignado
+- Métodos:
+
+Usuario:
+- Atributos:
+	Dni
+	Nombre
+	PerfilUsuario
+- Métodos:
+	GetNombre
+	SetNombre
+	GetPerfil
+	SetPerfil
+
+UsuarioDatos:
+- Atributos:
+	- database
+- Métodos:
+	registrarUsuario
+	GetUsuario

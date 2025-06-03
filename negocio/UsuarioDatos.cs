@@ -106,7 +106,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario(data["dni"].ToString(), data["nombre"].ToString());
+                Usuario usuario = new Usuario(data["dni"].ToString(), data["nombre"].ToString(), new Perfil((int)data["idPerfil"], data["nombrePerfil"].ToString()));
                 return usuario;
             }
             catch (Exception ex)
@@ -132,7 +132,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario(data["dni"].ToString(), data["nombre"].ToString());
+                Usuario usuario = new Usuario(data["dni"].ToString(), data["nombre"].ToString(), new Perfil((int)data["idPerfil"], data["nombrePerfil"].ToString()));
                 return usuario;
             }
             catch (Exception ex)

@@ -46,11 +46,11 @@ namespace dominio
 
 
         // Constructor
-        public Usuario(string dni, string nombre)
+        public Usuario(string dni, string nombre, Perfil perfil)
         {
             Dni = dni;
             Nombre = nombre;
-            //TipoUsuario = new Perfil();
+            TipoUsuario = perfil;
         }
     }
 }
