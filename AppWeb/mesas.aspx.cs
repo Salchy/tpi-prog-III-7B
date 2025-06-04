@@ -10,8 +10,10 @@ namespace AppWeb
     public partial class WebForm3 : System.Web.UI.Page
     {
 
-        List<string> mesas = new List<string>();
-        //mesas.Add();
+        List<string> mesas = new List<string>()
+        {
+            {"Mesa 1", }
+        };
 
         protected void Page_Load(object sender, EventArgs e)
         {
