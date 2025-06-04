@@ -1,8 +1,12 @@
+CREATE DATABASE RestoBar
+GO
+USE RestoBar
+GO
+
 CREATE TABLE [Usuarios] (
 	[id_Usuario] TINYINT NOT NULL IDENTITY UNIQUE,
 	[DNI] VARCHAR NOT NULL UNIQUE,
 	[Nombre] VARCHAR NOT NULL UNIQUE,
-	[Usuario] VARCHAR NOT NULL UNIQUE,
 	[Contraseña] VARCHAR NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[Permisos] BIT NOT NULL DEFAULT 1,
@@ -17,7 +21,7 @@ EXEC sys.sp_addextendedproperty
 GO
 
 CREATE INDEX [USUARIOS_index_0]
-ON [Usuarios] ();
+ON [Usuarios] (DNI);
 GO
 
 CREATE TABLE [Categoria_Menu] (
@@ -45,15 +49,15 @@ CREATE TABLE [Ordenes] (
 	[Cantidad] CHAR NOT NULL DEFAULT '1',
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[id_Mesa] TINYINT NOT NULL,
-	[Id_Pedido] INTEGER NOT NULL,
-	PRIMARY KEY([id_Orden], [Id_Pedido])
+	[id_Pedido] INTEGER NOT NULL,
+	PRIMARY KEY([id_Orden], [id_Pedido])
 );
 GO
 
 CREATE TABLE [Mesas] (
 	[id_Mesa] TINYINT NOT NULL IDENTITY UNIQUE,
 	[Numero] VARCHAR NOT NULL UNIQUE,
-	[Id_Usuario] TINYINT NOT NULL,
+	[id_Usuario] TINYINT NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 01,
 	[Numero_Comensales] VARCHAR NOT NULL,
 	PRIMARY KEY([id_Mesa])
@@ -69,29 +73,32 @@ CREATE TABLE [Pedidos] (
 );
 GO
 
-
-ALTER TABLE [Usuarios]
-ADD FOREIGN KEY([id_Usuario])
-REFERENCES [Mesas]([Id_Usuario])
-ON UPDATE NO ACTION ON DELETE NO ACTION;
-GO
 ALTER TABLE [Mesas]
-ADD FOREIGN KEY([id_Mesa])
-REFERENCES [Pedidos]([id_Mesa])
+ADD FOREIGN KEY([id_Usuario])
+REFERENCES [Usuarios]([id_Usuario])
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 GO
+
 ALTER TABLE [Menu]
-ADD FOREIGN KEY([id_Menu_Item])
-REFERENCES [Ordenes]([id_Menu])
-ON UPDATE NO ACTION ON DELETE NO ACTION;
-GO
-ALTER TABLE [Categoria_Menu]
 ADD FOREIGN KEY([id_Categoria])
-REFERENCES [Menu]([id_Categoria])
+REFERENCES [Categoria_Menu]([id_Categoria])
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 GO
-ALTER TABLE [Pedidos]
+
+ALTER TABLE [Ordenes]
+ADD FOREIGN KEY([id_Menu])
+REFERENCES [Menu]([id_Menu_Item])
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [Ordenes]
 ADD FOREIGN KEY([id_Pedido])
-REFERENCES [Ordenes]([Id_Pedido])
+REFERENCES [Pedidos]([id_Pedido])
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [Pedidos]
+ADD FOREIGN KEY([id_Mesa])
+REFERENCES [Mesas]([id_Mesa])
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 GO
