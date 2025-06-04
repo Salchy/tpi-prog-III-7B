@@ -19,13 +19,15 @@
                 <div class="position-absolute top-50 start-50 translate-middle">
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <%--<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">--%>
+                        <asp:TextBox ID="txtBarDNI" class="form-control" runat="server"></asp:TextBox>
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                       <%-- <input type="password" class="form-control" id="exampleInputPassword1">--%>
+                        <asp:TextBox ID="txtBarPassword" class="form-control" runat="server"></asp:TextBox>
                     </div>
-                    <button type="submit" class="btn btn-primary">Iniciar Sesion</button>
+                    <asp:Button ID="Button1" class="btn btn-primary" runat="server" Text="Iniciar Sesion" OnClientClick="login" OnClick="Button1_Click" />
                 </div>
             </div>
         </main>

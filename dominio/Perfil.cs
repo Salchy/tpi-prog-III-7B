@@ -9,6 +9,7 @@ namespace dominio
     public class Perfil
     {
         public int IdPermiso { get; }
+        public int Nivel { get; }
         public string NombrePermiso;
         public string getNombrePermiso()
         {
@@ -25,10 +26,18 @@ namespace dominio
             return false;
         }
 
-        public Perfil(int idPermiso, string nombrePermiso)
+        public Perfil(int idPermiso, string nombrePermiso) // Sólo para que no se me rompa por ahora
         {
             IdPermiso = idPermiso;
             NombrePermiso = nombrePermiso;
+            Nivel = 0;
+        }
+
+        public Perfil(int idPermiso, string nombrePermiso, int nivel)
+        {
+            IdPermiso = idPermiso;
+            NombrePermiso = nombrePermiso;
+            Nivel = nivel;
         }
     }
 }
