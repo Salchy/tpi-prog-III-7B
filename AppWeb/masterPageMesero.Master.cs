@@ -7,14 +7,8 @@ using System.Web.UI.WebControls;
 
 namespace AppWeb
 {
-    public partial class WebForm3 : System.Web.UI.Page
+    public partial class Site2 : System.Web.UI.MasterPage
     {
-
-        List<string> mesas = new List<string>()
-        {
-            {"Mesa 1", }
-        };
-
         protected void Page_Load(object sender, EventArgs e)
         {
 

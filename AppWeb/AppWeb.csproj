@@ -152,6 +152,7 @@
     <Content Include="login.aspx" />
     <Content Include="gerencia.aspx" />
     <Content Include="mesas.aspx" />
+    <Content Include="Mesero.aspx" />
     <None Include="Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -234,6 +235,13 @@
     <Compile Include="masterPageGerencia.Master.designer.cs">
       <DependentUpon>masterPageGerencia.Master</DependentUpon>
     </Compile>
+    <Compile Include="masterPageMesero.Master.cs">
+      <DependentUpon>masterPageMesero.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="masterPageMesero.Master.designer.cs">
+      <DependentUpon>masterPageMesero.Master</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -262,6 +270,13 @@
     <Compile Include="mesas.aspx.designer.cs">
       <DependentUpon>mesas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Mesero.aspx.cs">
+      <DependentUpon>Mesero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Mesero.aspx.designer.cs">
+      <DependentUpon>Mesero.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -271,6 +286,7 @@
     <Content Include="Scripts\jquery-3.7.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <Content Include="masterPageGerencia.Master" />
+    <Content Include="masterPageMesero.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
