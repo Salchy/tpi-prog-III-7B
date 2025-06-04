@@ -11,10 +11,14 @@ namespace dominio
     // Esto va a ser otra tabla
     public class MenuItem
     {
-        private int IdMenuItem { get; set; }
-        private Categoria Categoria { get; set; }
-        private string Nombre { get; set; }
-        private decimal Precio { get; set; }
-        
+        public int IdMenuItem { get; set; }
+        public Categoria Categoria { get; set; }
+        public string Nombre { get; set; }
+        public decimal Precio { get; set; }
+
+        public bool Estado { get; set; }
+
+        public string Descripcion { get; set; }
+
     }
 }

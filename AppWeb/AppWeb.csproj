@@ -118,6 +118,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="gerenciaMenu.aspx" />
+    <Content Include="gerenciaPersonal.aspx" />
+    <Content Include="gerenciaReportes.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -192,6 +194,20 @@
     </Compile>
     <Compile Include="gerenciaMenu.aspx.designer.cs">
       <DependentUpon>gerenciaMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gerenciaPersonal.aspx.cs">
+      <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaPersonal.aspx.designer.cs">
+      <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gerenciaReportes.aspx.cs">
+      <DependentUpon>gerenciaReportes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaReportes.aspx.designer.cs">
+      <DependentUpon>gerenciaReportes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

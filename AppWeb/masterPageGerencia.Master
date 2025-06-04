@@ -29,7 +29,10 @@
                         <a class="nav-link" href="gerenciaMenu.aspx">Menú</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Personal</a>
+                        <a class="nav-link" href="gerenciaPersonal.aspx">Personal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gerenciaReportes.aspx">Reportes</a>
                     </li>
                 </ul>
             </div>
