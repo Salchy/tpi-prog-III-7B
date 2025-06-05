@@ -27,7 +27,9 @@ namespace AppWeb
             // Validar inicio de sesion y bla, redirigir a una pagina u otra dependiendo el perfil
 
             // Hardcodding, luego se quita
-            Usuario usuario = new Usuario("12345678", "Leandro", new Perfil(1, "Gerencia", 0));
+            Perfil perfil = new Perfil(1, "Gerencia", 1); // 0 es el nivel de Mesero, 1 es el nivel de Gerencia
+            Usuario usuario = new Usuario("12345678", "Leandro", perfil);
+            Session["NivelUsuario"] = perfil.Nivel; // Guardo en sesión el nivel de usuario
 
             if (usuario.GetPerfil().Nivel == 1)
                 Response.Redirect("Gerencia.aspx");

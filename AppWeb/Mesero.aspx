@@ -13,6 +13,4 @@
    </asp:GridView>
    
     <asp:Button Text="Agregar Orden" CssClass="btn btn-primary btn-sm" ID="btnAgregarOrden" OnClick="btnAgregarOrden_Click" runat="server" />
-
-
 </asp:Content>
