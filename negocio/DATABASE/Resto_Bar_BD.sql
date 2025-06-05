@@ -4,12 +4,12 @@ USE RestoBar
 GO
 
 CREATE TABLE [Usuarios] (
-	[id_Usuario] TINYINT NOT NULL IDENTITY UNIQUE,
-	[DNI] VARCHAR NOT NULL UNIQUE,
-	[Nombre] VARCHAR NOT NULL,
-	[Contraseña] VARCHAR NOT NULL,
+	[id_Usuario] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[DNI] VARCHAR(10) NOT NULL UNIQUE,
+	[Nombre] VARCHAR(30) NOT NULL,
+	[Contraseña] CHAR(64) NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
-	[Permisos] BIT NOT NULL DEFAULT 1,
+	[Permisos] INT NOT NULL DEFAULT 0,
 	PRIMARY KEY([id_Usuario])
 );
 GO
@@ -19,16 +19,16 @@ ON [Usuarios] (DNI);
 GO
 
 CREATE TABLE [Categoria_Menu] (
-	[id_Categoria] TINYINT NOT NULL IDENTITY UNIQUE,
-	[Nombre_Categoria] VARCHAR NOT NULL UNIQUE,
+	[id_Categoria] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[Nombre_Categoria] VARCHAR(100) NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY([id_Categoria])
 );
 GO
 
 CREATE TABLE [SubCategoriaMenu] (
-	[idSubCategoria] TINYINT NOT NULL IDENTITY UNIQUE,
-	[NombreSubCategoria] VARCHAR NOT NULL UNIQUE,
+	[idSubCategoria] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[NombreSubCategoria] VARCHAR(100) NOT NULL,
 	[idCategoriaPrincipal] TINYINT NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY([idSubCategoria])
@@ -36,20 +36,20 @@ CREATE TABLE [SubCategoriaMenu] (
 GO
 
 CREATE TABLE [Menu] (
-	[id_Menu_Item] INT NOT NULL IDENTITY UNIQUE,
-	[Nombre_Menu] VARCHAR NOT NULL UNIQUE,
+	[id_Menu_Item] INT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[Nombre_Menu] VARCHAR(100) NOT NULL,
 	[idSubCategoria] TINYINT NOT NULL,
 	[Precio] MONEY NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
-	[Descripcion] VARCHAR NOT NULL,
+	[Descripcion] VARCHAR(250),
 	PRIMARY KEY([id_Menu_Item])
 );
 GO
 
 CREATE TABLE [Ordenes] (
-	[id_Orden] INTEGER NOT NULL IDENTITY UNIQUE,
+	[id_Orden] INTEGER NOT NULL IDENTITY(1, 1) UNIQUE,
 	[id_Menu] INT NOT NULL,
-	[Cantidad] CHAR NOT NULL DEFAULT '1',
+	[Cantidad] TINYINT NOT NULL DEFAULT 1,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[id_Mesa] TINYINT NOT NULL,
 	[id_Pedido] INTEGER NOT NULL,
@@ -58,17 +58,17 @@ CREATE TABLE [Ordenes] (
 GO
 
 CREATE TABLE [Mesas] (
-	[id_Mesa] TINYINT NOT NULL IDENTITY UNIQUE,
-	[Numero] VARCHAR NOT NULL UNIQUE,
+	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[Numero] TINYINT NOT NULL UNIQUE,
 	[id_Usuario] TINYINT NOT NULL,
-	[Estado] BIT NOT NULL DEFAULT 01,
-	[Numero_Comensales] VARCHAR NOT NULL,
+	[Estado] BIT NOT NULL DEFAULT 1,
+	[Numero_Comensales] TINYINT NOT NULL DEFAULT 1,
 	PRIMARY KEY([id_Mesa])
 );
 GO
 
 CREATE TABLE [Pedidos] (
-	[id_Pedido] INTEGER NOT NULL IDENTITY UNIQUE,
+	[id_Pedido] INTEGER NOT NULL IDENTITY(1, 1) UNIQUE,
 	[id_Mesa] TINYINT NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[Importe] MONEY NOT NULL,
