@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dominio;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -15,10 +16,14 @@ namespace negocio
         {
             database = new Database();
         }
+        Database db;
         
+        public List<Mesa> getMesas()
         public void setMesaData(Mesa aux, SqlDataReader data)
         {
-          
+            List<Mesa> mesas = new List<Mesa>();
+
+            // Hardcoding para modelo de dominio funcional
 
             aux.Id = (int)data["id_Mesa"];
             aux.Numero= (string)data["Numero"];
@@ -39,16 +44,19 @@ namespace negocio
                 database.setParameter("@id", id);
                 database.execQuery();
 
+            return mesas;
                 while (database.Reader.Read())
                 {
                     Mesa aux = new Mesa();
                    setMesaData(aux, database.Reader);
                     Asignadas.Add(aux);
                 }
-            }
+        }
             catch (Exception ex)
             {
 
+        public MesaDatos() {
+            db = new Database();
                 throw ex;
             }
             finally

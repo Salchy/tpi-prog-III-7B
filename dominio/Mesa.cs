@@ -14,6 +14,12 @@ namespace dominio
         public string Comensales { get; set; }
         public bool Estado { get; set; }
 
+        public int IdMesa { get; set; }
+        public Mesero MeseroAsignado { get; set; }
+        public int numeroComensales { get; set; }
+        public bool Disponibilidad { get; set; } // true: Libre, false: Ocupado
+        public string Estado { get; set; } // Puede ser: "Eligiendo orden",  "Pedido tomado", "Comiendo", "Pagando"
+        public List<MenuItem> PlatosConsumidos { get; set; }
 
     }
 }
