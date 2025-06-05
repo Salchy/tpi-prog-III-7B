@@ -5,25 +5,43 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dominio;
+
 
 namespace negocio
 {
     public class MesaDatos
     {
-        private Database database;
-        public MesaDatos()
-        {
-            database = new Database();
-        }
-        Database db;
         
+        Database db;
+
         public List<Mesa> getMesas()
-        public void setMesaData(Mesa aux, SqlDataReader data)
+
         {
             List<Mesa> mesas = new List<Mesa>();
 
             // Hardcoding para modelo de dominio funcional
+
+
+            return mesas;
+        }
+    
+        
+
+        public MesaDatos() {
+            db = new Database();
+               
+        }
+
+        /*   
+           private Database database;
+        public MesaDatos()
+        {
+            database = new Database();
+        }
+        
+        public void setMesaData(Mesa aux, SqlDataReader data)
+        {
+          
 
             aux.Id = (int)data["id_Mesa"];
             aux.Numero= (string)data["Numero"];
@@ -44,19 +62,16 @@ namespace negocio
                 database.setParameter("@id", id);
                 database.execQuery();
 
-            return mesas;
                 while (database.Reader.Read())
                 {
                     Mesa aux = new Mesa();
                    setMesaData(aux, database.Reader);
                     Asignadas.Add(aux);
                 }
-        }
+            }
             catch (Exception ex)
             {
 
-        public MesaDatos() {
-            db = new Database();
                 throw ex;
             }
             finally
@@ -66,6 +81,8 @@ namespace negocio
             return Asignadas;
         }
         
+         
+         */
 
 
     }
