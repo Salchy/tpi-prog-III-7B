@@ -13,11 +13,10 @@ namespace dominio
     {
         public int IdMenuItem { get; set; }
         public Categoria Categoria { get; set; }
+        public SubCategoria SubCategoria { get; set; }
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
-
-        public bool Estado { get; set; }
-
+        //public bool Estado { get; set; } // Estado no hace falta, al momento de leer de la base de datos, si en el row del query está con estado falso (Eliminado) no hace falta representar la entidad en C#
         public string Descripcion { get; set; }
 
     }
