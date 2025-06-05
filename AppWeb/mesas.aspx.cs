@@ -12,7 +12,7 @@ namespace AppWeb
 
         List<string> mesas = new List<string>()
         {
-            {"Mesa 1", }
+            {"Mesa 1"}
         };
 
         protected void Page_Load(object sender, EventArgs e)
