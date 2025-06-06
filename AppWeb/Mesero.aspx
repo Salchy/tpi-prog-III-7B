@@ -8,7 +8,7 @@
             <asp:BoundField  HeaderText="Mesas asignadas" DataField="Numero" />
         </Columns>
     </asp:GridView>
-    <h1>Ordenes de la mesa</h1>
+    <h1>Pedido de la mesa</h1>
     <asp:GridView ID="dvgOrdenes" runat="server">
    </asp:GridView>
    
