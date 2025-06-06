@@ -9,26 +9,13 @@ namespace dominio
     public class Usuario
     {
         // Astributos
-        
+
         public string Dni { get; }
-        private string Nombre;
+        public string Nombre;
+        public string Apellido;
         private Perfil TipoUsuario;
 
         // Gets y Sets
-        public string GetNombre()
-        {
-            return Nombre;
-        }
-        public bool SetNombre(string nombre)
-        {
-            if (!string.IsNullOrEmpty(nombre))
-            {
-                Nombre = nombre;
-                return true;
-            }
-            return false;
-        }
-
         public Perfil GetPerfil()
         {
             return TipoUsuario;
@@ -47,10 +34,11 @@ namespace dominio
 
 
         // Constructor
-        public Usuario(string dni, string nombre, Perfil perfil)
+        public Usuario(string dni, string nombre, string apellido, Perfil perfil)
         {
             Dni = dni;
             Nombre = nombre;
+            Apellido = apellido;
             TipoUsuario = perfil;
         }
     }
