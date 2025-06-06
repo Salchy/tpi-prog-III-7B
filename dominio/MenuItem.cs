@@ -23,7 +23,7 @@ namespace dominio
         {
             IdMenuItem = idMenuItem;
             Categoria = new Categoria(idCategoria, nombreCategoria);
-            SubCategoria = new SubCategoria(idSubCategoria, subCategoriaNombre);
+            SubCategoria = new SubCategoria(idSubCategoria, subCategoriaNombre, idCategoria);
             Nombre = nombre;
             Precio = precio;
             Estado = true;

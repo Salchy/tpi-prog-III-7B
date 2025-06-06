@@ -21,20 +21,14 @@ namespace negocio
                 database.setQuery("SELECT id_Categoria, Nombre_Categoria From Categoria_Menu");
                 database.execQuery();
 
-
                 while (database.Reader.Read())
-
                 {
                     Categoria cate = new Categoria(
-                Convert.ToInt32(database.Reader["id_Categoria"]),
-                database.Reader["Nombre_Categoria"].ToString());
-                    
-                        lista.Add(cate);
+                    Convert.ToInt32(database.Reader["id_Categoria"]),
+                    database.Reader["Nombre_Categoria"].ToString());
 
-
-
+                    lista.Add(cate);
                 }
-
                 return lista;
             }
             catch (Exception ex)
@@ -44,11 +38,7 @@ namespace negocio
             finally
             {
                 database.closeConnection();
-
             }
-
-
         }
     }
-
 }
