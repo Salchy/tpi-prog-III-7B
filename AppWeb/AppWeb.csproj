@@ -117,6 +117,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
+    <Content Include="formItemMenu.aspx" />
     <Content Include="gerenciaMenu.aspx" />
     <Content Include="gerenciaPersonal.aspx" />
     <Content Include="gerenciaReportes.aspx" />
@@ -190,6 +191,13 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="formItemMenu.aspx.cs">
+      <DependentUpon>formItemMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="formItemMenu.aspx.designer.cs">
+      <DependentUpon>formItemMenu.aspx</DependentUpon>
+    </Compile>
     <Compile Include="gerenciaMenu.aspx.cs">
       <DependentUpon>gerenciaMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

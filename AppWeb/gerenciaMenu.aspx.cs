@@ -12,10 +12,33 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+            if (!IsPostBack)
+            {
+                menuItemDatos menu = new menuItemDatos();
+                dgvMenu.DataSource = menu.listarMenu();
+                //dgvMenu.
+                dgvMenu.DataBind();
+            }
+            
+        }
+
+        protected void dgvMenu_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvMenu.PageIndex = e.NewPageIndex;
+
             menuItemDatos menu = new menuItemDatos();
             dgvMenu.DataSource = menu.listarMenu();
-            //dgvMenu.
             dgvMenu.DataBind();
+            
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("formItemMenu.aspx", false);
         }
     }
+
+
+
 }
