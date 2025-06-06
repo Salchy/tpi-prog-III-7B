@@ -21,9 +21,6 @@ namespace AppWeb
 
 
             ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-
-        }
-
-       
+        }       
     }
 }
