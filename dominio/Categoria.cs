@@ -9,7 +9,13 @@ namespace dominio
     // Podría ser como las categorías del menú
     public class Categoria
     {
-        public int IdCategoria { get; set; }
-        public string NombreCategoria { get; set; } // Supongo que podría ser Bebidas, tipo de plato (Pastas, Carnes), postre, etc.
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+
+        public Categoria(int idCategoria, string nombreCategoria)
+        {
+            Id = idCategoria;
+            Nombre = nombreCategoria;
+        }
     }
 }

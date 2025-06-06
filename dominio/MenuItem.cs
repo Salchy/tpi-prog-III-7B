@@ -11,13 +11,23 @@ namespace dominio
     // Esto va a ser otra tabla
     public class MenuItem
     {
-        public int IdMenuItem { get; set; }
+        public int IdMenuItem { get; }
         public Categoria Categoria { get; set; }
         public SubCategoria SubCategoria { get; set; }
         public string Nombre { get; set; }
         public decimal Precio { get; set; }
-        //public bool Estado { get; set; } // Estado no hace falta, al momento de leer de la base de datos, si en el row del query está con estado falso (Eliminado) no hace falta representar la entidad en C#
+        public bool Estado { get; set; }
         public string Descripcion { get; set; }
 
+        public MenuItem(int idMenuItem, string nombre, string descripcion, decimal precio, int idCategoria, string nombreCategoria, int idSubCategoria, string subCategoriaNombre)
+        {
+            IdMenuItem = idMenuItem;
+            Categoria = new Categoria(idCategoria, nombreCategoria);
+            SubCategoria = new SubCategoria(idSubCategoria, subCategoriaNombre);
+            Nombre = nombre;
+            Precio = precio;
+            Estado = true;
+            Descripcion = descripcion;
+        }
     }
 }

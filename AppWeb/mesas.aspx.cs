@@ -25,6 +25,8 @@ namespace AppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             // Acá se habilitarán los botones o no, dependiendo el nivel que tiene
+
+
         }
     }
 }
