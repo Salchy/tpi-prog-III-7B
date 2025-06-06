@@ -37,6 +37,11 @@ namespace AppWeb
         {
             Response.Redirect("formItemMenu.aspx", false);
         }
+
+        protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 
 
