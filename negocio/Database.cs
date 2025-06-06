@@ -20,8 +20,18 @@ namespace negocio
 
         public Database()
         {
-            connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-            command = new SqlCommand();
+            try
+            {
+                //connection = new SqlConnection(ConfigurationManager.AppSettings["databaseConnection"]);
+                connection = new SqlConnection("server =.\\SQLEXPRESS; database = RestoBar; integrated security = true");
+                
+                command = new SqlCommand();
+            }
+            catch (Exception Ex)
+            {
+                throw Ex;
+            }
+            
         }
 
         /// <summary>

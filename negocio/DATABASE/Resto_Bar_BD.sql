@@ -111,3 +111,13 @@ ADD FOREIGN KEY([id_Mesa])
 REFERENCES [Mesas]([id_Mesa])
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 GO
+
+-- PROCEDIMIENTOS:
+
+CREATE PROCEDURE SP_GETALLMENU
+AS
+	SELECT id_Menu_Item, Nombre_Menu, Descripcion, Precio, CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado
+	FROM Menu AS M
+	INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
+	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
+GO
