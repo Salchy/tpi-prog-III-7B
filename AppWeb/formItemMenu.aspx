@@ -32,7 +32,7 @@
 
                     <div class="mb-3">
                         <label for="ddlCategoria" class="form-label">Categoría</label>
-                        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" />
+                        <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true"/>
                     </div>
 
                     <div class="mb-3">
