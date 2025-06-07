@@ -28,7 +28,7 @@ namespace AppWeb
 
             // Hardcodding, luego se quita
             Perfil perfil = new Perfil(1, "Gerencia", 1); // 0 es el nivel de Mesero, 1 es el nivel de Gerencia
-            Usuario usuario = new Usuario("12345678", "Leandro", perfil);
+            Usuario usuario = new Usuario("12345678", "Leandro", "Correa", perfil);
             Session["NivelUsuario"] = perfil.Nivel; // Guardo en sesión el nivel de usuario
 
             if (usuario.GetPerfil().Nivel == 1)

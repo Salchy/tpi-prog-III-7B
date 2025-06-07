@@ -122,3 +122,5 @@ AS
 	INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
 	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
 GO
+
+SELECT * FROM SubCategoriaMenu;
