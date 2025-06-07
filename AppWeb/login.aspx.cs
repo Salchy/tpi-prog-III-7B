@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
+using negocio;
 
 namespace AppWeb
 {
     public partial class WebForm2 : System.Web.UI.Page
     {
+        UsuarioDatos UserDB = new UsuarioDatos();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -24,14 +26,15 @@ namespace AppWeb
                 Response.Write("<script>alert('Por favor, complete todos los campos.');</script>");
                 return;
             }
-            // Validar inicio de sesion y bla, redirigir a una pagina u otra dependiendo el perfil
+            Usuario user = UserDB.getUsuario(dni, password);
+            if (user == null)
+            {
+                Response.Write("<script>alert('Usuario o contraseña incorrecta, ¿Olvidaste tu contraseña?.');</script>");
+                return;
+            }
+            Session["Usuario"] = user; // Guardo en sesión el usuario que hizo login
 
-            // Hardcodding, luego se quita
-            Perfil perfil = new Perfil(1, "Gerencia", 1); // 0 es el nivel de Mesero, 1 es el nivel de Gerencia
-            Usuario usuario = new Usuario("12345678", "Leandro", "Correa", perfil);
-            Session["NivelUsuario"] = perfil.Nivel; // Guardo en sesión el nivel de usuario
-
-            if (usuario.GetPerfil().Nivel == 1)
+            if (user.NivelUsuario == 1)
                 Response.Redirect("Gerencia.aspx");
             else
                 Response.Redirect("Mesero.aspx");

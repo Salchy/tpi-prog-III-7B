@@ -123,5 +123,4 @@ namespace negocio
             connection.Close();
         }
     }
-
 }

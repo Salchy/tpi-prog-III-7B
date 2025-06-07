@@ -13,19 +13,19 @@ namespace dominio
         public string Dni { get; }
         public string Nombre { get; }
         public string Apellido { get; }
-        public Perfil TipoUsuario { get; }
+        public int NivelUsuario { get; }
 
         // Métodos
 
 
         // Constructor
-        public Usuario(int id, string dni, string nombre, string apellido, Perfil perfil)
+        public Usuario(int id, string dni, string nombre, string apellido, int nivelUsuario)
         {
             Id = id;
             Dni = dni;
             Nombre = nombre;
             Apellido = apellido;
-            TipoUsuario = perfil;
+            NivelUsuario = nivelUsuario;
         }
     }
 }

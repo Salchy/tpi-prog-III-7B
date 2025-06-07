@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio
 
 namespace AppWeb
 {
@@ -14,7 +15,7 @@ namespace AppWeb
         // Esto va a cambiar el MasterPage dependiendo del nivel de usuario
         protected void Page_PreInit(object sender, EventArgs e)
         {
-            nivelUsuario = (int)Session["NivelUsuario"];
+            nivelUsuario = ((Usuario)Session["Usuario"]).NivelUsuario;
 
             if (nivelUsuario == 0) // Es mesero
                 this.MasterPageFile = "~/masterPageMesero.Master";

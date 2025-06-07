@@ -31,13 +31,13 @@ namespace negocio
                 database.setParameter("@nombre", user.Nombre);
                 database.setParameter("@apellido", user.Apellido);
                 database.setParameter("@contraseña", generateHashPassword(password));
-                database.setParameter("@permisos", user.TipoUsuario);
+                database.setParameter("@permisos", user.NivelUsuario);
                 database.execScalar();
                 return true;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al registrar usuario: " + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -77,7 +77,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario((int)database.Reader["id_Usuario"], database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), new Perfil((int)database.Reader["idPerfil"], database.Reader["nombrePerfil"].ToString()));
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
                 return usuario;
             }
             catch (Exception ex)
@@ -109,11 +109,11 @@ namespace negocio
                 {
                     return null;
                 }
-                if (database.Reader["password"] == null || database.Reader["password"].ToString() != generateHashPassword(password))
+                if (database.Reader["Contraseña"] == null || database.Reader["Contraseña"].ToString() != generateHashPassword(password))
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario((int)database.Reader["id_Usuario"], database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), new Perfil((int)database.Reader["idPerfil"], database.Reader["nombrePerfil"].ToString()));
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
                 return usuario;
             }
             catch (Exception ex)
