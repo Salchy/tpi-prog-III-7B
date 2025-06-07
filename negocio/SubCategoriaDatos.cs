@@ -17,13 +17,13 @@ namespace negocio
 
             try
             {
-                database.setQuery("SELECT idCategoria, nombreSubCategoria, idCategoriaPrincipal FROM SubCategoriaMenu");
+                database.setQuery("SELECT idSubCategoria, nombreSubCategoria, idCategoriaPrincipal FROM SubCategoriaMenu");
                 database.execQuery();
 
                 while (database.Reader.Read())
                 {
                     SubCategoria subCate = new SubCategoria(
-                        Convert.ToInt32(database.Reader["idCategoria"]),
+                        Convert.ToInt32(database.Reader["idSubCategoria"]),
                         database.Reader["nombreSubCategoria"].ToString(),
                         Convert.ToInt32(database.Reader["idCategoriaPrincipal"])
                     );
