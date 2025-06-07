@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using dominio;
 using System.Data.SqlClient;
+using System.Net;
 
 namespace negocio
 {
@@ -16,66 +17,27 @@ namespace negocio
         {
             database = new Database();
         }
-
-        public bool registrarUsuario(string dni, string password)
+        public bool registrarUsuario(Usuario user, string password)
         {
             try
             {
-                database.setQuery("INSERT INTO Usuarios (dni, password) VALUES (@dni, @password)");
-                database.setParameter("@dni", dni);
-                database.setParameter("@password", generateHashPassword(password));
-                database.execNonQuery();
+                // Pasa a ser procedimiento, para poder obtener el id del usuario ingresado en la DB
+                //database.setQuery("INSERT INTO Usuarios (dni, password) VALUES (@dni, @password)");
+                //database.setParameter("@dni", dni);
+                //database.setParameter("@password", generateHashPassword(password));
+
+                database.setProcedure("SP_CrearUsuario");
+                database.setParameter("@dni", user.Dni);
+                database.setParameter("@nombre", user.Nombre);
+                database.setParameter("@apellido", user.Apellido);
+                database.setParameter("@contraseña", generateHashPassword(password));
+                database.setParameter("@permisos", user.TipoUsuario);
+                database.execScalar();
                 return true;
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al registrar usuario: " + ex.Message);
-            }
-            finally
-            {
-                database.closeConnection();
-            }
-        }
-
-        public bool ValidarUsuario(string dni)
-        {
-            try
-            {
-                SqlDataReader data = getUsuarioFromDatabase(dni);
-                if (!data.Read())
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al validar usuario: " + ex.Message);
-            }
-            finally
-            {
-                database.closeConnection();
-            }
-        }
-
-        public bool ValidarUsuario(string dni, string password)
-        {
-            try
-            {
-                SqlDataReader data = getUsuarioFromDatabase(dni);
-                if (!data.Read())
-                {
-                    return false;
-                }
-                if (data["password"] == null || data["password"].ToString() != generateHashPassword(password))
-                {
-                    return false;
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al validar usuario: " + ex.Message);
             }
             finally
             {
@@ -97,55 +59,13 @@ namespace negocio
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Para obtener un usuario de la base de datos
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns>Devuelve un Usuario, a partir de su DNI, NULL si no existe en la DB</returns>
+        /// <exception cref="Exception"></exception>
         public Usuario getUsuario(string dni)
-        {
-            try
-            {
-                SqlDataReader data = getUsuarioFromDatabase(dni);
-                if (!data.Read())
-                {
-                    return null;
-                }
-                Usuario usuario = new Usuario(data["dni"].ToString(), data["nombre"].ToString(), data["apellido"].ToString(), new Perfil((int)data["idPerfil"], data["nombrePerfil"].ToString()));
-                return usuario;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener usuario: " + ex.Message);
-            }
-            finally
-            {
-                database.closeConnection();
-            }
-        }
-
-        public Usuario getUsuario(string dni, string password)
-        {
-            try
-            {
-                SqlDataReader data = getUsuarioFromDatabase(dni);
-                if (!data.Read())
-                {
-                    return null;
-                }
-                if (data["password"] == null || data["password"].ToString() != generateHashPassword(password))
-                {
-                    return null;
-                }
-                Usuario usuario = new Usuario(data["dni"].ToString(), data["nombre"].ToString(), data["apellido"].ToString(), new Perfil((int)data["idPerfil"], data["nombrePerfil"].ToString()));
-                return usuario;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al obtener usuario: " + ex.Message);
-            }
-            finally
-            {
-                database.closeConnection();
-            }
-        }
-
-        private SqlDataReader getUsuarioFromDatabase(string dni)
         {
             try
             {
@@ -153,11 +73,52 @@ namespace negocio
                 database.setParameter("@dni", dni);
                 database.execQuery();
 
-                return database.Reader;
+                if (!database.Reader.Read())
+                {
+                    return null;
+                }
+                Usuario usuario = new Usuario((int)database.Reader["id_Usuario"], database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), new Perfil((int)database.Reader["idPerfil"], database.Reader["nombrePerfil"].ToString()));
+                return usuario;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al validar usuario: " + ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
+        /// <summary>
+        /// Para obtener un usuario de la base de datos, validando DNI y PASSWORD
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <param name="password"></param>
+        /// <returns>Devuelve un Usuario, a partir de su DNI, NULL si no existe en la DB</returns>
+        /// <exception cref="Exception"></exception>
+        public Usuario getUsuario(string dni, string password)
+        {
+            try
+            {
+                database.setQuery("SELECT * FROM Usuarios WHERE dni = @dni");
+                database.setParameter("@dni", dni);
+                database.execQuery();
+
+                if (!database.Reader.Read())
+                {
+                    return null;
+                }
+                if (database.Reader["password"] == null || database.Reader["password"].ToString() != generateHashPassword(password))
+                {
+                    return null;
+                }
+                Usuario usuario = new Usuario((int)database.Reader["id_Usuario"], database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), new Perfil((int)database.Reader["idPerfil"], database.Reader["nombrePerfil"].ToString()));
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {

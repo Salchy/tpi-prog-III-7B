@@ -123,4 +123,12 @@ AS
 	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
 GO
 
-SELECT * FROM SubCategoriaMenu;
+CREATE PROCEDURE SP_CrearUsuario
+	@dni varchar(10),
+	@nombre varchar(30),
+	@apellido varchar(30),
+	@contraseña char(64),
+	@permisos int
+AS
+	INSERT INTO Usuarios (DNI, Nombre, Apellido, Contraseña, Permisos) OUTPUT inserted.id_Usuario VALUES (@dni, @nombre, @apellido, @contraseña, @permisos)
+GO

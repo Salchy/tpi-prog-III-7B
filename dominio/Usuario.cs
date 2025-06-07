@@ -9,33 +9,19 @@ namespace dominio
     public class Usuario
     {
         // Astributos
-        public string Id { get; set; }
+        public int Id { get; }
         public string Dni { get; }
-        public string Nombre;
-        public string Apellido;
-        private Perfil TipoUsuario;
-
-        // Gets y Sets
-        public Perfil GetPerfil()
-        {
-            return TipoUsuario;
-        }
-        public bool setPerfil(Perfil tipoUsuario)
-        {
-            if (tipoUsuario != null)
-            {
-                TipoUsuario = tipoUsuario;
-                return true;
-            }
-            return false;
-        }
+        public string Nombre { get; }
+        public string Apellido { get; }
+        public Perfil TipoUsuario { get; }
 
         // Métodos
 
 
         // Constructor
-        public Usuario(string dni, string nombre, string apellido, Perfil perfil)
+        public Usuario(int id, string dni, string nombre, string apellido, Perfil perfil)
         {
+            Id = id;
             Dni = dni;
             Nombre = nombre;
             Apellido = apellido;

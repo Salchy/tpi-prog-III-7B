@@ -89,6 +89,24 @@ namespace negocio
         }
 
         /// <summary>
+        /// Para ejecutar consultas de tipo SCALAR (Retorna un valor entero), Funciones de resumen de SQL
+        /// </summary>
+        /// <returns>Retorna valores enteros de las funciones de resumen de SQL</returns>
+        public int execScalar()
+        {
+            command.Connection = connection;
+            try
+            {
+                connection.Open();
+                return int.Parse(command.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
         /// Agrega un parámetro a la consulta o procedimiento almacenado.
         /// </summary>
         /// <param name="nombre"></param>
