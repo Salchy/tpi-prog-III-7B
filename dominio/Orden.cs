@@ -12,7 +12,6 @@ namespace dominio
         public MenuItem Menu { get; set; }
         public int Cantidad { get; set; }
         public bool Estado { get; set; }
-        public Mesa mesa { get; set; }
         public Pedido Pedido { get; set; }
     }
 }

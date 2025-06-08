@@ -2,10 +2,29 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="scmCategorias" runat="server" ></asp:ScriptManager>
 
-    <h1>Carga de Ordenes</h1>
-    <h2>Categorias</h2>
-    <asp:DropDownList ID="ddlCategoria" runat="server" ></asp:DropDownList>
+    <h2>Menu disponible</h2>
+      <h1>Carga de Ordenes</h1>
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>   
+            <div class="=row">   
+                <div class="col"">   
+                    <h2>Categorias</h2>
+                    <asp:DropDownList ID="ddlCategoria" runat="server"  OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                </div>
+                <div class="col"">   
+                    <h2>SubCategorias</h2>
+            <asp:DropDownList ID="ddlSubCategoria" runat="server" ></asp:DropDownList>
+                </div>
+                
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+  
+    
+
+    
     <h2>Menu disponible</h2>
     <asp:GridView ID="dgvMenu" runat="server"></asp:GridView>
     <asp:Label ID="lbCantidad" runat="server" Text="Cantidad"></asp:Label>

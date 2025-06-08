@@ -1,9 +1,12 @@
-﻿using System;
+﻿using negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
+using dominio;
 
 namespace AppWeb
 {
@@ -11,7 +14,33 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+           CategoriasDatos categoria = new CategoriasDatos();
+            SubCategoriaDatos subcat= new SubCategoriaDatos();
+           
+            try
+            {
+                if (!IsPostBack)
+                {
+                    List<SubCategoria> ListaSubcategorias = subcat.listarSubCategorias();
+                    Session["ListaSubcategorias"] = ListaSubcategorias;
+                    List<Categoria> lista = categoria.listarCategorias();
+                   
 
+                    ddlCategoria.DataSource = lista;
+                    ddlCategoria.DataTextField = "Nombre";
+                    ddlCategoria.DataValueField = "id";
+                    ddlCategoria.DataBind();
+                    //ddlCategoria.SelectedIndex = 0; 
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
 
         protected void btnEliminarOrden_Click(object sender, EventArgs e)
@@ -32,6 +61,20 @@ namespace AppWeb
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            if (IsPostBack)
+            {
+                
+                int id=int.Parse(ddlCategoria.SelectedValue);
+                ddlSubCategoria.DataSource=((List<SubCategoria>)Session["ListaSubcategorias"]).FindAll(x=> x.IdCategoriaPadre==id);
+                ddlSubCategoria.DataTextField = "Nombre";
+                ddlSubCategoria.DataValueField = "id";
+                ddlSubCategoria.DataBind();
+            }
         }
     }
 }

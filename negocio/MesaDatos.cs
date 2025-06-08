@@ -54,9 +54,9 @@ namespace negocio
 
         public List<Mesa> getMesasAsignadas(int id)
         {
-            List<Mesa> Asignadas = new List<Mesa>();
+           List<Mesa> Asignadas = new List<Mesa>();
             
-            try
+           /* try
             {
                 database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id");//tambien agregar filtrado de estado
                 database.setParameter("@id", id);
@@ -65,7 +65,7 @@ namespace negocio
                 while (database.Reader.Read())
                 {
                     Mesa aux = new Mesa();
-                   setMesaData(aux, database.Reader);
+                   setMesaData(aux,database.Reader);
                     Asignadas.Add(aux);
                 }
             }
@@ -77,8 +77,9 @@ namespace negocio
             finally
             {
                 database.closeConnection();
-            }
+            }*/
             return Asignadas;
+           
         }
         
          
