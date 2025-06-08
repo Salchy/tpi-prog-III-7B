@@ -125,5 +125,30 @@ namespace negocio
                 database.closeConnection();
             }
         }
+
+        public Usuario getUsuario(int id)
+        {
+            try
+            {
+                database.setQuery("SELECT * FROM Usuarios WHERE id_Usuario = @id");
+                database.setParameter("@id", id);
+                database.execQuery();
+
+                if (!database.Reader.Read())
+                {
+                    return null;
+                }
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
     }
 }

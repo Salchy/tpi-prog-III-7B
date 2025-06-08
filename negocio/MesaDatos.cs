@@ -12,7 +12,7 @@ namespace negocio
     public class MesaDatos
     {
         
-        Database db;
+       /* Database db;
 
         public List<Mesa> getMesas()
 
@@ -30,9 +30,9 @@ namespace negocio
         public MesaDatos() {
             db = new Database();
                
-        }
+        }*/
 
-        /*   
+        
            private Database database;
         public MesaDatos()
         {
@@ -41,13 +41,13 @@ namespace negocio
         
         public void setMesaData(Mesa aux, SqlDataReader data)
         {
-          
-
-            aux.Id = (int)data["id_Mesa"];
-            aux.Numero= (string)data["Numero"];
-            //aux.Usuario.id= (int)data["id_Usuario"];  es necesario agregar el ID a la clase usuario
-            aux.Estado = (bool)data["Estado"];
-            aux.Comensales = (string)data["Numero_Comensales"];
+          UsuarioDatos user = new UsuarioDatos();
+            aux.MeseroAsignado = user.getUsuario((int)data["id_Usuario"]);
+            aux.IdMesa = (int)data["id_Mesa"];
+            aux.numeroMesa= (int)data["Numero"]; 
+            aux.Disponibilidad= (bool)data["Estado"];
+            aux.numeroComensales= (int) data["Numero_Comensales"];
+            //Ver tema estado fuera de base de datos
             
         }
 
@@ -82,7 +82,7 @@ namespace negocio
         }
         
          
-         */
+         
 
 
     }
