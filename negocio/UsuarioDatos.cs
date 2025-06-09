@@ -17,7 +17,7 @@ namespace negocio
         {
             database = new Database();
         }
-        public bool registrarUsuario(Usuario user, string password)
+        public int registrarUsuario(Usuario user, string password)
         {
             try
             {
@@ -32,8 +32,9 @@ namespace negocio
                 database.setParameter("@apellido", user.Apellido);
                 database.setParameter("@contraseña", generateHashPassword(password));
                 database.setParameter("@permisos", user.NivelUsuario);
-                database.execScalar();
-                return true;
+                int newID = database.execScalar();
+                user.Id = newID;
+                return newID;
             }
             catch (Exception ex)
             {
@@ -113,7 +114,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), dni, database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
                 return usuario;
             }
             catch (Exception ex)
@@ -140,6 +141,35 @@ namespace negocio
                 }
                 Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
                 return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
+        /// <summary>
+        /// Para obtener todos los usuarios de la base de datos
+        /// </summary>
+        /// <returns></returns>
+        public List<Usuario> getUsuarios()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            try
+            {
+                database.setQuery("SELECT * FROM Usuarios");
+                database.execQuery();
+
+                while (database.Reader.Read())
+                {
+                    Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                    usuarios.Add(usuario);
+                }
+                return usuarios;
             }
             catch (Exception ex)
             {

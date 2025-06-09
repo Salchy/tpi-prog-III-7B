@@ -119,7 +119,7 @@
     <Content Include="favicon.ico" />
     <Content Include="formItemMenu.aspx" />
     <Content Include="gerenciaMenu.aspx" />
-    <Content Include="gerenciaPersonal.aspx" />
+    <Content Include="gerenciaAddEmpleado.aspx" />
     <Content Include="gerenciaReportes.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Ordenes.aspx" />
@@ -155,6 +155,7 @@
     <Content Include="gerencia.aspx" />
     <Content Include="mesas.aspx" />
     <Content Include="Mesero.aspx" />
+    <Content Include="gerenciaPersonal.aspx" />
     <None Include="Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -205,12 +206,12 @@
     <Compile Include="gerenciaMenu.aspx.designer.cs">
       <DependentUpon>gerenciaMenu.aspx</DependentUpon>
     </Compile>
-    <Compile Include="gerenciaPersonal.aspx.cs">
-      <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
+    <Compile Include="gerenciaAddEmpleado.aspx.cs">
+      <DependentUpon>gerenciaAddEmpleado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="gerenciaPersonal.aspx.designer.cs">
-      <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
+    <Compile Include="gerenciaAddEmpleado.aspx.designer.cs">
+      <DependentUpon>gerenciaAddEmpleado.aspx</DependentUpon>
     </Compile>
     <Compile Include="gerenciaReportes.aspx.cs">
       <DependentUpon>gerenciaReportes.aspx</DependentUpon>
@@ -292,6 +293,13 @@
     </Compile>
     <Compile Include="Mesero.aspx.designer.cs">
       <DependentUpon>Mesero.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gerenciaPersonal.aspx.cs">
+      <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaPersonal.aspx.designer.cs">
+      <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

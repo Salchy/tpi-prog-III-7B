@@ -15,6 +15,10 @@ namespace AppWeb
         // Esto va a cambiar el MasterPage dependiendo del nivel de usuario
         protected void Page_PreInit(object sender, EventArgs e)
         {
+            if (Session["Usuario"] == null)
+            {
+                Response.Redirect("login.aspx");
+            }
             nivelUsuario = ((Usuario)Session["Usuario"]).NivelUsuario;
 
             if (nivelUsuario == 0) // Es mesero

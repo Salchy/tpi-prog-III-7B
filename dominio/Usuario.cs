@@ -9,7 +9,7 @@ namespace dominio
     public class Usuario
     {
         // Astributos
-        public int Id { get; }
+        public int Id { get; set;}
         public string Dni { get; }
         public string Nombre { get; }
         public string Apellido { get; }
