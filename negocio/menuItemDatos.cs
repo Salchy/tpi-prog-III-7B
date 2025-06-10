@@ -38,7 +38,7 @@ namespace negocio
 
         public void Agregar (MenuItem menuNuevo)
         {
-            //La consulta funciona solo esta comentado hasta terminar de definir el voucher
+            
              database = new Database();
 
             try

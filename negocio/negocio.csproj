@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriasDatos.cs" />
+    <Compile Include="OrdenDatos.cs" />
     <Compile Include="MesaDatos.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="menuItemDatos.cs" />

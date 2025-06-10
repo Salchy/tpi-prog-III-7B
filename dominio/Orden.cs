@@ -13,5 +13,6 @@ namespace dominio
         public int Cantidad { get; set; }
         public bool Estado { get; set; }
         public Pedido Pedido { get; set; }
+        public Mesa Mesa { get; set; }
     }
 }
