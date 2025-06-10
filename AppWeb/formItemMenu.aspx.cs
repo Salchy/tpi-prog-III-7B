@@ -43,5 +43,39 @@ namespace AppWeb
 
             ddlSubcategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
         }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+                dominio.MenuItem nuevo = new dominio.MenuItem();
+                menuItemDatos manager = new menuItemDatos();
+
+
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Precio = decimal.Parse(txtPrecio.Text);
+                nuevo.Descripcion = txtDescripcion.Text;
+
+                nuevo.Categoria = new Categoria();
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+
+                nuevo.SubCategoria = new SubCategoria();
+                nuevo.SubCategoria.Id = int.Parse(ddlSubcategoria.SelectedValue);
+
+
+                manager.Agregar(nuevo);
+
+
+                Response.Redirect("gerenciaMenu.aspx", false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
     }
 }

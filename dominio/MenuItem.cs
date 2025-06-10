@@ -29,5 +29,11 @@ namespace dominio
             Estado = true;
             Descripcion = descripcion;
         }
+
+
+        public MenuItem()
+        {
+           
+        }
     }
 }

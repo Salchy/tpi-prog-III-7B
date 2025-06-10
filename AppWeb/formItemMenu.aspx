@@ -13,7 +13,12 @@
     <form id="form1" runat="server">
         <div class="container mt-5">
             <div class="row ">
-                <div class="col-6">
+                 <div class="col-md-6 text-center">
+                    <img src="img/logo.png" class="img-fluid" style="max-height: 400px;" alt="Logo" />
+                </div>
+
+
+                <div class="col-md-6">
 
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Item</label>
@@ -41,7 +46,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <asp:Button Text="Aceptar" ID="btnAceptar" runat="server" />
+                        <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" />
                         <a href="gerenciaMenu.aspx">Cancelar</a>
                     </div>
 

@@ -17,5 +17,11 @@ namespace dominio
             Id = idCategoria;
             Nombre = nombreCategoria;
         }
+
+        public Categoria()
+        {
+           
+        }
+
     }
 }

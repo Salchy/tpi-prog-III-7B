@@ -18,5 +18,10 @@ namespace dominio
             Nombre = nombreSubCategoria;
             IdCategoriaPadre = idCategoriaPadre;
         }
+
+        public SubCategoria()
+        {
+           
+        }
     }
 }

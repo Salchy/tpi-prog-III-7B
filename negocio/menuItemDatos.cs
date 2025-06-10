@@ -35,5 +35,34 @@ namespace negocio
 
             return menuCompleto;
         }
+
+        public void Agregar (MenuItem menuNuevo)
+        {
+            //La consulta funciona solo esta comentado hasta terminar de definir el voucher
+             database = new Database();
+
+            try
+            {
+                database.setQuery("INSERT INTO MENU (Nombre_Menu,idSubCategoria,Precio,Estado,Descripcion) VALUES (@nombre,@IDSub,@precio,@estado,@descripcion)");
+                database.setParameter("@nombre", menuNuevo.Nombre);
+                database.setParameter("@IDSub", menuNuevo.SubCategoria.Id);
+                database.setParameter("@precio", menuNuevo.Precio);
+                database.setParameter("@estado", 1);
+                database.setParameter("@descripcion", menuNuevo.Descripcion);
+
+                database.execNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+
+
+        }
     }
 }
+
