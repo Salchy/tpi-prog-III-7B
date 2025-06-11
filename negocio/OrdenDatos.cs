@@ -21,7 +21,7 @@ namespace negocio
                 database.setParameter("@menu", orden.Menu.IdMenuItem);
                 database.setParameter("@cant", orden.Cantidad);
                 database.setParameter("@estado",orden.Estado);
-                database.setParameter("@mesa", orden.Mesa.IdMesa);
+                database.setParameter("@mesa", orden.Pedido.mesa.IdMesa);
                 database.setParameter("@pedido", orden.Pedido.Id);
 
                 database.execNonQuery();
@@ -86,6 +86,7 @@ namespace negocio
 
 
         }
+
 
     }
 }
