@@ -11,25 +11,16 @@ namespace AppWeb
 {
 
 
-    public partial class gerenciaCategorias
+    public partial class gerenciaAddCategoria
     {
 
         /// <summary>
-        /// Control dgvCategorias.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView dgvCategorias;
-
-        /// <summary>
-        /// Control btnAgregarCate.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarCate;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

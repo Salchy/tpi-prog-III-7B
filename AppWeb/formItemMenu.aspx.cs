@@ -70,10 +70,10 @@ namespace AppWeb
 
                 Response.Redirect("gerenciaMenu.aspx", false);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
             
         }
