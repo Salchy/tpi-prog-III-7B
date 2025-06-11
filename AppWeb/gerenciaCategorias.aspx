@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false">
+    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false" Height="100%">
         <Columns>
             <asp:BoundField HeaderText="IDCategoria" DataField="Id" Visible="false"/>
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />

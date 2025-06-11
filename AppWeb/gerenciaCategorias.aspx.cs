@@ -24,6 +24,8 @@ namespace AppWeb
 
         protected void btnAgregarCate_Click(object sender, EventArgs e)
         {
+
+
             Response.Redirect("gerenciaAddCategoria.aspx");
         }
     }

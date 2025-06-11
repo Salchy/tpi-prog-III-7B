@@ -40,5 +40,29 @@ namespace negocio
                 database.closeConnection();
             }
         }
+
+        public void Agregar(Categoria cateNueva)
+        {
+
+            database = new Database();
+
+            try
+            {
+                database.setQuery("INSERT INTO Categoria_Menu (Nombre_Categoria,Estado) VALUES (@nombreCate,@estadoCate)");
+                database.setParameter("@nombreCate", cateNueva.Nombre);
+                database.setParameter("@estadoCate", 1);
+                database.execNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+
+
+        }
     }
 }

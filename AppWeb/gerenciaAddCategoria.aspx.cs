@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using negocio;
 
 namespace AppWeb
 {
@@ -12,6 +14,30 @@ namespace AppWeb
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnAceptarCate_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                Categoria nuevo = new Categoria();
+                CategoriasDatos manager = new CategoriasDatos();
+
+
+                nuevo.Nombre = txtNombre.Text;      
+
+                manager.Agregar(nuevo);
+
+
+                Response.Redirect("gerenciaCategorias.aspx");
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
     }
 }

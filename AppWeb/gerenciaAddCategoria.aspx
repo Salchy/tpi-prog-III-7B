@@ -11,10 +11,27 @@
 </head>
 <body class="bg-dark text-white">
     <form id="form1" runat="server">
-        <div>
+        
+            <div class="container mt-5">
+            <div class="row ">
+                 <div class="col-md-6 text-center">
+                    <img src="img/logo.png" class="img-fluid" style="max-height: 400px;" alt="Logo" />
+                </div>
 
 
+                <div class="col-md-3">
+
+                    <div class="mb-3">
+                        <label for="txtNombre" class="form-label">Nombre</label>
+                        <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                    </div>
+
+                    <asp:Button Text="Aceptar" ID="btnAceptarCate" runat="server" OnClick="btnAceptarCate_Click"/>
+                </div>
+            </div>
         </div>
+
+       
     </form>
 </body>
 </html>
