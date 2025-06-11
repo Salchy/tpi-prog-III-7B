@@ -118,9 +118,11 @@
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="formItemMenu.aspx" />
+    <Content Include="gerenciaCategorias.aspx" />
     <Content Include="gerenciaMenu.aspx" />
     <Content Include="gerenciaAddEmpleado.aspx" />
     <Content Include="gerenciaReportes.aspx" />
+    <Content Include="gerenciaSubCategorias.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Ordenes.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -199,6 +201,13 @@
     <Compile Include="formItemMenu.aspx.designer.cs">
       <DependentUpon>formItemMenu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="gerenciaCategorias.aspx.cs">
+      <DependentUpon>gerenciaCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaCategorias.aspx.designer.cs">
+      <DependentUpon>gerenciaCategorias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="gerenciaMenu.aspx.cs">
       <DependentUpon>gerenciaMenu.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -219,6 +228,13 @@
     </Compile>
     <Compile Include="gerenciaReportes.aspx.designer.cs">
       <DependentUpon>gerenciaReportes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gerenciaSubCategorias.aspx.cs">
+      <DependentUpon>gerenciaSubCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaSubCategorias.aspx.designer.cs">
+      <DependentUpon>gerenciaSubCategorias.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
