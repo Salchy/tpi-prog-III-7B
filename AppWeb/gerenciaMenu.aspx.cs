@@ -51,6 +51,25 @@ namespace AppWeb
         {
             
         }
+
+        protected void dgvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Editar" || e.CommandName == "Borrar")
+            {
+                int index = int.Parse(e.CommandArgument.ToString());
+
+                int id = int.Parse(dgvMenu.Rows[index].Cells[0].Text);
+
+                if (e.CommandName == "Editar")
+                {
+                    Response.Redirect("formItemMenu.aspx?id=" + id);
+                }
+                else if (e.CommandName == "Borrar")
+                {
+                    Response.Redirect("formItemMenu.aspx");
+                }
+            }
+        }
     }
 
 

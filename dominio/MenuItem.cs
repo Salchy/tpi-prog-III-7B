@@ -11,7 +11,7 @@ namespace dominio
     // Esto va a ser otra tabla
     public class MenuItem
     {
-        public int IdMenuItem { get; }
+        public int IdMenuItem { get; set; }
         public Categoria Categoria { get; set; }
         public SubCategoria SubCategoria { get; set; }
         public string Nombre { get; set; }

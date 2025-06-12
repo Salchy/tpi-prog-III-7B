@@ -9,7 +9,7 @@ using negocio;
 
 namespace AppWeb
 {
-    public partial class formItemMenu : System.Web.UI.Page
+    public partial class gerenciaAddMenu : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,40 +22,19 @@ namespace AppWeb
                 ddlCategoria.DataBind();
 
                 ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-
-
-                if (Request.QueryString["id"] != null)
-                {
-                    int id = int.Parse(Request.QueryString["id"].ToString());
-
-                    menuItemDatos manager = new menuItemDatos();
-                    dominio.MenuItem seleccionado = manager.GetItem(id);
-                    txtNombre.Text = seleccionado.Nombre;
-                    txtPrecio.Text = seleccionado.Precio.ToString();
-                    txtDescripcion.Text = seleccionado.Descripcion;
-                    ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-
-
-                    // NECESITO EL DDL CARGADO PARA QUE LO PUEDA ASIGNAR  
-                    SubCategoriaDatos datos = new SubCategoriaDatos();
-                    List<SubCategoria> todas = datos.listarSubCategorias();
-
-                    List<SubCategoria> filtradas = todas.Where(x => x.IdCategoriaPadre == seleccionado.Categoria.Id).ToList();
-
-                    ddlSubcategoria.DataSource = filtradas;
-                    ddlSubcategoria.DataTextField = "Nombre";
-                    ddlSubcategoria.DataValueField = "Id";
-                    ddlSubcategoria.DataBind();
-
-                    ddlSubcategoria.SelectedValue = seleccionado.SubCategoria.Id.ToString();
-                }
             }
 
-                
-            
+            if(Request.QueryString["id"] !=null)
+            {
+                int id = int.Parse(Request.QueryString["id"].ToString());
+                menuItemDatos manager = new menuItemDatos();
 
-
-           
+                dominio.MenuItem seleccionado = manager.getItem(id);
+                txtNombre.Text = seleccionado.Nombre;
+                txt.Text = usuario.Apellido;
+                txtDNI.Text = usuario.Dni;
+                dropDownPerfil.SelectedValue = usuario.NivelUsuario.ToString();
+            }
         }
         
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,21 +77,7 @@ namespace AppWeb
                 nuevo.SubCategoria.Id = int.Parse(ddlSubcategoria.SelectedValue);
 
 
-
-
-                if (Request.QueryString["id"] != null)
-                {
-                    nuevo.IdMenuItem = int.Parse(Request.QueryString["id"]);
-                    manager.ModificarItem(nuevo);
-                } else
-                {
-                    manager.Agregar(nuevo);
-                }
-
-
-         
-
-
+                manager.Agregar(nuevo);
 
 
                 Response.Redirect("gerenciaMenu.aspx", false);
@@ -124,8 +89,5 @@ namespace AppWeb
             }
             
         }
-
-
-
     }
 }

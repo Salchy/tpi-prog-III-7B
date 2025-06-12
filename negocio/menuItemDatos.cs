@@ -36,6 +36,43 @@ namespace negocio
             return menuCompleto;
         }
 
+
+        public MenuItem GetItem(int id)
+        {
+            try
+            {
+                database = new Database();
+                database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.id_Menu_Item = @id");
+                database.setParameter("@id", id);
+                database.execQuery();
+
+                if (!database.Reader.Read())
+                {
+                    return null;
+                }
+                MenuItem item = new MenuItem(
+                     (int)database.Reader["id_Menu_Item"],
+                     database.Reader["Nombre_Menu"].ToString(),
+                     database.Reader.IsDBNull(database.Reader.GetOrdinal("Descripcion")) ? "" : database.Reader["Descripcion"].ToString(),
+                     Math.Round((decimal)database.Reader["Precio"], 2),
+                     Convert.ToInt32(database.Reader["id_Categoria"]), // Porque en la DB lo definimos como TINYINT
+                     (string)database.Reader["Nombre_Categoria"],
+                     Convert.ToInt32(database.Reader["idSubCategoria"]),
+                     (string)database.Reader["NombreSubCategoria"]
+                 );
+
+                return item;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
         public void Agregar (MenuItem menuNuevo)
         {
             
@@ -62,7 +99,40 @@ namespace negocio
             }
 
 
+           
+
+         }
+
+
+        public void ModificarItem(MenuItem item)
+        {
+            database = new Database();
+
+            try
+            {
+                database.setQuery("UPDATE MENU SET Nombre_Menu = @nombre, idSubCategoria = @IDSub, Precio = @precio, Estado = @estado, Descripcion = @descripcion WHERE  id_Menu_Item = @id");
+                database.setParameter("@nombre", item.Nombre);
+                database.setParameter("@IDSub", item.SubCategoria.Id);
+                database.setParameter("@precio", item.Precio);
+                database.setParameter("@estado", 1);
+                database.setParameter("@descripcion", item.Descripcion);
+                database.setParameter("@id", item.IdMenuItem);
+
+
+                database.execNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+
         }
     }
+
+ 
 }
 
