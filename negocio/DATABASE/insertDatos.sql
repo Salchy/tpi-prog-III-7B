@@ -1,5 +1,15 @@
 -- Insert de datos
 USE RestoBar;
+
+-- Crear usuario adminsitrador (Genérico, para Empleados de Sistemas)
+EXEC SP_CrearUsuario 'Admin', 'Admin', 'Admin', '3EB3FE66B31E3B4D10FA70B5CAD49C7112294AF6AE4E476A1C405155D45AA121', 0;
+
+-- Crear usuario Gerente
+EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '95980CC32FCB13BFAEDF96D13F5E850AE93583994CE68264AC73C2084D5E0069', 1;
+
+-- Crear usuario Mesero
+EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', '55DCEC5B6DE9023E541D5E308FC8BA2D3C7FF50D23F2E9FD6E99A92EE7DD272C', 2;
+
 -- Insert de Categorías
 INSERT INTO Categoria_Menu (Nombre_Categoria)
 VALUES 

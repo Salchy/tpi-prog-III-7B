@@ -25,7 +25,7 @@
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
                        <%-- <input type="password" class="form-control" id="exampleInputPassword1">--%>
-                        <asp:TextBox ID="txtBarPassword" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtBarPassword" TextMode="Password" class="form-control" runat="server"></asp:TextBox>
                     </div>
                     <asp:Button ID="Button1" class="btn btn-primary" runat="server" Text="Iniciar Sesion" OnClientClick="login" OnClick="Button1_Click" />
                 </div>

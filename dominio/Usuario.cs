@@ -14,18 +14,20 @@ namespace dominio
         public string Nombre { get; }
         public string Apellido { get; }
         public int NivelUsuario { get; }
+        public bool Estado { get; }
 
         // Métodos
 
 
         // Constructor
-        public Usuario(int id, string dni, string nombre, string apellido, int nivelUsuario)
+        public Usuario(int id, string dni, string nombre, string apellido, int nivelUsuario, bool estado = true)
         {
             Id = id;
             Dni = dni;
             Nombre = nombre;
             Apellido = apellido;
             NivelUsuario = nivelUsuario;
+            Estado = estado;
         }
     }
 }

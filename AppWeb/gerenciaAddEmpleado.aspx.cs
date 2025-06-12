@@ -22,12 +22,31 @@ namespace AppWeb
             //    Response.Redirect("login.aspx", false);
             //    return;
             //}
+            if (((Usuario)Session["Usuario"]).NivelUsuario > 1)
+            {
+                // No tiene permiso a esta pantalla
+            }
             if (IsPostBack)
             {
                 return;
             }
-            dropDownPerfil.Items.Add(new ListItem("Mesero", "0"));
+            dropDownPerfil.Items.Add(new ListItem("Mesero", "2"));
             dropDownPerfil.Items.Add(new ListItem("Gerente", "1"));
+
+            if (Request.QueryString["id"] != null)
+            {
+                int id = int.Parse(Request.QueryString["id"].ToString());
+                Usuario usuario = userDB.getUsuario(id);
+                if (usuario == null)
+                {
+                    Response.Write("El usuario no existe.");
+                    return;
+                }
+                txtNombre.Text = usuario.Nombre;
+                txtApellido.Text = usuario.Apellido;
+                txtDNI.Text = usuario.Dni;
+                dropDownPerfil.SelectedValue = usuario.NivelUsuario.ToString();
+            }
         }
         protected void registrarUsuario(object sender, EventArgs e)
         {

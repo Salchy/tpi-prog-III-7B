@@ -32,12 +32,28 @@ namespace AppWeb
                 Response.Write("<script>alert('Usuario o contraseña incorrecta, ¿Olvidaste tu contraseña?.');</script>");
                 return;
             }
+            if (!user.Estado)
+            {
+                Response.Write("<script>alert('El usuario está deshabilitado.');</script>");
+                return;
+            }
             Session["Usuario"] = user; // Guardo en sesión el usuario que hizo login
 
-            if (user.NivelUsuario == 1)
-                Response.Redirect("Gerencia.aspx");
-            else
-                Response.Redirect("Mesero.aspx");
+            switch (user.NivelUsuario)
+            {
+                case 0:
+                    Response.Redirect("Gerencia.aspx");
+                    break;
+                case 1:
+                    Response.Redirect("Gerencia.aspx");
+                    break;
+                case 2:
+                    Response.Redirect("Mesero.aspx");
+                    break;
+                default:
+                    Response.Redirect("Mesero.aspx");
+                    return;
+            }
         }
     }
 }

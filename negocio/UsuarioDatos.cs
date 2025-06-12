@@ -78,7 +78,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"], (bool)database.Reader["Estado"]);
                 return usuario;
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), dni, database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), dni, database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"], (bool)database.Reader["Estado"]);
                 return usuario;
             }
             catch (Exception ex)
@@ -139,7 +139,7 @@ namespace negocio
                 {
                     return null;
                 }
-                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"], (bool)database.Reader["Estado"]);
                 return usuario;
             }
             catch (Exception ex)
@@ -166,7 +166,12 @@ namespace negocio
 
                 while (database.Reader.Read())
                 {
-                    Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), database.Reader["dni"].ToString(), database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"]);
+                    string dni = database.Reader["dni"].ToString();
+                    if (dni == "Admin")
+                    {
+                        continue; // Para que no añada al usuario Admin a la lista
+                    }
+                    Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), dni, database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), (int)database.Reader["Permisos"], (bool)database.Reader["Estado"]);
                     usuarios.Add(usuario);
                 }
                 return usuarios;
