@@ -167,7 +167,7 @@ namespace negocio
                 while (database.Reader.Read())
                 {
                     string dni = database.Reader["dni"].ToString();
-                    if (dni == "Admin")
+                    if (dni == "admin")
                     {
                         continue; // Para que no añada al usuario Admin a la lista
                     }

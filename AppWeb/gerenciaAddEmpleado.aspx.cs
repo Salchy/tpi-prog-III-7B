@@ -37,11 +37,6 @@ namespace AppWeb
             {
                 int id = int.Parse(Request.QueryString["id"].ToString());
                 Usuario usuario = userDB.getUsuario(id);
-                if (usuario == null)
-                {
-                    Response.Write("El usuario no existe.");
-                    return;
-                }
                 txtNombre.Text = usuario.Nombre;
                 txtApellido.Text = usuario.Apellido;
                 txtDNI.Text = usuario.Dni;

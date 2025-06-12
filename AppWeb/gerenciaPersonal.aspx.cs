@@ -25,8 +25,7 @@ namespace AppWeb
                 // No tiene permiso a esta pantalla
                 //Session.Add("error", ex.ToString());
                 Session.Add("error", "Mensaje de error");
-
-
+                Response.Redirect("Error.aspx");
                 return;
             }
             if (IsPostBack)
@@ -38,16 +37,23 @@ namespace AppWeb
             dataGridEmpleados.DataBind();
         }
 
-        protected void dataGridEmpleados_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void dataGridEmpleados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            GridViewRow fila = dataGridEmpleados.Rows[e.NewEditIndex];
-            int id = fila.Cells[0]
-            Response.Redirect("gerenciaAddEmpleado.aspx?id=" + id);
-        }
+            if (e.CommandName == "Modify" || e.CommandName == "Delete")
+            {
+                int index = int.Parse(e.CommandArgument.ToString());
 
-        protected void dataGridEmpleados_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int id = int.Parse(dataGridEmpleados.DataKeys[e.RowIndex].Value.ToString());
+                int id = int.Parse(dataGridEmpleados.Rows[index].Cells[0].Text);
+
+                if (e.CommandName == "Modify")
+                {
+                    Response.Redirect("gerenciaAddEmpleado.aspx?id=" + id);
+                }
+                else if (e.CommandName == "Delete")
+                {
+                    Response.Redirect("gerenciaAddEmpleado.aspx");
+                }
+            }
         }
 
         protected void addEmpleado_Click(object sender, EventArgs e)
