@@ -33,8 +33,12 @@ namespace AppWeb
             dropDownPerfil.Items.Add(new ListItem("Mesero", "2"));
             dropDownPerfil.Items.Add(new ListItem("Gerente", "1"));
 
-            if (Request.QueryString["id"] != null)
+            if (Request.QueryString["id"] != null) // Es una modificación
             {
+                lblTitle.Text = "Modificar Empleado";
+                cancelBtn.Text = "Cancelar Modificación";
+                regUserBTN.Text = "Modificar Empleado";
+
                 int id = int.Parse(Request.QueryString["id"].ToString());
                 Usuario usuario = userDB.getUsuario(id);
                 txtNombre.Text = usuario.Nombre;
@@ -43,42 +47,76 @@ namespace AppWeb
                 dropDownPerfil.SelectedValue = usuario.NivelUsuario.ToString();
             }
         }
-        protected void registrarUsuario(object sender, EventArgs e)
+        protected void btnRegistrarUsuario(object sender, EventArgs e)
         {
             string userName = txtNombre.Text;
+            string userSurName = txtApellido.Text;
+            string userDNI = txtDNI.Text;
+            if (!validaciones(userName, userSurName, userDNI))
+            {
+                return;
+            }
+            if (Request.QueryString["id"] != null)
+            {
+                int id = int.Parse(Request.QueryString["id"].ToString());
+                Usuario usuario = userDB.getUsuario(id);
+                usuario.Nombre = userName;
+                usuario.Apellido = userSurName;
+                usuario.Dni = userDNI;
+                usuario.NivelUsuario = int.Parse(dropDownPerfil.SelectedValue);
+                if (userDB.modificarUsuario(usuario))
+                {
+                    // Notificar que se modificó correctamente
+                    Response.Redirect("gerenciaPersonal.aspx", true);
+                }
+            }
+            else
+            {
+                if (registrarUsuario(userName, userSurName, userDNI))
+                {
+                    // Notificia r que el usuario se agregó correctamente
+                }
+            }
+        }
+
+        private bool validaciones(string userName, string userSurName, string userDNI)
+        {
             if (string.IsNullOrWhiteSpace(userName))
             {
                 Response.Write("Debes ingresar un Nombre.");
-                return;
+                return false;
             }
-            string userSurName = txtApellido.Text;
             if (string.IsNullOrWhiteSpace(userSurName))
             {
                 Response.Write("Debes ingresar un Apellido.");
-                return;
+                return false;
             }
-            string userDNI = txtDNI.Text;
             if (string.IsNullOrWhiteSpace(userDNI))
             {
                 Response.Write("Debes ingresar un DNI.");
-                return;
+                return false;
             }
             if (!esNumerico(userDNI))
             {
                 Response.Write("Debes ingresar un DNI válido.");
-                return;
+                return false;
             }
             if (!dniValido(userDNI))
             {
                 Response.Write("Debes ingresar un DNI válido.");
-                return;
+                return false;
             }
-            
+            return true;
+        }
+        private bool registrarUsuario(string userName, string userSurName, string userDNI)
+        {
             Usuario nuevoUsuario = new Usuario(0, userDNI, userName, userSurName, int.Parse(dropDownPerfil.SelectedValue));
             int nuevoUsuarioID = userDB.registrarUsuario(nuevoUsuario, userDNI);
-            if (nuevoUsuarioID > 0) {
-                // Notificacion de usuario creado con éxito.
+            if (nuevoUsuarioID > 0)
+            {
+                return true;
             }
+            return false;
         }
 
         private bool esNumerico(string str)
@@ -102,6 +140,11 @@ namespace AppWeb
                 return false;
             }
             return true;
+        }
+
+        protected void cancelRegistrarUsuario(object sender, EventArgs e)
+        {
+            Response.Redirect("gerenciaPersonal.aspx", true);
         }
     }
 }

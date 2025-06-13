@@ -3,7 +3,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h2 class="text-center">Registrar nuevo empleado</h2>
+    <figure class="text-center">
+
+        <asp:Label CssClass="fs-2 fw-bold " ID="lblTitle" runat="server">Registrar nuevo empleado</asp:Label>
+    </figure>
     <div class="container text-center">
         <div class="row g-3">
             <div class="col">
@@ -19,13 +22,14 @@
                 <asp:TextBox ID="txtDNI" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
         </div>
-        <div class="mb-6">
+        <div class="col-3 mb-6 mx-auto">
             <label for="perfil" class="form-label">Perfíl</label>
             <asp:DropDownList ID="dropDownPerfil" runat="server" CssClass="form-select" />
         </div>
-        <hr/>
+        <hr />
         <div>
-            <asp:Button ID="regUserBTN" runat="server" CssClass="btn btn-success d-grid gap-2 col-6 mx-auto" Text="Añadir Empleado" OnClick="registrarUsuario" />
+            <asp:Button ID="cancelBtn" runat="server" CssClass="btn btn-danger col-3 mx-auto" Text="Cancelar" OnClick="cancelRegistrarUsuario" />
+            <asp:Button ID="regUserBTN" runat="server" CssClass="btn btn-success col-3 mx-auto" Text="Añadir Empleado" OnClick="btnRegistrarUsuario" />
         </div>
     </div>
 </asp:Content>

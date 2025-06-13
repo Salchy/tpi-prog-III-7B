@@ -33,32 +33,43 @@ namespace AppWeb
                 return;
             }
 
-            dataGridEmpleados.DataSource = UsuarioDatos.getUsuarios();
-            dataGridEmpleados.DataBind();
+            reloadDataBind();
         }
 
         protected void dataGridEmpleados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Modify" || e.CommandName == "Delete")
+            if (e.CommandName != "Modify" && e.CommandName != "ToggleEstado")
             {
-                int index = int.Parse(e.CommandArgument.ToString());
+                return;
+            }
+            int id = int.Parse(e.CommandArgument.ToString());
+            
+            if (e.CommandName == "Modify")
+            {
+                //int id = int.Parse(dataGridEmpleados.Rows[index].Cells[0].Text); // Esto toma desde la columna oculta, nose porque no lo toma
+                Response.Redirect("gerenciaAddEmpleado.aspx?id=" + id);
+            } else if (e.CommandName == "RestorePassword") {
+                
+            }
+            else
+            {
+                Usuario usuario = UsuarioDatos.getUsuario(id);
+                usuario.Estado = !usuario.Estado;
 
-                int id = int.Parse(dataGridEmpleados.Rows[index].Cells[0].Text);
-
-                if (e.CommandName == "Modify")
-                {
-                    Response.Redirect("gerenciaAddEmpleado.aspx?id=" + id);
-                }
-                else if (e.CommandName == "Delete")
-                {
-                    Response.Redirect("gerenciaAddEmpleado.aspx");
-                }
+                UsuarioDatos.enableDisableUsuario(id, usuario.Estado);
+                reloadDataBind();
             }
         }
 
         protected void addEmpleado_Click(object sender, EventArgs e)
         {
             Response.Redirect("gerenciaAddEmpleado.aspx");
+        }
+
+        protected void reloadDataBind()
+        {
+            dataGridEmpleados.DataSource = UsuarioDatos.getUsuarios();
+            dataGridEmpleados.DataBind();
         }
 
         protected void dataGridEmpleados_PageIndexChanging(object sender, GridViewPageEventArgs e)

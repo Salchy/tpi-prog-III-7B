@@ -9,12 +9,12 @@ namespace dominio
     public class Usuario
     {
         // Astributos
-        public int Id { get; set;}
-        public string Dni { get; }
-        public string Nombre { get; }
-        public string Apellido { get; }
-        public int NivelUsuario { get; }
-        public bool Estado { get; }
+        public int Id { get; set; }
+        public string Dni { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public int NivelUsuario { get; set; }
+        public bool Estado { get; set; }
 
         // Métodos
 

@@ -132,3 +132,21 @@ CREATE PROCEDURE SP_CrearUsuario
 AS
 	INSERT INTO Usuarios (DNI, Nombre, Apellido, Contraseña, Permisos) OUTPUT inserted.id_Usuario VALUES (@dni, @nombre, @apellido, @contraseña, @permisos)
 GO
+
+CREATE PROCEDURE SP_ModificarUsuario
+	@id tinyint,
+	@nombre varchar(30),
+	@apellido varchar(30),
+	@permisos int
+AS
+	UPDATE Usuarios SET Nombre = @nombre, Apellido = @apellido, Permisos = @permisos WHERE id_Usuario = @id;
+GO
+
+CREATE PROCEDURE SP_ActivarDesactivarUsuario
+	@id int,
+	@state bit
+AS
+	UPDATE Usuarios SET Estado = @state WHERE id_Usuario = @id;
+GO
+
+SELECT * FROM Usuarios;

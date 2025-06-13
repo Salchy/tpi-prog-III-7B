@@ -40,6 +40,7 @@ namespace negocio
         /// <param name="consulta"></param>
         public void setQuery(string consulta)
         {
+            command.Parameters.Clear();
             command.CommandType = System.Data.CommandType.Text;
             command.CommandText = consulta;
         }
@@ -50,6 +51,7 @@ namespace negocio
         /// <param name="procedure"></param>
         public void setProcedure(string procedure)
         {
+            command.Parameters.Clear();
             command.CommandType = System.Data.CommandType.StoredProcedure;
             command.CommandText = procedure;
         }
@@ -87,7 +89,7 @@ namespace negocio
                 throw ex;
             }
         }
-
+        
         /// <summary>
         /// Para ejecutar consultas de tipo SCALAR (Retorna un valor entero), Funciones de resumen de SQL
         /// </summary>

@@ -185,5 +185,47 @@ namespace negocio
                 database.closeConnection();
             }
         }
+
+        public bool modificarUsuario(Usuario usuario)
+        {
+            try
+            {
+                database.setProcedure("SP_ModificarUsuario");
+                database.setParameter("@id", usuario.Id);
+                database.setParameter("@nombre", usuario.Nombre);
+                database.setParameter("@apellido", usuario.Apellido);
+                database.setParameter("@permisos", usuario.NivelUsuario);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
+        public bool enableDisableUsuario(int id, bool state)
+        {
+            try
+            {
+                database.setProcedure("SP_ActivarDesactivarUsuario");
+                database.setParameter("@id", id);
+                database.setParameter("@state", state);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
     }
 }
