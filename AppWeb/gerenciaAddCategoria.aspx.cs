@@ -13,7 +13,21 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(IsPostBack)
+            {
+                return;
+            }
+            
+              if(Request.QueryString["id"] != null)
+                {
+                    int id = int.Parse(Request.QueryString["id"].ToString());
+                    CategoriasDatos manager = new CategoriasDatos();
 
+                    Categoria cate = manager.GetCategoria(id);
+                    txtNombre.Text = cate.Nombre;
+                    
+               }
+            
         }
 
         protected void btnAceptarCate_Click(object sender, EventArgs e)
@@ -25,10 +39,17 @@ namespace AppWeb
                 CategoriasDatos manager = new CategoriasDatos();
 
 
-                nuevo.Nombre = txtNombre.Text;      
+                nuevo.Nombre = txtNombre.Text;
 
-                manager.Agregar(nuevo);
-
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    manager.ModificarItem(nuevo);
+                }
+                else
+                {
+                    manager.Agregar(nuevo);
+                }
 
                 Response.Redirect("gerenciaCategorias.aspx");
             }
@@ -38,6 +59,11 @@ namespace AppWeb
                 throw ex;
             }
             
+        }
+
+        protected void btnVolverCate_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("gerenciaCategorias.aspx");
         }
     }
 }

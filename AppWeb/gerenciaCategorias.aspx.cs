@@ -28,5 +28,24 @@ namespace AppWeb
 
             Response.Redirect("gerenciaAddCategoria.aspx");
         }
+
+        protected void dgvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Editar" || e.CommandName == "Borrar")
+            {
+                int index = int.Parse(e.CommandArgument.ToString());
+
+                int id = int.Parse(dgvCategorias.Rows[index].Cells[0].Text);
+
+                if (e.CommandName == "Editar")
+                {
+                    Response.Redirect("gerenciaAddCategoria.aspx?id=" + id);
+                }
+                else if (e.CommandName == "Borrar")
+                {
+                    Response.Redirect("gerenciaAddCategoria.aspx");
+                }
+            }
+        }
     }
 }

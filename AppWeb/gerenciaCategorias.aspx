@@ -3,12 +3,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false" Height="100%">
+    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand">
         <Columns>
-            <asp:BoundField HeaderText="IDCategoria" DataField="Id" Visible="false"/>
+            <asp:BoundField HeaderText="IDCategoria" DataField="Id" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto"/>
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />
-            <asp:CommandField HeaderText ="Detalles" ShowSelectButton="true" SelectText="🔍 Ver detalles" />
+            <%--<asp:CommandField HeaderText ="Detalles" ShowSelectButton="true" SelectText="🔍 Ver detalles" />--%>
 
+
+            <asp:ButtonField ButtonType="Button" CommandName="Editar" Text="Editar" ControlStyle-CssClass="btn btn-info" />
+            <asp:ButtonField ButtonType="Button" CommandName="Borrar" Text="Borrar" ControlStyle-CssClass="btn btn-danger" />
         </Columns>
     </asp:GridView>
 

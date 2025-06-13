@@ -23,6 +23,7 @@
                         <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
                     </div>
                     <asp:Button Text="Aceptar" ID="btnAceptarCate" runat="server" OnClick="btnAceptarCate_Click" />
+                    <asp:Button Text="Volver" ID="btnVolverCate" OnClick="btnVolverCate_Click" runat="server" />
                 </div>
             </div>
         </div>
