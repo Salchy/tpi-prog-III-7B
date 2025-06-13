@@ -149,4 +149,9 @@ AS
 	UPDATE Usuarios SET Estado = @state WHERE id_Usuario = @id;
 GO
 
-SELECT * FROM Usuarios;
+CREATE PROCEDURE SP_SetPassword
+	@id int,
+	@password char(64)
+AS
+	UPDATE Usuarios SET Contraseña = @password WHERE id_Usuario = @id;
+GO

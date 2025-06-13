@@ -159,6 +159,7 @@
     <Content Include="mesas.aspx" />
     <Content Include="Mesero.aspx" />
     <Content Include="gerenciaPersonal.aspx" />
+    <Content Include="gerenciaRestablecerPassword.aspx" />
     <None Include="Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -331,6 +332,13 @@
     </Compile>
     <Compile Include="gerenciaPersonal.aspx.designer.cs">
       <DependentUpon>gerenciaPersonal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gerenciaRestablecerPassword.aspx.cs">
+      <DependentUpon>gerenciaRestablecerPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaRestablecerPassword.aspx.designer.cs">
+      <DependentUpon>gerenciaRestablecerPassword.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

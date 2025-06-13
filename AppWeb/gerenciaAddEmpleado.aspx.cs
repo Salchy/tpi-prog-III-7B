@@ -62,7 +62,7 @@ namespace AppWeb
                 Usuario usuario = userDB.getUsuario(id);
                 usuario.Nombre = userName;
                 usuario.Apellido = userSurName;
-                usuario.Dni = userDNI;
+                //usuario.Dni = userDNI;
                 usuario.NivelUsuario = int.Parse(dropDownPerfil.SelectedValue);
                 if (userDB.modificarUsuario(usuario))
                 {
@@ -75,6 +75,7 @@ namespace AppWeb
                 if (registrarUsuario(userName, userSurName, userDNI))
                 {
                     // Notificia r que el usuario se agregó correctamente
+                    Response.Redirect("gerenciaPersonal.aspx", true);
                 }
             }
         }
@@ -133,9 +134,9 @@ namespace AppWeb
             return numerico;
         }
 
-        private bool dniValido(string str) // Sólo compara que no sea menor a 7 cifras, y que no sea mayor a 9 cifras
+        private bool dniValido(string str) // Sólo compara que no sea menor a 6 cifras, y que no sea mayor a 9 cifras
         {
-            if (str.Length < 7 || str.Length > 9)
+            if (str.Length < 6 || str.Length > 9)
             {
                 return false;
             }

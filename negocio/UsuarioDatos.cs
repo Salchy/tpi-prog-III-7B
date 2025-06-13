@@ -208,6 +208,25 @@ namespace negocio
             }
         }
 
+        public bool setUserPassword(int id, string password)
+        {
+            try
+            {
+                database.setProcedure("SP_SetPassword");
+                database.setParameter("@id", id);
+                database.setParameter("@password", generateHashPassword(password));
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
         public bool enableDisableUsuario(int id, bool state)
         {
             try

@@ -38,18 +38,20 @@ namespace AppWeb
 
         protected void dataGridEmpleados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName != "Modify" && e.CommandName != "ToggleEstado")
+            if (e.CommandName != "Modify" && e.CommandName != "ToggleEstado" && e.CommandName != "RestorePassword")
             {
                 return;
             }
             int id = int.Parse(e.CommandArgument.ToString());
-            
+
             if (e.CommandName == "Modify")
             {
                 //int id = int.Parse(dataGridEmpleados.Rows[index].Cells[0].Text); // Esto toma desde la columna oculta, nose porque no lo toma
                 Response.Redirect("gerenciaAddEmpleado.aspx?id=" + id);
-            } else if (e.CommandName == "RestorePassword") {
-                
+            }
+            else if (e.CommandName == "RestorePassword")
+            {
+                Response.Redirect("gerenciaRestablecerPassword.aspx?id=" + id);
             }
             else
             {
