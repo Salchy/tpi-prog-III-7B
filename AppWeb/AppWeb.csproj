@@ -119,6 +119,7 @@
     <Content Include="favicon.ico" />
     <Content Include="formItemMenu.aspx" />
     <Content Include="gerenciaAddCategoria.aspx" />
+    <Content Include="gerenciaAddSubCategoria.aspx" />
     <Content Include="gerenciaCategorias.aspx" />
     <Content Include="gerenciaMenu.aspx" />
     <Content Include="gerenciaAddEmpleado.aspx" />
@@ -209,6 +210,13 @@
     </Compile>
     <Compile Include="gerenciaAddCategoria.aspx.designer.cs">
       <DependentUpon>gerenciaAddCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="gerenciaAddSubCategoria.aspx.cs">
+      <DependentUpon>gerenciaAddSubCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaAddSubCategoria.aspx.designer.cs">
+      <DependentUpon>gerenciaAddSubCategoria.aspx</DependentUpon>
     </Compile>
     <Compile Include="gerenciaCategorias.aspx.cs">
       <DependentUpon>gerenciaCategorias.aspx</DependentUpon>

@@ -17,7 +17,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("SELECT idSubCategoria, nombreSubCategoria, idCategoriaPrincipal FROM SubCategoriaMenu");
+                database.setQuery("SELECT s.idSubCategoria, s.nombreSubCategoria, s.idCategoriaPrincipal, c.Nombre_Categoria FROM SubCategoriaMenu s INNER JOIN Categoria_Menu c ON s.idCategoriaPrincipal = c.id_Categoria");
                 database.execQuery();
 
                 while (database.Reader.Read())
@@ -27,6 +27,9 @@ namespace negocio
                         database.Reader["nombreSubCategoria"].ToString(),
                         Convert.ToInt32(database.Reader["idCategoriaPrincipal"])
                     );
+
+                    subCate.NombreCategoriaPadre = database.Reader["Nombre_Categoria"].ToString();
+
                     lista.Add(subCate);
                 }
                 return lista;

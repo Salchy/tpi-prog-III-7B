@@ -47,10 +47,7 @@ namespace AppWeb
             Response.Redirect("formItemMenu.aspx", false);
         }
 
-        protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
+  
 
         protected void dgvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -58,7 +55,7 @@ namespace AppWeb
             {
                 int index = int.Parse(e.CommandArgument.ToString());
 
-                int id = int.Parse(dgvMenu.Rows[index].Cells[0].Text);
+                int id = int.Parse(dgvMenu.DataKeys[index].Value.ToString());
 
                 if (e.CommandName == "Editar")
                 {

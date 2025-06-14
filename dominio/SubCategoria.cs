@@ -12,6 +12,8 @@ namespace dominio
         public string Nombre { get; set; }
         public int IdCategoriaPadre { get; set; }
 
+        public string NombreCategoriaPadre { get; set; }
+
         public SubCategoria(int idSubCategoria, string nombreSubCategoria, int idCategoriaPadre)
         {
             Id = idSubCategoria;
