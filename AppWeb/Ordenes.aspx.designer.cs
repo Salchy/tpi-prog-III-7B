@@ -51,24 +51,6 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.GridView dgvMenu;
 
         /// <summary>
-        /// Control lbCantidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbCantidad;
-
-        /// <summary>
-        /// Control tbcCantidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbcCantidad;
-
-        /// <summary>
         /// Control btnAgregar.
         /// </summary>
         /// <remarks>

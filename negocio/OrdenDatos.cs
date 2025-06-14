@@ -17,10 +17,9 @@ namespace negocio
 
             try
             {
-                database.setQuery("INSERT INTO Ordenes (id_Menu,Cantidad,Estado,id_Mesa,id_Pedido) VALUES (@menu,@cant,@estado,@mesa,@pedido)");
+                database.setQuery("INSERT INTO Ordenes (id_Menu,Cantidad,Estado,id_Mesa,id_Pedido) VALUES (@menu,@cant,1,@mesa,@pedido)");
                 database.setParameter("@menu", orden.Menu.IdMenuItem);
                 database.setParameter("@cant", orden.Cantidad);
-                database.setParameter("@estado",orden.Estado);
                 database.setParameter("@mesa", orden.Pedido.mesa.IdMesa);
                 database.setParameter("@pedido", orden.Pedido.Id);
 

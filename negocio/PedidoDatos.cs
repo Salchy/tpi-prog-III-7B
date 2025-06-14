@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace negocio
 {
-    internal class PedidoDatos
+    public class PedidoDatos
     {
         Database database;
         public void CrearPedido(Mesa mesa)

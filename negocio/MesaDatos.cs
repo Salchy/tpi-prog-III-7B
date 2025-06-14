@@ -42,13 +42,12 @@ namespace negocio
         public void setMesaData(Mesa aux, SqlDataReader data)
         {
           UsuarioDatos user = new UsuarioDatos();
-            aux.MeseroAsignado = user.getUsuario((int)data["id_Usuario"]);
-            aux.IdMesa = (int)data["id_Mesa"];
-            aux.numeroMesa= (int)data["Numero"]; 
+            aux.MeseroAsignado = user.getUsuario(Convert.ToInt32(data["id_Usuario"]));
+            aux.IdMesa = Convert.ToInt32(data["id_Mesa"]);
+            aux.numeroMesa= Convert.ToInt32(data["Numero"]); 
             aux.Disponibilidad= (bool)data["Estado"];
-            aux.numeroComensales= (int) data["Numero_Comensales"];
-            //Ver tema estado fuera de base de datos
-            
+            aux.numeroComensales= Convert.ToInt32(data["Numero_Comensales"]);
+
         }
 
 
@@ -56,7 +55,7 @@ namespace negocio
         {
            List<Mesa> Asignadas = new List<Mesa>();
             
-           /* try
+            /*try
             {
                 database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id");//tambien agregar filtrado de estado
                 database.setParameter("@id", id);

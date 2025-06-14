@@ -29,6 +29,9 @@ namespace negocio
                     (string)database.Reader["Nombre_Categoria"],
                     Convert.ToInt32(database.Reader["idSubCategoria"]),
                     (string)database.Reader["NombreSubCategoria"]
+
+                
+
                 );
                 menuCompleto.Add(item);
             }
@@ -131,8 +134,39 @@ namespace negocio
             }
 
         }
+        ///////////////////
+        public List<MenuItem> listarSubMenu(int id)
+        {
+            List<MenuItem> submenu = new List<MenuItem>();
+
+            database = new Database();
+
+            database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.idSubCategoria= @id");
+            database.setParameter("@id", id);
+            database.execQuery();
+
+            while (database.Reader.Read())
+            {
+                MenuItem item = new MenuItem(
+                    (int)database.Reader["id_Menu_Item"],
+                    database.Reader["Nombre_Menu"].ToString(),
+                    database.Reader.IsDBNull(database.Reader.GetOrdinal("Descripcion")) ? "" : database.Reader["Descripcion"].ToString(),
+                    Math.Round((decimal)database.Reader["Precio"], 2),
+                    Convert.ToInt32(database.Reader["id_Categoria"]), // Porque en la DB lo definimos como TINYINT
+                    (string)database.Reader["Nombre_Categoria"],
+                    Convert.ToInt32(database.Reader["idSubCategoria"]),
+                    (string)database.Reader["NombreSubCategoria"]
+                );
+                submenu.Add(item);
+            }
+
+            return submenu;
+        }
+        /////////////////
+
     }
 
- 
+
+
 }
 

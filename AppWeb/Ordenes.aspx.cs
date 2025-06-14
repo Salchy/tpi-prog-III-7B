@@ -12,11 +12,12 @@ namespace AppWeb
 {
     public partial class Ordenes : System.Web.UI.Page
     {
+        public bool AgregarOrden { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
            CategoriasDatos categoria = new CategoriasDatos();
             SubCategoriaDatos subcat= new SubCategoriaDatos();
-           
+            
             try
             {
                 if (!IsPostBack)
@@ -24,14 +25,14 @@ namespace AppWeb
                     List<SubCategoria> ListaSubcategorias = subcat.listarSubCategorias();
                     Session["ListaSubcategorias"] = ListaSubcategorias;
                     List<Categoria> lista = categoria.listarCategorias();
-                   
-
+                                       
                     ddlCategoria.DataSource = lista;
                     ddlCategoria.DataTextField = "Nombre";
                     ddlCategoria.DataValueField = "id";
                     ddlCategoria.DataBind();
-                    //ddlCategoria.SelectedIndex = 0; 
+                    ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
 
+                                       
                 }
 
             }
@@ -65,16 +66,48 @@ namespace AppWeb
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-            if (IsPostBack)
+                 
+
+                try
+                {
+                if (IsPostBack)
+                 {
+               
+                int id = int.Parse(ddlCategoria.SelectedValue);
+                    ddlSubCategoria.DataSource = ((List<SubCategoria>)Session["ListaSubcategorias"]).FindAll(x => x.IdCategoriaPadre == id);
+                    ddlSubCategoria.DataTextField = "Nombre";
+                    ddlSubCategoria.DataValueField = "id";
+                    ddlSubCategoria.DataBind();
+                ddlSubCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+                }
+            }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+        
+              
+
+        protected void ddlSubCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
             {
                 
-                int id=int.Parse(ddlCategoria.SelectedValue);
-                ddlSubCategoria.DataSource=((List<SubCategoria>)Session["ListaSubcategorias"]).FindAll(x=> x.IdCategoriaPadre==id);
-                ddlSubCategoria.DataTextField = "Nombre";
-                ddlSubCategoria.DataValueField = "id";
-                ddlSubCategoria.DataBind();
+                menuItemDatos submenu = new menuItemDatos();
+                int id = int.Parse(ddlSubCategoria.SelectedValue);
+                 dgvMenu.DataSource = submenu.listarSubMenu(id);
+                dgvMenu.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
+
+       
     }
 }
