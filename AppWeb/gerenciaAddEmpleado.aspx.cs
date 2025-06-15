@@ -84,27 +84,27 @@ namespace AppWeb
         {
             if (string.IsNullOrWhiteSpace(userName))
             {
-                Response.Write("Debes ingresar un Nombre.");
+                mostrarMensaje("Nombre inválido", "ERROR: Debes ingresar un nombre para el empleado.");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(userSurName))
             {
-                Response.Write("Debes ingresar un Apellido.");
+                mostrarMensaje("Apellido inválido", "ERROR: Debes ingresar un apellido para el empleado.");
                 return false;
             }
             if (string.IsNullOrWhiteSpace(userDNI))
             {
-                Response.Write("Debes ingresar un DNI.");
+                mostrarMensaje("DNI inválido", "ERROR: Debes ingresar un DNI asociado el empleado.");
                 return false;
             }
             if (!esNumerico(userDNI))
             {
-                Response.Write("Debes ingresar un DNI válido.");
+                mostrarMensaje("DNI inválido", "ERROR: Debes ingresar un DNI válido.");
                 return false;
             }
             if (!dniValido(userDNI))
             {
-                Response.Write("Debes ingresar un DNI válido.");
+                mostrarMensaje("DNI inválido", "ERROR: Debes ingresar un DNI válido.");
                 return false;
             }
             return true;
@@ -147,5 +147,11 @@ namespace AppWeb
         {
             Response.Redirect("gerenciaPersonal.aspx", true);
         }
-    }
+
+        private void mostrarMensaje(string title, string msg)
+        {
+            literal.Text = "<div class='modal-dialog modal-dialog-centered'>" + title + "</div>" +
+                "<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>" + msg + "</div>";
+        }
+}
 }

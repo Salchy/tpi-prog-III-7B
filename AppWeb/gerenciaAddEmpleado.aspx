@@ -4,8 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <figure class="text-center">
-
-        <asp:Label CssClass="fs-2 fw-bold " ID="lblTitle" runat="server">Registrar nuevo empleado</asp:Label>
+        <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblTitle" runat="server">Registrar nuevo empleado</asp:Label>
     </figure>
     <div class="container text-center">
         <div class="row g-3">
@@ -32,4 +31,5 @@
             <asp:Button ID="regUserBTN" runat="server" CssClass="btn btn-success col-3 mx-auto" Text="Añadir Empleado" OnClick="btnRegistrarUsuario" />
         </div>
     </div>
+    <asp:Literal ID="literal" runat="server"></asp:Literal>
 </asp:Content>

@@ -14,7 +14,7 @@
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <asp:BoundField HeaderText="Apellido" DataField="Apellido" />
             <asp:BoundField HeaderText="DNI" DataField="Dni" />
-            <asp:BoundField HeaderText="Estado" DataField="Estado" />
+            <asp:BoundField HeaderText="Cargo" DataField="NivelUsuario" />
 
             <%--            
                  <asp:CommandField ShowEditButton="True" ShowDeleteButton="True" />
