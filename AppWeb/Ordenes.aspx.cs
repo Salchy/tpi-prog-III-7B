@@ -12,12 +12,14 @@ namespace AppWeb
 {
     public partial class Ordenes : System.Web.UI.Page
     {
-        public bool AgregarOrden { get; set; }
+
+        Orden nueva = new Orden();
         protected void Page_Load(object sender, EventArgs e)
         {
            CategoriasDatos categoria = new CategoriasDatos();
             SubCategoriaDatos subcat= new SubCategoriaDatos();
             
+
             try
             {
                 if (!IsPostBack)
@@ -32,7 +34,16 @@ namespace AppWeb
                     ddlCategoria.DataBind();
                     ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
 
-                                       
+                    ddlMesaActiva.DataSource = ((List<Mesa>)Session["MesasAsignadas"]);
+                    ddlMesaActiva.DataTextField = "numeroMesa";
+                    ddlMesaActiva.DataValueField = "IdMesa";
+                    ddlMesaActiva.DataBind();
+                    ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+
+
+
+
+
                 }
 
             }
@@ -108,6 +119,53 @@ namespace AppWeb
             }
         }
 
-       
+        protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           /* menuItemDatos menu = new menuItemDatos();
+            nueva.Menu= menu.GetItem(int.Parse(dgvMenu.SelectedDataKey.Value.ToString()));
+            nueva.Estado = true;
+            OrdenDatos orden = new OrdenDatos();
+            orden.AgregarOrden(nueva);*/
+
+        }
+
+        protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+           /* try
+            {
+                 
+                MesaDatos mesaactiva = new MesaDatos();
+                    int id = int.Parse(ddlMesaActiva.SelectedValue);
+                    PedidoDatos nuevo = new PedidoDatos();
+                Pedido aux = new Pedido();
+                if (nuevo.getIdPedidoMesaAbierta(id) == 0)
+                    {
+                        nuevo.CrearPedido(id);
+                        
+                    }
+                aux= nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(id));
+                nueva.Pedido = aux;
+                           
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }*/
+        }
+
+      
+
+        protected void txtCantiad_TextChanged(object sender, EventArgs e)
+        {
+            //nueva.Cantidad=int.Parse(txtCantidad.Text);
+            nueva.Cantidad = 999;
+        }
+
+        protected void chkAgregar_CheckedChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

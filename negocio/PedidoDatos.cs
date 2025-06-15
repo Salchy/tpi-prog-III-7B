@@ -11,15 +11,15 @@ namespace negocio
     public class PedidoDatos
     {
         Database database;
-        public void CrearPedido(Mesa mesa)
+        public void CrearPedido(int id)
         {
 
             database = new Database();
 
             try
             {
-                database.setQuery("INSERT INTO Ordenes (id_Mesa,Estado,Importe) VALUES (@mesa,1,-1)");
-                database.setParameter("@mesa", mesa.IdMesa);
+                database.setQuery("INSERT INTO Pedidos (id_Mesa,Estado,Importe) VALUES (@mesa,1,-1)");
+                database.setParameter("@mesa", id);
                 database.execNonQuery();
             }
             catch (Exception ex)
@@ -33,25 +33,24 @@ namespace negocio
 
         }
 
-        /*public void setPedidoData(Mesa mesa, Pedido aux, SqlDataReader data)
-        {
-            aux.Id= (int)data["id_Pedido"];
-            aux.mesa = mesa;
-            aux.Estado= (bool)data["Estado"];
-            aux.Importe= (int)data["Importe"];
+        
 
-        }*/
-
-        public int getPedidoMesaAbierta(Mesa mesa)//busco el id del pedido recein creado
+        public int getIdPedidoMesaAbierta(int id)//busco el id del pedido recein creado
         {
             int aux = 0;
+            database = new Database();
             try
             {
                 database.setQuery("SELECT * FROM Pedidos WHERE id_Mesa= @id and Estado=1 and Importe=-1");
-                database.setParameter("@id", mesa.IdMesa);
+                database.setParameter("@id", id);
                 database.execQuery();
-                aux = (int)database.Reader["id_Pedido"];
 
+                if (!database.Reader.Read())
+                {
+                    return aux;
+                }
+                aux = (int)database.Reader["id_Pedido"];
+                return aux;
             }
             catch (Exception ex)
             {
@@ -62,7 +61,7 @@ namespace negocio
             {
                 database.closeConnection();
             }
-            return aux;
+            
 
         }
 
@@ -73,7 +72,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("update Ordenes set Estado=@estado, Importe=@importe Where id_Pedido=@id");
+                database.setQuery("update Pedidos set Estado=@estado, Importe=@importe Where id_Pedido=@id");
                 database.setParameter("@importe", importe);
                 database.setParameter("@estado", estado);
                 database.setParameter("@id", id);
@@ -99,9 +98,8 @@ namespace negocio
 
             try
             {
-                database.setQuery("update Ordenes set Estado=0, Importe=0 Where id_Pedido=@id");
+                database.setQuery("update Pedidos set Estado=0, Importe=0 Where id_Pedido=@id");
                 database.setParameter("@id", id);
-
                 database.execQuery();
             }
             catch (Exception ex)
@@ -113,6 +111,45 @@ namespace negocio
                 database.closeConnection();
             }
 
+        }
+
+        public void setPedidoData(Pedido aux, SqlDataReader data)
+        {
+            MesaDatos mesa = new MesaDatos();
+
+            aux.Id = (int)data["id_Pedido"];
+            aux.mesa= mesa.getMesa(Convert.ToInt32(data["id_Mesa"]));
+            aux.Estado= (bool)data["Estado"];
+            aux.Importe= Convert.ToInt32(data["Importe"]);
+        }
+
+        public Pedido BuscarPedido( int id)
+        {
+            database = new Database();
+           
+
+            try
+            {
+                database.setQuery("SELECT * FROM Pedidos WHERE id_Pedido= @id");
+                database.setParameter("@id", id);
+                database.execQuery();
+                if (!database.Reader.Read())
+                {
+                    return null;
+                }
+                Pedido aux = new Pedido();
+                setPedidoData(aux, database.Reader);
+                return aux;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
         }
     }
 }

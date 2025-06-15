@@ -15,13 +15,17 @@ namespace AppWeb
         {
              MesaDatos mesaDatos = new MesaDatos();
             List<Mesa> lista = mesaDatos.getMesasAsignadas(3);
+            
+            
 
-           /*Usuario Mesero = (Usuario) Session["Usuario"];
-            dgvMesas_asignadas.DataSource = mesaDatos.getMesasAsignadas(Mesero.Id);//recuperar el id del usuario cuando se loguea
-            dgvMesas_asignadas.DataBind();*/
+
+            /*Usuario Mesero = (Usuario) Session["Usuario"];
+             dgvMesas_asignadas.DataSource = mesaDatos.getMesasAsignadas(Mesero.Id);//recuperar el id del usuario cuando se loguea
+             dgvMesas_asignadas.DataBind();*/
 
             dgvMesas_asignadas.DataSource = lista;//recuperar el id del usuario cuando se loguea
             dgvMesas_asignadas.DataBind();
+            Session["MesasAsignadas"] = lista;
 
         }
 

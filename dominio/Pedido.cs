@@ -21,5 +21,10 @@ namespace dominio
             Estado = true;
             Importe = -1;
         }
+        public Pedido()
+        {
+            Estado = true;
+            Importe = -1;
+        }
     }
 }

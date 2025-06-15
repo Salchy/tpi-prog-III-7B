@@ -42,11 +42,13 @@ namespace negocio
         public void setMesaData(Mesa aux, SqlDataReader data)
         {
           UsuarioDatos user = new UsuarioDatos();
-            aux.MeseroAsignado = user.getUsuario(Convert.ToInt32(data["id_Usuario"]));
+            
             aux.IdMesa = Convert.ToInt32(data["id_Mesa"]);
-            aux.numeroMesa= Convert.ToInt32(data["Numero"]); 
+            aux.MeseroAsignado = user.getUsuario(Convert.ToInt32(data["id_Usuario"]));
+            aux.numeroComensales = Convert.ToInt32(data["Numero_Comensales"]);
+            aux.numeroMesa= Convert.ToInt32(data["Numero"]);
             aux.Disponibilidad= (bool)data["Estado"];
-            aux.numeroComensales= Convert.ToInt32(data["Numero_Comensales"]);
+           
 
         }
 
@@ -55,7 +57,7 @@ namespace negocio
         {
            List<Mesa> Asignadas = new List<Mesa>();
             
-            /*try
+            try
             {
                 database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id");//tambien agregar filtrado de estado
                 database.setParameter("@id", id);
@@ -76,13 +78,67 @@ namespace negocio
             finally
             {
                 database.closeConnection();
-            }*/
+            }
             return Asignadas;
            
         }
-        
-         
-         
+        public List<Mesa> getMesas()
+        {
+            List<Mesa> Mesas = new List<Mesa>();
+            UsuarioDatos user = new UsuarioDatos();
+
+            try
+            {
+                database.setQuery("SELECT * FROM mesas");
+                database.execQuery();
+
+                while (database.Reader.Read())
+                {
+
+                    Mesa aux = new Mesa();
+                    setMesaData(aux, database.Reader);
+                    Mesas.Add(aux);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+            return Mesas;
+
+        }
+        public Mesa getMesa(int id)
+        {
+            Mesa aux = new Mesa();
+
+            try
+            {
+                database.setQuery("SELECT * FROM mesas WHERE id_Mesa = @id");
+                database.setParameter("@id", id);
+                database.execQuery();
+                if (!database.Reader.Read())
+                {
+                    return null;
+                }
+                setMesaData(aux, database.Reader);
+                return aux;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
 
 
     }

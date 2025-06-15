@@ -6,36 +6,47 @@
 
     
       <h1>Carga de Ordenes</h1>
+
+    <div class="=row">   
+    <div class="col"">   
+        <h2>Mesa</h2>
+        <asp:DropDownList ID="ddlMesaActiva" runat="server"  OnSelectedIndexChanged="ddlMesaActiva_SelectedIndexChanged" AutoPostBack="true" class="btn btn-secondary dropdown-toggle" >
+                    </asp:DropDownList>
+    </div>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>   
             <div class="=row">   
                 <div class="col"">   
                     <h2>Categorias</h2>
-                    <asp:DropDownList ID="ddlCategoria" runat="server"  OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" >
+                    <asp:DropDownList ID="ddlCategoria" runat="server"  OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" class="btn btn-secondary dropdown-toggle" >
 
                     </asp:DropDownList>
                 </div>
                 <div class="col"">   
                     <h2>SubCategorias</h2>
-            <asp:DropDownList ID="ddlSubCategoria" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSubCategoria_SelectedIndexChanged"></asp:DropDownList>
+            <asp:DropDownList ID="ddlSubCategoria" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSubCategoria_SelectedIndexChanged" class="btn btn-secondary dropdown-toggle"></asp:DropDownList>
                 </div>
                 
     
                 <h2>Menu disponible</h2>
-<asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false">
+<asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvMenu_SelectedIndexChanged" DataKeyNames="IdMenuItem" >
     <Columns>
-    <asp:BoundField DataField="IdMenuItem" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto" />
-    <asp:BoundField HeaderText="Menu" DataField="Nombre" />
+     <asp:BoundField HeaderText="Menu" DataField="Nombre" />
     <asp:BoundField HeaderText="Precio" DataField="Precio" />
     <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
         
  <asp:TemplateField>
      <HeaderTemplate> Cantidad</HeaderTemplate>
      <ItemTemplate>
-         <asp:CheckBox Text="" ID="chkAgregar"  runat="server"  />
-         <asp:TextBox runat="server" ID="txtCantiadFiltro" CssClass="form-control" />
-                  </ItemTemplate>
+         <asp:CheckBox Text="" ID="chkAgregar"  runat="server"  OnCheckedChanged="chkAgregar_CheckedChanged" AutoPostBack="true" />
+          
+          </ItemTemplate>
+     <ItemTemplate>
+         <asp:TextBox runat="server" ID="txtCantiad" CssClass="form-control" OnTextChanged="txtCantiad_TextChanged" AutoPostBack="true" ReadOnly="true"/>
+         </ItemTemplate>
 </asp:TemplateField>
+        <asp:CommandField ShowSelectButton="true" ButtonType="Button" SelectText="Agregar"/>
+        
 </Columns>
 
 </asp:GridView>
