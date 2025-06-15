@@ -21,6 +21,18 @@ namespace AppWeb
             }
         }
 
-     
+        protected void dgvSubCate_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvSubCate.PageIndex = e.NewPageIndex;
+
+           SubCategoriaDatos manager = new SubCategoriaDatos();
+            dgvSubCate.DataSource = manager.listarSubCategorias();
+            dgvSubCate.DataBind();
+        }
+
+        protected void btnAgregarSub_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("gerenciaAddSubCategoria.aspx");
+        }
     }
 }

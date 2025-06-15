@@ -3,9 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand">
+    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand" AllowPaging="true" pageSize ="10" OnPageIndexChanging="dgvCategorias_PageIndexChanging" DataKeyNames ="Id">
         <Columns>
-            <asp:BoundField HeaderText="IDCategoria" DataField="Id" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto"/>
+            
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />
             <%--<asp:CommandField HeaderText ="Detalles" ShowSelectButton="true" SelectText="🔍 Ver detalles" />--%>
 

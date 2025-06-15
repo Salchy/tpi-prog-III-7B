@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table">
+    <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging">
       <Columns>
            <asp:BoundField HeaderText="IDSubCategoria" DataField="Id"/>
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />
@@ -15,4 +15,6 @@
             <asp:ButtonField ButtonType="Button" CommandName="Borrar" Text="Borrar" ControlStyle-CssClass="btn btn-danger" />
       </Columns>
     </asp:GridView>
+
+    <asp:Button Text="AGREGAR" ID="btnAgregarSub" runat="server" OnClick="btnAgregarSub_Click" />
 </asp:Content>

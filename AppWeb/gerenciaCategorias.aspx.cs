@@ -35,7 +35,7 @@ namespace AppWeb
             {
                 int index = int.Parse(e.CommandArgument.ToString());
 
-                int id = int.Parse(dgvCategorias.Rows[index].Cells[0].Text);
+                int id = int.Parse(dgvCategorias.DataKeys[index].Value.ToString());
 
                 if (e.CommandName == "Editar")
                 {
@@ -46,6 +46,15 @@ namespace AppWeb
                     Response.Redirect("gerenciaAddCategoria.aspx");
                 }
             }
+        }
+
+        protected void dgvCategorias_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            dgvCategorias.PageIndex = e.NewPageIndex;
+
+            CategoriasDatos manager = new CategoriasDatos();
+            dgvCategorias.DataSource = manager.listarCategorias();
+            dgvCategorias.DataBind();
         }
     }
 }
