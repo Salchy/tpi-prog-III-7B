@@ -17,7 +17,6 @@ namespace AppWeb
                 SubCategoriaDatos subcate = new SubCategoriaDatos();
                 dgvSubCate.DataSource = subcate.listarSubCategorias();
                 dgvSubCate.DataBind();
-                dgvSubCate.Columns[0].Visible = false; 
             }
         }
 
@@ -33,6 +32,25 @@ namespace AppWeb
         protected void btnAgregarSub_Click(object sender, EventArgs e)
         {
             Response.Redirect("gerenciaAddSubCategoria.aspx");
+        }
+
+        protected void dgvSubCate_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Editar" || e.CommandName == "Borrar")
+            {
+                int index = int.Parse(e.CommandArgument.ToString());
+
+                int id = int.Parse(dgvSubCate.DataKeys[index].Value.ToString());
+
+                if (e.CommandName == "Editar")
+                {
+                    Response.Redirect("gerenciaAddSubCategoria.aspx?id=" + id);
+                }
+                else if (e.CommandName == "Borrar")
+                {
+                    //Response.Redirect("gerenciaAddCategoria.aspx");
+                }
+            }
         }
     }
 }

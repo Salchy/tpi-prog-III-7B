@@ -25,7 +25,7 @@
                         <label for="ddlCategoriaPadre" class="form-label ">Categoria a la que pertenece</label>
                         <asp:DropDownList ID="ddlCategoriaPadre" runat="server" CssClass="form-select" />
                     </div>
-                    <asp:Button Text="Aceptar" ID="btnAceptarSubCate" runat="server" />
+                    <asp:Button Text="Aceptar" ID="btnAceptarSubCate" runat="server" OnClick="btnAceptarSubCate_Click" />
                     <asp:Button Text="Volver" ID="btnVolverSubCate" runat="server"  OnClick="btnVolverSubCate_Click"/>
                 </div>
             </div>
