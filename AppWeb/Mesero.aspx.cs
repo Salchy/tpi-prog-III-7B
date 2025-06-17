@@ -34,5 +34,18 @@ namespace AppWeb
             
             Response.Redirect("Ordenes.aspx", false);
         }
+
+        protected void dgvMesas_asignadas_SelectedIndexChanged(object sender, EventArgs e)//es igual el de ordenes pero salta error, al buscar la lista de ordenes de la mesa
+        {
+            /*OrdenDatos orden = new OrdenDatos();
+            PedidoDatos pedido = new PedidoDatos();
+
+            int idmesa = int.Parse(dgvMesas_asignadas.SelectedDataKey.Value.ToString());
+            int idpedido = pedido.getIdPedidoMesaAbierta(idmesa);
+
+
+            dvgOrdenes.DataSource= orden.getOrdenesPedido(idpedido);
+            dvgOrdenes.DataBind();*/
+        }
     }
 }

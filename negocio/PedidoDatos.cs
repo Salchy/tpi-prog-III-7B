@@ -41,7 +41,7 @@ namespace negocio
             database = new Database();
             try
             {
-                database.setQuery("SELECT * FROM Pedidos WHERE id_Mesa= @id and Estado=1 and Importe=-1");
+                database.setQuery("SELECT id_Pedido FROM Pedidos WHERE id_Mesa= @id and Estado=1 and Importe=-1");
                 database.setParameter("@id", id);
                 database.execQuery();
 

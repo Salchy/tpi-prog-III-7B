@@ -29,7 +29,7 @@
                 
     
                 <h2>Menu disponible</h2>
-<asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvMenu_SelectedIndexChanged" DataKeyNames="IdMenuItem" >
+<asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvMenu_SelectedIndexChanged" DataKeyNames="IdMenuItem"  >
     <Columns>
      <asp:BoundField HeaderText="Menu" DataField="Nombre" />
     <asp:BoundField HeaderText="Precio" DataField="Precio" />
@@ -37,25 +37,37 @@
         
  <asp:TemplateField>
      <HeaderTemplate> Cantidad</HeaderTemplate>
+     
      <ItemTemplate>
-         <asp:CheckBox Text="" ID="chkAgregar"  runat="server"  OnCheckedChanged="chkAgregar_CheckedChanged" AutoPostBack="true" />
-          
-          </ItemTemplate>
-     <ItemTemplate>
-         <asp:TextBox runat="server" ID="txtCantiad" CssClass="form-control" OnTextChanged="txtCantiad_TextChanged" AutoPostBack="true" ReadOnly="true"/>
+         <asp:TextBox runat="server" ID="txtCantiad" CssClass="form-control" OnTextChanged="txtCantiad_TextChanged" AutoPostBack="true" ReadOnly="false" />
          </ItemTemplate>
 </asp:TemplateField>
-        <asp:CommandField ShowSelectButton="true" ButtonType="Button" SelectText="Agregar"/>
+        <asp:CommandField  ShowSelectButton="true" ButtonType="Button" SelectText="Agregar"/>
         
 </Columns>
 
 </asp:GridView>
             </div>
+
+                <h2>Ordenes del Pedido</h2>
+     <asp:GridView ID="dgvOrdenes" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" >
+
+             <Columns>
+     <asp:BoundField HeaderText="Menu" DataField="Menu.Nombre" />
+    <asp:BoundField HeaderText="Precio Unitario" DataField="Menu.Precio" />
+    <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
+        
+</Columns>
+
+ 
+     </asp:GridView>
         </ContentTemplate>
+
+   
+
     </asp:UpdatePanel>
-    <asp:Button Text="Agregar Orden" CssClass="btn btn-primary btn-sm" ID="btnAgregar" OnClick="btnAgregar_Click" runat="server" />
-    <h2>Ordenes del Pedido</h2>
-     <asp:GridView ID="dgvOrdenes" runat="server"></asp:GridView>
+    
+   
     <asp:Button Text="Enviar orden" CssClass="btn btn-primary btn-sm" ID="btnEnviar" OnClick="btnEnviar_Click" runat="server" />
     <asp:Button Text="Eliminar orden" CssClass="btn btn-primary btn-sm" ID="btnEliminarOrden" OnClick="btnEliminarOrden_Click" runat="server" />
     <asp:Button Text="Volver" CssClass="btn btn-primary btn-sm" ID="btnVolver" OnClick="btnVolver_Click" runat="server" />

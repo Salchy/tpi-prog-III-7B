@@ -1,6 +1,7 @@
 ﻿using dominio;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,9 +18,10 @@ namespace negocio
 
             try
             {
-                database.setQuery("INSERT INTO Ordenes (id_Menu,Cantidad,Estado,id_Mesa,id_Pedido) VALUES (@menu,@cant,1,@mesa,@pedido)");
+                database.setQuery("INSERT INTO Ordenes (id_Menu,Cantidad,Estado,id_Mesa,id_Pedido) VALUES (@menu,@cant,@Estado,@mesa,@pedido)");
                 database.setParameter("@menu", orden.Menu.IdMenuItem);
                 database.setParameter("@cant", orden.Cantidad);
+                database.setParameter("@Estado", orden.Estado);
                 database.setParameter("@mesa", orden.Pedido.mesa.IdMesa);
                 database.setParameter("@pedido", orden.Pedido.Id);
 
@@ -35,6 +37,8 @@ namespace negocio
             }
 
         }
+
+
 
         public void ModificarOrden(Orden orden)
         {
@@ -86,6 +90,47 @@ namespace negocio
 
         }
 
+        public void setOrdenData(Orden aux, SqlDataReader data)
+        {
+           menuItemDatos menu = new menuItemDatos();
+           PedidoDatos pedido = new PedidoDatos();
+           
 
+            aux.Menu = menu.GetItem((int)data["id_Menu"]);
+            aux.Estado= (bool)data["Estado"];
+            aux.Pedido = pedido.BuscarPedido((int)data["id_Pedido"]);
+            aux.Cantidad = Convert.ToInt32(data["Cantidad"]);
+            aux.id = (int)data["id_Orden"];
+
+        }
+        public List<Orden> getOrdenesPedido(int id)
+        {
+            List<Orden> Pedidas = new List<Orden>();
+
+            try
+            {
+                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido= @id");//tambien agregar filtrado de estado
+                database.setParameter("@id", id);
+                database.execQuery();
+
+                while (database.Reader.Read())
+                {
+                    Orden aux = new Orden();
+                    setOrdenData(aux, database.Reader);
+                    Pedidas.Add(aux);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+            return Pedidas;
+
+        }
     }
 }
