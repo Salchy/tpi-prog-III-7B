@@ -15,7 +15,7 @@ namespace negocio
             List<MenuItem> menuCompleto = new List<MenuItem>();
 
             database = new Database();
-            database.setProcedure("SP_GETALLMENU");
+            database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, M.Estado, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria");
             database.execQuery();
 
             while (database.Reader.Read())
@@ -33,6 +33,7 @@ namespace negocio
                 
 
                 );
+                item.Estado = (bool)database.Reader["Estado"];
                 menuCompleto.Add(item);
             }
 
@@ -45,7 +46,7 @@ namespace negocio
             try
             {
                 database = new Database();
-                database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.id_Menu_Item = @id");
+                database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion,M.Estado ,M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.id_Menu_Item = @id");
                 database.setParameter("@id", id);
                 database.execQuery();
 
@@ -63,6 +64,7 @@ namespace negocio
                      Convert.ToInt32(database.Reader["idSubCategoria"]),
                      (string)database.Reader["NombreSubCategoria"]
                  );
+                item.Estado = (bool)database.Reader["Estado"];
 
                 return item;
             }
@@ -164,6 +166,26 @@ namespace negocio
         }
         /////////////////
 
+
+        public bool habilitarInhabilitarMenu(int id, bool estado)
+        {
+            try
+            {
+                database.setQuery("UPDATE MENU SET Estado = @estado WHERE  id_Menu_Item = @id");
+                database.setParameter("@id", id);
+                database.setParameter("@estado", estado);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
     }
 
 

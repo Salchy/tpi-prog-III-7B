@@ -98,8 +98,6 @@ namespace AppWeb
                 nuevo.SubCategoria.Id = int.Parse(ddlSubcategoria.SelectedValue);
 
 
-
-
                 if (Request.QueryString["id"] != null)
                 {
                     nuevo.IdMenuItem = int.Parse(Request.QueryString["id"]);
@@ -108,12 +106,6 @@ namespace AppWeb
                 {
                     manager.Agregar(nuevo);
                 }
-
-
-         
-
-
-
 
                 Response.Redirect("gerenciaMenu.aspx", false);
             }

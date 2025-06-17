@@ -29,7 +29,7 @@ namespace AppWeb
                 //dgvMenu.
                 dgvMenu.DataBind();
             }
-            
+
         }
 
         protected void dgvMenu_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -39,7 +39,7 @@ namespace AppWeb
             menuItemDatos menu = new menuItemDatos();
             dgvMenu.DataSource = menu.listarMenu();
             dgvMenu.DataBind();
-            
+
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -47,24 +47,34 @@ namespace AppWeb
             Response.Redirect("formItemMenu.aspx", false);
         }
 
-  
+
 
         protected void dgvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Editar" || e.CommandName == "Borrar")
+
+            int id = int.Parse(e.CommandArgument.ToString());
+
+            //int id = int.Parse(dgvMenu.DataKeys[index].Value.ToString());
+
+            if (e.CommandName == "Editar")
             {
-                int index = int.Parse(e.CommandArgument.ToString());
+                Response.Redirect("formItemMenu.aspx?id=" + id);
+            }
+            
+            else if (e.CommandName == "Estado")
+            {
 
-                int id = int.Parse(dgvMenu.DataKeys[index].Value.ToString());
+                menuItemDatos manager = new menuItemDatos();
+                dominio.MenuItem menu = manager.GetItem(id);
+                menu.Estado = !menu.Estado;
 
-                if (e.CommandName == "Editar")
-                {
-                    Response.Redirect("formItemMenu.aspx?id=" + id);
-                }
-                else if (e.CommandName == "Borrar")
-                {
-                    Response.Redirect("formItemMenu.aspx");
-                }
+                manager.habilitarInhabilitarMenu(id, menu.Estado);
+
+                dgvMenu.DataSource = manager.listarMenu();
+                dgvMenu.DataBind();
+                
+
+
             }
         }
     }
