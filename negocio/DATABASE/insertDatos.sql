@@ -11,58 +11,84 @@ EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '95980CC32FCB13BFAEDF96D13
 EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', '55DCEC5B6DE9023E541D5E308FC8BA2D3C7FF50D23F2E9FD6E99A92EE7DD272C', 2;
 
 -- Insert de Categorías
-INSERT INTO Categoria_Menu (Nombre_Categoria)
-VALUES 
-	('Entrantes y Principales'),
-	('Ensaladas / Woks'),
-	('Menú Niños'),
-	('Pescados y Mariscos'),
-	('Rissottos y Especiales'),
-	('Pastas Caseras'),
-	('Parrilla'),
-	('Guarniciones'),
-	('Carnes'),
-	('Aves'),
-	('Sobremesa'),
-	('Bebidas'),
-	('Cafetería'),
-	('Aperitivos y Licores'),
-	('Whiskies');
+INSERT INTO Categoria_Menu (Nombre_Categoria) VALUES 
+	('Entradas'),
+	('Ensaladas'),
+	('Platos principales'),
+	('Menú infantil'),
+	('Pastas caseras'),
+	('Pescados y mariscos'),
+	('Woks'),
+	('Risottos'),
+	('Pizzas'),
+	('Postres'),
+	('Bebidas sin alcohol'),
+	('Bebidas con alcohol'),
+	('Cafetería');
 
 SELECT * FROM Categoria_Menu
 
 -- Insert de SubCategorías
-INSERT INTO SubCategoriaMenu(NombreSubCategoria, idCategoriaPrincipal)
-VALUES 
-	('Simples', 1),
-	('Raciones - Cocina Fusión Peruano - Argentina', 1),
-	('Bruschettas', 1),
-	('Empanadas XL', 1),
-	('Picadas y Tablas', 1),
-	('Ensaladas', 2),
-	('Menú Niños', 3),
-	('Pescados y Mariscos', 4),
-	('Rissottos y Especiales', 5),
-	('Combinaciones Clásicas', 6),
-	('Exquisiteces Combinadas', 6),
-	('Entradas Criollas', 7),
-	('Cortes de Parrilla', 7),
-	('Parrilladas para compartir', 7),
-	('Parrillada de Pescados y Mariscos', 7),
-	('Guarniciones', 8),
-	('Carnes', 9),
-	('Milanesas Especiales', 9),
-	('Aves', 10),
-	('Postres Clásicos', 11),
-	('Alta Cocina', 11),
-	('Agregados', 11),
-	('Helados', 11),
-	('Bebidas sin alcohol', 12),
+INSERT INTO SubCategoriaMenu(NombreSubCategoria, idCategoriaPrincipal) VALUES 
+	-- Categoría 1: Entradas
+	('Picadas', 1),
+	('Empanadas', 1),
+	('Sopas', 1),
+
+	-- Categoría 2: Ensaladas
+	('Verdes', 2),
+	('Con proteínas', 2),
+
+	-- Categoría 3: Platos principales
+	('Carnes', 3),
+	('Pastas', 3),
+	('Pescados', 3),
+
+	-- Categoría 4: Menú infantil
+	('Platos', 4),
+	('Postres', 4),
+
+	-- Categoría 5: Pastas caseras
+	('Rellenas', 5),
+	('Sin relleno', 5),
+
+	-- Categoría 6: Pescados y mariscos
+	('Grillados', 6),
+	('Fritos', 6),
+	('Guisos', 6),
+
+	-- Categoría 7: Woks
+	('Vegetarianos', 7),
+	('Con Pollo', 7),
+	('Con Camarones', 7),
+
+	-- Categoría 8: Risottos
+	('Clásicos', 8),
+	('De mar', 8),
+
+	-- Categoría 9: Pizzas
+	('Clásicas', 9),
+	('Especiales', 9),
+
+	-- Categoría 10: Postres
+	('Tortas', 10),
+	('Helados', 10),
+	('Otros', 10),
+
+	-- Categoría 11: Bebidas sin alcohol
+	('Aguas', 11),
+	('Gaseosas', 11),
+	('Jugos', 11),
+
+	-- Categoría 12: Bebidas con alcohol
 	('Cervezas', 12),
-	('Cafetería', 13),
-	('Aperitivos y Licores', 14),
-	('Especialidad de la casa', 14),
-	('Whiskies', 15);
+	('Vinos', 12),
+	('Tragos', 12),
+
+	-- Categoría 13: Cafetería
+	('Cafés', 13),
+	('Tés', 13),
+	('Especiales', 13);
 
 SELECT * FROM SubCategoriaMenu;
 
@@ -70,219 +96,224 @@ SELECT Nombre_Categoria, NombreSubCategoria FROM SubCategoriaMenu AS SCM
 INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
 
 -- Insert de ItemsMenu:
-INSERT INTO Menu(Nombre_Menu, idSubCategoria, Descripcion, Precio)
-VALUES
-	('Papas Americanas', 1, 'Papas Rústicas, salsa 4 quesos, verdeo y panceta.', 14000),
-	('Jamón Serrano con Pan de Campo', 1, NULL, 15500),
-	('Rabas a la Romana', 1, 'Rebozadas y acompañadas con gajos de limón.', 18500),
-	('Variedad de Marizcos a la Provenzal', 1, NULL, 18500),
-	('Langostinos Rebozados', 1, 'Con intensa mayonesa de cayena y perejil.', 19000),
-	('Brochettes de Vegetales', 1, 'Hongos, cherry, cebolla morada, zucchini, zanahoria, morron bicolor.', 17000),
-	('Brochettes de Mar', 1, 'Salmón rosado, langostinos, kanikama, tomate cherry, panceta y cebolla morada, con salsa Alioli', 21000),
-	('Langostinos Especiales Grillados', 1, 'Al limón, vino blanco y chimichurri.', 21000),
-	('Ceviche', 2, 'Dados de abadejo, langostinos y trozos de pulpo, con cebolla morada, ajo, jugo de limón, ají, cilantro, granos de choclo, sal, pimienta y hojas verdes, con suave salsa rosé.', 16500),
-	('Degustación de Causas Peruanas', 2, '4 causas con base de papa andina prensada y palta, topadas con: langostino, salmón ahumado, mero y pollo, más dressing especial.', 28000),
-	('Combinación de Ceviche y Rabas', 2, NULL, 31500),
-	('Combinación de Causas y Brochetas de Mar', 2, NULL, 44000),
-	('Italiana', 3, 'Mozzarella, tomate, ajo, albahaca y oliva extra virgen.', 5000),
-	('Ibérica', 3, 'Jamón serrano, quesos crema y azul, nuez, rúcula y oliva.', 8000),
-	('Di Salmone', 3, 'Salmón ahumado, queso crema, verdeo, cherrys, almendras y oliva extra virgen.', 9000),
-	('Criolla', 4, NULL, 3000),
-	('Jamón y Queso', 4, NULL, 3000),
-	('Cebolla y Queso c/ Romero', 4, NULL, 3000),
-	('Pollo', 4, NULL, 3000),
-	('Caprese', 4, NULL, 3000),
-	('Pescado', 4, NULL, 3000),
-	('Verdura y Queso', 4, NULL, 3000),
-	('Gourmet', 4, 'De horno, carne braseada al Malbec y cebolla caramelizada.', 3000),
-	('Cazuelita de Quesos', 5, 'Variedad de quesos y aceitunas.', 9000),
-	('Tablita de Jamón Serrano y Quesos', 5, 'Con pan de campo, nueces, aceitunas negras y tomatitos cherry.', 27500),
-	('Tabla de Quesos', 5, 'Variedad de fiambres y quesos, salames, quesos especiales y aceitunas verdes.', 38000),
-	('Gran Surtido de Frutos del Mar', 5, 'Gambas al ajillo, rabas, brochette de mar, ceviche, mini cazuela de mariscos, langostinos rebozados y bruschettas di salmone.', 56000),
-	('Simple', 6, 'Lechuga, tomate, cebolla, zanahoria, huevo.', 6500),
-	('Especial', 6, 'Rúcula, albahaca, parmesano, tomate cherry, kanikama + clásicos.', 8000),
-	('Verde y Parmesano', 6, 'Mix de hojas verdes, croutons de pan y escamas de parmesano.', 8000),
-	('Caprese', 6, 'Tomate, mozzarella, albahaca, olivas negras y pimienta negra.', 8000),
-	('César', 6, 'Mix de verdes, croutons de pan, ajo, parmesano, crocantes de panceta, con aderezo César.', 6500),
-	('César con Pollo', 6, 'Clásica ensalada César, con tiras de pollo a la parrilla.', 8500),
-	('César con Langostinos', 6, 'Mix de verdes, croutons de pan, escamas de parmesano, langostinos grillados y lluvia de perejil, con aderezo César.', 16000),
-	('Palta y Pollo', 6, 'Mix de hojas verdes, tomate, huevo duro, roquefort, aceitunas negras y aderezo italiano. Con cazuela de salsa rosé.', 19500),
-	('Patagónica', 6, 'Hojas verdes, salmón ahumado, crocantes de pan, queso fresco, cherrys confitados, vinagreta de ciboulette y nueces.', 23500),
-	('Tallarines', 7, 'Con salsa a elección + helado de 2 gustos de postre.', 160000),
-	('Ravioles', 7, 'Con salsa a elección + helado de 2 gustos de postre.', 16000),
-	('Ñoquis', 7, 'Con salsa a elección + helado de 2 gustos de postre.', 16000),
-	('Sorrentinos', 7, 'Con salsa a elección + helado de 2 gustos de postre.', 16000),
-	('Milanesitas Ragazzi', 7, 'Con papas fritas o puré + helado de 2 gustos de postre.', 16000),
-	('Lomito', 7, 'Con papas fritas o puré + helado de 2 gustos de postre.', 16000),
-	('Merluza a la Parrilla a la Crema de Espinaca y Queso', 8, 'Con papas naturales con oliva y perejil.', 15000),
-	('Salmón Blanco', 8, 'Con verduritas al vapor.', 16500),
-	('Merluzón Grillé', 8, 'Con verduritas al vapor.', 16500),
-	('Salmón Blanco a la Luciano', 8, 'Con papas Doré (crema, champiñón, choclo, toque de aceitunas, jamón y mozzarella con parmesano gratinado).', 20500),
-	('Abadejo grillado a la Parrilla', 8, 'Con puré verde (papa y crema de espinacas).', 20500),
-	('Lenguado grillado a la Parrilla', 8, 'Con puré verde (papa y crema de espinacas).', 20500),
-	('Abadejo a los Cuatro Quesos gratinado', 8, 'Con papas Doré.', 22500),
-	('Trucha Patagónica a la Parrilla', 8, 'Con puré verde.', 22500),
-	('Lenguado a la Crema de Camarones', 8, 'Con verduritas y papas Doré.', 21500),
-	('Salmón Rosado a la Parrilla', 8, 'Con puré verde.', 39000),
-	('Salmón Rosado', 8, 'Con papas Doré (panceta, almendras, crema de camarones y parmesano gratinado).', 39000),
-	('Cazuela de Mariscos', 8, 'Con o sin timbal de arroz blanco – para compartir.', 39000),
-	('Paella a la Valenciana', 8, 'Para compartir.', 39000),
-	('Pulpo a la Gallega', 8, 'Con papas españolas, pimentón dulce y oliva.', 70000),
-	('Risotto de Pollo y Hongos', 9, 'Con arroz carnaroli, pollo, cebolla de verdeo, queso parmesano, zanahoria y vino blanco.', 18500),
-	('Risotto de Hongos y Vegetales', 9, 'Arroz carnaroli, hongos silvestres y champiñones, verdeo, zucchini, zanahoria, parmesano y vino blanco.', 21500),
-	('Risotto de Salmón Rosado y Langostinos', 9, 'Con arroz carnaroli, puerros, ciboulette, langostinos y cubos de salmón rosado.', 29500),
-	('Wok de Vegetales', 9, 'Juliana de verduras, zapallito, cherry, chauchas, cebolla de verdeo, champiñón, sésamo, fideos de arroz y salsa de soja.', 21500),
-	('Vermicelli a la fileto', 10, NULL, 14500),
-	('Vermicelli en salsa rosa', 10, NULL, 14500),
-	('Vermicelli al vero pesto', 10, NULL, 16000),
-	('Tallarines al huevo con estofado de pollo en salsa', 10, NULL, 16000),
-	('Fetuccine con salsa boloñesa', 10, NULL, 17000),
-	('Ñoquis al vero pesto', 10, NULL, 17000),
-	('Ñoquis a la crema de albahaca', 10, NULL, 17000),
-	('Ñoquis a la boloñesa', 10, NULL, 18000),
-	('Ñoquis cuatro quesos gratinado', 10, NULL, 18000),
-	('Ravioles de verdura a la fileto', 10, NULL, 17500),
-	('Ravioles de verdura con salsa rosa', 10, NULL, 17500),
-	('Ravioles de verdura a los cuatro quesos gratinado', 10, NULL, 19500),
-	('Ravioles de verdura a la boloñesa', 10, NULL, 19500),
-	('Sorrentinos de calabaza y queso con salsa rosa', 10, NULL, 18500),
-	('Sorrentinos de jamón y muzzarella a los cuatro quesos gratinado', 10, NULL, 21000),
-	('Sorrentinos de jamón y muzzarella a la crema de champiñones', 10, NULL, 21000),
-	('Canelones de pollo en salsa de puerros', 10, NULL, 18500),
-	('Canelones de verdura y carne a la rossini', 10, NULL, 19500),
-	('Lasaña de carne con salsa boloñesa', 10, NULL, 24000),
-	('Sorrentinos mediterráneos', 11, 'Mozzarella, albahaca, ricota y nuez', 20000),
-	('Sorrentinos de calabaza y queso con salsa cuatro quesos gratinada', 11, NULL, 21000),
-	('Sorrentinos sicilianos a la crema parmesana', 11, 'Berenjenas horneadas, cebollas confit, mozzarella y ricota', 21000),
-	('Sorrentinos de jamón serrano y rúcula a la crema parmesana', 11, NULL, 21000),
-	('Panzotti de pollo y hongos a los cuatro quesos', 11, NULL, 21000),
-	('Ravioltinos de carne braseada al malbec', 11, 'Con fondo de carne y manteca y toque de queso crema', 22000),
-	('Ravioltinos de cerdo braseado, hongos y mozzarella', 11, 'Con salsa suave de barbacoa', 22000),
-	('Ravioltinos negros de salmón a la crema de limone e gambero', 11, NULL, 24000),
-	('Ravioltinos de langostinos a la crema de camarones y langostinos', 11, NULL, 24000),
-	('Lasaña de salmón rosado con crema de langostinos', 11, NULL, 28000),
-	('Empanada criolla a la chacarera', 12, NULL, 3000),
-	('Provoleta clásica individual', 12, NULL, 7000),
-	('Provoleta clásica p/compartir', 12, NULL, 9000),
-	('Chorizo especial', 12, NULL, 4000),
-	('Morcilla especial', 12, NULL, 4000),
-	('Mollejita a la molinera', 12, 'Porción, con chimichurri al limón', 25000),
-	('Muslo pollo', 13, NULL, 13500),
-	('Pechuga de pollo', 13, NULL, 13500),
-	('Asado corte grillé', 13, NULL, 17500),
-	('Vacío', 13, NULL, 17500),
-	('Entraña fina de asado', 13, NULL, 22500),
-	('Matambrito de cerdo', 13, NULL, 17500),
-	('Vacío de cerdo', 13, NULL, 17500),
-	('Bifecito criollo', 13, NULL, 17500),
-	('Bife de chorizo', 13, NULL, 27500),
-	('Clásica', 14, 'Chorizo, Morcilla, Asado Grillé, Vacío y Pollo deshuesado', 45000),
-	('Completa', 14, 'Chorizo, Morcilla, Molleja, Asado Grillé, Vacío de Vaca y Cerdo y Pollo deshuesado', 54500),
-	('Salmón', 15, 'Con langostinos grillados, calamares a la reja, brochetas de mar y mejillones grillados', 61000),
-	('Mero', 15, 'Con langostinos grillados, calamares a la reja, brochetas de mar y mejillones grillados', 61000),
-	('Salmón Rosado', 15, 'Con langostinos grillados, calamares a la reja, brochetas de mar y mejillones grillados', 61000),
-	('Trucha Salmonada', 15, 'Con langostinos grillados, calamares a la reja, brochetas de mar y mejillones grillados', 61000),
-	('Papas Fritas', 16, NULL, 6500),
-	('Puré de Papas', 16, NULL, 6500),
-	('Calabaza', 16, NULL, 6500),
-	('Papas Natural', 16, NULL, 6500),
-	('Papas Fritas Rústicas', 16, 'En gajos y con cáscara', 6500),
-	('Ensalada Simple', 16, 'Hasta 4 ingredientes', 6500),
-	('Ensalada Hojas Verdes', 16, 'Croutons de pan y parmesano', 6500),
-	('Verduritas al Vapor', 16, 'Repollito, zapallito, zanahoria, chauchas, papitas', 11000),
-	('Carne Braseada en Vegetales al Malbec', 17, 'Con papas al horno', 19500),
-	('Locro Criollo', 17, 'Acompañado de cazuelita de salsa picante', 17000),
-	('Matambre Tiernizado al Verdeo', 17, 'Con papas bastón (con salsa crema de cebolla de verdeo)', 20500),
-	('Matambrito de Cerdo a la Parrilla', 17, 'Salteado de vegetales y papas doré (chauchas, zucchini, zanahoria, brócoli y cebolla morada)', 20500),
-	('Lomo a las Cinco Pimientas', 17, 'Con papas a la crema', 25000),
-	('Lomo a la Mostaza y Estragón con papas rústicas', 17, 'Con papas a la crema', 25000),
-	('Lomo al Champignon con puré de papas al ajillo', 17, 'Con papas a la crema', 25000),
-	('Bondiola de Cerdo a la Barbacoa', 17, 'Con papas rústicas con salsa cuatro quesos, verdeo y panceta', 20500),
-	('Bondiola de Cerdo', 17, 'Braseada a la cerveza negra con risotto de hongos (con cebolla de verdeo, hongos silvestres y ciboulette)', 23000),
-	('Carne clásica', 18, 'Al limón, con fritas bastón', 14000),
-	('Carne a caballo', 18, 'Montada con huevo frito, con papas fritas rústicas', 15000),
-	('Carne napolitana', 18, 'Salsa y rodajas de tomate, jamón cocido, mozzarella y orégano, con fritas bastón', 17500),
-	('Pollo clásica', 18, 'Al limón, con fritas bastón', 14000),
-	('Pollo a caballo', 18, 'Montada con huevo frito, con papas fritas rústicas', 15000),
-	('Pollo napolitana', 18, 'Salsa y rodajas de tomate, jamón cocido, mozzarella y orégano, con fritas bastón', 17500),
-	('Pollo Chef', 19, 'Con papas doré, cebolla y morrón, arrollado con jamón y queso con suave crema de quesos', 17000),
-	('Suprema Pastora', 19, 'Con papas bastón, arrollado con jamón y queso con salsa suave de kétchup, crema y salsa blanca', 18500),
-	('Pollo al Champignon', 19, 'Con puré caprese (puré de papas con tomate cherry y albahaca)', 19500),
-	('Pollo Grillado a la Luciano', 19, 'Con papas doré (crema, champignon, choclo, toque de aceitunas, jamón y mozzarella con parmesano gratinado)', 20500),
-	('Ensalada de Frutas Frescas de Estación', 20, NULL, 5000),
-	('Flan Casero', 20, NULL, 5000),
-	('Affogato Italiano', 20, 'Café expreso con helado de vainilla', 5000),
-	('Lemon Champ', 20, 'Helado de limón con champagne', 6000),
-	('Ensalada de Frutas Frescas con Helado', 20, NULL, 7500),
-	('Don Pedro', 20, NULL, 7500),
-	('Budín de Pan', 20, NULL, 7000),
-	('Copa de la casa', 20, 'Merengue, frutillas, helado de crema americana, charlotte, nueces, crema chantilly y obleas', 9000),
-	('Torre de Postre estilo Balcarce', 21, NULL, 10000),
-	('Torre de Chocolate en dos texturas', 21, 'Con dulce de leche', 10000),
-	('Torre de Crema Mousse de Limón', 21, 'Con moneda de ganache de chocolate', 10000),
-	('Torre Capuccino', 21, 'Crema moka, café y chocolate, el sabor del capuccino', 10000),
-	('Torre de Malbec, Chocolate y Avellanas', 21, NULL, 10000),
-	('Brownie con Cheesecake', 21, 'Con base de brownie', 10000),
-	('Creme Bruleé de Dulce de Leche', 21, NULL, 8500),
-	('Tiramisú all’Italia', 21, NULL, 9000),
-	('Brownie con Helado de Crema Americana', 21, NULL, 9500),
-	('Cheesecake', 21, 'Fórmula exclusiva: con frutos del bosque', 10000),
-	('Copa del Fin del Mundo', 21, 'Copa de frutos del bosque y chocolate, frambuesas, moras, crema, brownie, merengue y frutos rojos', 12000),
-	('Súper Copa de la casa', 21, 'Galletitas Oreo, helado de dulce de leche, crema rocher, almendras y helado de chocolate', 11000),
-	('Frutillas a la Fiamma con Helado de Crema Americana', 21, 'Flambeado con licores', 9000),
-	('Copita MALAMADO, Malbec', 22, 'Recomendado con postres de chocolate', 4000),
-	('Copita MALAMADO, Blanco-Viognier', 22, 'Recomendado con tiramisú', 4000),
-	('Porción de crema, dulce de leche o charlotte', 22, NULL, 1500),
-	('Salsa de Frutos Rojos', 22, NULL, 1500),
-	('Helado 2 Gustos', 23, 'Chocolate, americana, vainilla, frutilla, limón, dulce de leche', 5000),
-	('Helado sin TACC (consultar variedades disponibles)', 23, NULL, 5000),
-	('Bocha de Helado', 23, NULL, 3500),
-	('Almendrado', 23, NULL, 4500),
-	('Bombón', 23, NULL, 4500),
-	('Agua Mineral 600 ml con o sin gas', 24, NULL, 3000),
-	('Gaseosa Línea Coca-Cola 500 cc', 24, NULL, 3000),
-	('Gaseosa Línea Coca-Cola Light 500 cc', 24, NULL, 3000),
-	('Jugos Aquarios', 24, 'Pomelo, manzana, naranja, uva y pera', 3000),
-	('Jugo de Naranja Natural', 24, NULL, 3900),
-	('Jugo de Limón', 24, NULL, 1300),
-	('Schneider - Copa de 1/2 litro', 25, 'Rubia o negra', 4000),
-	('Schneider - 1 litro', 25, 'Rubia o negra', 6000),
-	('Imperial - Copa de 1/2 litro', 25, 'Rubia, negra, roja, golden, IPA, APA', 4500),
-	('Imperial - 1 litro', 25, 'Rubia, negra, roja, golden, IPA, APA', 7000),
-	('Heineken - Copa de 1/2 litro', 25, NULL, 5000),
-	('Heineken - 1 litro', 25, NULL, 8000),
-	('Café / Cortado', 26, NULL, 2500),
-	('Café / Cortado Americano', 26, NULL, 3000),
-	('Café / Cortado Doble', 26, NULL, 4000),
-	('Affogato Italiano', 26, 'Café expreso con helado de vainilla', 5000),
-	('Café de la casa', 26, 'Blend propio, con Bailey’s, chocolate, crema y canela', 5000),
-	('Cappuccino “4 colores”', 26, 'Blend propio, leche, crema, charlotte y canela', 5000),
-	('Té (a elección)', 26, NULL, 3000),
-	('Té Gourmet “Inti Zen”', 26, '8 blends a elección', 4000),
-	('Gancia', 27, NULL, 5500),
-	('Cinzano', 27, NULL, 5500),
-	('Martini', 27, NULL, 5500),
-	('Fernet', 27, NULL, 5500),
-	('Campari', 27, NULL, 5500),
-	('Tía María', 27, NULL, 6500),
-	('Gin Beefeater', 27, NULL, 6500),
-	('Ron Havana Club', 27, NULL, 6500),
-	('Bailey''s', 27, NULL, 6500),
-	('Jerez "Malamado Dry"', 27, NULL, 6500),
-	('Cognac Reserva - San Juan', 27, NULL, 6500),
-	('Fernet con Coca Cola', 27, 'Mini botella Branca + latita de Coca-Cola', 7000),
-	('Ferroviario', 27, 'Fernet Branca, Cinzano Rosso y soda', 7000),
-	('Negroni', 27, 'Campari, Cinzano Rosso, gin y naranja', 7000),
-	('Gin tonic', 27, 'Solo o con limón', 7000),
-	('Spritz', 27, 'Aperol, champaña extra brut y chorro de soda', 7000),
-	('Limoncello artesanal', 28, NULL, 2900),
-	('Crema de limoncello artesanal', 28, NULL, 2900),
-	('Botella de limoncello', 28, NULL, 8500),
-	('J&B', 29, NULL, 4000),
-	('Jim Beam White Label', 29, NULL, 6000),
-	('Jim Beam Honey', 29, NULL, 6500),
-	('Johnnie Walker Red Label', 29, NULL, 6500),
-	('Johnnie Walker Black Label', 29, NULL, 8000);
+INSERT INTO Menu(Nombre_Menu, idSubCategoria, Descripcion, Precio) VALUES
+	-- Subcategoría 1: Entradas
+	('Picada Clásica', 1, 'Variedad de fiambres, quesos y pan', 5500.00),
+	('Picada Vegetariana', 1, 'Quesos, aceitunas, hummus y vegetales', 5200.00),
+	('Picada de Mar', 1, 'Mariscos, rabas y salsas para compartir', 6000.00),
+
+	-- Subcategoría 2: Ensaladas
+	('Empanada de Carne', 2, 'Carne cortada a cuchillo, cebolla y especias', 800.00),
+	('Empanada de Pollo', 2, 'Pollo desmenuzado con cebolla y morrón', 750.00),
+	('Empanada de Queso', 2, 'Queso cremoso con cebolla salteada', 700.00),
+
+	-- Subcategoría 3: Platos principales
+	('Sopa de Calabaza', 3, 'Cremosa sopa de calabaza con croutons', 1200.00),
+	('Sopa de Cebolla', 3, 'Tradicional sopa francesa gratinada', 1300.00),
+	('Sopa de Verduras', 3, 'Variedad de vegetales en caldo suave', 1100.00),
+
+	-- Subcategoría 4: Verdes
+	('Ensalada Mixta', 4, 'Lechuga, tomate y cebolla', 1500.00),
+	('Ensalada César', 4, 'Lechuga, croutons, queso y aderezo César', 2200.00),
+	('Ensalada Primavera', 4, 'Mix de hojas verdes con zanahoria rallada', 1800.00),
+	('Ensalada Mediterránea', 4, 'Tomate cherry, aceitunas y rúcula', 2000.00),
+
+	-- Subcategoría 5: Con proteínas
+	('Ensalada con Pollo', 5, 'Lechuga, pollo grillado y huevo', 2400.00),
+	('Ensalada con Atún', 5, 'Hojas verdes, atún y choclo', 2300.00),
+	('Ensalada con Huevo', 5, 'Lechuga, huevo duro y tomate', 1900.00),
+	('Ensalada con Lentejas', 5, 'Lentejas, cebolla morada y zanahoria', 2100.00),
+
+	-- Subcategoría 6: Carnes
+	('Bife de Chorizo', 6, 'Bife de chorizo con papas rústicas', 4500.00),
+	('Milanesa con Papas', 6, 'Milanesa de carne con papas fritas', 4000.00),
+	('Lomo a la Pimienta', 6, 'Lomo con salsa a la pimienta y puré', 4700.00),
+	('Asado con Ensalada', 6, 'Tira de asado con ensalada mixta', 4600.00),
+	('Pollo a la Parrilla', 6, 'Pechuga grillada con guarnición', 3900.00),
+
+	-- Subcategoría 7: Pastas
+	('Fideos con Tuco', 7, 'Fideos caseros con salsa de tomate', 3000.00),
+	('Ñoquis con Salsa', 7, 'Ñoquis de papa con salsa a elección', 3200.00),
+	('Ravioles de Ricota', 7, 'Rellenos de ricota y nuez con crema', 3300.00),
+	('Spaghetti Bolognesa', 7, 'Spaghetti con salsa de carne', 3400.00),
+	('Fusilli al Pesto', 7, 'Fusilli con salsa de albahaca y nueces', 3100.00),
+
+	-- Subcategoría 8: Pescados
+	('Merluza al Horno', 8, 'Filet de merluza con papas al vapor', 4200.00),
+	('Salmón con Guarnición', 8, 'Salmón grillado con vegetales', 5500.00),
+	('Lenguado al Limón', 8, 'Lenguado con salsa de limón', 5000.00),
+	('Trucha a las Finas Hierbas', 8, 'Trucha con manteca y hierbas', 5300.00),
+
+	-- Subcategoría 9: Platos (Menú infantil)
+	('Nuggets con Papas', 9, 'Nuggets de pollo con papas fritas', 2500.00),
+	('Hamburguesa Kids', 9, 'Mini hamburguesa con queso y papas', 2700.00),
+	('Mini Pizza', 9, 'Pizza individual con muzzarella', 2300.00),
+	('Tallarines con Salsa', 9, 'Tallarines con salsa suave de tomate', 2400.00),
+	('Salchichas con Puré', 9, 'Salchichas con puré de papa cremoso', 2200.00),
+
+	-- Subcategoría 10: Postres (Menú infantil)
+	('Helado Simple', 10, '1 bocha de helado a elección', 1000.00),
+	('Flan con Dulce', 10, 'Flan casero con dulce de leche', 1200.00),
+	('Gelatina con Crema', 10, 'Gelatina sabor frutilla con crema', 1000.00),
+	('Banana con Dulce', 10, 'Banana cortada con dulce de leche', 1100.00),
+
+	-- Subcategoría 11: Rellenas (Pastas caseras)
+	('Sorrentinos Jamón y Queso', 11, 'Sorrentinos caseros con salsa mixta', 3500.00),
+	('Ravioles de Verdura', 11, 'Ravioles rellenos de espinaca y ricota', 3300.00),
+	('Capeletis de Pollo', 11, 'Capeletis con salsa blanca', 3400.00),
+	('Agnolotis de Calabaza', 11, 'Agnolotis con crema de queso', 3600.00),
+
+	-- Subcategoría 12: Sin relleno (Pastas caseras)
+	('Fetuccini al Pesto', 12, 'Fetuccini con salsa de albahaca', 3200.00),
+	('Spaghetti a la Bolognesa', 12, 'Spaghetti con salsa de carne', 3400.00),
+	('Tallarines a la Manteca', 12, 'Tallarines frescos con manteca y queso', 3100.00),
+	('Mostacholes con Tuco', 12, 'Mostacholes con salsa roja tradicional', 3000.00),
+	('Cintas a la Carbonara', 12, 'Cintas con panceta, huevo y crema', 3500.00),
+
+	-- Subcategoría 13: 
+	('Salmón a la Parrilla', 13, 'Salmón fresco grillado con hierbas', 5600.00),
+	('Atún Sellado', 13, 'Atún a la plancha con salsa cítrica', 5300.00),
+	('Trucha a las Finas Hierbas', 13, 'Trucha con manteca y especias', 5300.00),
+	('Merluza a la Parrilla', 13, 'Filete de merluza grillado con limón', 4200.00),
+	('Langostinos Grillados', 13, 'Langostinos a la parrilla con ajo', 5800.00),
+
+	-- Categoría 6: Pescados y mariscos
+	-- Subcategoría 13: Grillados
+	('Salmón a la Parrilla', 13, 'Salmón fresco grillado con hierbas', 5600.00),
+	('Atún Sellado', 13, 'Atún a la plancha con salsa cítrica', 5300.00),
+	('Trucha a las Finas Hierbas', 13, 'Trucha con manteca y especias', 5300.00),
+	('Merluza a la Parrilla', 13, 'Filete de merluza grillado con limón', 4200.00),
+	('Langostinos Grillados', 13, 'Langostinos a la parrilla con ajo', 5800.00),
+
+	-- Subcategoría 14: Fritos
+	('Rabas', 14, 'Calamares fritos crocantes', 4000.00),
+	('Cornalitos', 14, 'Pescaditos fritos pequeños', 3700.00),
+	('Pescado Rebozado', 14, 'Filete de merluza rebozado y frito', 3900.00),
+	('Calamares a la Romana', 14, 'Aros de calamar fritos', 4200.00),
+
+	-- Subcategoría 15: Guisos
+	('Cazuela de Mariscos', 15, 'Variedad de mariscos en caldo especiado', 5800.00),
+	('Paella', 15, 'Arroz con mariscos y azafrán', 6000.00),
+	('Guiso de Pescado', 15, 'Pescado cocido con vegetales y especias', 5500.00),
+	('Mariscos al Curry', 15, 'Mariscos cocidos en salsa curry suave', 5900.00),
+
+	-- Categoría 7: Woks
+	-- Subcategoría 16: Vegetarianos
+	('Wok de Verduras', 16, 'Salteado de vegetales frescos con salsa de soja', 3100.00),
+	('Wok con Tofu', 16, 'Tofu marinado con vegetales y jengibre', 3300.00),
+	('Wok Thai Vegetariano', 16, 'Vegetales con leche de coco y curry suave', 3400.00),
+	('Wok de Brotes y Setas', 16, 'Brotes de soja y setas salteados', 3200.00),
+
+	-- Subcategoría 17: Con Pollo
+	('Wok de Pollo y Vegetales', 17, 'Tiras de pollo con vegetales salteados', 3600.00),
+	('Wok Picante de Pollo', 17, 'Pollo con salsa picante y verduras', 3700.00),
+	('Wok de Pollo Teriyaki', 17, 'Pollo con salsa teriyaki y arroz', 3800.00),
+	('Wok con Pollo y Ananá', 17, 'Pollo salteado con piña y verduras', 3650.00),
+
+	-- Subcategoría 18: Con Camarones
+	('Wok de Camarones', 18, 'Camarones salteados con vegetales y soja', 4200.00),
+	('Wok de Camarones Picante', 18, 'Camarones con salsa picante y arroz', 4300.00),
+	('Wok de Camarones al Curry', 18, 'Camarones con salsa curry y leche de coco', 4400.00),
+	('Wok de Camarones y Verduras', 18, 'Camarones con mezcla de vegetales frescos', 4250.00),
+
+	-- Categoría 8: Risottos
+
+	-- Subcategoría 19: Clásicos
+	('Risotto de Calabaza', 19, 'Risotto cremoso con calabaza asada', 3800.00),
+	('Risotto de Hongos', 19, 'Risotto con mezcla de hongos y queso parmesano', 3900.00),
+	('Risotto de Verduras', 19, 'Risotto con verduras frescas y hierbas', 3700.00),
+	('Risotto de Queso Azul', 19, 'Risotto con queso azul y nueces', 4000.00),
+
+	-- Subcategoría 20: De mar
+	('Risotto de Mariscos', 20, 'Arroz cremoso con mariscos frescos', 5200.00),
+	('Risotto de Camarones', 20, 'Risotto con camarones y salsa de crema', 5100.00),
+	('Risotto de Langostinos', 20, 'Risotto con langostinos y azafrán', 5300.00),
+
+	-- Categoría 9: Pizzas
+
+	-- Subcategoría 21: Clásicas
+	('Muzzarella', 21, 'Pizza con salsa de tomate y muzzarella', 2800.00),
+	('Napolitana', 21, 'Pizza con tomate, muzzarella y ajo', 2900.00),
+	('Jamón y Morrones', 21, 'Pizza con jamón y pimientos', 3200.00),
+	('Fugazzeta', 21, 'Pizza con cebolla y muzzarella', 3000.00),
+	('Calabresa', 21, 'Pizza con salame y salsa picante', 3300.00),
+
+	-- Categoría 9: Pizzas
+
+	-- Subcategoría 22: Especiales
+	('Pizza Cuatro Quesos', 22, 'Mozzarella, roquefort, parmesano y fontina', 3600.00),
+	('Pizza de Provolone', 22, 'Provolone fundido con orégano', 3500.00),
+	('Pizza Vegetariana', 22, 'Verduras asadas y muzzarella', 3400.00),
+	('Pizza de Pollo BBQ', 22, 'Pollo con salsa barbacoa y cebolla', 3700.00),
+	('Pizza Caprese', 22, 'Tomate, mozzarella y albahaca fresca', 3550.00),
+
+	-- Categoría 10: Postres
+
+	-- Subcategoría 23: Tortas
+	('Torta Selva Negra', 23, 'Bizcochuelo con crema y chocolate', 2200.00),
+	('Torta de Ricota', 23, 'Torta casera con relleno de ricota', 2100.00),
+	('Torta de Manzana', 23, 'Torta con manzana y canela', 2000.00),
+	('Torta de Chocolate', 23, 'Torta húmeda de chocolate', 2300.00),
+	('Torta de Zanahoria', 23, 'Torta con zanahoria y nueces', 2150.00),
+
+	-- Subcategoría 24: Helados
+	('Helado Vainilla', 24, 'Helado cremoso de vainilla', 900.00),
+	('Helado Chocolate', 24, 'Helado intenso de chocolate', 900.00),
+	('Helado Dulce de Leche', 24, 'Helado sabor dulce de leche', 950.00),
+	('Helado Frutilla', 24, 'Helado sabor frutilla natural', 900.00),
+	('Helado Limón', 24, 'Helado refrescante de limón', 900.00),
+
+	-- Categoría 10: Postres
+
+	-- Subcategoría 25: Otros
+	('Panqueques con Dulce', 25, 'Panqueques rellenos con dulce de leche', 1100.00),
+	('Brownie con Helado', 25, 'Brownie de chocolate con helado vainilla', 1300.00),
+	('Mousse de Chocolate', 25, 'Mousse suave y cremoso de chocolate', 1200.00),
+	('Frutas Frescas', 25, 'Ensalada de frutas de estación', 1000.00),
+
+	-- Categoría 11: Bebidas sin alcohol
+
+	-- Subcategoría 26: Aguas
+	('Agua Mineral', 26, 'Agua sin gas botella 500ml', 600.00),
+	('Agua con Gas', 26, 'Agua mineral con gas botella 500ml', 650.00),
+	('Agua Saborizada', 26, 'Agua con sabor a limón o durazno', 700.00),
+
+	-- Subcategoría 27: Gaseosas
+	('Coca-Cola', 27, 'Gaseosa clásica 500ml', 800.00),
+	('Sprite', 27, 'Gaseosa limón 500ml', 800.00),
+	('Fanta', 27, 'Gaseosa naranja 500ml', 800.00),
+	('Pepsi', 27, 'Gaseosa cola 500ml', 800.00),
+	('Seven Up', 27, 'Gaseosa limón 500ml', 800.00),
+
+	-- Categoría 11: Bebidas sin alcohol
+
+	-- Subcategoría 28: Jugos
+	('Jugo de Naranja', 28, 'Jugo natural exprimido', 900.00),
+	('Jugo de Manzana', 28, 'Jugo natural de manzana', 900.00),
+	('Jugo de Durazno', 28, 'Jugo natural de durazno', 900.00),
+	('Jugo de Pomelo', 28, 'Jugo natural de pomelo', 900.00),
+
+	-- Categoría 12: Bebidas con alcohol
+
+	-- Subcategoría 29: Cervezas
+	('Cerveza Rubia', 29, 'Cerveza rubia nacional 500ml', 1200.00),
+	('Cerveza Negra', 29, 'Cerveza negra artesanal', 1400.00),
+	('Cerveza Roja', 29, 'Cerveza roja con sabor a malta', 1300.00),
+	('Cerveza IPA', 29, 'Cerveza IPA con notas cítricas', 1500.00),
+
+	-- Subcategoría 30: Vinos
+	('Vino Tinto Malbec', 30, 'Vino malbec argentino 750ml', 3200.00),
+	('Vino Blanco Chardonnay', 30, 'Vino chardonnay fresco y frutal', 3100.00),
+	('Vino Rosado', 30, 'Vino rosado suave y afrutado', 3000.00),
+	('Vino Espumante', 30, 'Vino espumante dulce', 3500.00),
+
+	-- Categoría 12: Bebidas con alcohol
+
+	-- Subcategoría 31: Licores
+	('Licor de Naranja', 31, 'Licor dulce con sabor a naranja', 2800.00),
+	('Licor de Café', 31, 'Licor con aroma y sabor a café', 3000.00),
+	('Licor de Hierbas', 31, 'Licor tradicional de hierbas', 2900.00),
+	('Licor de Menta', 31, 'Licor refrescante de menta', 2700.00)
 
 -- UPDATE Menu SET Descripcion = 'Hongos, cherry, cebolla morada, zucchini, zanahoria, morrón bicolor.' WHERE id_Menu_Item = 6;
 
