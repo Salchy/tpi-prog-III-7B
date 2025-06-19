@@ -5,12 +5,36 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging" OnRowCommand="dgvSubCate_RowCommand" DataKeyNames ="Id">
+    <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging" OnRowCommand="dgvSubCate_RowCommand">
       <Columns>
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />
           <asp:BoundField HeaderText="Categoria asociada" DataField ="NombreCategoriaPadre" />
-            <asp:ButtonField ButtonType="Button" CommandName="Editar" Text="Editar" ControlStyle-CssClass="btn btn-info" />
-            <asp:ButtonField ButtonType="Button" CommandName="Borrar" Text="Borrar" ControlStyle-CssClass="btn btn-danger" />
+           <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnEditar" runat="server" Text="Editar"
+                        CommandName="Editar"
+                        CommandArgument='<%# Eval("Id") %>'
+                        CssClass="btn btn-info" />
+                </ItemTemplate>
+            </asp:TemplateField>
+
+
+            <asp:TemplateField>
+                <ItemTemplate>
+                
+                    <asp:Button ID="btnDeshabilitar" runat="server" Text="Deshabilitar"
+                        CommandName="Estado"
+                        CommandArgument='<%# Eval("Id") %>'
+                        CssClass="btn btn-danger"
+                        Visible='<%# (bool)Eval("Estado") == true %>' />
+
+                    <asp:Button ID="btnHabilitar" runat="server" Text="Habilitar"
+                        CommandName="Estado"
+                        CommandArgument='<%# Eval("Id") %>'
+                        CssClass="btn btn-success"
+                        Visible='<%# (bool)Eval("Estado") == false %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
       </Columns>
     </asp:GridView>
 
