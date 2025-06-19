@@ -60,10 +60,11 @@ GO
 
 CREATE TABLE [Mesas] (
 	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
-	[Numero] TINYINT NOT NULL UNIQUE,
-	[id_Usuario] TINYINT NOT NULL,
-	[Estado] BIT NOT NULL DEFAULT 1,
-	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0,
+	[numeroMesa] varchar(30) NOT NULL,
+	[id_Usuario] TINYINT NOT NULL, -- ID Usuario asignado a la mesa
+	[EstadoMesa] TINYINT NOT NULL, -- Estado de la mesa, Mesa Libre, Platillo En preparacion, Comiendo, Pagando, etc.
+	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0, -- Clientes usando la mesa
+	[Estado] BIT NOT NULL DEFAULT 1, -- Mesa habilitada / Deshabilitada al público
 	PRIMARY KEY([id_Mesa])
 );
 GO
@@ -115,12 +116,33 @@ GO
 
 -- PROCEDIMIENTOS:
 
-CREATE PROCEDURE SP_GETALLMENU
+CREATE PROCEDURE SP_GetAllMenu
 AS
-	SELECT id_Menu_Item, Nombre_Menu, Descripcion, Precio, CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado
+	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado
 	FROM Menu AS M
 	INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
-	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
+	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria
+	ORDER BY CM.Nombre_Categoria ASC, SCM.NombreSubCategoria ASC, M.Nombre_Menu ASC;
+GO
+
+CREATE PROCEDURE SP_GetMenuItemsFromCategory(
+	@idCategoriaPrincipal INT
+)
+AS
+	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria, M.Estado
+	FROM Menu AS M
+	INNER JOIN SubCategoriaMenu AS S ON M.idSubCategoria = S.idSubCategoria
+	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
+	WHERE M.idSubCategoria = @idCategoriaPrincipal
+	ORDER BY S.NombreSubCategoria ASC;
+GO
+
+CREATE PROCEDURE SP_GetCategories
+AS
+	SELECT S.idSubCategoria, S.nombreSubCategoria, S.idCategoriaPrincipal, C.Nombre_Categoria
+	FROM SubCategoriaMenu AS S
+	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
+	ORDER BY S.NombreSubCategoria ASC;
 GO
 
 CREATE PROCEDURE SP_CrearUsuario

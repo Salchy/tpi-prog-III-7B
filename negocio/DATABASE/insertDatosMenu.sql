@@ -10,6 +10,30 @@ EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '95980CC32FCB13BFAEDF96D13
 -- Crear usuario Mesero
 EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', '55DCEC5B6DE9023E541D5E308FC8BA2D3C7FF50D23F2E9FD6E99A92EE7DD272C', 2;
 
+-- Por defecto, se asignan las mesas al user Admin
+INSERT INTO Mesas (numeroMesa, id_Usuario, EstadoMesa) VALUES
+	('Mesa 01', 1, 0),
+	('Mesa 02', 1, 0),
+	('Mesa 03', 1, 0),
+	('Mesa 04', 1, 0),
+	('Mesa 05', 1, 0),
+	('Mesa 06', 1, 0),
+	('Mesa 07', 1, 0),
+	('Mesa 08', 1, 0),
+	('Mesa 09', 1, 0),
+	('Mesa 10', 1, 0);
+
+CREATE TABLE [Mesas] (
+	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
+	[numeroMesa] varchar(30) NOT NULL,
+	[id_Usuario] TINYINT NOT NULL, -- ID Usuario asignado a la mesa
+	[EstadoMesa] TINYINT NOT NULL, -- Estado de la mesa, Mesa Libre, Platillo En preparacion, Comiendo, Pagando, etc.
+	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0, -- Clientes usando la mesa
+	[Estado] BIT NOT NULL DEFAULT 1, -- Mesa habilitada / Deshabilitada al público
+	PRIMARY KEY([id_Mesa])
+);
+GO
+
 -- Insert de Categorías
 INSERT INTO Categoria_Menu (Nombre_Categoria) VALUES 
 	('Entradas'),
@@ -328,6 +352,7 @@ INSERT INTO Menu(Nombre_Menu, idSubCategoria, Descripcion, Precio) VALUES
 		('Mocaccino', 34, 'Café, leche, chocolate y espuma', 1250.00),
 		('Latte Vainilla', 34, 'Café con leche saborizado con vainilla', 1300.00),
 		('Café Helado', 34, 'Café frío con crema y hielo', 1350.00)
+
 -- UPDATE Menu SET Descripcion = 'Hongos, cherry, cebolla morada, zucchini, zanahoria, morrón bicolor.' WHERE id_Menu_Item = 6;
 
 -- SELECT * FROM SubCategoriaMenu WHERE NombreSubCategoria LIKE '%aperitivos%';
@@ -336,6 +361,7 @@ INSERT INTO Menu(Nombre_Menu, idSubCategoria, Descripcion, Precio) VALUES
 
 --SELECT * FROM Menu;
 
-SELECT Nombre_Menu, SCM.NombreSubCategoria, CM.Nombre_Categoria FROM Menu AS M
-INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
-INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
+-- Consulta para obtener el menú, con sus categorías
+--SELECT Nombre_Menu, SCM.NombreSubCategoria, CM.Nombre_Categoria FROM Menu AS M
+--INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
+--INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;
