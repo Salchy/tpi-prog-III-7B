@@ -26,9 +26,10 @@ namespace negocio
                     Categoria cate = new Categoria(
                     Convert.ToInt32(database.Reader["id_Categoria"]),
                     database.Reader["Nombre_Categoria"].ToString());
-
+                    cate.Estado = (bool)database.Reader["Estado"];
                     lista.Add(cate);
                 }
+                
                 return lista;
             }
             catch (Exception ex)
@@ -70,7 +71,7 @@ namespace negocio
             try
             {
                 database = new Database();
-                database.setQuery("SELECT id_Categoria, Nombre_Categoria FROM Categoria_Menu WHERE id_Categoria = @id");
+                database.setQuery("SELECT id_Categoria, Nombre_Categoria, Estado FROM Categoria_Menu WHERE id_Categoria = @id");
                 database.setParameter("@id", id);
                 database.execQuery();
 
@@ -81,7 +82,7 @@ namespace negocio
                 Categoria cate = new Categoria(
                      Convert.ToInt32(database.Reader["id_Categoria"]),
                     database.Reader["Nombre_Categoria"].ToString());
-
+                    cate.Estado = (bool)database.Reader["Estado"];
                 return cate;
             }
             catch (Exception ex)
@@ -116,6 +117,35 @@ namespace negocio
                 database.closeConnection();
             }
 
+        }
+
+
+        public bool habilitarInhabilitarCategoria(int id, bool estado)
+        {
+            try
+            {
+                database.setQuery("UPDATE Categoria_Menu SET Estado = @estado WHERE id_Categoria = @id");
+                database.setParameter("@id", id);
+                database.setParameter("@estado", estado);
+                database.execNonQuery();
+
+                database.closeConnection();
+
+
+                database.setQuery("UPDATE m SET m.Estado = @estado FROM MENU m INNER JOIN SubCategoriaMenu s ON m.idSubCategoria = s.idSubCategoria INNER JOIN Categoria_Menu c ON s.idCategoriaPrincipal = c.id_Categoria WHERE id_Categoria = @id");
+                database.setParameter("@id", id);
+                database.setParameter("@estado", estado);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
         }
     }
 

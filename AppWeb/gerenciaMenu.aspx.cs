@@ -54,7 +54,6 @@ namespace AppWeb
 
             int id = int.Parse(e.CommandArgument.ToString());
 
-            //int id = int.Parse(dgvMenu.DataKeys[index].Value.ToString());
 
             if (e.CommandName == "Editar")
             {
