@@ -13,15 +13,10 @@ namespace AppWeb
 {
     public partial class Ordenes : System.Web.UI.Page
     {
-
-        
         protected void Page_Load(object sender, EventArgs e)
         {
-           CategoriasDatos categoria = new CategoriasDatos();
-            SubCategoriaDatos subcat= new SubCategoriaDatos();
-
-
-            
+            CategoriasDatos categoria = new CategoriasDatos();
+            SubCategoriaDatos subcat = new SubCategoriaDatos();
             try
             {
                 if (!IsPostBack)
@@ -30,7 +25,7 @@ namespace AppWeb
                     Session["ListaSubcategorias"] = ListaSubcategorias;
                     List<Categoria> lista = categoria.listarCategorias();
                     //List<Orden> OrdenesTomadas = new List<Orden>();
-                   // Session["OrdenesTomadas"] = OrdenesTomadas;
+                    // Session["OrdenesTomadas"] = OrdenesTomadas;
 
                     ddlCategoria.DataSource = lista;
                     ddlCategoria.DataTextField = "Nombre";
@@ -43,19 +38,14 @@ namespace AppWeb
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-
-                   
-
-
                 }
 
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
-            
+
         }
 
         protected void btnEliminarOrden_Click(object sender, EventArgs e)
@@ -80,38 +70,38 @@ namespace AppWeb
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-                 
 
-                try
-                {
+
+            try
+            {
                 if (IsPostBack)
-                 {
-               
-                int id = int.Parse(ddlCategoria.SelectedValue);
+                {
+
+                    int id = int.Parse(ddlCategoria.SelectedValue);
                     ddlSubCategoria.DataSource = ((List<SubCategoria>)Session["ListaSubcategorias"]).FindAll(x => x.IdCategoriaPadre == id);
                     ddlSubCategoria.DataTextField = "Nombre";
                     ddlSubCategoria.DataValueField = "id";
                     ddlSubCategoria.DataBind();
-                ddlSubCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+                    ddlSubCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
                 }
             }
-                catch (Exception ex)
-                {
+            catch (Exception ex)
+            {
 
-                    throw ex;
-                }
+                throw ex;
             }
-        
-              
+        }
+
+
 
         protected void ddlSubCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                
+
                 menuItemDatos submenu = new menuItemDatos();
                 int id = int.Parse(ddlSubCategoria.SelectedValue);
-                 dgvMenu.DataSource = submenu.listarSubMenu(id);
+                dgvMenu.DataSource = submenu.listarSubMenu(id);
                 dgvMenu.DataBind();
 
             }
@@ -133,9 +123,9 @@ namespace AppWeb
             orden1.Estado = true;
             orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(int.Parse(ddlMesaActiva.SelectedValue)));
 
-            
-                orden1.Cantidad = 99;//tomarlo de la textbox
-            
+
+            orden1.Cantidad = 99;//tomarlo de la textbox
+
             orden.AgregarOrden(orden1);
 
 
@@ -144,25 +134,25 @@ namespace AppWeb
             //dgvOrdenes.DataSource= ((List<Orden>)Session["OrdenesTomadas"]).FindAll(x => x.Pedido.Id == orden1.Pedido.Id);
 
             dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
-             dgvOrdenes.DataBind();
+            dgvOrdenes.DataBind();
 
         }
 
         protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             try
             {
-                 
+
                 int id = int.Parse(ddlMesaActiva.SelectedValue);
-                    PedidoDatos nuevo = new PedidoDatos();
+                PedidoDatos nuevo = new PedidoDatos();
                 if (nuevo.getIdPedidoMesaAbierta(id) == 0)
-                    {
-                        nuevo.CrearPedido(id);
-                        
-                    }
-                
-                           
+                {
+                    nuevo.CrearPedido(id);
+
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -171,14 +161,14 @@ namespace AppWeb
             }
         }
 
-      
+
 
         protected void txtCantiad_TextChanged(object sender, EventArgs e)
         {
             //nueva.Cantidad=int.Parse(txtCantidad.Text);
-            
+
         }
 
-        
+
     }
 }

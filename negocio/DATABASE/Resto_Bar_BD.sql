@@ -139,7 +139,7 @@ GO
 
 CREATE PROCEDURE SP_GetCategories
 AS
-	SELECT S.idSubCategoria, S.nombreSubCategoria, S.idCategoriaPrincipal, C.Nombre_Categoria
+	SELECT S.idSubCategoria, S.nombreSubCategoria, S.idCategoriaPrincipal, C.Nombre_Categoria, S.Estado
 	FROM SubCategoriaMenu AS S
 	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
 	ORDER BY S.NombreSubCategoria ASC;

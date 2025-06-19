@@ -18,7 +18,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("SELECT id_Categoria, Nombre_Categoria From Categoria_Menu ORDER BY Nombre_Categoria ASC");
+                database.setQuery("SELECT id_Categoria, Nombre_Categoria, Estado From Categoria_Menu ORDER BY Nombre_Categoria ASC");
                 database.execQuery();
 
                 while (database.Reader.Read())

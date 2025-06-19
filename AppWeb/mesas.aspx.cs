@@ -24,23 +24,18 @@ namespace AppWeb
             switch (nivelUsuario)
             {
                 case 0:
-                    Response.Redirect("Gerencia.aspx");
+                    this.MasterPageFile = "~/masterPageMesero.Master";
                     break;
                 case 1:
-                    Response.Redirect("Gerencia.aspx");
+                    this.MasterPageFile = "~/masterPageMesero.Master";
                     break;
                 case 2:
-                    Response.Redirect("Mesero.aspx");
+                    this.MasterPageFile = "~/masterPageGerencia.master";
                     break;
                 default:
-                    Response.Redirect("Mesero.aspx");
+                    this.MasterPageFile = "~/masterPageGerencia.master";
                     return;
             }
-
-            if (nivelUsuario < 2) // Es Gerente o admin
-                this.MasterPageFile = "~/masterPageMesero.Master";
-            else if (nivelUsuario == 1) // Es gerente
-                this.MasterPageFile = "~/masterPageGerencia.master";
         }
         protected void Page_Load(object sender, EventArgs e)
         {
