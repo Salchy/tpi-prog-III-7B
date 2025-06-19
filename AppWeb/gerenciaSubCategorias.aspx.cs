@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using dominio;
 
 namespace AppWeb
 {
@@ -24,7 +25,7 @@ namespace AppWeb
         {
             dgvSubCate.PageIndex = e.NewPageIndex;
 
-           SubCategoriaDatos manager = new SubCategoriaDatos();
+            SubCategoriaDatos manager = new SubCategoriaDatos();
             dgvSubCate.DataSource = manager.listarSubCategorias();
             dgvSubCate.DataBind();
         }
@@ -36,20 +37,25 @@ namespace AppWeb
 
         protected void dgvSubCate_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Editar" || e.CommandName == "Borrar")
+
+
+
+            int id = int.Parse(e.CommandArgument.ToString());
+
+            if (e.CommandName == "Editar")
             {
-                int index = int.Parse(e.CommandArgument.ToString());
+                Response.Redirect("gerenciaAddSubCategoria.aspx?id=" + id);
+            }
+            else if (e.CommandName == "Estado")
+            {
+                SubCategoriaDatos manager = new SubCategoriaDatos();
+                SubCategoria sub = manager.GetSubCategoria(id);
+                sub.Estado = !sub.Estado;
 
-                int id = int.Parse(dgvSubCate.DataKeys[index].Value.ToString());
+                manager.habilitarInhabilitarSubCategoria(id, sub.Estado);
 
-                if (e.CommandName == "Editar")
-                {
-                    Response.Redirect("gerenciaAddSubCategoria.aspx?id=" + id);
-                }
-                else if (e.CommandName == "Borrar")
-                {
-                    //Response.Redirect("gerenciaAddCategoria.aspx");
-                }
+                dgvSubCate.DataSource = manager.listarSubCategorias();
+                dgvSubCate.DataBind();
             }
         }
     }

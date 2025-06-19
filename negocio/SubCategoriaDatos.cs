@@ -29,6 +29,8 @@ namespace negocio
                     );
 
                     subCate.NombreCategoriaPadre = database.Reader["Nombre_Categoria"].ToString();
+                    subCate.Estado = (bool)database.Reader["Estado"];
+
 
                     lista.Add(subCate);
                 }
@@ -48,7 +50,7 @@ namespace negocio
             try
             {
                 database = new Database();
-                database.setQuery("SELECT idSubCategoria, nombreSubCategoria, idCategoriaPrincipal FROM SubCategoriaMenu WHERE idSubCategoria = @id");
+                database.setQuery("SELECT idSubCategoria, nombreSubCategoria, idCategoriaPrincipal , Estado FROM SubCategoriaMenu WHERE idSubCategoria = @id");
                 database.setParameter("@id", id);
                 database.execQuery();
 
@@ -62,6 +64,7 @@ namespace negocio
                     database.Reader["nombreSubCategoria"].ToString(),
                     Convert.ToInt32(database.Reader["idCategoriaPrincipal"])
                 );
+                                    subCate.Estado = (bool)database.Reader["Estado"];
 
                 return subCate;
             }
@@ -124,5 +127,35 @@ namespace negocio
             }
 
         }
+
+
+        public bool habilitarInhabilitarSubCategoria(int id, bool estado)
+        {
+            try
+            {
+                database.setQuery("UPDATE SubCategoriaMenu SET Estado = @estado WHERE idSubCategoria = @id");
+                database.setParameter("@id", id);
+                database.setParameter("@estado", estado);
+                database.execNonQuery();
+
+                database.closeConnection();
+
+
+                database.setQuery("UPDATE MENU SET Estado = @estado WHERE idSubCategoria = @id ");
+                database.setParameter("@id", id);
+                database.setParameter("@estado", estado);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
     }
 }
