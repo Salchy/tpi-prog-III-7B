@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging" OnRowCommand="dgvSubCate_RowCommand">
+    <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table table-dark table-striped" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging" OnRowCommand="dgvSubCate_RowCommand" >
       <Columns>
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />
           <asp:BoundField HeaderText="Categoria asociada" DataField ="NombreCategoriaPadre" />

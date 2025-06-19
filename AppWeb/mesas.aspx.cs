@@ -25,13 +25,13 @@ namespace AppWeb
             switch (nivelUsuario)
             {
                 case 0:
-                    this.MasterPageFile = "~/masterPageMesero.Master";
+                    this.MasterPageFile = "~/masterPageGerencia.Master";
                     break;
                 case 1:
-                    this.MasterPageFile = "~/masterPageMesero.Master";
+                    this.MasterPageFile = "~/masterPageGerencia.Master";
                     break;
                 case 2:
-                    this.MasterPageFile = "~/masterPageGerencia.master";
+                    this.MasterPageFile = "~/masterPageMesero.master";
                     break;
                 default:
                     this.MasterPageFile = "~/masterPageGerencia.master";
