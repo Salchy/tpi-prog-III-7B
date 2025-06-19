@@ -4,7 +4,7 @@ USE RestoBar
 GO
 
 CREATE TABLE [Usuarios] (
-	[id_Usuario] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[id_Usuario] TINYINT NOT NULL IDENTITY(1, 1),
 	[DNI] VARCHAR(10) NOT NULL UNIQUE,
 	[Nombre] VARCHAR(30) NOT NULL,
 	[Apellido] VARCHAR(30) NOT NULL,
@@ -20,7 +20,7 @@ ON [Usuarios] (DNI);
 GO
 
 CREATE TABLE [Categoria_Menu] (
-	[id_Categoria] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[id_Categoria] TINYINT NOT NULL IDENTITY(1, 1),
 	[Nombre_Categoria] VARCHAR(100) NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY([id_Categoria])
@@ -28,7 +28,7 @@ CREATE TABLE [Categoria_Menu] (
 GO
 
 CREATE TABLE [SubCategoriaMenu] (
-	[idSubCategoria] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[idSubCategoria] TINYINT NOT NULL IDENTITY(1, 1),
 	[NombreSubCategoria] VARCHAR(100) NOT NULL,
 	[idCategoriaPrincipal] TINYINT NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
@@ -37,7 +37,7 @@ CREATE TABLE [SubCategoriaMenu] (
 GO
 
 CREATE TABLE [Menu] (
-	[id_Menu_Item] INT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[id_Menu_Item] INT NOT NULL IDENTITY(1, 1),
 	[Nombre_Menu] VARCHAR(100) NOT NULL,
 	[idSubCategoria] TINYINT NOT NULL,
 	[Precio] MONEY NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE [Menu] (
 GO
 
 CREATE TABLE [Ordenes] (
-	[id_Orden] INTEGER NOT NULL IDENTITY(1, 1) UNIQUE,
+	[id_Orden] INTEGER NOT NULL IDENTITY(1, 1),
 	[id_Menu] INT NOT NULL,
 	[Cantidad] TINYINT NOT NULL DEFAULT 1,
 	[Estado] BIT NOT NULL DEFAULT 1,
@@ -59,17 +59,17 @@ CREATE TABLE [Ordenes] (
 GO
 
 CREATE TABLE [Mesas] (
-	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1) UNIQUE,
+	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
 	[Numero] TINYINT NOT NULL UNIQUE,
 	[id_Usuario] TINYINT NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
-	[Numero_Comensales] TINYINT NOT NULL DEFAULT 1,
+	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0,
 	PRIMARY KEY([id_Mesa])
 );
 GO
 
 CREATE TABLE [Pedidos] (
-	[id_Pedido] INTEGER NOT NULL IDENTITY(1, 1) UNIQUE,
+	[id_Pedido] INTEGER NOT NULL IDENTITY(1, 1),
 	[id_Mesa] TINYINT NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[Importe] MONEY NOT NULL,

@@ -6,7 +6,7 @@
 
 
 
-    <asp:GridView ID="dgvMenu" CssClass="table" AutoGenerateColumns="false" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvMenu_PageIndexChanging" OnRowCommand="dgvMenu_RowCommand">
+    <asp:GridView ID="dgvMenu" CssClass="table table-dark table-striped" AutoGenerateColumns="false" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvMenu_PageIndexChanging" OnRowCommand="dgvMenu_RowCommand">
         <Columns>
             <asp:BoundField HeaderText="Ítem" DataField="Nombre" />
             <asp:BoundField HeaderText="Precio" DataField="Precio" />

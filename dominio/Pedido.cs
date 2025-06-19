@@ -13,11 +13,11 @@ namespace dominio
         public bool Estado { get; set; }
         public float Importe { get; set; }
 
-    
 
-    public Pedido(Mesa mesaAbierta)
-        { 
-           mesa = mesaAbierta;
+
+        public Pedido(Mesa mesaAbierta)
+        {
+            mesa = mesaAbierta;
             Estado = true;
             Importe = -1;
         }

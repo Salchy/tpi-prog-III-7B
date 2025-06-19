@@ -11,52 +11,28 @@ namespace negocio
 {
     public class MesaDatos
     {
-        
-       /* Database db;
-
-        public List<Mesa> getMesas()
-
-        {
-            List<Mesa> mesas = new List<Mesa>();
-
-            // Hardcoding para modelo de dominio funcional
-
-
-            return mesas;
-        }
-    
-        
-
-        public MesaDatos() {
-            db = new Database();
-               
-        }*/
-
-        
-           private Database database;
+        private Database database;
         public MesaDatos()
         {
             database = new Database();
         }
-        
+
         public void setMesaData(Mesa aux, SqlDataReader data)
         {
-          UsuarioDatos user = new UsuarioDatos();
-            
+            UsuarioDatos user = new UsuarioDatos();
+
             aux.IdMesa = Convert.ToInt32(data["id_Mesa"]);
             aux.MeseroAsignado = user.getUsuario(Convert.ToInt32(data["id_Usuario"]));
             aux.numeroComensales = Convert.ToInt32(data["Numero_Comensales"]);
-            aux.numeroMesa= Convert.ToInt32(data["Numero"]);
-            aux.Disponibilidad= (bool)data["Estado"];
-           
-
+           // aux.numeroMesa = Convert.ToInt32(data["Numero"]);
+            aux.Disponibilidad = (bool)data["Estado"];
         }
 
 
         public List<Mesa> getMesasAsignadas(int id)
         {
-           List<Mesa> Asignadas = new List<Mesa>();
-            
+            List<Mesa> Asignadas = new List<Mesa>();
+
             try
             {
                 database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id");//tambien agregar filtrado de estado
@@ -66,7 +42,7 @@ namespace negocio
                 while (database.Reader.Read())
                 {
                     Mesa aux = new Mesa();
-                   setMesaData(aux,database.Reader);
+                    setMesaData(aux, database.Reader);
                     Asignadas.Add(aux);
                 }
             }
@@ -80,7 +56,7 @@ namespace negocio
                 database.closeConnection();
             }
             return Asignadas;
-           
+
         }
         public List<Mesa> getMesas()
         {

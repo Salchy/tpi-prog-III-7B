@@ -11,7 +11,6 @@ namespace dominio
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int IdCategoriaPadre { get; set; }
-
         public string NombreCategoriaPadre { get; set; }
 
         public SubCategoria(int idSubCategoria, string nombreSubCategoria, int idCategoriaPadre)
@@ -23,7 +22,7 @@ namespace dominio
 
         public SubCategoria()
         {
-           
+
         }
     }
 }

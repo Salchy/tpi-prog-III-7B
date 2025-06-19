@@ -23,7 +23,7 @@ namespace AppWeb
              dgvMesas_asignadas.DataSource = mesaDatos.getMesasAsignadas(Mesero.Id);//recuperar el id del usuario cuando se loguea
              dgvMesas_asignadas.DataBind();*/
 
-            dgvMesas_asignadas.DataSource = lista;//recuperar el id del usuario cuando se loguea
+            dgvMesas_asignadas.DataSource = lista; //recuperar el id del usuario cuando se loguea
             dgvMesas_asignadas.DataBind();
             Session["MesasAsignadas"] = lista;
 
@@ -35,7 +35,7 @@ namespace AppWeb
             Response.Redirect("Ordenes.aspx", false);
         }
 
-        protected void dgvMesas_asignadas_SelectedIndexChanged(object sender, EventArgs e)//es igual el de ordenes pero salta error, al buscar la lista de ordenes de la mesa
+        protected void dgvMesas_asignadas_SelectedIndexChanged(object sender, EventArgs e) //es igual el de ordenes pero salta error, al buscar la lista de ordenes de la mesa
         {
             /*OrdenDatos orden = new OrdenDatos();
             PedidoDatos pedido = new PedidoDatos();
