@@ -15,7 +15,10 @@ namespace negocio
             List<MenuItem> menuCompleto = new List<MenuItem>();
 
             database = new Database();
-            database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, M.Estado, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria");
+            //database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, M.Estado, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria");
+            //database.execQuery();
+
+            database.setProcedure("SP_GetAllMenu"); // Ya estaba el procedimiento armado en la base de datos
             database.execQuery();
 
             while (database.Reader.Read())
@@ -29,9 +32,6 @@ namespace negocio
                     (string)database.Reader["Nombre_Categoria"],
                     Convert.ToInt32(database.Reader["idSubCategoria"]),
                     (string)database.Reader["NombreSubCategoria"]
-
-                
-
                 );
                 item.Estado = (bool)database.Reader["Estado"];
                 menuCompleto.Add(item);
@@ -78,10 +78,10 @@ namespace negocio
             }
         }
 
-        public void Agregar (MenuItem menuNuevo)
+        public void Agregar(MenuItem menuNuevo)
         {
-            
-             database = new Database();
+
+            database = new Database();
 
             try
             {
@@ -102,17 +102,12 @@ namespace negocio
             {
                 database.closeConnection();
             }
-
-
-           
-
-         }
+        }
 
 
         public void ModificarItem(MenuItem item)
         {
             database = new Database();
-
             try
             {
                 database.setQuery("UPDATE MENU SET Nombre_Menu = @nombre, idSubCategoria = @IDSub, Precio = @precio, Estado = @estado, Descripcion = @descripcion WHERE  id_Menu_Item = @id");
@@ -122,7 +117,6 @@ namespace negocio
                 database.setParameter("@estado", 1);
                 database.setParameter("@descripcion", item.Descripcion);
                 database.setParameter("@id", item.IdMenuItem);
-
 
                 database.execNonQuery();
             }
@@ -136,14 +130,14 @@ namespace negocio
             }
 
         }
-        ///////////////////
+
         public List<MenuItem> listarSubMenu(int id)
         {
             List<MenuItem> submenu = new List<MenuItem>();
 
             database = new Database();
 
-            database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.idSubCategoria= @id");
+            database.setQuery("SP_GetMenuItemsFromCategory");
             database.setParameter("@id", id);
             database.execQuery();
 
@@ -164,8 +158,6 @@ namespace negocio
 
             return submenu;
         }
-        /////////////////
-
 
         public bool habilitarInhabilitarMenu(int id, bool estado)
         {

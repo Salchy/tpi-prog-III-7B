@@ -17,7 +17,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("SELECT s.idSubCategoria, s.nombreSubCategoria, s.idCategoriaPrincipal, c.Nombre_Categoria FROM SubCategoriaMenu s INNER JOIN Categoria_Menu c ON s.idCategoriaPrincipal = c.id_Categoria");
+                database.setQuery("SP_GetCategories");
                 database.execQuery();
 
                 while (database.Reader.Read())

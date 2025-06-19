@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using static dominio.Mesa;
 
 namespace negocio
 {
@@ -17,22 +17,25 @@ namespace negocio
             database = new Database();
         }
 
-        public void setMesaData(Mesa aux, SqlDataReader data)
+        public Mesa setMesaData(SqlDataReader data)
         {
             UsuarioDatos user = new UsuarioDatos();
+            Usuario meseroAsignado = user.getUsuario(Convert.ToInt32(data["id_Usuario"]));
 
-            aux.IdMesa = Convert.ToInt32(data["id_Mesa"]);
-            aux.MeseroAsignado = user.getUsuario(Convert.ToInt32(data["id_Usuario"]));
-            aux.numeroComensales = Convert.ToInt32(data["Numero_Comensales"]);
-           // aux.numeroMesa = Convert.ToInt32(data["Numero"]);
-            aux.Disponibilidad = (bool)data["Estado"];
+            Mesa mesa = new Mesa(
+                Convert.ToInt32(data["id_Mesa"]),
+                data["nombre"].ToString(),
+                (Mesa.estadoMesa)Convert.ToInt32(data["id_Mesa"]),
+                Convert.ToInt32(data["id_Mesa"]),
+                meseroAsignado
+            );
+
+            return mesa;
         }
-
 
         public List<Mesa> getMesasAsignadas(int id)
         {
             List<Mesa> Asignadas = new List<Mesa>();
-
             try
             {
                 database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id");//tambien agregar filtrado de estado
@@ -41,8 +44,7 @@ namespace negocio
 
                 while (database.Reader.Read())
                 {
-                    Mesa aux = new Mesa();
-                    setMesaData(aux, database.Reader);
+                    Mesa aux = setMesaData(database.Reader);
                     Asignadas.Add(aux);
                 }
             }
@@ -70,9 +72,7 @@ namespace negocio
 
                 while (database.Reader.Read())
                 {
-
-                    Mesa aux = new Mesa();
-                    setMesaData(aux, database.Reader);
+                    Mesa aux = setMesaData(database.Reader);
                     Mesas.Add(aux);
                 }
             }
@@ -90,7 +90,7 @@ namespace negocio
         }
         public Mesa getMesa(int id)
         {
-            Mesa aux = new Mesa();
+            Mesa aux;
 
             try
             {
@@ -101,7 +101,7 @@ namespace negocio
                 {
                     return null;
                 }
-                setMesaData(aux, database.Reader);
+                aux = setMesaData(database.Reader);
                 return aux;
 
             }
@@ -115,9 +115,5 @@ namespace negocio
                 database.closeConnection();
             }
         }
-
-
     }
-
-
 }

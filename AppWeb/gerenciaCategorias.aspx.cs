@@ -24,8 +24,6 @@ namespace AppWeb
 
         protected void btnAgregarCate_Click(object sender, EventArgs e)
         {
-
-
             Response.Redirect("gerenciaAddCategoria.aspx");
         }
 
@@ -43,7 +41,8 @@ namespace AppWeb
                 }
                 else if (e.CommandName == "Borrar")
                 {
-                    Response.Redirect("gerenciaAddCategoria.aspx");
+                    //Response.Redirect("gerenciaAddCategoria.aspx");
+                    
                 }
             }
         }
