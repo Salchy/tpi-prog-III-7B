@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using dominio;
 
 namespace AppWeb
 {
@@ -31,21 +32,27 @@ namespace AppWeb
 
         protected void dgvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Editar" || e.CommandName == "Borrar")
-            {
-                int index = int.Parse(e.CommandArgument.ToString());
+            
 
-                int id = int.Parse(dgvCategorias.DataKeys[index].Value.ToString());
+
+                int id = int.Parse(e.CommandArgument.ToString());
 
                 if (e.CommandName == "Editar")
                 {
                     Response.Redirect("gerenciaAddCategoria.aspx?id=" + id);
                 }
-                else if (e.CommandName == "Borrar")
+                else if (e.CommandName == "Estado")
                 {
-                    Response.Redirect("gerenciaAddCategoria.aspx");
+                    CategoriasDatos manager = new CategoriasDatos();
+                    Categoria cate = manager.GetCategoria(id);
+                    cate.Estado = !cate.Estado;
+
+                    manager.habilitarInhabilitarCategoria(id, cate.Estado);
+
+                    dgvCategorias.DataSource = manager.listarCategorias();
+                    dgvCategorias.DataBind();
                 }
-            }
+            
         }
 
         protected void dgvCategorias_PageIndexChanging(object sender, GridViewPageEventArgs e)
