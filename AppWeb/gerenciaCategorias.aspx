@@ -1,12 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPageGerencia.Master" AutoEventWireup="true" CodeBehind="gerenciaCategorias.aspx.cs" Inherits="AppWeb.gerenciaCategorias" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:GridView ID="dgvCategorias" runat="server" CssClass =" table" AutoGenerateColumns ="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand" AllowPaging="true" pageSize ="10" OnPageIndexChanging="dgvCategorias_PageIndexChanging" DataKeyNames ="Id">
+    <asp:GridView ID="dgvCategorias" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvCategorias_PageIndexChanging" DataKeyNames="Id">
         <Columns>
-            
-            <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />
+
+            <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <%--<asp:CommandField HeaderText ="Detalles" ShowSelectButton="true" SelectText="🔍 Ver detalles" />--%>
 
 
