@@ -19,3 +19,29 @@ Mesero Asignado a la mesa.
 - Usuario: Para el sistema de login, tendrá Nombre de Usuario (podría ser el Legajo del EMPLEADO) y una contraseña.
 
 Ordenes y Pedidos tendran un estado en C# (UML)
+
+
+
+Pantallas:
+2 Paginas maestras:
+- 1 para Meseros
+	1) Ver mesas (Sólo de sus mesas)
+	2) Cargar pedido (Mostrar platillos, precios, al finalizar, mandar todo el pedido)
+- 2 para Gerentes
+	1) Ver todas las mesas, ver mosos asignados.
+	2) Gestionar mesas y meseros
+	3) Gestion de reportes por mesa, pedidos por mesero, recaudacion del día, etc.
+
+
+---------------------
+
+- Fixear navegación del lado mesero.
+- Fixear listado de mesas de un mesero en sesión
+- Stock de cada plato:
+	- Añadir un campo a la tabla y atributo (Hacer que se muestre en la grilla de menú) Menú, para indicar el stock que tenemos de ese plato.
+- Funcionalidad core (Mesero)
+- Reportes
+- Filtros y búsquedas
+- ABM Mesas
+- Asignar mesero a una mesa
+- Validaciones de todos los campos editables

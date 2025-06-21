@@ -43,6 +43,7 @@ CREATE TABLE [Menu] (
 	[Precio] MONEY NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[Descripcion] VARCHAR(250),
+	[Stock] TINYINT NOT NULL DEFAULT 0,
 	PRIMARY KEY([id_Menu_Item])
 );
 GO

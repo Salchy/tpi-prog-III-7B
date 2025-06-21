@@ -18,7 +18,7 @@ namespace dominio
         public decimal Precio { get; set; }
         public bool Estado { get; set; }
         public string Descripcion { get; set; }
-
+        public int Stock { get; set; }
         public MenuItem(int idMenuItem, string nombre, string descripcion, decimal precio, int idCategoria, string nombreCategoria, int idSubCategoria, string subCategoriaNombre)
         {
             IdMenuItem = idMenuItem;
