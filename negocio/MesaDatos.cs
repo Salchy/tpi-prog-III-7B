@@ -25,7 +25,6 @@ namespace negocio
             Mesa mesa = new Mesa(
                 Convert.ToInt32(data["id_Mesa"]),
                 data["numeroMesa"].ToString(),
-                (Mesa.estadoMesa)Convert.ToInt32(data["EstadoMesa"]),
                 Convert.ToInt32(data["Numero_Comensales"]),
                 meseroAsignado
             );
