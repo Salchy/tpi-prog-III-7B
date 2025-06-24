@@ -16,7 +16,11 @@ namespace AppWeb
             if (!IsPostBack)
             {
                 CategoriasDatos lista = new CategoriasDatos();
-                ddlCategoriaPadre.DataSource = lista.listarCategorias();
+
+                List<Categoria> todasCategorias = lista.listarCategorias();
+                List<Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
+
+                ddlCategoriaPadre.DataSource = activas;
                 ddlCategoriaPadre.DataTextField = "Nombre";     // VISUAL
                 ddlCategoriaPadre.DataValueField = "Id";        // QUE SE GUARDA
                 ddlCategoriaPadre.DataBind();

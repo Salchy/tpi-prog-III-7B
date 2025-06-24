@@ -141,10 +141,10 @@ namespace negocio
                 database.closeConnection();
 
 
-                database.setQuery("UPDATE MENU SET Estado = @estado WHERE idSubCategoria = @id ");
-                database.setParameter("@id", id);
-                database.setParameter("@estado", estado);
-                database.execNonQuery();
+                //database.setQuery("UPDATE MENU SET Estado = @estado WHERE idSubCategoria = @id ");
+                //database.setParameter("@id", id);
+                //database.setParameter("@estado", estado);
+                //database.execNonQuery();
                 return true;
             }
             catch (Exception ex)

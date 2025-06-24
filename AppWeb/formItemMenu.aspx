@@ -43,6 +43,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="txtStock" class="form-label">Stock</label>
+                        <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" />
+                    </div>
+
+                    <div class="mb-3">
                         <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" />
                         <a href="gerenciaMenu.aspx">Cancelar</a>
                     </div>

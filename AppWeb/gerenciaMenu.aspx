@@ -13,6 +13,7 @@
             <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
             <asp:BoundField HeaderText="Categoria" DataField="Categoria.Nombre"></asp:BoundField>
             <asp:BoundField HeaderText="Subcategoria" DataField="SubCategoria.Nombre"></asp:BoundField>
+            <asp:BoundField HeaderText="Stock" DataField="Stock"></asp:BoundField>
 
 
             <asp:TemplateField>

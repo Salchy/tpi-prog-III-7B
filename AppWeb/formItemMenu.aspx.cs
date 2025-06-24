@@ -16,7 +16,11 @@ namespace AppWeb
             if (!IsPostBack)
             {
                 CategoriasDatos lista = new CategoriasDatos();
-                ddlCategoria.DataSource = lista.listarCategorias();
+
+                List<Categoria> todasCategorias = lista.listarCategorias();
+                List <Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
+
+                ddlCategoria.DataSource = activas;
                 ddlCategoria.DataTextField = "Nombre";     // VISUAL
                 ddlCategoria.DataValueField = "Id";        // QUE SE GUARDA
                 ddlCategoria.DataBind();
@@ -34,13 +38,13 @@ namespace AppWeb
                     txtPrecio.Text = seleccionado.Precio.ToString();
                     txtDescripcion.Text = seleccionado.Descripcion;
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-
+                    txtStock.Text = seleccionado.Stock.ToString();
 
                     // NECESITO EL DDL CARGADO PARA QUE LO PUEDA ASIGNAR  
                     SubCategoriaDatos datos = new SubCategoriaDatos();
                     List<SubCategoria> todas = datos.listarSubCategorias();
 
-                    List<SubCategoria> filtradas = todas.Where(x => x.IdCategoriaPadre == seleccionado.Categoria.Id).ToList();
+                    List<SubCategoria> filtradas = todas.Where(x => x.Estado==true && x.IdCategoriaPadre == seleccionado.Categoria.Id) .ToList();
 
                     ddlSubcategoria.DataSource = filtradas;
                     ddlSubcategoria.DataTextField = "Nombre";
@@ -50,10 +54,6 @@ namespace AppWeb
                     ddlSubcategoria.SelectedValue = seleccionado.SubCategoria.Id.ToString();
                 }
             }
-
-
-
-
 
 
         }
@@ -67,7 +67,7 @@ namespace AppWeb
 
             List<SubCategoria> todas = datos.listarSubCategorias();
 
-            List<SubCategoria> filtradas = todas.Where(x => x.IdCategoriaPadre == idCategoriaPadre).ToList();
+            List<SubCategoria> filtradas = todas.Where(x => x.Estado == true && x.IdCategoriaPadre == idCategoriaPadre).ToList();
 
             ddlSubcategoria.DataSource = filtradas;
             ddlSubcategoria.DataTextField = "Nombre";
@@ -97,6 +97,7 @@ namespace AppWeb
                 nuevo.SubCategoria = new SubCategoria();
                 nuevo.SubCategoria.Id = int.Parse(ddlSubcategoria.SelectedValue);
 
+                nuevo.Stock = int.Parse(txtStock.Text);
 
                 if (Request.QueryString["id"] != null)
                 {

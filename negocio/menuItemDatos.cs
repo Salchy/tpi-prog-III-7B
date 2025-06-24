@@ -34,6 +34,7 @@ namespace negocio
                     (string)database.Reader["NombreSubCategoria"]
                 );
                 item.Estado = (bool)database.Reader["Estado"];
+                item.Stock = Convert.ToInt32(database.Reader["Stock"]);
                 menuCompleto.Add(item);
             }
 
@@ -46,7 +47,7 @@ namespace negocio
             try
             {
                 database = new Database();
-                database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion,M.Estado ,M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.id_Menu_Item = @id");
+                database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion,M.Estado ,M.Precio, M.Stock ,C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria FROM Menu M INNER JOIN SubCategoriaMenu S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.id_Menu_Item = @id");
                 database.setParameter("@id", id);
                 database.execQuery();
 
@@ -65,6 +66,7 @@ namespace negocio
                      (string)database.Reader["NombreSubCategoria"]
                  );
                 item.Estado = (bool)database.Reader["Estado"];
+                item.Stock = Convert.ToInt32(database.Reader["Stock"]);
 
                 return item;
             }
@@ -85,12 +87,13 @@ namespace negocio
 
             try
             {
-                database.setQuery("INSERT INTO MENU (Nombre_Menu,idSubCategoria,Precio,Estado,Descripcion) VALUES (@nombre,@IDSub,@precio,@estado,@descripcion)");
+                database.setQuery("INSERT INTO MENU (Nombre_Menu,idSubCategoria,Precio,Estado,Descripcion,Stock) VALUES (@nombre,@IDSub,@precio,@estado,@descripcion,@stock)");
                 database.setParameter("@nombre", menuNuevo.Nombre);
                 database.setParameter("@IDSub", menuNuevo.SubCategoria.Id);
                 database.setParameter("@precio", menuNuevo.Precio);
                 database.setParameter("@estado", 1);
                 database.setParameter("@descripcion", menuNuevo.Descripcion);
+                database.setParameter("@stock", menuNuevo.Stock);
 
                 database.execNonQuery();
             }
@@ -110,13 +113,14 @@ namespace negocio
             database = new Database();
             try
             {
-                database.setQuery("UPDATE MENU SET Nombre_Menu = @nombre, idSubCategoria = @IDSub, Precio = @precio, Estado = @estado, Descripcion = @descripcion WHERE  id_Menu_Item = @id");
+                database.setQuery("UPDATE MENU SET Nombre_Menu = @nombre, idSubCategoria = @IDSub, Precio = @precio, Estado = @estado, Descripcion = @descripcion, Stock = @stock WHERE  id_Menu_Item = @id");
                 database.setParameter("@nombre", item.Nombre);
                 database.setParameter("@IDSub", item.SubCategoria.Id);
                 database.setParameter("@precio", item.Precio);
                 database.setParameter("@estado", 1);
                 database.setParameter("@descripcion", item.Descripcion);
                 database.setParameter("@id", item.IdMenuItem);
+                database.setParameter("@stock", item.Stock);
 
                 database.execNonQuery();
             }

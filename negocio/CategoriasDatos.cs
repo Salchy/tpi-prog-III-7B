@@ -133,18 +133,18 @@ namespace negocio
 
 
 
-                database.setQuery("UPDATE SubCategoriaMenu SET Estado = @estado WHERE idCategoriaPrincipal = @id");
-                database.setParameter("@id", id);
-                database.setParameter("@estado", estado);
-                database.execNonQuery();
+                //database.setQuery("UPDATE SubCategoriaMenu SET Estado = @estado WHERE idCategoriaPrincipal = @id");
+                //database.setParameter("@id", id);
+                //database.setParameter("@estado", estado);
+                //database.execNonQuery();
 
-                database.closeConnection();
+                //database.closeConnection();
 
 
-                database.setQuery("UPDATE m SET m.Estado = @estado FROM MENU m INNER JOIN SubCategoriaMenu s ON m.idSubCategoria = s.idSubCategoria INNER JOIN Categoria_Menu c ON s.idCategoriaPrincipal = c.id_Categoria WHERE id_Categoria = @id");
-                database.setParameter("@id", id);
-                database.setParameter("@estado", estado);
-                database.execNonQuery();
+                //database.setQuery("UPDATE m SET m.Estado = @estado FROM MENU m INNER JOIN SubCategoriaMenu s ON m.idSubCategoria = s.idSubCategoria INNER JOIN Categoria_Menu c ON s.idCategoriaPrincipal = c.id_Categoria WHERE id_Categoria = @id");
+                //database.setParameter("@id", id);
+                //database.setParameter("@estado", estado);
+                //database.execNonQuery();
                 return true;
             }
             catch (Exception ex)
