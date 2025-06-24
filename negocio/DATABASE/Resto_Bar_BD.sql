@@ -56,7 +56,7 @@ CREATE TABLE [Ordenes] (
 GO
 
 CREATE TABLE [Mesas] (
-	[id_Mesa] INT NOT NULL IDENTITY(1, 1),
+	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
 	[numeroMesa] varchar(30) NOT NULL,
 	[id_Usuario] TINYINT NOT NULL, -- ID Usuario asignado a la mesa
 	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0, -- Clientes usando la mesa
