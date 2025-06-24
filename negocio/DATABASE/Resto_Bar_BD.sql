@@ -56,7 +56,7 @@ CREATE TABLE [Ordenes] (
 GO
 
 CREATE TABLE [Mesas] (
-	[id_Mesa] INT NOT NULL IDENTITY(1, 1),
+	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
 	[numeroMesa] varchar(30) NOT NULL,
 	[id_Usuario] TINYINT NOT NULL, -- ID Usuario asignado a la mesa
 	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0, -- Clientes usando la mesa
@@ -118,7 +118,7 @@ GO
 
 CREATE PROCEDURE SP_GetAllMenu
 AS
-	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado
+	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, M.Stock ,CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado
 	FROM Menu AS M
 	INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
 	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria
