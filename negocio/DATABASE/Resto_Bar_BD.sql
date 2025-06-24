@@ -10,13 +10,9 @@ CREATE TABLE [Usuarios] (
 	[Apellido] VARCHAR(30) NOT NULL,
 	[Contraseña] CHAR(64) NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
-	[Permisos] INT NOT NULL DEFAULT 0,
+	[Permisos] TINYINT NOT NULL DEFAULT 0,
 	PRIMARY KEY([id_Usuario])
 );
-GO
-
-CREATE INDEX [USUARIOS_index_0]
-ON [Usuarios] (DNI);
 GO
 
 CREATE TABLE [Categoria_Menu] (
@@ -50,20 +46,19 @@ GO
 
 CREATE TABLE [Ordenes] (
 	[id_Orden] INTEGER NOT NULL IDENTITY(1, 1),
+	[id_Pedido] INTEGER NOT NULL,
 	[id_Menu] INT NOT NULL,
 	[Cantidad] TINYINT NOT NULL DEFAULT 1,
 	[Estado] BIT NOT NULL DEFAULT 1,
-	[id_Mesa] TINYINT NOT NULL,
-	[id_Pedido] INTEGER NOT NULL,
+	
 	PRIMARY KEY([id_Orden], [id_Pedido])
 );
 GO
 
 CREATE TABLE [Mesas] (
-	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
+	[id_Mesa] INT NOT NULL IDENTITY(1, 1),
 	[numeroMesa] varchar(30) NOT NULL,
 	[id_Usuario] TINYINT NOT NULL, -- ID Usuario asignado a la mesa
-	[EstadoMesa] TINYINT NOT NULL, -- Estado de la mesa, Mesa Libre, Platillo En preparacion, Comiendo, Pagando, etc.
 	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0, -- Clientes usando la mesa
 	[Estado] BIT NOT NULL DEFAULT 1, -- Mesa habilitada / Deshabilitada al público
 	PRIMARY KEY([id_Mesa])
@@ -73,10 +68,14 @@ GO
 CREATE TABLE [Pedidos] (
 	[id_Pedido] INTEGER NOT NULL IDENTITY(1, 1),
 	[id_Mesa] TINYINT NOT NULL,
-	[Estado] BIT NOT NULL DEFAULT 1,
 	[Importe] MONEY NOT NULL,
+	[Estado] BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY([id_Pedido])
 );
+GO
+
+CREATE INDEX [USUARIOS_index_0]
+ON [Usuarios] (DNI);
 GO
 
 ALTER TABLE [Mesas]

@@ -23,17 +23,6 @@ INSERT INTO Mesas (numeroMesa, id_Usuario, EstadoMesa) VALUES
 	('Mesa 09', 1, 0),
 	('Mesa 10', 1, 0);
 
-CREATE TABLE [Mesas] (
-	[id_Mesa] TINYINT NOT NULL IDENTITY(1, 1),
-	[numeroMesa] varchar(30) NOT NULL,
-	[id_Usuario] TINYINT NOT NULL, -- ID Usuario asignado a la mesa
-	[EstadoMesa] TINYINT NOT NULL, -- Estado de la mesa, Mesa Libre, Platillo En preparacion, Comiendo, Pagando, etc.
-	[Numero_Comensales] TINYINT NOT NULL DEFAULT 0, -- Clientes usando la mesa
-	[Estado] BIT NOT NULL DEFAULT 1, -- Mesa habilitada / Deshabilitada al público
-	PRIMARY KEY([id_Mesa])
-);
-GO
-
 -- Insert de Categorías
 INSERT INTO Categoria_Menu (Nombre_Categoria) VALUES 
 	('Entradas'),
