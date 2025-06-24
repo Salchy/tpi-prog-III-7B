@@ -28,11 +28,23 @@
                         </ul>
                     </div>
                 </div>
+                <div class="d-flex">
+                    <% if (!negocio.UsuarioDatos.SesionActiva(Session["Usuario"]))
+                        { %>
+                    <a href="Login.aspx" class="btn btn-success me-2">Login</a>
+                    <%
+                        }
+                        else
+                        {
+                    %>
+                    <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-outline-primary me-2" OnClick="btnSalir_Click" runat="server" />
+                    <asp:Label ID="lblUser" Text="user" CssClass="text-light m-auto me-2" runat="server" />
+                    <%} %>
+                </div>
             </nav>
-
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
         </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
     </form>
 </body>
 </html>
