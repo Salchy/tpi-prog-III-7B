@@ -13,12 +13,11 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] == null)
-            {
+            if (!UsuarioDatos.SesionActiva(Session["Usuario"])) {
                 Response.Redirect("login.aspx", false);
                 return;
             }
-            if (((Usuario)Session["Usuario"]).NivelUsuario > 1)
+            if (UsuarioDatos.GetLevel(Session["Usuario"]) > 1)
             {
                 // No tiene permiso a esta pantalla
             }

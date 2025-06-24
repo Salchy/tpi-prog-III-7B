@@ -29,5 +29,10 @@ namespace dominio
             NivelUsuario = nivelUsuario;
             Estado = estado;
         }
+
+        public string getFullName()
+        {
+            return Nombre + " " + Apellido;
+        }
     }
 }

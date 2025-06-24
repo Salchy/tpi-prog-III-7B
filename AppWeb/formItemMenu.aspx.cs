@@ -51,16 +51,16 @@ namespace AppWeb
                 }
             }
 
-                
-            
 
 
-           
+
+
+
         }
-        
+
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             int idCategoriaPadre = int.Parse(ddlCategoria.SelectedValue);
 
             SubCategoriaDatos datos = new SubCategoriaDatos();
@@ -102,7 +102,8 @@ namespace AppWeb
                 {
                     nuevo.IdMenuItem = int.Parse(Request.QueryString["id"]);
                     manager.ModificarItem(nuevo);
-                } else
+                }
+                else
                 {
                     manager.Agregar(nuevo);
                 }
@@ -114,7 +115,7 @@ namespace AppWeb
 
                 throw ex;
             }
-            
+
         }
 
 

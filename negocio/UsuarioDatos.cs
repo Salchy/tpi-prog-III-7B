@@ -17,6 +17,23 @@ namespace negocio
         {
             database = new Database();
         }
+
+        public static bool SesionActiva(object user)
+        {
+            Usuario usuario = user != null ? (Usuario)user : null;
+            if (usuario != null && usuario.Id != 0)
+                return true;
+            else
+                return false;
+        }
+        public static int GetLevel(object user)
+        {
+            Usuario usuario = user != null ? (Usuario)user : null;
+            if (usuario == null || usuario.Id == 0)
+                return -1;
+            return usuario.NivelUsuario;
+        }
+
         public int registrarUsuario(Usuario user, string password)
         {
             try

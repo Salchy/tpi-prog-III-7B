@@ -161,6 +161,8 @@
     <Content Include="Mesero.aspx" />
     <Content Include="gerenciaPersonal.aspx" />
     <Content Include="gerenciaRestablecerPassword.aspx" />
+    <Content Include="gerenciaMesas.aspx" />
+    <Content Include="Error.aspx" />
     <None Include="Scripts\jquery-3.7.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -292,13 +294,6 @@
     <Compile Include="masterPageMesero.Master.designer.cs">
       <DependentUpon>masterPageMesero.Master</DependentUpon>
     </Compile>
-    <Compile Include="Error.Master.cs">
-      <DependentUpon>Error.Master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Error.Master.designer.cs">
-      <DependentUpon>Error.Master</DependentUpon>
-    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -348,6 +343,20 @@
     <Compile Include="gerenciaRestablecerPassword.aspx.designer.cs">
       <DependentUpon>gerenciaRestablecerPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="gerenciaMesas.aspx.cs">
+      <DependentUpon>gerenciaMesas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="gerenciaMesas.aspx.designer.cs">
+      <DependentUpon>gerenciaMesas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -358,7 +367,6 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
     <Content Include="masterPageGerencia.Master" />
     <Content Include="masterPageMesero.Master" />
-    <Content Include="Error.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -126,7 +126,6 @@ namespace negocio
         public Pedido BuscarPedido( int id)
         {
             database = new Database();
-           
 
             try
             {

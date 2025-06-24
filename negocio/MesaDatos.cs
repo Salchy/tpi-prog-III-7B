@@ -25,7 +25,6 @@ namespace negocio
             Mesa mesa = new Mesa(
                 Convert.ToInt32(data["id_Mesa"]),
                 data["numeroMesa"].ToString(),
-                (Mesa.estadoMesa)Convert.ToInt32(data["EstadoMesa"]),
                 Convert.ToInt32(data["Numero_Comensales"]),
                 meseroAsignado
             );
@@ -38,7 +37,7 @@ namespace negocio
             List<Mesa> Asignadas = new List<Mesa>();
             try
             {
-                database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id");//tambien agregar filtrado de estado
+                database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id"); //tambien agregar filtrado de estado
                 database.setParameter("@id", id);
                 database.execQuery();
 
