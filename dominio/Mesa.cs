@@ -22,6 +22,7 @@ namespace dominio
             IdMesa = idMesa;
             NumeroMesa = numeroMesa;
             MeseroAsignado = meseroAsignado;
+            Habilitado = true;
         }
     }
 }

@@ -163,11 +163,7 @@ namespace AppWeb
 
 
 
-        protected void txtCantiad_TextChanged(object sender, EventArgs e)
-        {
-            //nueva.Cantidad=int.Parse(txtCantidad.Text);
-
-        }
+       
 
 
     }
