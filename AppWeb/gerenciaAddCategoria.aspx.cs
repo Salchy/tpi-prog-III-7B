@@ -13,21 +13,27 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(IsPostBack)
+            if (IsPostBack)
             {
                 return;
             }
-            
-              if(Request.QueryString["id"] != null)
-                {
-                    int id = int.Parse(Request.QueryString["id"].ToString());
-                    CategoriasDatos manager = new CategoriasDatos();
 
+            if (Request.QueryString["id"] != null)
+            {
+                int id = int.Parse(Request.QueryString["id"].ToString());
+                CategoriasDatos manager = new CategoriasDatos();
+
+                try
+                {
                     Categoria cate = manager.GetCategoria(id);
                     txtNombre.Text = cate.Nombre;
-                    
-               }
-            
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al cargar la categoría: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
         }
 
         protected void btnAceptarCate_Click(object sender, EventArgs e)
@@ -37,7 +43,6 @@ namespace AppWeb
             {
                 Categoria nuevo = new Categoria();
                 CategoriasDatos manager = new CategoriasDatos();
-
 
                 nuevo.Nombre = txtNombre.Text;
 
@@ -50,15 +55,14 @@ namespace AppWeb
                 {
                     manager.Agregar(nuevo);
                 }
-
                 Response.Redirect("gerenciaCategorias.aspx");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", "Error al agregar/modificar la categoría: " + ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
-            
+
         }
 
         protected void btnVolverCate_Click(object sender, EventArgs e)

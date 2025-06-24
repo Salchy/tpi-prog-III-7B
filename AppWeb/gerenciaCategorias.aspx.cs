@@ -15,13 +15,21 @@ namespace AppWeb
         {
             if (!IsPostBack)
             {
-                CategoriasDatos categorias = new CategoriasDatos();
-                dgvCategorias.DataSource = categorias.listarCategorias();
-                
-                dgvCategorias.DataBind();
+                try
+                {
+                    CategoriasDatos categorias = new CategoriasDatos();
+                    dgvCategorias.DataSource = categorias.listarCategorias();
+
+                    dgvCategorias.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al cargar las categorías." + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
+                }
+
             }
         }
-
 
         protected void btnAgregarCate_Click(object sender, EventArgs e)
         {
@@ -30,16 +38,15 @@ namespace AppWeb
 
         protected void dgvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            
+            int id = int.Parse(e.CommandArgument.ToString());
 
-
-                int id = int.Parse(e.CommandArgument.ToString());
-
-                if (e.CommandName == "Editar")
-                {
-                    Response.Redirect("gerenciaAddCategoria.aspx?id=" + id);
-                }
-                else if (e.CommandName == "Estado")
+            if (e.CommandName == "Editar")
+            {
+                Response.Redirect("gerenciaAddCategoria.aspx?id=" + id);
+            }
+            else if (e.CommandName == "Estado")
+            {
+                try
                 {
                     CategoriasDatos manager = new CategoriasDatos();
                     Categoria cate = manager.GetCategoria(id);
@@ -50,16 +57,27 @@ namespace AppWeb
                     dgvCategorias.DataSource = manager.listarCategorias();
                     dgvCategorias.DataBind();
                 }
-            
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
         }
 
         protected void dgvCategorias_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            dgvCategorias.PageIndex = e.NewPageIndex;
+            try
+            {
+                dgvCategorias.PageIndex = e.NewPageIndex;
 
-            CategoriasDatos manager = new CategoriasDatos();
-            dgvCategorias.DataSource = manager.listarCategorias();
-            dgvCategorias.DataBind();
+                CategoriasDatos manager = new CategoriasDatos();
+                dgvCategorias.DataSource = manager.listarCategorias();
+                dgvCategorias.DataBind();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

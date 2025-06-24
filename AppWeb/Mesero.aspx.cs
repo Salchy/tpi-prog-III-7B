@@ -31,10 +31,7 @@ namespace AppWeb
 
         protected void btnAgregarOrden_Click(object sender, EventArgs e)
         {
-
             Response.Redirect("Ordenes.aspx", false);
         }
-
-
     }
 }

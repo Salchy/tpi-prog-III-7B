@@ -39,13 +39,11 @@ namespace AppWeb
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-
         }
 
         protected void btnEliminarOrden_Click(object sender, EventArgs e)
@@ -163,7 +161,7 @@ namespace AppWeb
 
 
 
-       
+
 
 
     }

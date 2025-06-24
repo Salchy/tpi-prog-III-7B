@@ -15,9 +15,18 @@ namespace AppWeb
         {
             if (!IsPostBack)
             {
-                SubCategoriaDatos subcate = new SubCategoriaDatos();
-                dgvSubCate.DataSource = subcate.listarSubCategorias();
-                dgvSubCate.DataBind();
+                try
+                {
+                    SubCategoriaDatos subcate = new SubCategoriaDatos();
+                    dgvSubCate.DataSource = subcate.listarSubCategorias();
+                    dgvSubCate.DataBind();
+                }
+                catch (Exception)
+                {
+                    Session.Add("error", "Error al cargar las sub categorías.");
+                    Response.Redirect("Error.aspx", false);
+                }
+
             }
         }
 
@@ -25,9 +34,17 @@ namespace AppWeb
         {
             dgvSubCate.PageIndex = e.NewPageIndex;
 
-            SubCategoriaDatos manager = new SubCategoriaDatos();
-            dgvSubCate.DataSource = manager.listarSubCategorias();
-            dgvSubCate.DataBind();
+            try
+            {
+                SubCategoriaDatos manager = new SubCategoriaDatos();
+                dgvSubCate.DataSource = manager.listarSubCategorias();
+                dgvSubCate.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         protected void btnAgregarSub_Click(object sender, EventArgs e)
@@ -37,9 +54,6 @@ namespace AppWeb
 
         protected void dgvSubCate_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
-
-
             int id = int.Parse(e.CommandArgument.ToString());
 
             if (e.CommandName == "Editar")
@@ -48,14 +62,21 @@ namespace AppWeb
             }
             else if (e.CommandName == "Estado")
             {
-                SubCategoriaDatos manager = new SubCategoriaDatos();
-                SubCategoria sub = manager.GetSubCategoria(id);
-                sub.Estado = !sub.Estado;
+                try
+                {
+                    SubCategoriaDatos manager = new SubCategoriaDatos();
+                    SubCategoria sub = manager.GetSubCategoria(id);
+                    sub.Estado = !sub.Estado;
 
-                manager.habilitarInhabilitarSubCategoria(id, sub.Estado);
+                    manager.habilitarInhabilitarSubCategoria(id, sub.Estado);
 
-                dgvSubCate.DataSource = manager.listarSubCategorias();
-                dgvSubCate.DataBind();
+                    dgvSubCate.DataSource = manager.listarSubCategorias();
+                    dgvSubCate.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }

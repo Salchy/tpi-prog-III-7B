@@ -15,32 +15,35 @@ namespace AppWeb
         {
             if (!IsPostBack)
             {
-                CategoriasDatos lista = new CategoriasDatos();
-
-                List<Categoria> todasCategorias = lista.listarCategorias();
-                List<Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
-
-                ddlCategoriaPadre.DataSource = activas;
-                ddlCategoriaPadre.DataTextField = "Nombre";     // VISUAL
-                ddlCategoriaPadre.DataValueField = "Id";        // QUE SE GUARDA
-                ddlCategoriaPadre.DataBind();
-
-                ddlCategoriaPadre.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-
-
-                if (Request.QueryString["id"] != null)
+                try
                 {
-                    int id = int.Parse(Request.QueryString["id"].ToString());
-                    SubCategoriaDatos manager = new SubCategoriaDatos();
+                    CategoriasDatos lista = new CategoriasDatos();
+                    List<Categoria> todasCategorias = lista.listarCategorias();
+                    List<Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
 
-                    SubCategoria sub = manager.GetSubCategoria(id);
-                    txtNombre.Text = sub.Nombre;
-                    ddlCategoriaPadre.SelectedValue = sub.IdCategoriaPadre.ToString();
+                    ddlCategoriaPadre.DataSource = activas;
+                    ddlCategoriaPadre.DataTextField = "Nombre";     // VISUAL
+                    ddlCategoriaPadre.DataValueField = "Id";        // QUE SE GUARDA
+                    ddlCategoriaPadre.DataBind();
 
+                    ddlCategoriaPadre.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+
+                    if (Request.QueryString["id"] != null)
+                    {
+                        int id = int.Parse(Request.QueryString["id"].ToString());
+                        SubCategoriaDatos manager = new SubCategoriaDatos();
+
+                        SubCategoria sub = manager.GetSubCategoria(id);
+                        txtNombre.Text = sub.Nombre;
+                        ddlCategoriaPadre.SelectedValue = sub.IdCategoriaPadre.ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al cargar las sub categorías: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
                 }
             }
-
-            
         }
 
         protected void btnVolverSubCate_Click(object sender, EventArgs e)
@@ -55,10 +58,8 @@ namespace AppWeb
                 SubCategoria nuevo = new SubCategoria();
                 SubCategoriaDatos manager = new SubCategoriaDatos();
 
-
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.IdCategoriaPadre = int.Parse(ddlCategoriaPadre.SelectedValue);
-
 
                 if (Request.QueryString["id"] != null)
                 {
@@ -69,13 +70,12 @@ namespace AppWeb
                 {
                     manager.Agregar(nuevo);
                 }
-
                 Response.Redirect("gerenciaSubCategorias.aspx");
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", "Error al agregar/modificar la sub categoría: " + ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

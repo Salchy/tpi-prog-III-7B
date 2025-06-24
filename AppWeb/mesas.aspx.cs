@@ -42,19 +42,6 @@ namespace AppWeb
         {
             MesaDatos mesaDatos = new MesaDatos();
 
-            //if (Session["Usuario"] == null)
-            //{
-            //    Response.Redirect("login.aspx", false);
-            //    return;
-            //}
-            if (((Usuario)Session["Usuario"]).NivelUsuario > 2)
-            {
-                // No tiene permiso a esta pantalla
-                //Session.Add("error", ex.ToString());
-                Session.Add("error", "Mensaje de error");
-                Response.Redirect("Error.aspx");
-                return;
-            }
             if (IsPostBack)
             {
                 return;
@@ -79,7 +66,6 @@ namespace AppWeb
 
             int idmesa = int.Parse(dgvMesas_asignadas.SelectedDataKey.Value.ToString());
             int idpedido = pedido.getIdPedidoMesaAbierta(idmesa);
-
 
             dvgOrdenes.DataSource= orden.getOrdenesPedido(idpedido);
             dvgOrdenes.DataBind();*/

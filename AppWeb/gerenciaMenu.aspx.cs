@@ -13,33 +13,28 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] == null)
-            {
-                Response.Redirect("login.aspx", false);
-                return;
-            }
-            if (((Usuario)Session["Usuario"]).NivelUsuario > 1)
-            {
-                // No tiene permiso a esta pantalla
-            }
             if (!IsPostBack)
             {
                 menuItemDatos menu = new menuItemDatos();
                 dgvMenu.DataSource = menu.listarMenu();
-                //dgvMenu.
                 dgvMenu.DataBind();
             }
-
         }
 
         protected void dgvMenu_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            dgvMenu.PageIndex = e.NewPageIndex;
+            try
+            {
+                dgvMenu.PageIndex = e.NewPageIndex;
 
-            menuItemDatos menu = new menuItemDatos();
-            dgvMenu.DataSource = menu.listarMenu();
-            dgvMenu.DataBind();
-
+                menuItemDatos menu = new menuItemDatos();
+                dgvMenu.DataSource = menu.listarMenu();
+                dgvMenu.DataBind();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         protected void btnAgregar_Click(object sender, EventArgs e)
@@ -47,37 +42,34 @@ namespace AppWeb
             Response.Redirect("formItemMenu.aspx", false);
         }
 
-
-
         protected void dgvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
             int id = int.Parse(e.CommandArgument.ToString());
 
-
             if (e.CommandName == "Editar")
             {
                 Response.Redirect("formItemMenu.aspx?id=" + id);
             }
-            
+
             else if (e.CommandName == "Estado")
             {
+                try
+                {
+                    menuItemDatos manager = new menuItemDatos();
+                    dominio.MenuItem menu = manager.GetItem(id);
+                    menu.Estado = !menu.Estado;
 
-                menuItemDatos manager = new menuItemDatos();
-                dominio.MenuItem menu = manager.GetItem(id);
-                menu.Estado = !menu.Estado;
+                    manager.habilitarInhabilitarMenu(id, menu.Estado);
 
-                manager.habilitarInhabilitarMenu(id, menu.Estado);
-
-                dgvMenu.DataSource = manager.listarMenu();
-                dgvMenu.DataBind();
-                
-
-
+                    dgvMenu.DataSource = manager.listarMenu();
+                    dgvMenu.DataBind();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }
-
-
-
 }

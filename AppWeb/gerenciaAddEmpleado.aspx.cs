@@ -17,15 +17,6 @@ namespace AppWeb
         private UsuarioDatos userDB = new UsuarioDatos();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session["Usuario"] == null)
-            //{
-            //    Response.Redirect("login.aspx", false);
-            //    return;
-            //}
-            if (((Usuario)Session["Usuario"]).NivelUsuario > 1)
-            {
-                // No tiene permiso a esta pantalla
-            }
             if (IsPostBack)
             {
                 return;
@@ -40,11 +31,20 @@ namespace AppWeb
                 regUserBTN.Text = "Modificar Empleado";
 
                 int id = int.Parse(Request.QueryString["id"].ToString());
-                Usuario usuario = userDB.getUsuario(id);
-                txtNombre.Text = usuario.Nombre;
-                txtApellido.Text = usuario.Apellido;
-                txtDNI.Text = usuario.Dni;
-                dropDownPerfil.SelectedValue = usuario.NivelUsuario.ToString();
+                try
+                {
+                    Usuario usuario = userDB.getUsuario(id);
+                    txtNombre.Text = usuario.Nombre;
+                    txtApellido.Text = usuario.Apellido;
+                    txtDNI.Text = usuario.Dni;
+                    dropDownPerfil.SelectedValue = usuario.NivelUsuario.ToString();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al cargar el usuario: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
+                }
+
             }
         }
         protected void btnRegistrarUsuario(object sender, EventArgs e)
@@ -59,23 +59,37 @@ namespace AppWeb
             if (Request.QueryString["id"] != null)
             {
                 int id = int.Parse(Request.QueryString["id"].ToString());
-                Usuario usuario = userDB.getUsuario(id);
-                usuario.Nombre = userName;
-                usuario.Apellido = userSurName;
-                //usuario.Dni = userDNI;
-                usuario.NivelUsuario = int.Parse(dropDownPerfil.SelectedValue);
-                if (userDB.modificarUsuario(usuario))
+                try
                 {
-                    // Notificar que se modificó correctamente
-                    Response.Redirect("gerenciaPersonal.aspx", true);
+                    Usuario usuario = userDB.getUsuario(id);
+                    usuario.Nombre = userName;
+                    usuario.Apellido = userSurName;
+                    //usuario.Dni = userDNI;
+                    usuario.NivelUsuario = int.Parse(dropDownPerfil.SelectedValue);
+                    if (userDB.modificarUsuario(usuario))
+                    {
+                        // Notificar que se modificó correctamente
+                        Response.Redirect("gerenciaPersonal.aspx", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error " + lblTitle.Text + " el usuario: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
                 }
             }
             else
             {
-                if (registrarUsuario(userName, userSurName, userDNI))
+                try
                 {
-                    // Notificia r que el usuario se agregó correctamente
+                    registrarUsuario(userName, userSurName, userDNI);
+                    // Notificiar que el usuario se agregó correctamente
                     Response.Redirect("gerenciaPersonal.aspx", true);
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al registrar el usuario: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
                 }
             }
         }
@@ -112,12 +126,19 @@ namespace AppWeb
         private bool registrarUsuario(string userName, string userSurName, string userDNI)
         {
             Usuario nuevoUsuario = new Usuario(0, userDNI, userName, userSurName, int.Parse(dropDownPerfil.SelectedValue));
-            int nuevoUsuarioID = userDB.registrarUsuario(nuevoUsuario, userDNI);
-            if (nuevoUsuarioID > 0)
+            try
             {
-                return true;
+                int nuevoUsuarioID = userDB.registrarUsuario(nuevoUsuario, userDNI);
+                if (nuevoUsuarioID > 0)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private bool esNumerico(string str)
@@ -148,10 +169,11 @@ namespace AppWeb
             Response.Redirect("gerenciaPersonal.aspx", true);
         }
 
+        // todo: Hacer un método para mostrar mensajes de notificaciones
         private void mostrarMensaje(string title, string msg)
         {
             literal.Text = "<div class='modal-dialog modal-dialog-centered'>" + title + "</div>" +
                 "<div class='modal-dialog modal-dialog-centered modal-dialog-scrollable'>" + msg + "</div>";
         }
-}
+    }
 }

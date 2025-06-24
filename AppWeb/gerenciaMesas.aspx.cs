@@ -13,15 +13,6 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["Usuario"] == null)
-            {
-                Response.Redirect("login.aspx", false);
-                return;
-            }
-            if (((Usuario)Session["Usuario"]).NivelUsuario > 1)
-            {
-                // No tiene permiso a esta pantalla
-            }
             if (IsPostBack)
             {
                 return;
@@ -52,12 +43,18 @@ namespace AppWeb
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 Mesa mesa = (Mesa)e.Row.DataItem;
-
                 Label lblMesero = (Label)e.Row.FindControl("lblMeseroAsignado");
 
                 if (lblMesero != null && mesa != null)
                 {
-                    lblMesero.Text = mesa.MeseroAsignado.getFullName();
+                    try
+                    {
+                        lblMesero.Text = mesa.MeseroAsignado.getFullName();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
                 }
             }
         }

@@ -13,14 +13,6 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!UsuarioDatos.SesionActiva(Session["Usuario"])) {
-                Response.Redirect("login.aspx", false);
-                return;
-            }
-            if (UsuarioDatos.GetLevel(Session["Usuario"]) > 1)
-            {
-                // No tiene permiso a esta pantalla
-            }
             if (IsPostBack)
             {
                 return;
@@ -37,12 +29,21 @@ namespace AppWeb
             int id = int.Parse(Request.QueryString["id"].ToString());
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
-                Response.Write("<script>alert('Por favor, complete ambos campos de contraseña..');</script>");
+                Response.Write("<script>alert('Por favor, complete el campo de contraseña..');</script>");
                 return;
             }
-            UsuarioDatos UsuarioDatos = new UsuarioDatos();
-            UsuarioDatos.setUserPassword(id, txtPassword.Text);
-            Response.Redirect("gerenciaPersonal.aspx", true);
+            try
+            {
+                UsuarioDatos UsuarioDatos = new UsuarioDatos();
+                UsuarioDatos.setUserPassword(id, txtPassword.Text);
+                Response.Redirect("gerenciaPersonal.aspx", true);
+            }
+            catch (Exception)
+            {
+                Session.Add("error", "Error al restablecer la contraseña del usuario.");
+                Response.Redirect("Error.aspx", false);
+            }
+
         }
     }
 }

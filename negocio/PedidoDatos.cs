@@ -13,7 +13,6 @@ namespace negocio
         Database database;
         public void CrearPedido(int id)
         {
-
             database = new Database();
 
             try

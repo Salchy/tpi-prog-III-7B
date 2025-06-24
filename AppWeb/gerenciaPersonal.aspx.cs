@@ -41,11 +41,19 @@ namespace AppWeb
             }
             else
             {
-                Usuario usuario = UsuarioDatos.getUsuario(id);
-                usuario.Estado = !usuario.Estado;
+                try
+                {
+                    Usuario usuario = UsuarioDatos.getUsuario(id);
+                    usuario.Estado = !usuario.Estado;
 
-                UsuarioDatos.enableDisableUsuario(id, usuario.Estado);
-                reloadDataBind();
+                    UsuarioDatos.enableDisableUsuario(id, usuario.Estado);
+                    reloadDataBind();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al cambiar el estado del usuario: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
+                }
             }
         }
 
