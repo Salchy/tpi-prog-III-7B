@@ -129,7 +129,7 @@ CREATE PROCEDURE SP_GetMenuItemsFromCategory(
 	@idCategoriaPrincipal INT
 )
 AS
-	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria, M.Estado
+	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio,M.Stock, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria, M.Estado
 	FROM Menu AS M
 	INNER JOIN SubCategoriaMenu AS S ON M.idSubCategoria = S.idSubCategoria
 	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
