@@ -43,6 +43,66 @@ namespace negocio
         }
 
 
+
+        public List<MenuItem> filtrar(string campo,string filtro, string estado)
+        {
+            List<MenuItem> menuFiltrado = new List<MenuItem>();
+            database = new Database();
+            try
+            {
+                string consulta = "SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, M.Stock, CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado FROM Menu AS M INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria ";
+
+                if (campo == "Ítem")
+                {
+                   consulta += "WHERE Nombre_Menu like '" + filtro + "%' ";
+                        
+                           
+                }
+                else if (campo == "Categoria")
+                {
+                    consulta += "WHERE Nombre_Categoria like '" + filtro + "%' ";
+                }
+                else if (campo == "SubCategoria")
+                {
+                    consulta += "WHERE NombreSubCategoria like '" + filtro + "%' ";
+                }
+
+                if (estado == "Activo")
+                    consulta += " and M.Estado = 1";
+                else if (estado == "Inactivo")
+                    consulta += " and M.Estado = 0";
+
+
+                consulta += "ORDER BY CM.Nombre_Categoria ASC, SCM.NombreSubCategoria ASC, M.Nombre_Menu ASC";
+
+                database.setQuery(consulta);
+                database.execQuery();
+                while (database.Reader.Read())
+                {
+                    MenuItem item = new MenuItem(
+                    (int)database.Reader["id_Menu_Item"],
+                    database.Reader["Nombre_Menu"].ToString(),
+                    database.Reader.IsDBNull(database.Reader.GetOrdinal("Descripcion")) ? "" : database.Reader["Descripcion"].ToString(),
+                    Math.Round((decimal)database.Reader["Precio"], 2),
+                    Convert.ToInt32(database.Reader["id_Categoria"]), // Porque en la DB lo definimos como TINYINT
+                    (string)database.Reader["Nombre_Categoria"],
+                    Convert.ToInt32(database.Reader["idSubCategoria"]),
+                    (string)database.Reader["NombreSubCategoria"]
+                );
+                    item.Estado = (bool)database.Reader["Estado"];
+                    item.Stock = Convert.ToInt32(database.Reader["Stock"]);
+                    menuFiltrado.Add(item);
+                    
+                }
+
+                return menuFiltrado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public MenuItem GetItem(int id)
         {
             try

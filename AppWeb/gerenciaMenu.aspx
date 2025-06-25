@@ -4,7 +4,43 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+ 
+    <div class="row">
+        <div class ="col-2">
+            <div class="mb-3">
+                <asp:Label Text="Campo" ID="lblCampo" runat="server" />
+                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo">
+                    <asp:ListItem Text="Ítem" />
+                    <asp:ListItem Text="Categoria" />
+                    <asp:ListItem Text="SubCategoria" />
+                </asp:DropDownList>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="mb-3">
+                <asp:Label Text="Filtro" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control"/>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="mb-3">
+                <asp:Label Text="Estado" runat="server" />
+                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlEstado">
+                    <asp:ListItem Text="Activo" />
+                    <asp:ListItem Text="Inactivo" />
+                </asp:DropDownList>
+            </div>
+        </div>
 
+        <div class="col-2 d-flex align-items-end">
+            <div class="mb-3 w-100">
+                <asp:Button Text="Buscar" runat="server" CssClass="btn btn-primary" ID="btnBuscar" OnClick="btnBuscar_Click"/>
+            </div>
+        </div>
+    </div>
+    
+        
+   
 
     <asp:GridView ID="dgvMenu" CssClass="table table-dark table-striped" AutoGenerateColumns="false" runat="server" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvMenu_PageIndexChanging" OnRowCommand="dgvMenu_RowCommand">
         <Columns>

@@ -15,9 +15,21 @@ namespace AppWeb
         {
             if (!IsPostBack)
             {
-                menuItemDatos menu = new menuItemDatos();
-                dgvMenu.DataSource = menu.listarMenu();
-                dgvMenu.DataBind();
+
+                try
+                {
+                    menuItemDatos menu = new menuItemDatos();
+                    dgvMenu.DataSource = menu.filtrar("Ítem","","Activo");
+                    dgvMenu.DataBind();
+
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+               
             }
         }
 
@@ -27,8 +39,13 @@ namespace AppWeb
             {
                 dgvMenu.PageIndex = e.NewPageIndex;
 
-                menuItemDatos menu = new menuItemDatos();
-                dgvMenu.DataSource = menu.listarMenu();
+                menuItemDatos manager = new menuItemDatos();
+                string campo = ddlCampo.SelectedValue;
+                string filtro = txtFiltroAvanzado.Text;
+                string estado = ddlEstado.SelectedValue;
+
+                // Volver a aplicar el filtro actual
+                dgvMenu.DataSource = manager.filtrar(campo, filtro, estado);
                 dgvMenu.DataBind();
             }
             catch (Exception ex)
@@ -62,13 +79,35 @@ namespace AppWeb
 
                     manager.habilitarInhabilitarMenu(id, menu.Estado);
 
-                    dgvMenu.DataSource = manager.listarMenu();
+                    string campo = ddlCampo.SelectedValue;
+                    string filtro = txtFiltroAvanzado.Text;
+                    string estado = ddlEstado.SelectedValue;
+
+                    // Volver a aplicar el filtro actual
+                    dgvMenu.DataSource = manager.filtrar(campo, filtro, estado);
                     dgvMenu.DataBind();
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
+            }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                menuItemDatos manager = new menuItemDatos();
+                dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedItem.ToString(),
+                  txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
+                dgvMenu.DataBind();
+                    
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
