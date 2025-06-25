@@ -37,7 +37,7 @@ namespace negocio
             List<Mesa> Asignadas = new List<Mesa>();
             try
             {
-                database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id"); //tambien agregar filtrado de estado
+                database.setQuery("SELECT * FROM Mesas WHERE id_Usuario = @id and Estado =1" ); //tambien agregar filtrado de estado
                 database.setParameter("@id", id);
                 database.execQuery();
 

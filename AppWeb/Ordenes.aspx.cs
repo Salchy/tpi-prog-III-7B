@@ -29,7 +29,7 @@ namespace AppWeb
 
                     ddlCategoria.DataSource = lista;
                     ddlCategoria.DataTextField = "Nombre";
-                    ddlCategoria.DataValueField = "id";
+                    ddlCategoria.DataValueField = "Id";
                     ddlCategoria.DataBind();
                     ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
 

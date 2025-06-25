@@ -21,6 +21,7 @@ namespace dominio
         {
             IdMesa = idMesa;
             NumeroMesa = numeroMesa;
+            NumeroComensales = numeroComensales;
             MeseroAsignado = meseroAsignado;
             Habilitado = true;
         }

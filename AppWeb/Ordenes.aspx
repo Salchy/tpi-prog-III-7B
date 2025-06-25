@@ -7,12 +7,13 @@
 
     <h1>Carga de Ordenes</h1>
 
-    <div class="=row">   
+    <div class="=row">   /////
     <div class="col">   
         <h2>Mesa</h2>
         <asp:DropDownList ID="ddlMesaActiva" runat="server"  OnSelectedIndexChanged="ddlMesaActiva_SelectedIndexChanged" AutoPostBack="true" class="btn btn-secondary dropdown-toggle" >
                     </asp:DropDownList>
     </div>
+        </div>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>   
                 <h2>Menu disponible</h2>
@@ -43,14 +44,12 @@
         </div>
         
      
-    </div>
-             </div>
-             </div>
+             
              
 
   
 
-<asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvMenu_SelectedIndexChanged" DataKeyNames="IdMenuItem"  >
+<asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvMenu_SelectedIndexChanged" DataKeyNames="IdMenuItem">
     <Columns>
      <asp:BoundField HeaderText="Menu" DataField="Nombre" />
     <asp:BoundField HeaderText="Precio" DataField="Precio" />
@@ -83,7 +82,8 @@
             </div>
         </div>
              </div>
-         <h2>Ordenes del Pedido</h2>     
+         <h2>Ordenes del Pedido</h2>  
+            
      <asp:GridView ID="dgvOrdenes" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" >
 
              <Columns>
