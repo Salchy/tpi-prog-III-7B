@@ -20,6 +20,7 @@ INSERT INTO Mesas (numeroMesa, id_Usuario) VALUES
 	('Mesa 08', 1),
 	('Mesa 09', 1),
 	('Mesa 10', 1);
+GO
 
 -- Insert de Categorías
 INSERT INTO Categoria_Menu (Nombre_Categoria) VALUES 
@@ -36,7 +37,7 @@ INSERT INTO Categoria_Menu (Nombre_Categoria) VALUES
 	('Bebidas sin alcohol'),
 	('Bebidas con alcohol'),
 	('Cafetería');
-
+GO
 --SELECT * FROM Categoria_Menu
 
 -- Insert de SubCategorías
@@ -100,7 +101,7 @@ INSERT INTO SubCategoriaMenu(NombreSubCategoria, idCategoriaPrincipal) VALUES
 	('Cafés', 13),
 	('Tés', 13),
 	('Especiales', 13);
-
+GO
 --SELECT * FROM SubCategoriaMenu;
 
 --SELECT Nombre_Categoria, NombreSubCategoria FROM SubCategoriaMenu AS SCM
@@ -332,7 +333,7 @@ INSERT INTO Menu(Nombre_Menu, idSubCategoria, Descripcion, Precio, Stock) VALUES
 		('Mocaccino', 34, 'Café, leche, chocolate y espuma', 1250.00, 7),
 		('Latte Vainilla', 34, 'Café con leche saborizado con vainilla', 1300.00, 1),
 		('Café Helado', 34, 'Café frío con crema y hielo', 1350.00, 13);
-
+GO
 -- UPDATE Menu SET Descripcion = 'Hongos, cherry, cebolla morada, zucchini, zanahoria, morrón bicolor.' WHERE id_Menu_Item = 6;
 
 -- SELECT * FROM SubCategoriaMenu WHERE NombreSubCategoria LIKE '%aperitivos%';

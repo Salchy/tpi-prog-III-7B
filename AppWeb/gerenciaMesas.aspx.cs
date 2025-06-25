@@ -11,30 +11,38 @@ namespace AppWeb
 {
     public partial class gerenciaMesas : System.Web.UI.Page
     {
+        MesaDatos mesaDatos = new MesaDatos();
+        List<Mesa> mesasAsignadas;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (IsPostBack)
             {
                 return;
             }
-            MesaDatos mesaDatos = new MesaDatos();
-            List<Mesa> mesasAsignadas = mesaDatos.getMesas();
+            reloadDataBind();
+        }
 
-            dgvMesas.DataSource = mesasAsignadas;
-            dgvMesas.DataBind();
+        private void reloadDataBind()
+        {
+            try
+            {
+                mesasAsignadas = mesaDatos.getMesas();
+                dgvMesas.DataSource = mesasAsignadas;
+                dgvMesas.DataBind();
+            }
+            catch (Exception)
+            {
+                Session.Add("error", "Error al intentar obtener listado de mesas");
+                Response.Redirect("Error.aspx", false);
+            }
         }
 
         protected void dgvMesas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Asignar")
+            if (e.CommandName == "management")
             {
                 int idMesa = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("gerenciaAsignarMesero.aspx?id=" + idMesa, false);
-            }
-            else if (e.CommandName == "Editar")
-            {
-                int idMesa = Convert.ToInt32(e.CommandArgument);
-                Response.Redirect("gerenciaEditarMesa.aspx?id=" + idMesa, false);
+                Response.Redirect("gerenciaAdministrarMesa.aspx?id=" + idMesa, false);
             }
         }
 
