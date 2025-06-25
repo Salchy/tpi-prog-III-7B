@@ -4,11 +4,9 @@ USE RestoBar;
 -- Crear usuario adminsitrador (Genérico, para Empleados de Sistemas)
 EXEC SP_CrearUsuario 'Admin', 'Admin', 'Admin', '3EB3FE66B31E3B4D10FA70B5CAD49C7112294AF6AE4E476A1C405155D45AA121', 0;
 
--- Crear usuario Gerente
 EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '68E059127789EA920AD39F186B60EAA3ACFEF029A4C8808D2D271E500C992D4A', 1;
-
 -- Crear usuario Mesero
-EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', 'EF9BD64654BB3D8826C9892CFCC3B01FA73774247DBFB1E7AA09A6271E76D80D', 2;
+EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', 'EF9BD64654BB3D8826C9892CFCC3B01FA73774247DBFB1E7AA09A6271E76D80D', 2;
 
 -- Por defecto, se asignan las mesas al user Admin
 INSERT INTO Mesas (numeroMesa, id_Usuario) VALUES
