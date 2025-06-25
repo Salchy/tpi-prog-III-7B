@@ -5,12 +5,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:GridView ID="dgvMesas" runat="server" AutoGenerateColumns="False" CssClass="table table-dark table-striped" OnRowDataBound="dgvMesas_RowDataBound" DataKeyNames="IdMesa">
         <Columns>
-            <asp:BoundField DataField="IdMesa" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto" />
+            <asp:BoundField HeaderText="ID Mesa" DataField="IdMesa"/>
             <asp:BoundField HeaderText="Numero de Mesa" DataField="numeroMesa" />
             <asp:BoundField HeaderText="Comensales" DataField="numeroComensales" />
             <asp:TemplateField HeaderText="Mesero Asignado">
                 <ItemTemplate>
                     <asp:Label ID="lblMeseroAsignado" runat="server" Text=""></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField>
+                <ItemTemplate>
+                    <asp:Button ID="btnAdministrar" runat="server" Text="Administrar" CommandName="management" CommandArgument='<%# Eval("IdMesa") %>' CssClass="btn btn-warning" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

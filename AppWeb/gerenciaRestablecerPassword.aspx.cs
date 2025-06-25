@@ -29,14 +29,19 @@ namespace AppWeb
             int id = int.Parse(Request.QueryString["id"].ToString());
             if (string.IsNullOrEmpty(txtPassword.Text))
             {
-                Response.Write("<script>alert('Por favor, complete el campo de contraseña..');</script>");
+                Response.Write("<script>alert('Por favor, complete el campo de contraseña.');</script>");
                 return;
             }
             try
             {
                 UsuarioDatos UsuarioDatos = new UsuarioDatos();
+                if (UsuarioDatos.getUsuario(id) == null)
+                {
+                    Response.Write("<script>alert('El usuario no existe.');</script>");
+                    return;
+                }
                 UsuarioDatos.setUserPassword(id, txtPassword.Text);
-                Response.Redirect("gerenciaPersonal.aspx", true);
+                Response.Redirect("gerenciaPersonal.aspx", false);
             }
             catch (Exception)
             {

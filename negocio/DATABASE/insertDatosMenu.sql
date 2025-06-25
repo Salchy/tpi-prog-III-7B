@@ -5,23 +5,23 @@ USE RestoBar;
 EXEC SP_CrearUsuario 'Admin', 'Admin', 'Admin', '3EB3FE66B31E3B4D10FA70B5CAD49C7112294AF6AE4E476A1C405155D45AA121', 0;
 
 -- Crear usuario Gerente
-EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '95980CC32FCB13BFAEDF96D13F5E850AE93583994CE68264AC73C2084D5E0069', 1;
+EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '68E059127789EA920AD39F186B60EAA3ACFEF029A4C8808D2D271E500C992D4A', 1;
 
 -- Crear usuario Mesero
-EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', '55DCEC5B6DE9023E541D5E308FC8BA2D3C7FF50D23F2E9FD6E99A92EE7DD272C', 2;
+EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', 'EF9BD64654BB3D8826C9892CFCC3B01FA73774247DBFB1E7AA09A6271E76D80D', 2;
 
 -- Por defecto, se asignan las mesas al user Admin
-INSERT INTO Mesas (numeroMesa, id_Usuario, EstadoMesa) VALUES
-	('Mesa 01', 1, 0),
-	('Mesa 02', 1, 0),
-	('Mesa 03', 1, 0),
-	('Mesa 04', 1, 0),
-	('Mesa 05', 1, 0),
-	('Mesa 06', 1, 0),
-	('Mesa 07', 1, 0),
-	('Mesa 08', 1, 0),
-	('Mesa 09', 1, 0),
-	('Mesa 10', 1, 0);
+INSERT INTO Mesas (numeroMesa, id_Usuario) VALUES
+	('Mesa 01', 1),
+	('Mesa 02', 1),
+	('Mesa 03', 1),
+	('Mesa 04', 1),
+	('Mesa 05', 1),
+	('Mesa 06', 1),
+	('Mesa 07', 1),
+	('Mesa 08', 1),
+	('Mesa 09', 1),
+	('Mesa 10', 1);
 
 -- Insert de Categorías
 INSERT INTO Categoria_Menu (Nombre_Categoria) VALUES 
@@ -340,7 +340,7 @@ INSERT INTO Menu(Nombre_Menu, idSubCategoria, Descripcion, Precio) VALUES
 		('Submarino', 34, 'Leche caliente con barra de chocolate', 1300.00),
 		('Mocaccino', 34, 'Café, leche, chocolate y espuma', 1250.00),
 		('Latte Vainilla', 34, 'Café con leche saborizado con vainilla', 1300.00),
-		('Café Helado', 34, 'Café frío con crema y hielo', 1350.00)
+		('Café Helado', 34, 'Café frío con crema y hielo', 1350.00);
 
 -- UPDATE Menu SET Descripcion = 'Hongos, cherry, cebolla morada, zucchini, zanahoria, morrón bicolor.' WHERE id_Menu_Item = 6;
 
