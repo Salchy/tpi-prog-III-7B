@@ -17,9 +17,9 @@ namespace AppWeb
             {
                 if (Request.QueryString["id"] != null) // Es una modificación
                 {
-                    lblTitle.Text = "Modificar Empleado";
-                    cancelBtn.Text = "Cancelar Modificación";
-                    regUserBTN.Text = "Modificar Empleado";
+                    //lblTitle.Text = "Modificar Empleado";
+                    //cancelBtn.Text = "Cancelar Modificación";
+                    //regUserBTN.Text = "Modificar Empleado";
 
                     int id = int.Parse(Request.QueryString["id"].ToString());
                     try

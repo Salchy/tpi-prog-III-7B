@@ -8,7 +8,7 @@
     <div class="row">
         <div class ="col-2">
             <div class="mb-3">
-                <asp:Label Text="Campo" ID="lblCampo" runat="server" />
+                <asp:Label Text="Buscar por" runat="server" />
                 <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo">
                     <asp:ListItem Text="Ítem" />
                     <asp:ListItem Text="Categoria" />
@@ -18,8 +18,8 @@
         </div>
         <div class="col-4">
             <div class="mb-3">
-                <asp:Label Text="Filtro" runat="server" />
-                <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control"/>
+                <asp:Label Text="Palabra clave" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control" placeholder="Ingrese texto"/>
             </div>
         </div>
         <div class="col-2">
@@ -35,6 +35,12 @@
         <div class="col-2 d-flex align-items-end">
             <div class="mb-3 w-100">
                 <asp:Button Text="Buscar" runat="server" CssClass="btn btn-primary" ID="btnBuscar" OnClick="btnBuscar_Click"/>
+            </div>
+        </div>
+
+        <div class ="col-2 d-flex align-items-end">
+            <div class="mb-3 w-100">
+                <asp:Button Text="Reestablecer filtros" runat="server"  CssClass="btn btn-primary" ID="btnLimpiarFiltros" OnClick="btnLimpiarFiltros_Click"/>
             </div>
         </div>
     </div>

@@ -22,7 +22,7 @@ namespace AppWeb
                     dgvMenu.DataSource = menu.filtrar("Ítem","","Activo");
                     dgvMenu.DataBind();
 
-
+                   
                 }
                 catch (Exception ex)
                 {
@@ -98,11 +98,39 @@ namespace AppWeb
         {
             try
             {
-                menuItemDatos manager = new menuItemDatos();
-                dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedItem.ToString(),
-                  txtFiltroAvanzado.Text, ddlEstado.SelectedItem.ToString());
-                dgvMenu.DataBind();
+
+                if (ddlCampo.SelectedValue == "-- Seleccione --")
+                {
                     
+                } else
+                {
+                    menuItemDatos manager = new menuItemDatos();
+                    dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedValue,
+                      txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
+                    dgvMenu.DataBind();
+                }
+                
+                    
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        protected void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                menuItemDatos manager = new menuItemDatos();
+                txtFiltroAvanzado.Text = "";
+                ddlEstado.SelectedValue = "Activo";
+                ddlCampo.SelectedValue = "Ítem";
+
+                dgvMenu.DataSource = manager.filtrar("Ítem",
+                  txtFiltroAvanzado.Text, "Activo");
+                dgvMenu.DataBind();
             }
             catch (Exception)
             {
