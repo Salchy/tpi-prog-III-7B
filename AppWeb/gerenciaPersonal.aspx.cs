@@ -21,7 +21,7 @@ namespace AppWeb
             }
             reloadDataBind();
         }
-
+        
         protected void dataGridEmpleados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName != "Modify" && e.CommandName != "ToggleEstado" && e.CommandName != "RestorePassword")
