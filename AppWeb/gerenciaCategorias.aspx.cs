@@ -95,10 +95,10 @@ namespace AppWeb
 
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
 

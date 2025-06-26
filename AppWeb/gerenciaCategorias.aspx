@@ -16,7 +16,7 @@
         <div class="col-2">
             <div class="mb-3">
                 <asp:Label Text="Estado" runat="server" />
-                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlEstado">
+                <asp:DropDownList runat="server" CssClass="form-select" ID="ddlEstado">
                     <asp:ListItem Text="Activo" />
                     <asp:ListItem Text="Inactivo" />
                 </asp:DropDownList>

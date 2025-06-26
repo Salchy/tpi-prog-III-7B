@@ -9,7 +9,7 @@
         <div class ="col-2">
             <div class="mb-3">
                 <asp:Label Text="Buscar por" runat="server" />
-                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo">
+                <asp:DropDownList runat="server" CssClass="form-select" ID="ddlCampo">
                     <asp:ListItem Text="Ítem" />
                     <asp:ListItem Text="Categoria" />
                     <asp:ListItem Text="SubCategoria" />
@@ -25,7 +25,7 @@
         <div class="col-2">
             <div class="mb-3">
                 <asp:Label Text="Estado" runat="server" />
-                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlEstado">
+                <asp:DropDownList runat="server" CssClass="form-select" ID="ddlEstado">
                     <asp:ListItem Text="Activo" />
                     <asp:ListItem Text="Inactivo" />
                 </asp:DropDownList>

@@ -17,8 +17,9 @@ namespace AppWeb
             {
                 try
                 {
-                    SubCategoriaDatos subcate = new SubCategoriaDatos();
-                    dgvSubCate.DataSource = subcate.listarSubCategorias();
+                    SubCategoriaDatos manager = new SubCategoriaDatos();
+                    dgvSubCate.DataSource = manager.FiltrarSubCategorias("Nombre",
+                      "","Activo");
                     dgvSubCate.DataBind();
                 }
                 catch (Exception)
@@ -37,7 +38,8 @@ namespace AppWeb
             try
             {
                 SubCategoriaDatos manager = new SubCategoriaDatos();
-                dgvSubCate.DataSource = manager.listarSubCategorias();
+                dgvSubCate.DataSource = manager.FiltrarSubCategorias(ddlCampo.SelectedValue,
+                  txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
                 dgvSubCate.DataBind();
             }
             catch (Exception ex)
@@ -70,13 +72,55 @@ namespace AppWeb
 
                     manager.habilitarInhabilitarSubCategoria(id, sub.Estado);
 
-                    dgvSubCate.DataSource = manager.listarSubCategorias();
+                   
+                    dgvSubCate.DataSource = manager.FiltrarSubCategorias(ddlCampo.SelectedValue,
+                      txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
                     dgvSubCate.DataBind();
+
+                    
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
+            }
+        }
+
+        protected void btnBuscarSubCategorias_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                SubCategoriaDatos manager = new SubCategoriaDatos();
+                dgvSubCate.DataSource = manager.FiltrarSubCategorias(ddlCampo.SelectedValue,
+                  txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
+                dgvSubCate.DataBind();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        protected void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SubCategoriaDatos manager = new SubCategoriaDatos();
+                txtFiltroAvanzado.Text = "";
+                ddlEstado.SelectedValue = "Activo";
+
+
+                dgvSubCate.DataSource = manager.FiltrarSubCategorias("Nombre",txtFiltroAvanzado.Text, "Activo");
+                dgvSubCate.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }

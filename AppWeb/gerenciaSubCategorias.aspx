@@ -6,6 +6,50 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <div class="row">
+
+        <div class ="col-2">
+            <div class="mb-3">
+                <asp:Label Text="Buscar por" runat="server" />
+                <asp:DropDownList runat="server" CssClass="form-select" ID="ddlCampo">
+                    <asp:ListItem Text="Nombre" />
+                    <asp:ListItem Text="Categoria asociada" />
+                </asp:DropDownList>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="mb-3">
+                <asp:Label Text="Palabra clave" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control" placeholder="Ingrese texto" />
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="mb-3">
+                <asp:Label Text="Estado" runat="server" />
+                <asp:DropDownList runat="server" CssClass="form-select" ID="ddlEstado">
+                    <asp:ListItem Text="Activo" />
+                    <asp:ListItem Text="Inactivo" />
+                </asp:DropDownList>
+            </div>
+        </div>
+
+
+        <div class="col-2 d-flex align-items-end">
+            <div class="mb-3 w-100">
+                <asp:Button Text="Buscar" runat="server" CssClass="btn btn-primary" ID="btnBuscarSubCategorias" OnClick="btnBuscarSubCategorias_Click"/>
+            </div>
+        </div>
+
+        <div class="col-2 d-flex align-items-end">
+            <div class="mb-3 w-100">
+                <asp:Button Text="Reestablecer filtros" runat="server" CssClass="btn btn-primary" ID="btnLimpiarFiltros" OnClick="btnLimpiarFiltros_Click"/>
+            </div>
+
+        </div>
+    </div>
+
     <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table table-dark table-striped" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging" OnRowCommand="dgvSubCate_RowCommand" >
       <Columns>
             <asp:BoundField HeaderText="Nombre" DataField ="Nombre" />

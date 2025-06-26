@@ -45,6 +45,58 @@ namespace negocio
                 database.closeConnection();
             }
         }
+
+        public List<SubCategoria> FiltrarSubCategorias(string campo, string filtro, string estado)
+        {
+            List<SubCategoria> SubCategoriasFiltradas = new List<SubCategoria>();
+            database = new Database();
+            try
+            {
+                string consulta = "SELECT S.idSubCategoria, S.nombreSubCategoria, S.idCategoriaPrincipal, C.Nombre_Categoria, S.Estado FROM SubCategoriaMenu AS S INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria ";
+
+                if (campo == "Nombre")
+                {
+                    consulta += "WHERE S.nombreSubCategoria like '" + filtro + "%' ";
+
+
+                }
+                else if (campo == "Categoria asociada")
+                {
+                    consulta += "WHERE C.Nombre_Categoria like '" + filtro + "%' ";
+                }
+
+                if (estado == "Activo")
+                    consulta += " and S.Estado = 1";
+                else if (estado == "Inactivo")
+                    consulta += " and S.Estado = 0";
+
+
+                consulta += "ORDER BY S.NombreSubCategoria ASC";
+
+                database.setQuery(consulta);
+                database.execQuery();
+                while (database.Reader.Read())
+                {
+                    SubCategoria subCate = new SubCategoria(
+                        Convert.ToInt32(database.Reader["idSubCategoria"]),
+                        database.Reader["nombreSubCategoria"].ToString(),
+                        Convert.ToInt32(database.Reader["idCategoriaPrincipal"])
+                    );
+
+                    subCate.NombreCategoriaPadre = database.Reader["Nombre_Categoria"].ToString();
+                    subCate.Estado = (bool)database.Reader["Estado"];
+
+
+                    SubCategoriasFiltradas.Add(subCate);
+                }
+                return SubCategoriasFiltradas;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public SubCategoria GetSubCategoria(int id)
         {
             try
