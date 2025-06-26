@@ -33,14 +33,10 @@
             <div class="col-3">
                 <div class="mb-3">
                  
-                    <asp:TextBox runat="server" ID="txtMenu" CssClass="form-control" placeholder="Menu" />
+                    <asp:TextBox runat="server" ID="txtMenu" CssClass="form-control" placeholder="Menu" OnTextChanged="txtMenu_TextChanged" AutoPostBack="true"/>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <asp:Button Text="Buscar" runat="server" CssClass="btn btn-primary" id="Button1" />
-                </div>
-            </div>
+           
         </div>
         
      

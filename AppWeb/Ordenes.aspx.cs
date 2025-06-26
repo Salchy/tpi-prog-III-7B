@@ -99,7 +99,10 @@ namespace AppWeb
 
                 menuItemDatos submenu = new menuItemDatos();
                 int id = int.Parse(ddlSubCategoria.SelectedValue);
-                dgvMenu.DataSource = submenu.listarSubMenu(id);
+                Session.Add("Submenu", submenu.listarSubMenu(id));
+                dgvMenu.DataSource = Session["Submenu"];
+
+
                 dgvMenu.DataBind();
 
             }
@@ -159,10 +162,13 @@ namespace AppWeb
             }
         }
 
+        protected void txtMenu_TextChanged(object sender, EventArgs e)
+        {
+            List<dominio.MenuItem> submenu = (List<dominio.MenuItem>) Session["Submenu"];
 
-
-
-
-
+            List<dominio.MenuItem> MenuBuscado =submenu.FindAll(x=> x.Nombre.ToUpper().Contains(txtMenu.Text.ToUpper()));   
+            dgvMenu.DataSource = MenuBuscado;
+            dgvMenu.DataBind(); 
+        }
     }
 }
