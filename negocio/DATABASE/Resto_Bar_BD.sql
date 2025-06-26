@@ -1,4 +1,5 @@
 CREATE DATABASE RestoBar
+COLLATE Latin1_General_CI_AI
 GO
 USE RestoBar
 GO
