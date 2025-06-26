@@ -7,7 +7,7 @@
 
     <h1>Carga de Ordenes</h1>
 
-    <div class="=row">   /////
+    <div class="=row">   
     <div class="col">   
         <h2>Mesa</h2>
         <asp:DropDownList ID="ddlMesaActiva" runat="server"  OnSelectedIndexChanged="ddlMesaActiva_SelectedIndexChanged" AutoPostBack="true" class="btn btn-secondary dropdown-toggle" >
@@ -32,52 +32,52 @@
             </div>
             <div class="col-3">
                 <div class="mb-3">
-                 
-                    <asp:TextBox runat="server" ID="txtMenu" CssClass="form-control" placeholder="Menu" OnTextChanged="txtMenu_TextChanged" AutoPostBack="true"/>
+                          <asp:TextBox runat="server" ID="txtMenu" CssClass="form-control" placeholder="Menu" OnTextChanged="txtMenu_TextChanged" AutoPostBack="true"/>
                 </div>
             </div>
            
         </div>
-        
-     
-             
-             
-
-  
 
 <asp:GridView ID="dgvMenu" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvMenu_SelectedIndexChanged" DataKeyNames="IdMenuItem">
     <Columns>
-     <asp:BoundField HeaderText="Menu" DataField="Nombre" />
-    <asp:BoundField HeaderText="Precio" DataField="Precio" />
-    <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
-        
-    <asp:CommandField  ShowSelectButton="true" ButtonType="Button" SelectText="Seleccionar"/>
-        
-</Columns>
-
+        <asp:BoundField HeaderText="Menu" DataField="Nombre" />
+        <asp:BoundField HeaderText="Precio" DataField="Precio" />
+        <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+        <asp:CommandField  ShowSelectButton="true" ButtonType="Button" SelectText="Seleccionar"/>
+    </Columns>
 </asp:GridView>
-            </div>
-            <div class="row">
+
             <h2>Orden a agregar</h2> 
-            <div class="col-3">
-                <div class="mb-3">
-                    <<label for="lblMenu" class="visually-hidden">Menu</label>
-      <asp:TextBox ID="txtMenuSelecionado" runat="server" CssClass="form-control-plaintext"  ReadOnly="true"></asp:TextBox>
+  <div class="row">
+     <div class="col-3">
+      <div class="mb-3">
+          <asp:Label Text= "Menu" runat="server" ID="lblMenu"></asp:Label>
+       
+       </div>
+    </div>
+  </div>
+                </ContentTemplate>
+
+</asp:UpdatePanel>
+
+          </div>
+            
+            <div class="row">
+                
+                <div class="col-1">
+                 <div class="mb-3">
+                    <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" placeholder="Cantidad" ReadOnly="false" AutoPostBack="true"></asp:TextBox>
+                 </div>
                 </div>
-            </div>
-            <div class="col-3">
+               <div class="col-3">
                 <div class="mb-3">
-                 
-                    <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" placeholder="Cantidad" ReadOnly="false"></asp:TextBox>
+                    <asp:Button Text="Agregar Orden" runat="server" CssClass="btn btn-primary" Id="btnAgregarOrden" OnClick="btnAgregarOrden_Click" />
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="mb-3">
-                    <asp:Button Text="Agregar a Pedido" runat="server" CssClass="btn btn-primary" id="Button2" />
-                </div>
-            </div>
-        </div>
+               </div>
              </div>
+          </div>
+
+
          <h2>Ordenes del Pedido</h2>  
             
      <asp:GridView ID="dgvOrdenes" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" >
@@ -91,11 +91,7 @@
 
  
      </asp:GridView>
-        </ContentTemplate>
-
-   
-
-    </asp:UpdatePanel>
+        
     
    
     <asp:Button Text="Enviar orden" CssClass="btn btn-primary btn-sm" ID="btnEnviar" OnClick="btnEnviar_Click" runat="server" />

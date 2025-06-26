@@ -113,30 +113,20 @@ namespace AppWeb
             }
         }
 
+        protected void txtMenu_TextChanged(object sender, EventArgs e)
+        {
+            List<dominio.MenuItem> submenu = (List<dominio.MenuItem>)Session["Submenu"];
+
+            List<dominio.MenuItem> MenuBuscado = submenu.FindAll(x => x.Nombre.ToUpper().Contains(txtMenu.Text.ToUpper()));
+            dgvMenu.DataSource = MenuBuscado;
+            dgvMenu.DataBind();
+        }
+
         protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
             menuItemDatos menu = new menuItemDatos();
-            OrdenDatos orden = new OrdenDatos();
-            PedidoDatos nuevo = new PedidoDatos();
-            Orden orden1 = new Orden();
-
-            orden1.Menu = menu.GetItem(int.Parse(dgvMenu.SelectedDataKey.Value.ToString()));
-            orden1.Estado = true;
-            orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(int.Parse(ddlMesaActiva.SelectedValue)));
-
-
-            orden1.Cantidad = 99;//tomarlo de la textbox
-
-            orden.AgregarOrden(orden1);
-
-
-
-            //((List<Orden>)Session["OrdenesTomadas"].Add(orden1);  
-            //dgvOrdenes.DataSource= ((List<Orden>)Session["OrdenesTomadas"]).FindAll(x => x.Pedido.Id == orden1.Pedido.Id);
-
-            dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
-            dgvOrdenes.DataBind();
-
+            dominio.MenuItem item = menu.GetItem(int.Parse(dgvMenu.SelectedDataKey.Value.ToString()));
+            lblMenu.Text = item.Nombre;
         }
 
         protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
@@ -162,13 +152,30 @@ namespace AppWeb
             }
         }
 
-        protected void txtMenu_TextChanged(object sender, EventArgs e)
-        {
-            List<dominio.MenuItem> submenu = (List<dominio.MenuItem>) Session["Submenu"];
+        
 
-            List<dominio.MenuItem> MenuBuscado =submenu.FindAll(x=> x.Nombre.ToUpper().Contains(txtMenu.Text.ToUpper()));   
-            dgvMenu.DataSource = MenuBuscado;
-            dgvMenu.DataBind(); 
+        protected void btnAgregarOrden_Click(object sender, EventArgs e)
+        {
+            menuItemDatos menu = new menuItemDatos();
+            OrdenDatos orden = new OrdenDatos();
+            PedidoDatos nuevo = new PedidoDatos();
+            Orden orden1 = new Orden();
+
+            orden1.Menu = menu.GetItem(int.Parse(dgvMenu.SelectedDataKey.Value.ToString()));
+            orden1.Estado = true;
+            orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(int.Parse(ddlMesaActiva.SelectedValue)));
+
+
+            orden1.Cantidad = 99;//tomarlo de la textbox
+
+            orden.AgregarOrden(orden1);
+
+
+
+            //((List<Orden>)Session["OrdenesTomadas"].Add(orden1);  
+            //dgvOrdenes.DataSource= ((List<Orden>)Session["OrdenesTomadas"]).FindAll(x => x.Pedido.Id == orden1.Pedido.Id);
+            dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
+            dgvOrdenes.DataBind();
         }
     }
 }

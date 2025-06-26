@@ -78,13 +78,13 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.GridView dgvMenu;
 
         /// <summary>
-        /// Control txtMenuSelecionado.
+        /// Control lblMenu.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMenuSelecionado;
+        protected global::System.Web.UI.WebControls.Label lblMenu;
 
         /// <summary>
         /// Control txtCantidad.
@@ -96,13 +96,13 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.TextBox txtCantidad;
 
         /// <summary>
-        /// Control Button2.
+        /// Control btnAgregarOrden.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnAgregarOrden;
 
         /// <summary>
         /// Control dgvOrdenes.
