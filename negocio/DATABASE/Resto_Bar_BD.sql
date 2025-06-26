@@ -1,5 +1,5 @@
 CREATE DATABASE RestoBar
-COLLATE Latin1_General_CI_AI
+COLLATE Latin1_General_CI_AI;
 GO
 USE RestoBar
 GO
@@ -126,6 +126,7 @@ BEGIN
 	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria
 	ORDER BY CM.Nombre_Categoria ASC, SCM.NombreSubCategoria ASC, M.Nombre_Menu ASC;
 END
+GO
 
 CREATE PROCEDURE SP_GetMenuItemsFromCategory(
 	@idCategoriaPrincipal INT
@@ -148,6 +149,7 @@ BEGIN
 	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
 	ORDER BY S.NombreSubCategoria ASC;
 END
+GO
 
 CREATE PROCEDURE SP_CrearUsuario(
 	@dni varchar(10),
@@ -160,6 +162,7 @@ AS
 BEGIN
 	INSERT INTO Usuarios (DNI, Nombre, Apellido, Contraseña, Permisos) OUTPUT inserted.id_Usuario VALUES (@dni, @nombre, @apellido, @contraseña, @permisos)
 END
+GO
 
 CREATE PROCEDURE SP_ModificarUsuario
 	@id tinyint,
@@ -170,6 +173,7 @@ AS
 BEGIN
 	UPDATE Usuarios SET Nombre = @nombre, Apellido = @apellido, Permisos = @permisos WHERE id_Usuario = @id;
 END
+GO
 
 CREATE PROCEDURE SP_ActivarDesactivarUsuario(
 	@id int,
@@ -179,6 +183,7 @@ AS
 BEGIN
 	UPDATE Usuarios SET Estado = @state WHERE id_Usuario = @id;
 END
+GO
 
 CREATE PROCEDURE SP_SetPassword(
 	@id int,
@@ -188,6 +193,7 @@ AS
 BEGIN
 	UPDATE Usuarios SET Contraseña = @password WHERE id_Usuario = @id;
 END
+GO
 
 CREATE PROCEDURE SP_ActivarDesactivarMesa(
 	@idMesa tinyint,
@@ -197,6 +203,7 @@ AS
 BEGIN
 	UPDATE Mesas SET Estado = @state WHERE id_Mesa = @idMesa;
 END
+GO
 
 CREATE PROCEDURE SP_CrearMesa(
 	@nombreMesa varchar(30),
@@ -206,6 +213,4 @@ AS
 BEGIN
 	INSERT INTO Mesas (numeroMesa, id_Usuario) VALUES (@nombreMesa, @idMeseroAsignado);
 END
-
-
-SELECT * FROM Mesas;
+GO
