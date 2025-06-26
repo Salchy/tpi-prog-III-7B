@@ -11,15 +11,18 @@ namespace negocio
     public class PedidoDatos
     {
         Database database;
-        public void CrearPedido(int id)
+        public int CrearPedido(int id)
         {
             database = new Database();
+            
 
             try
             {
-                database.setQuery("INSERT INTO Pedidos (id_Mesa,Estado,Importe) VALUES (@mesa,1,-1)");
+                database.setQuery("INSERT INTO Pedidos (id_Mesa,Estado,Importe) OUTPUT inserted.id_Pedido VALUES (@mesa,1,0)");
                 database.setParameter("@mesa", id);
                 database.execNonQuery();
+                int idPedido = database.execScalar();
+                return idPedido;
             }
             catch (Exception ex)
             {
@@ -40,16 +43,18 @@ namespace negocio
             database = new Database();
             try
             {
-                database.setQuery("SELECT id_Pedido FROM Pedidos WHERE id_Mesa= @id and Estado=1 and Importe=-1");
+                database.setQuery("SELECT id_Pedido FROM Pedidos WHERE id_Mesa= @id and Estado=1 and Importe=0");
                 database.setParameter("@id", id);
                 database.execQuery();
 
                 if (!database.Reader.Read())
                 {
                     return aux;
+                    
                 }
                 aux = (int)database.Reader["id_Pedido"];
                 return aux;
+                
             }
             catch (Exception ex)
             {

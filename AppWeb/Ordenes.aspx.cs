@@ -34,7 +34,7 @@ namespace AppWeb
                     ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
 
                     ddlMesaActiva.DataSource = ((List<Mesa>)Session["MesasAsignadas"]);
-                    ddlMesaActiva.DataTextField = "numeroMesa";
+                    ddlMesaActiva.DataTextField = "NumeroMesa";
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
@@ -75,7 +75,7 @@ namespace AppWeb
                 if (IsPostBack)
                 {
 
-                    int id = int.Parse(ddlCategoria.SelectedValue);
+                    int id = Convert.ToInt32(ddlCategoria.SelectedValue);
                     ddlSubCategoria.DataSource = ((List<SubCategoria>)Session["ListaSubcategorias"]).FindAll(x => x.IdCategoriaPadre == id);
                     ddlSubCategoria.DataTextField = "Nombre";
                     ddlSubCategoria.DataValueField = "id";
@@ -98,7 +98,7 @@ namespace AppWeb
             {
 
                 menuItemDatos submenu = new menuItemDatos();
-                int id = int.Parse(ddlSubCategoria.SelectedValue);
+                int id = Convert.ToInt32(ddlSubCategoria.SelectedValue);
                 Session.Add("Submenu", submenu.listarSubMenu(id));
                 dgvMenu.DataSource = Session["Submenu"];
 
@@ -124,18 +124,30 @@ namespace AppWeb
 
         protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            menuItemDatos menu = new menuItemDatos();
-            dominio.MenuItem item = menu.GetItem(int.Parse(dgvMenu.SelectedDataKey.Value.ToString()));
-            lblMenu.Text = item.Nombre;
+           
+            try
+            {
+
+                menuItemDatos menu = new menuItemDatos();
+                dominio.MenuItem item = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
+                lblMenu.Text = item.Nombre;
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
-        protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)//salta error por conexion abierta cuando quiero cambiar de mesa
         {
 
             try
             {
 
-                int id = int.Parse(ddlMesaActiva.SelectedValue);
+                int id = Convert.ToInt32(ddlMesaActiva.SelectedValue);
                 PedidoDatos nuevo = new PedidoDatos();
                 if (nuevo.getIdPedidoMesaAbierta(id) == 0)
                 {
@@ -161,21 +173,35 @@ namespace AppWeb
             PedidoDatos nuevo = new PedidoDatos();
             Orden orden1 = new Orden();
 
-            orden1.Menu = menu.GetItem(int.Parse(dgvMenu.SelectedDataKey.Value.ToString()));
-            orden1.Estado = true;
-            orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(int.Parse(ddlMesaActiva.SelectedValue)));
+            
 
 
-            orden1.Cantidad = 99;//tomarlo de la textbox
+            try
+            {
 
-            orden.AgregarOrden(orden1);
+                orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
+                orden1.Estado = true;
+                orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
+
+
+                orden1.Cantidad = int.Parse(txtCantidad.Text);//tomarlo de la textbox debe ser menos a 800
+
+                orden.AgregarOrden(orden1);
 
 
 
-            //((List<Orden>)Session["OrdenesTomadas"].Add(orden1);  
-            //dgvOrdenes.DataSource= ((List<Orden>)Session["OrdenesTomadas"]).FindAll(x => x.Pedido.Id == orden1.Pedido.Id);
-            dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
-            dgvOrdenes.DataBind();
+                //((List<Orden>)Session["OrdenesTomadas"].Add(orden1);  
+                //dgvOrdenes.DataSource= ((List<Orden>)Session["OrdenesTomadas"]).FindAll(x => x.Pedido.Id == orden1.Pedido.Id);
+                dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
+                dgvOrdenes.DataBind();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }
