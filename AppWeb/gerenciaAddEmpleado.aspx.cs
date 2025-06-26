@@ -69,7 +69,7 @@ namespace AppWeb
                     if (userDB.modificarUsuario(usuario))
                     {
                         // Notificar que se modificó correctamente
-                        Response.Redirect("gerenciaPersonal.aspx", true);
+                        Response.Redirect("gerenciaPersonal.aspx", false);
                     }
                 }
                 catch (Exception ex)
@@ -84,7 +84,7 @@ namespace AppWeb
                 {
                     registrarUsuario(userName, userSurName, userDNI);
                     // Notificiar que el usuario se agregó correctamente
-                    Response.Redirect("gerenciaPersonal.aspx", true);
+                    Response.Redirect("gerenciaPersonal.aspx", false);
                 }
                 catch (Exception ex)
                 {
@@ -166,7 +166,7 @@ namespace AppWeb
 
         protected void cancelRegistrarUsuario(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaPersonal.aspx", true);
+            Response.Redirect("gerenciaPersonal.aspx");
         }
 
         // todo: Hacer un método para mostrar mensajes de notificaciones

@@ -90,5 +90,5 @@
 
    
 
-    <asp:Button Text="AGREGAR" ID="btnAgregar" runat="server" CssClass="btn btn-primary" OnClick="btnAgregar_Click" />
+    <asp:Button Text="AGREGAR" ID="btnAgregar" runat="server" CssClass="btn btn-success" OnClick="btnAgregar_Click" />
 </asp:Content>

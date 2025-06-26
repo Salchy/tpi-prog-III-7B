@@ -14,7 +14,18 @@ namespace AppWeb
         UsuarioDatos UserDB = new UsuarioDatos();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Usuario"] != null)
+            {
+                Usuario user = (Usuario)Session["Usuario"];
+                if (user.NivelUsuario == 0 || user.NivelUsuario == 1)
+                {
+                    Response.Redirect("Gerencia.aspx");
+                }
+                else if (user.NivelUsuario == 2)
+                {
+                    Response.Redirect("Mesero.aspx");
+                }
+            }
         }
 
         protected void Button1_Click(object sender, EventArgs e)

@@ -39,10 +39,26 @@ namespace AppWeb
 
         protected void dgvMesas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int idMesa = Convert.ToInt32(e.CommandArgument);
             if (e.CommandName == "management")
             {
-                int idMesa = Convert.ToInt32(e.CommandArgument);
                 Response.Redirect("gerenciaAdministrarMesa.aspx?id=" + idMesa, false);
+            }
+            else if (e.CommandName == "ToggleEstado")
+            {
+                try
+                {
+                    Mesa mesa = mesaDatos.getMesa(idMesa);
+                    mesa.Habilitado = !mesa.Habilitado;
+
+                    mesaDatos.enableDisableMesa(idMesa, mesa.Habilitado);
+                    reloadDataBind();
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al cambiar el estado del usuario: " + ex.ToString());
+                    Response.Redirect("Error.aspx", false);
+                }
             }
         }
 
@@ -65,6 +81,11 @@ namespace AppWeb
                     }
                 }
             }
+        }
+
+        protected void btnAgregarMesa_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("gerenciaAdministrarMesa.aspx", false);
         }
     }
 }

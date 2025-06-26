@@ -118,42 +118,47 @@ GO
 
 CREATE PROCEDURE SP_GetAllMenu
 AS
+BEGIN
 	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio, M.Stock ,CM.Nombre_Categoria, CM.id_Categoria, SCM.NombreSubCategoria, M.idSubCategoria, M.Estado
 	FROM Menu AS M
 	INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
 	INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria
 	ORDER BY CM.Nombre_Categoria ASC, SCM.NombreSubCategoria ASC, M.Nombre_Menu ASC;
-GO
+END
 
 CREATE PROCEDURE SP_GetMenuItemsFromCategory(
 	@idCategoriaPrincipal INT
 )
 AS
+BEGIN
 	SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio,M.Stock, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria, M.Estado
 	FROM Menu AS M
 	INNER JOIN SubCategoriaMenu AS S ON M.idSubCategoria = S.idSubCategoria
 	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
 	WHERE M.idSubCategoria = @idCategoriaPrincipal
 	ORDER BY S.NombreSubCategoria ASC;
-GO
+END
 
 CREATE PROCEDURE SP_GetCategories
 AS
+BEGIN
 	SELECT S.idSubCategoria, S.nombreSubCategoria, S.idCategoriaPrincipal, C.Nombre_Categoria, S.Estado
 	FROM SubCategoriaMenu AS S
 	INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria
 	ORDER BY S.NombreSubCategoria ASC;
-GO
+END
 
-CREATE PROCEDURE SP_CrearUsuario
+CREATE PROCEDURE SP_CrearUsuario(
 	@dni varchar(10),
 	@nombre varchar(30),
 	@apellido varchar(30),
 	@contraseña char(64),
 	@permisos int
+)
 AS
+BEGIN
 	INSERT INTO Usuarios (DNI, Nombre, Apellido, Contraseña, Permisos) OUTPUT inserted.id_Usuario VALUES (@dni, @nombre, @apellido, @contraseña, @permisos)
-GO
+END
 
 CREATE PROCEDURE SP_ModificarUsuario
 	@id tinyint,
@@ -161,19 +166,45 @@ CREATE PROCEDURE SP_ModificarUsuario
 	@apellido varchar(30),
 	@permisos int
 AS
+BEGIN
 	UPDATE Usuarios SET Nombre = @nombre, Apellido = @apellido, Permisos = @permisos WHERE id_Usuario = @id;
-GO
+END
 
-CREATE PROCEDURE SP_ActivarDesactivarUsuario
+CREATE PROCEDURE SP_ActivarDesactivarUsuario(
 	@id int,
-	@state bit
+	@state biT
+)
 AS
+BEGIN
 	UPDATE Usuarios SET Estado = @state WHERE id_Usuario = @id;
-GO
+END
 
-CREATE PROCEDURE SP_SetPassword
+CREATE PROCEDURE SP_SetPassword(
 	@id int,
 	@password char(64)
+)
 AS
+BEGIN
 	UPDATE Usuarios SET Contraseña = @password WHERE id_Usuario = @id;
-GO
+END
+
+CREATE PROCEDURE SP_ActivarDesactivarMesa(
+	@idMesa tinyint,
+	@state bit
+)
+AS
+BEGIN
+	UPDATE Mesas SET Estado = @state WHERE id_Mesa = @idMesa;
+END
+
+CREATE PROCEDURE SP_CrearMesa(
+	@nombreMesa varchar(30),
+	@idMeseroAsignado tinyint
+)
+AS
+BEGIN
+	INSERT INTO Mesas (numeroMesa, id_Usuario) VALUES (@nombreMesa, @idMeseroAsignado);
+END
+
+
+SELECT * FROM Mesas;

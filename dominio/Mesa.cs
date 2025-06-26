@@ -17,13 +17,13 @@ namespace dominio
         public int NumeroComensales { get; set; }
         public Usuario MeseroAsignado { get; set; }
         public bool Habilitado { get; set; } // Bool que controla que la mesa esté habilitada al publico o no
-        public Mesa(int idMesa, string numeroMesa, int numeroComensales, Usuario meseroAsignado)
+        public Mesa(int idMesa, string numeroMesa, int numeroComensales, Usuario meseroAsignado, bool habilitado)
         {
             IdMesa = idMesa;
             NumeroMesa = numeroMesa;
             NumeroComensales = numeroComensales;
             MeseroAsignado = meseroAsignado;
-            Habilitado = true;
+            Habilitado = habilitado;
         }
     }
 }

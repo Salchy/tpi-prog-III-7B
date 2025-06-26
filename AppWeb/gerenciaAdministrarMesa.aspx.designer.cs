@@ -15,6 +15,15 @@ namespace AppWeb
     {
 
         /// <summary>
+        /// Control lblTitle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+
+        /// <summary>
         /// Control txtNombreMesa.
         /// </summary>
         /// <remarks>
@@ -42,12 +51,12 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.Button btnCancel;
 
         /// <summary>
-        /// Control btnAcceptModify.
+        /// Control btnAccept.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAcceptModify;
+        protected global::System.Web.UI.WebControls.Button btnAccept;
     }
 }

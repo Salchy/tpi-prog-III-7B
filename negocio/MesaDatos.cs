@@ -26,9 +26,9 @@ namespace negocio
                 Convert.ToInt32(data["id_Mesa"]),
                 data["numeroMesa"].ToString(),
                 Convert.ToInt32(data["Numero_Comensales"]),
-                meseroAsignado
+                meseroAsignado,
+                Convert.ToBoolean(data["Estado"])
             );
-
             return mesa;
         }
 
@@ -44,12 +44,16 @@ namespace negocio
                 while (database.Reader.Read())
                 {
                     Mesa aux = setMesaData(database.Reader);
+                    if (!aux.Habilitado)
+                    {
+                        // Excluye la mesa con estado deshabilitado
+                        continue;
+                    }
                     Asignadas.Add(aux);
                 }
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -57,7 +61,6 @@ namespace negocio
                 database.closeConnection();
             }
             return Asignadas;
-
         }
         public List<Mesa> getMesas()
         {
@@ -77,7 +80,6 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -85,7 +87,6 @@ namespace negocio
                 database.closeConnection();
             }
             return Mesas;
-
         }
         public Mesa getMesa(int id)
         {
@@ -102,11 +103,49 @@ namespace negocio
                 }
                 aux = setMesaData(database.Reader);
                 return aux;
-
             }
             catch (Exception ex)
             {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
 
+        public bool enableDisableMesa(int idMesa, bool state)
+        {
+            try
+            { // Quizá haga falta una condición para que no se pueda deshabilitar una mesa que está siendo utilizada (comensales > 0)
+                database.setProcedure("SP_ActivarDesactivarMesa");
+                database.setParameter("@idMesa", idMesa);
+                database.setParameter("@state", state);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
+        public bool crearMesa(string nombreMesa, int idMeseroAsignado)
+        {
+            try
+            {
+                database.setProcedure("SP_CrearMesa");
+                database.setParameter("@nombreMesa", nombreMesa);
+                database.setParameter("@idMeseroAsignado", idMeseroAsignado);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally

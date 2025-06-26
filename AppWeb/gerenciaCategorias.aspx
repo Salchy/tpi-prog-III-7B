@@ -6,11 +6,9 @@
 
     <asp:GridView ID="dgvCategorias" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvCategorias_PageIndexChanging" DataKeyNames="Id">
         <Columns>
-
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
             <%--<asp:CommandField HeaderText ="Detalles" ShowSelectButton="true" SelectText="🔍 Ver detalles" />--%>
 
-            
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:Button ID="btnEditar" runat="server" Text="Editar"
@@ -20,10 +18,8 @@
                 </ItemTemplate>
             </asp:TemplateField>
 
-           <asp:TemplateField>
+            <asp:TemplateField>
                 <ItemTemplate>
-                
-
                     <asp:Button ID="btnDeshabilitar" runat="server" Text="Deshabilitar"
                         CommandName="Estado"
                         CommandArgument='<%# Eval("Id") %>'
@@ -42,5 +38,5 @@
         </Columns>
     </asp:GridView>
 
-    <asp:Button ID="btnAgregarCate" runat="server" Text="Agregar" OnClick="btnAgregarCate_Click" />
+    <asp:Button ID="btnAgregarCate" runat="server" Text="AGREGAR" CssClass="btn btn-success" OnClick="btnAgregarCate_Click" />
 </asp:Content>
