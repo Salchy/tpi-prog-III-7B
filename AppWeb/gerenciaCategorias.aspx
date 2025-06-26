@@ -4,6 +4,42 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+
+    <div class="row">
+        <div class="col-4">
+            <div class="mb-3">
+                <asp:Label Text="Palabra clave" runat="server" />
+                <asp:TextBox runat="server" ID="txtFiltroAvanzado" CssClass="form-control" placeholder="Ingrese texto" />
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="mb-3">
+                <asp:Label Text="Estado" runat="server" />
+                <asp:DropDownList runat="server" CssClass="form-control" ID="ddlEstado">
+                    <asp:ListItem Text="Activo" />
+                    <asp:ListItem Text="Inactivo" />
+                </asp:DropDownList>
+            </div>
+        </div>
+
+
+        <div class="col-2 d-flex align-items-end">
+            <div class="mb-3 w-100">
+                <asp:Button Text="Buscar" runat="server" CssClass="btn btn-primary" ID="btnBuscarCategorias" OnClick="btnBuscarCategorias_Click"/>
+            </div>
+        </div>
+
+        <div class="col-2 d-flex align-items-end">
+            <div class="mb-3 w-100">
+                <asp:Button Text="Reestablecer filtros" runat="server" CssClass="btn btn-primary" ID="btnLimpiarFiltros" OnClick="btnLimpiarFiltros_Click"/>
+            </div>
+
+        </div>
+    </div>
+
+
+
     <asp:GridView ID="dgvCategorias" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" Height="100%" OnRowCommand="dgvCategorias_RowCommand" AllowPaging="true" PageSize="10" OnPageIndexChanging="dgvCategorias_PageIndexChanging" DataKeyNames="Id">
         <Columns>
             <asp:BoundField HeaderText="Nombre" DataField="Nombre" />

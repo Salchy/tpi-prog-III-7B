@@ -48,7 +48,7 @@ namespace AppWeb
 
         protected void btnVolverSubCate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaSubCategorias.aspx");
+            Response.Redirect("gerenciaSubCategorias.aspx",false);
         }
 
         protected void btnAceptarSubCate_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace AppWeb
                 {
                     manager.Agregar(nuevo);
                 }
-                Response.Redirect("gerenciaSubCategorias.aspx");
+                Response.Redirect("gerenciaSubCategorias.aspx",false);
             }
             catch (Exception ex)
             {

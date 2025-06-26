@@ -55,7 +55,7 @@ namespace AppWeb
                 {
                     manager.Agregar(nuevo);
                 }
-                Response.Redirect("gerenciaCategorias.aspx");
+                Response.Redirect("gerenciaCategorias.aspx",false);
             }
             catch (Exception ex)
             {
@@ -67,7 +67,7 @@ namespace AppWeb
 
         protected void btnVolverCate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaCategorias.aspx");
+            Response.Redirect("gerenciaCategorias.aspx",false);
         }
     }
 }

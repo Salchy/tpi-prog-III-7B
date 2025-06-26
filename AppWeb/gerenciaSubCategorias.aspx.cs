@@ -49,7 +49,7 @@ namespace AppWeb
 
         protected void btnAgregarSub_Click(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaAddSubCategoria.aspx");
+            Response.Redirect("gerenciaAddSubCategoria.aspx",false);
         }
 
         protected void dgvSubCate_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -58,7 +58,7 @@ namespace AppWeb
 
             if (e.CommandName == "Editar")
             {
-                Response.Redirect("gerenciaAddSubCategoria.aspx?id=" + id);
+                Response.Redirect("gerenciaAddSubCategoria.aspx?id=" + id,false);
             }
             else if (e.CommandName == "Estado")
             {
