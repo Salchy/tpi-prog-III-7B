@@ -60,21 +60,29 @@ namespace AppWeb
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
+            try
+            {
+                int idCategoriaPadre = int.Parse(ddlCategoria.SelectedValue);
 
-            int idCategoriaPadre = int.Parse(ddlCategoria.SelectedValue);
+                SubCategoriaDatos datos = new SubCategoriaDatos();
 
-            SubCategoriaDatos datos = new SubCategoriaDatos();
+                List<SubCategoria> todas = datos.listarSubCategorias();
 
-            List<SubCategoria> todas = datos.listarSubCategorias();
+                List<SubCategoria> filtradas = todas.Where(x => x.Estado == true && x.IdCategoriaPadre == idCategoriaPadre).ToList();
 
-            List<SubCategoria> filtradas = todas.Where(x => x.Estado == true && x.IdCategoriaPadre == idCategoriaPadre).ToList();
+                ddlSubcategoria.DataSource = filtradas;
+                ddlSubcategoria.DataTextField = "Nombre";
+                ddlSubcategoria.DataValueField = "Id";
+                ddlSubcategoria.DataBind();
 
-            ddlSubcategoria.DataSource = filtradas;
-            ddlSubcategoria.DataTextField = "Nombre";
-            ddlSubcategoria.DataValueField = "Id";
-            ddlSubcategoria.DataBind();
+                ddlSubcategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+            }
+            catch (Exception ex)
+            {
 
-            ddlSubcategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+                throw ex;
+            }
+            
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)

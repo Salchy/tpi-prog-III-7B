@@ -39,5 +39,5 @@
       </Columns>
     </asp:GridView>
 
-    <asp:Button Text="AGREGAR" ID="btnAgregarSub" runat="server" OnClick="btnAgregarSub_Click" />
+    <asp:Button Text="AGREGAR" ID="btnAgregarSub" runat="server" OnClick="btnAgregarSub_Click"  CssClass="btn btn-primary"/>
 </asp:Content>

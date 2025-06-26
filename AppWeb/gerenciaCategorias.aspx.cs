@@ -17,9 +17,9 @@ namespace AppWeb
             {
                 try
                 {
-                    CategoriasDatos categorias = new CategoriasDatos();
-                    dgvCategorias.DataSource = categorias.listarCategorias();
-
+                    CategoriasDatos manager = new CategoriasDatos();
+                    dgvCategorias.DataSource = manager.FiltrarCategorias(
+                      "", "Activo");
                     dgvCategorias.DataBind();
                 }
                 catch (Exception ex)
@@ -33,7 +33,7 @@ namespace AppWeb
 
         protected void btnAgregarCate_Click(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaAddCategoria.aspx");
+            Response.Redirect("gerenciaAddCategoria.aspx",false);
         }
 
         protected void dgvCategorias_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -42,7 +42,7 @@ namespace AppWeb
 
             if (e.CommandName == "Editar")
             {
-                Response.Redirect("gerenciaAddCategoria.aspx?id=" + id);
+                Response.Redirect("gerenciaAddCategoria.aspx?id=" + id,false);
             }
             else if (e.CommandName == "Estado")
             {
@@ -54,7 +54,9 @@ namespace AppWeb
 
                     manager.habilitarInhabilitarCategoria(id, cate.Estado);
 
-                    dgvCategorias.DataSource = manager.listarCategorias();
+                    
+                    dgvCategorias.DataSource = manager.FiltrarCategorias(
+                      txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
                     dgvCategorias.DataBind();
                 }
                 catch (Exception ex)
@@ -71,7 +73,8 @@ namespace AppWeb
                 dgvCategorias.PageIndex = e.NewPageIndex;
 
                 CategoriasDatos manager = new CategoriasDatos();
-                dgvCategorias.DataSource = manager.listarCategorias();
+                dgvCategorias.DataSource = manager.FiltrarCategorias(
+                  txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
                 dgvCategorias.DataBind();
             }
             catch (Exception)
@@ -79,5 +82,44 @@ namespace AppWeb
                 throw;
             }
         }
+
+        protected void btnBuscarCategorias_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                CategoriasDatos manager = new CategoriasDatos();
+                dgvCategorias.DataSource = manager.FiltrarCategorias(
+                  txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
+                dgvCategorias.DataBind();
+
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        protected void btnLimpiarFiltros_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CategoriasDatos manager = new CategoriasDatos();
+                txtFiltroAvanzado.Text = "";
+                ddlEstado.SelectedValue = "Activo";
+                
+
+                dgvCategorias.DataSource = manager.FiltrarCategorias(txtFiltroAvanzado.Text, "Activo");
+                dgvCategorias.DataBind();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
+    
 }

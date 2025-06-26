@@ -42,6 +42,46 @@ namespace negocio
             }
         }
 
+
+
+        public List<Categoria> FiltrarCategorias(string filtro, string estado)
+        {
+            List<Categoria> CategoriasFiltradas = new List<Categoria>();
+            database = new Database();
+            try
+            {
+                string consulta = " SELECT id_Categoria, Nombre_Categoria, Estado From Categoria_Menu ";
+                
+                 consulta += "WHERE Nombre_Categoria like '" + filtro + "%' ";
+
+
+                if (estado == "Activo")
+                    consulta += " and Categoria_Menu.Estado = 1";
+                else if (estado == "Inactivo")
+                    consulta += " and Categoria_Menu.Estado = 0";
+
+
+                consulta += "ORDER BY Nombre_Categoria ASC";
+
+                database.setQuery(consulta);
+                database.execQuery();
+                while (database.Reader.Read())
+                {
+                    Categoria cate = new Categoria(
+                    Convert.ToInt32(database.Reader["id_Categoria"]),
+                    database.Reader["Nombre_Categoria"].ToString());
+                    cate.Estado = (bool)database.Reader["Estado"];
+                    CategoriasFiltradas.Add(cate);
+                }
+
+                return CategoriasFiltradas;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void Agregar(Categoria cateNueva)
         {
 

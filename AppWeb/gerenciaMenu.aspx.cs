@@ -66,7 +66,7 @@ namespace AppWeb
 
             if (e.CommandName == "Editar")
             {
-                Response.Redirect("formItemMenu.aspx?id=" + id);
+                Response.Redirect("formItemMenu.aspx?id=" + id,false);
             }
 
             else if (e.CommandName == "Estado")
@@ -98,17 +98,11 @@ namespace AppWeb
         {
             try
             {
-
-                if (ddlCampo.SelectedValue == "-- Seleccione --")
-                {
-                    
-                } else
-                {
+               
                     menuItemDatos manager = new menuItemDatos();
                     dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedValue,
                       txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
                     dgvMenu.DataBind();
-                }
                 
                     
             }
@@ -132,10 +126,10 @@ namespace AppWeb
                   txtFiltroAvanzado.Text, "Activo");
                 dgvMenu.DataBind();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
         }
     }
