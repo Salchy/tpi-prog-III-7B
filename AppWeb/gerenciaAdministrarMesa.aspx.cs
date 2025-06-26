@@ -22,6 +22,7 @@ namespace AppWeb
                     int id = int.Parse(Request.QueryString["id"].ToString());
 
                     lblTitle.Text = "Modificar una mesa";
+                    btnAccept.Text = "Modificar Mesa";
                     try
                     {
                         Mesa mesa = MesaDatos.getMesa(id);
@@ -93,20 +94,43 @@ namespace AppWeb
                 return;
             }
             int idMeseroAsignado = int.Parse(listBoxEmpleados.SelectedValue);
-
+            
             // Logica de añadir / modificar mesa
             if (Request.QueryString["id"] != null) // Es una modificación
             {
+                try
+                {
+                    int id = int.Parse(Request.QueryString["id"].ToString());
 
+                    UsuarioDatos usuarioDatos = new UsuarioDatos();
+                    Usuario meseroAsignado = usuarioDatos.getUsuario(idMeseroAsignado);
+
+                    if (meseroAsignado == null)
+                    {
+                        Session.Add("error", "El mesero seleccionado no existe.");
+                        Response.Redirect("Error.aspx", false);
+                        return;
+                    }
+                    Mesa mesa = MesaDatos.getMesa(id);
+                    mesa.NumeroMesa = nombreMesa;
+                    mesa.MeseroAsignado = meseroAsignado;
+                    if (MesaDatos.modificarMesa(mesa))
+                    {
+                        Response.Redirect("gerenciaMesas.aspx", false);
+                    }
+                }
+                catch (Exception Ex)
+                {
+                    Session.Add("error", "Error al modificar la mesa: " + Ex.ToString());
+                }
             }
             else
             {
                 try
                 {
-                    bool success = crearMesa(nombreMesa, idMeseroAsignado);
-                    if (success)
+                    if (crearMesa(nombreMesa, idMeseroAsignado))
                     {
-                        Response.Redirect("gerenciaMesas.aspx");
+                        Response.Redirect("gerenciaMesas.aspx", false);
                     }
                 }
                 catch (Exception)

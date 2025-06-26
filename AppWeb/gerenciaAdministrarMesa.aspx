@@ -13,11 +13,11 @@
         </div>
     </div>
     <div class="col-3 mb-6 mx-auto">
-        <label for="perfil" class="form-label">Mesero Asignado</label>
+        <label for="perfil" class="form-label text-center w-100">Mesero Asignado</label>
         <asp:ListBox ID="listBoxEmpleados" runat="server" CssClass="form-control" SelectionMode="Single"></asp:ListBox>
     </div>
     <hr />
-    <div>
+    <div class="text-center w-100">
         <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-danger col-3 mx-auto" Text="Cancelar" OnClick="btnCancel_Click" />
         <asp:Button ID="btnAccept" runat="server" CssClass="btn btn-success col-3 mx-auto" Text="Añadir mesa" OnClick="btnAccept_Click" />
     </div>

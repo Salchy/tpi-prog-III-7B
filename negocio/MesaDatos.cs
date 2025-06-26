@@ -52,9 +52,9 @@ namespace negocio
                     Asignadas.Add(aux);
                 }
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
-                throw ex;
+                throw Ex;
             }
             finally
             {
@@ -78,9 +78,9 @@ namespace negocio
                     Mesas.Add(aux);
                 }
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
-                throw ex;
+                throw Ex;
             }
             finally
             {
@@ -104,9 +104,9 @@ namespace negocio
                 aux = setMesaData(database.Reader);
                 return aux;
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
-                throw ex;
+                throw Ex;
             }
             finally
             {
@@ -124,9 +124,9 @@ namespace negocio
                 database.execNonQuery();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
-                throw ex;
+                throw Ex;
             }
             finally
             {
@@ -144,13 +144,31 @@ namespace negocio
                 database.execNonQuery();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception Ex)
             {
-                throw ex;
+                throw Ex;
             }
             finally
             {
                 database.closeConnection();
+            }
+        }
+
+        public bool modificarMesa(Mesa mesa)
+        {
+            try
+            {
+                database.setQuery("UPDATE Mesas SET numeroMesa = @nombreMesa, id_Usuario = @idMeseroAsignado WHERE id_Mesa = @idMesa;");
+                database.setParameter("@nombreMesa", mesa.NumeroMesa);
+                database.setParameter("@idMeseroAsignado", mesa.MeseroAsignado.Id);
+                database.setParameter("@idMesa", mesa.IdMesa);
+                database.execNonQuery();
+                return true;
+            }
+            catch (Exception Ex)
+            {
+
+                throw Ex;
             }
         }
     }
