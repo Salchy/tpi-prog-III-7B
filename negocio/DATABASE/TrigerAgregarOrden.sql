@@ -2,6 +2,7 @@ CREATE TRIGGER trg_AGREGAR_ORDEN ON Ordenes
 INSTEAD OF INSERT
 AS 
 BEGIN 
+BEGIN TRY 
  Declare @idMenu int;
  Declare @idPedido int;
  Declare @stockactual TINYINT;
@@ -14,10 +15,11 @@ BEGIN
   set @catidadnueva=(SELECT Cantidad FROM inserted);
   set @catidadprevia=0;
 
-  IF ((@stockactual-@catidadnueva )<0)
+  IF (@stockactual<@catidadnueva )
 	   BEGIN 
-	      RAISERROR ('NO EXISTE STOCK SUFICIENTE PARA TOMAR LA ORDEN', 16, 1)
-		    RETURN;
+	      ROLLBACK TRANSACTION; 
+		  RAISERROR ('STOCK INSUFICIENTE PARA TOMAR ORDEN', 16, 1);
+		  RETURN; 
 	   END
 
   IF EXISTS (SELECT * FROM Ordenes WHERE id_Pedido=@idPedido and id_Menu=@idMenu)
@@ -31,4 +33,8 @@ BEGIN
    END
   
   UPDATE Menu  SET Stock= (@stockactual - @catidadnueva) WHERE id_Menu_Item=@idMenu;
+ END TRY 
+ BEGIN CATCH 
+  PRINT ERROR_MESSAGE() 
+ END CATCH 
 END
