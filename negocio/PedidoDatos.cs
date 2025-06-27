@@ -95,16 +95,25 @@ namespace negocio
 
         }
 
-        public void EliminarPedido(int id)//elimina el importe, lo deja en cero
+        public void EliminarPedido(int id)//elimina el importe, lo deja en cero, cambia el estado del pedido y de las ordenes 
         {
 
             database = new Database();
+           
 
             try
-            {
-                database.setQuery("update Pedidos set Estado=0, Importe=0 Where id_Pedido=@id");
+            { 
+                database.setQuery("update Pedidos set Estado=0, Importe=0 Where id_Pedido=@id and Estado=1");
                 database.setParameter("@id", id);
                 database.execQuery();
+
+                OrdenDatos orden = new OrdenDatos();
+                List<Orden> Pedidas = orden.getOrdenesPedido(id);
+                
+                foreach(var item in Pedidas) {
+                orden.EliminarOrden(item.id);   
+                }
+
             }
             catch (Exception ex)
             {

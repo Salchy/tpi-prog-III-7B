@@ -46,8 +46,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("update Ordenes set id_Menu=@menu, Cantidad=@cant Where id_Orden=@id");
-                database.setParameter("@menu", orden.Menu.IdMenuItem);
+                database.setQuery("update Ordenes set Cantidad=@cant Where id_Orden=@id and Estado=1");
                 database.setParameter("@cant", orden.Cantidad);
                 database.setParameter("@id", orden.id);
 
@@ -72,7 +71,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("update Ordenes set Estado=0 Where id_Orden=@id");
+                database.setQuery("update Ordenes set Estado=0 Where id_Orden=@id and Estado=1");
                 database.setParameter("@id", id);
 
                 database.execQuery();
@@ -108,7 +107,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido= @id");//tambien agregar filtrado de estado
+                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido= @id and Estado=1");//tambien agregar filtrado de estado
                 database.setParameter("@id", id);
                 database.execQuery();
 
@@ -118,6 +117,7 @@ namespace negocio
                     setOrdenData(aux, database.Reader);
                     Pedidas.Add(aux);
                 }
+                return Pedidas;
             }
             catch (Exception ex)
             {
@@ -128,7 +128,7 @@ namespace negocio
             {
                 database.closeConnection();
             }
-            return Pedidas;
+           
 
         }
     }
