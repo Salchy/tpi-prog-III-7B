@@ -66,6 +66,34 @@ namespace AppWeb
 
         }
 
+        protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            try
+            {
+
+                int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
+                PedidoDatos nuevo = new PedidoDatos();
+                int idpedido = nuevo.getIdPedidoMesaAbierta(idmesa);
+                if (idpedido == 0)
+                {
+                    nuevo.CrearPedido(idmesa);
+                    
+                }
+
+                //OrdenDatos orden = new OrdenDatos();
+               // dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+                //dgvOrdenes.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -127,33 +155,14 @@ namespace AppWeb
            
             try
             {
-
-                menuItemDatos menu = new menuItemDatos();
-                dominio.MenuItem item = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
-                lblMenu.Text = item.Nombre;
-
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
-
-        protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)//salta error por conexion abierta cuando quiero cambiar de mesa
-        {
-
-            try
-            {
-
-                int id = Convert.ToInt32(ddlMesaActiva.SelectedValue);
-                PedidoDatos nuevo = new PedidoDatos();
-                if (nuevo.getIdPedidoMesaAbierta(id) == 0)
+                if(ddlCategoria.SelectedValue !="0" && ddlSubCategoria.SelectedValue != "0" )
                 {
-                    nuevo.CrearPedido(id);
+                    menuItemDatos menu = new menuItemDatos();
+                    dominio.MenuItem item = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
+                    lblMenu.Text = item.Nombre;
 
                 }
+                
 
 
             }
@@ -164,6 +173,7 @@ namespace AppWeb
             }
         }
 
+       
         
 
         protected void btnAgregarOrden_Click(object sender, EventArgs e)
@@ -178,22 +188,34 @@ namespace AppWeb
 
             try
             {
-
-                orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
-                orden1.Estado = true;
-                orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
-
-
-                orden1.Cantidad = int.Parse(txtCantidad.Text);//tomarlo de la textbox debe ser menos a 800
-
-                orden.AgregarOrden(orden1);
+                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0")
+                {
+                    orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
+                    orden1.Estado = true;
+                    orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
 
 
+                    orden1.Cantidad = int.Parse(txtCantidad.Text);//tomarlo de la textbox debe ser menos a 800
 
-                //((List<Orden>)Session["OrdenesTomadas"].Add(orden1);  
-                //dgvOrdenes.DataSource= ((List<Orden>)Session["OrdenesTomadas"]).FindAll(x => x.Pedido.Id == orden1.Pedido.Id);
-                dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
-                dgvOrdenes.DataBind();
+                    orden.AgregarOrden(orden1);
+
+
+
+                    dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
+                    dgvOrdenes.DataBind();
+
+                    txtMenu.Text = "";
+                    ddlCategoria.SelectedValue = "0";
+                    txtCantidad.Text = "";
+                    lblMenu.Text = "Menu";
+                    ddlSubCategoria.SelectedValue = "0";
+
+                }
+                else {
+                    txtCantidad.Text = "";
+                }
+
+                
 
 
             }
