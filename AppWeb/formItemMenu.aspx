@@ -25,6 +25,7 @@
                     <div class="mb-3">
                         <label for="txtPrecio" class="form-label">Precio</label>
                         <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" />
+                        <asp:Label runat="server"  ID="lblErrorPrecio" ForeColor="Red" Visible ="false"/>
                     </div>
 
                     <div class="mb-3">
@@ -35,21 +36,26 @@
                     <div class="mb-3">
                         <label for="ddlCategoria" class="form-label">Categoría</label>
                         <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" />
+                        <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" />
+
                     </div>
 
                     <div class="mb-3">
                         <label for="ddlSubcategoria" class="form-label ">Subcategoría</label>
                         <asp:DropDownList ID="ddlSubcategoria" runat="server" CssClass="form-select" />
+                        <asp:Label ID="lblErrorSubCategoria" runat="server" ForeColor="Red" Visible="false" />
+
                     </div>
 
                     <div class="mb-3">
                         <label for="txtStock" class="form-label">Stock</label>
                         <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" />
+                        <asp:Label ID="lblErrorStock" runat="server" ForeColor="Red" Visible="false" />
                     </div>
 
                     <div class="mb-3">
                         <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" />
-                        <a href="gerenciaMenu.aspx">Cancelar</a>
+                        <asp:Button Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_Click" runat="server" />
                     </div>
                 </div>
             </div>
