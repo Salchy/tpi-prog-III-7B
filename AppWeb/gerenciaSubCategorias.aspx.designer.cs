@@ -15,6 +15,15 @@ namespace AppWeb
     {
 
         /// <summary>
+        /// Control panelSub.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panelSub;
+
+        /// <summary>
         /// Control ddlCampo.
         /// </summary>
         /// <remarks>

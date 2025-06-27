@@ -6,8 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <asp:Panel runat="server" ID="panelSub" DefaultButton="btnBuscarSubCategorias">       
     <div class="row">
-
         <div class ="col-2">
             <div class="mb-3">
                 <asp:Label Text="Buscar por" runat="server" />
@@ -49,6 +49,7 @@
 
         </div>
     </div>
+        </asp:Panel>
 
     <asp:GridView ID="dgvSubCate" runat="server" AutoGenerateColumns="false" CssClass="table table-dark table-striped" AllowPaging="true" pageSize="10" OnPageIndexChanging ="dgvSubCate_PageIndexChanging" OnRowCommand="dgvSubCate_RowCommand" >
       <Columns>
