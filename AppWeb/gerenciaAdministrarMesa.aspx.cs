@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
-using dominio;
+using dominio; 
 
 namespace AppWeb
 {

@@ -11,7 +11,7 @@ namespace dominio
         public int Id { get; set; }
         public Mesa mesa { get; set; }
         public bool Estado { get; set; }
-        public float Importe { get; set; }
+        public decimal Importe { get; set; }
 
 
 

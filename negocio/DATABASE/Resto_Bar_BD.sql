@@ -140,6 +140,7 @@ BEGIN
 	WHERE M.idSubCategoria = @idCategoriaPrincipal
 	ORDER BY S.NombreSubCategoria ASC;
 END
+GO
 
 CREATE PROCEDURE SP_GetCategories
 AS

@@ -44,7 +44,7 @@ namespace negocio
 
 
 
-        public List<MenuItem> filtrar(string campo,string filtro, string estado)
+        public List<MenuItem> filtrar(string campo, string filtro, string estado)
         {
             List<MenuItem> menuFiltrado = new List<MenuItem>();
             database = new Database();
@@ -54,9 +54,9 @@ namespace negocio
 
                 if (campo == "Ítem")
                 {
-                   consulta += "WHERE Nombre_Menu like '" + filtro + "%' ";
-                        
-                           
+                    consulta += "WHERE Nombre_Menu like '" + filtro + "%' ";
+
+
                 }
                 else if (campo == "Categoria")
                 {
@@ -92,7 +92,7 @@ namespace negocio
                     item.Estado = (bool)database.Reader["Estado"];
                     item.Stock = Convert.ToInt32(database.Reader["Stock"]);
                     menuFiltrado.Add(item);
-                    
+
                 }
 
                 return menuFiltrado;
@@ -205,14 +205,14 @@ namespace negocio
 
 
             aux.IdMenuItem = (int)database.Reader["id_Menu_Item"];
-             aux.Nombre = database.Reader["Nombre_Menu"].ToString();
-              aux.Descripcion = database.Reader.IsDBNull(database.Reader.GetOrdinal("Descripcion")) ? "" : database.Reader["Descripcion"].ToString();
-               aux.Precio = Math.Round((decimal)database.Reader["Precio"], 2);
+            aux.Nombre = database.Reader["Nombre_Menu"].ToString();
+            aux.Descripcion = database.Reader.IsDBNull(database.Reader.GetOrdinal("Descripcion")) ? "" : database.Reader["Descripcion"].ToString();
+            aux.Precio = Math.Round((decimal)database.Reader["Precio"], 2);
             aux.Stock = Convert.ToInt32(database.Reader["Stock"]); // Porque en la DB lo definimos como TINYINT
-                aux.SubCategoria = subcat.GetSubCategoria(Convert.ToInt32(database.Reader["idSubCategoria"]));
-              aux.Estado = (bool)database.Reader["Estado"];
+            aux.SubCategoria = subcat.GetSubCategoria(Convert.ToInt32(database.Reader["idSubCategoria"]));
+            aux.Estado = (bool)database.Reader["Estado"];
             aux.Categoria = cat.GetCategoria(aux.SubCategoria.IdCategoriaPadre);
-                                  
+
         }
 
         /// 
@@ -222,8 +222,8 @@ namespace negocio
 
             database = new Database();
 
-          // database.setQuery("SP_GetMenuItemsFromCategory"); //Revisar pasaje del parametro no lo esta tomando, dejo la consulta "larga" para continuar con el desarrollo
-           database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio,M.Stock, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria, M.Estado FROM Menu AS M INNER JOIN SubCategoriaMenu AS S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.idSubCategoria = @idCategoriaPrincipal ORDER BY S.NombreSubCategoria ASC;");
+            database.setProcedure("SP_GetMenuItemsFromCategory");
+            //database.setQuery("SELECT M.id_Menu_Item, M.Nombre_Menu, M.Descripcion, M.Precio,M.Stock, C.id_Categoria, C.Nombre_Categoria, S.idSubCategoria, S.NombreSubCategoria, M.Estado FROM Menu AS M INNER JOIN SubCategoriaMenu AS S ON M.idSubCategoria = S.idSubCategoria INNER JOIN Categoria_Menu AS C ON S.idCategoriaPrincipal = C.id_Categoria WHERE M.idSubCategoria = @idCategoriaPrincipal ORDER BY S.NombreSubCategoria ASC;");
             database.setParameter("@idCategoriaPrincipal", id);
             database.execQuery();
 

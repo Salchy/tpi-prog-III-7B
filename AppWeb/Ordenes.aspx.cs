@@ -71,18 +71,20 @@ namespace AppWeb
 
             try
             {
-
                 int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
-                PedidoDatos nuevo = new PedidoDatos();
-                int idpedido = nuevo.getIdPedidoMesaAbierta(idmesa);
-                if (idpedido == 0)
+                if (idmesa == 0)
                 {
-                    nuevo.CrearPedido(idmesa);
-                    
+                    return;
+                }
+                PedidoDatos pedidoDatos = new PedidoDatos();
+                Pedido pedido = pedidoDatos.BuscarPedido(idmesa);
+                if (pedido == null)
+                {
+                    pedidoDatos.CrearPedido(idmesa);
                 }
 
                 //OrdenDatos orden = new OrdenDatos();
-               // dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+                // dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                 //dgvOrdenes.DataBind();
 
             }
@@ -97,12 +99,10 @@ namespace AppWeb
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-
             try
             {
                 if (IsPostBack)
                 {
-
                     int id = Convert.ToInt32(ddlCategoria.SelectedValue);
                     ddlSubCategoria.DataSource = ((List<SubCategoria>)Session["ListaSubcategorias"]).FindAll(x => x.IdCategoriaPadre == id);
                     ddlSubCategoria.DataTextField = "Nombre";
@@ -152,17 +152,17 @@ namespace AppWeb
 
         protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             try
             {
-                if(ddlCategoria.SelectedValue !="0" && ddlSubCategoria.SelectedValue != "0" )
+                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0")
                 {
                     menuItemDatos menu = new menuItemDatos();
                     dominio.MenuItem item = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
                     lblMenu.Text = item.Nombre;
 
                 }
-                
+
 
 
             }
@@ -173,8 +173,8 @@ namespace AppWeb
             }
         }
 
-       
-        
+
+
 
         protected void btnAgregarOrden_Click(object sender, EventArgs e)
         {
@@ -182,20 +182,20 @@ namespace AppWeb
             OrdenDatos orden = new OrdenDatos();
             PedidoDatos nuevo = new PedidoDatos();
             Orden orden1 = new Orden();
-            Validaciones validar = new Validaciones();  
+            Validaciones validar = new Validaciones();
             MesaDatos mesaselecionada = new MesaDatos();
-            int cantMax= (mesaselecionada.getMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)).NumeroComensales)*6;
+            int cantMax = (mesaselecionada.getMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)).NumeroComensales) * 6;
             //la cantidad maxima de un menu que se toma en una orden es 6 veces el numero de comensales de la mesa
-            
+
 
 
             try
             {
-                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text)>0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
+                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
                 {
                     orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value));
                     orden1.Estado = true;
-                    orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
+                    orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoFromIdMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
 
 
                     orden1.Cantidad = int.Parse(txtCantidad.Text);
@@ -214,11 +214,12 @@ namespace AppWeb
                     ddlSubCategoria.SelectedValue = "0";
 
                 }
-                else {
+                else
+                {
                     txtCantidad.Text = "";
                 }
 
-                
+
 
 
             }
