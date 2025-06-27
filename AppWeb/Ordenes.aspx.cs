@@ -182,20 +182,23 @@ namespace AppWeb
             OrdenDatos orden = new OrdenDatos();
             PedidoDatos nuevo = new PedidoDatos();
             Orden orden1 = new Orden();
-
+            Validaciones validar = new Validaciones();  
+            MesaDatos mesaselecionada = new MesaDatos();
+            int cantMax= (mesaselecionada.getMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)).NumeroComensales)*6;
+            //la cantidad maxima de un menu que se toma en una orden es 6 veces el numero de comensales de la mesa
             
 
 
             try
             {
-                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0")
+                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text)>0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
                 {
-                    orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
+                    orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value));
                     orden1.Estado = true;
                     orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoMesaAbierta(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
 
 
-                    orden1.Cantidad = int.Parse(txtCantidad.Text);//tomarlo de la textbox debe ser menos a 800
+                    orden1.Cantidad = int.Parse(txtCantidad.Text);
 
                     orden.AgregarOrden(orden1);
 

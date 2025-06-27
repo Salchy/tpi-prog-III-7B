@@ -66,7 +66,7 @@
                 
                 <div class="col-1">
                  <div class="mb-3">
-                    <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" placeholder="Cantidad" ReadOnly="false" AutoPostBack="false"></asp:TextBox>
+                    <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" placeholder="Cantidad" ReadOnly="false" AutoPostBack="false" ></asp:TextBox>
                  </div>
                 </div>
                <div class="col-3">
