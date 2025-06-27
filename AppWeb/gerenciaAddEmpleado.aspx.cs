@@ -49,9 +49,9 @@ namespace AppWeb
         }
         protected void btnRegistrarUsuario(object sender, EventArgs e)
         {
-            string userName = txtNombre.Text;
-            string userSurName = txtApellido.Text;
-            string userDNI = txtDNI.Text;
+            string userName = txtNombre.Text.Trim();
+            string userSurName = txtApellido.Text.Trim();
+            string userDNI = txtDNI.Text.Trim();
             if (!validaciones(userName, userSurName, userDNI))
             {
                 return;
@@ -119,6 +119,12 @@ namespace AppWeb
             if (!dniValido(userDNI))
             {
                 mostrarMensaje("DNI inválido", "ERROR: Debes ingresar un DNI válido.");
+                return false;
+            }
+            UsuarioDatos userDatos = new UsuarioDatos();
+            if (userDatos.getUsuario(userDNI) != null)
+            {
+                mostrarMensaje("DNI ya registrado", "ERROR: El DNI ingresado ya está registrado en el sistema.");
                 return false;
             }
             return true;
