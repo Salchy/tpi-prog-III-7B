@@ -21,6 +21,7 @@
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Nombre</label>
                         <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                         <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" />
                     </div>
                     <asp:Button Text="Aceptar" ID="btnAceptarCate" runat="server" OnClick="btnAceptarCate_Click" />
                     <asp:Button Text="Volver" ID="btnVolverCate" OnClick="btnVolverCate_Click" runat="server" />

@@ -83,5 +83,64 @@ namespace negocio
 
         }
 
+
+        public bool BooleanSinCaracteresEspeciales(string str)
+        {
+            
+            foreach (char c in str)
+            {
+                if (!char.IsLetter(c) && !char.IsDigit(c) && !char.IsWhiteSpace(c))
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+
+        }
+
+
+        public bool BoolSoloNumeros(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+                return false;
+
+            foreach (char c in str)
+            {
+                if (!char.IsDigit(c))
+                    return false;
+            }
+
+            return true;
+        }
+
+
+        public bool validarTextos(string str)
+        {
+
+            if(string.IsNullOrEmpty(str))
+            {
+                return false;
+            }
+
+            if(BooleanSinCaracteresEspeciales(str) == false)
+            {
+                return false;
+            }
+
+            if(BoolSoloNumeros(str)) {
+                return false;
+            }
+            
+
+            // DOBLE ESPACIO JUNTO
+            if (str.Contains ("  ")) {
+                return false;
+               
+            }
+
+
+            return true;
+        }
     }
 }

@@ -91,11 +91,38 @@ namespace AppWeb
 
             try
             {
-
+                Validaciones val = new Validaciones();
                 dominio.MenuItem nuevo = new dominio.MenuItem();
                 menuItemDatos manager = new menuItemDatos();
 
-                bool ingresoValido = true; ;
+                bool ingresoValido = true;
+
+
+
+                if (val.validarTextos(txtNombre.Text) == false)
+                {
+                    lblErrorNombre.Visible = true;
+                    lblErrorNombre.Text = "Valor ingresado invalido, no se permiten caracteres especiales ni solo numeros";
+                    ingresoValido = false;
+                } else
+                {
+                    lblErrorNombre.Visible = false;
+                }
+
+                List<dominio.MenuItem> menu = manager.listarMenu();
+
+
+                foreach (var item in menu)
+                {
+                    if (item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower())
+                    {
+                        lblErrorNombre.Visible = true;
+                        lblErrorNombre.Text = "Menu repetido";
+                        ingresoValido = false;
+                        break;
+                    }
+                }
+
 
 
                 if (string.IsNullOrEmpty(txtPrecio.Text) || !decimal.TryParse(txtPrecio.Text.Trim(), out _)) // tryParse intenta convertir el numero en decimal, devuelve bool // out _ ignora la salida
@@ -114,6 +141,19 @@ namespace AppWeb
                     lblErrorPrecio.Visible = false;
 
                 }
+
+
+                if (val.validarTextos(txtDescripcion.Text) == false)
+                {
+                    lblErrorDescripcion.Visible = true;
+                    lblErrorDescripcion.Text = "Valor ingresado invalido, no se permiten caracteres especiales ni solo numeros";
+                    ingresoValido = false;
+                } else
+                {
+                    lblErrorDescripcion.Visible = false;
+                }
+
+               
 
 
 
@@ -167,7 +207,7 @@ namespace AppWeb
                 }
 
 
-                nuevo.Nombre = txtNombre.Text;
+                nuevo.Nombre = txtNombre.Text.Trim();
 
                 
 
@@ -177,7 +217,7 @@ namespace AppWeb
 
                 
 
-                nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Descripcion = txtDescripcion.Text.Trim();
 
                 nuevo.Categoria = new Categoria();
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);

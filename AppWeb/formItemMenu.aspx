@@ -20,17 +20,21 @@
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Item</label>
                         <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                         <asp:Label ID="lblErrorNombre" runat="server" ForeColor="Red" Visible="false" />
+
                     </div>
 
                     <div class="mb-3">
                         <label for="txtPrecio" class="form-label">Precio</label>
                         <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" />
                         <asp:Label runat="server"  ID="lblErrorPrecio" ForeColor="Red" Visible ="false"/>
+
                     </div>
 
                     <div class="mb-3">
                         <label for="txtDescripcion" class="form-label">Descripción</label>
                         <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" />
+                        <asp:Label ID="lblErrorDescripcion" runat="server" ForeColor="Red" Visible="false" />
                     </div>
 
                     <div class="mb-3">

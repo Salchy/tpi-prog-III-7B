@@ -43,8 +43,41 @@ namespace AppWeb
             {
                 Categoria nuevo = new Categoria();
                 CategoriasDatos manager = new CategoriasDatos();
+                Validaciones val = new Validaciones();
+                bool IngresoValido = true;
 
-                nuevo.Nombre = txtNombre.Text;
+                if (val.validarTextos(txtNombre.Text) == false)
+                {
+                    lblErrorCategoria.Visible = true;
+                    lblErrorCategoria.Text = "No puede estar vacio, no se permiten caracteres especiales ni solo numeros";
+                    IngresoValido = false;
+                }
+                else
+                {
+                    lblErrorCategoria.Visible = false;
+                }
+
+                List<Categoria> categorias = manager.listarCategorias();
+
+
+                foreach (var item in categorias)
+                {
+                    if (item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower())
+                    {
+                        lblErrorCategoria.Visible = true;
+                        lblErrorCategoria.Text = "Categoria repetido";
+                        IngresoValido = false;
+                        break;
+                    }
+                }
+
+
+                if (IngresoValido == false)
+                {
+                    return;
+                }
+
+                nuevo.Nombre = txtNombre.Text.Trim();
 
                 if (Request.QueryString["id"] != null)
                 {
