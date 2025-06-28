@@ -60,7 +60,7 @@
 
 </asp:UpdatePanel>
 
-          </div>
+          
             
             <div class="row">
                 
@@ -75,7 +75,7 @@
                 </div>
                </div>
              </div>
-          </div>
+          
 
 
          <h2>Ordenes del Pedido</h2>  

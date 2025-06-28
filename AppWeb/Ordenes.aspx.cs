@@ -229,7 +229,11 @@ namespace AppWeb
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", "Error al cargar la orden: " + ex.Message);
+                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usarno en un boton de volveren la pagina de error
+                Response.Redirect("Error.aspx", false);
+               // throw ex;
+                
             }
         }
     }

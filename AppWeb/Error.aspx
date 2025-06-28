@@ -26,6 +26,12 @@
             <h3>Error</h3>
             <asp:Label Text="text" ID="lblError" runat="server" />
         </div>
+        <%/*if (!paginaerror)
+             { */%>
+        <div class="text-center">
+      <asp:Button Text="Volver" runat="server" CssClass="btn btn-primary" Id="btnVolver" OnClick="btnVolver_Click" />
+</div>
+        <%//} %>
     </form>
 </body>
 </html>
