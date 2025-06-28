@@ -76,11 +76,14 @@ namespace AppWeb
                 {
                     return;
                 }
-                PedidoDatos pedidoDatos = new PedidoDatos();
-                Pedido pedido = pedidoDatos.BuscarPedido(idmesa);
-                if (pedido == null)
+
+              
+                PedidoDatos nuevo = new PedidoDatos();
+                int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
+                if (idpedido == 0)
                 {
-                    pedidoDatos.CrearPedido(idmesa);
+                    nuevo.CrearPedido(idmesa);
+
                 }
 
                 //OrdenDatos orden = new OrdenDatos();
