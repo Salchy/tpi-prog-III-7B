@@ -89,7 +89,7 @@ namespace negocio
             
             foreach (char c in str)
             {
-                if (!char.IsLetter(c) && !char.IsDigit(c) && !char.IsWhiteSpace(c))
+                if (!char.IsLetter(c) && !char.IsDigit(c) && !char.IsWhiteSpace(c) && c!=',')
                 {
                     return false;
                 }
@@ -138,7 +138,6 @@ namespace negocio
                 return false;
                
             }
-
 
             return true;
         }
