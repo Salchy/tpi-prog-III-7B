@@ -57,8 +57,53 @@ namespace AppWeb
             {
                 SubCategoria nuevo = new SubCategoria();
                 SubCategoriaDatos manager = new SubCategoriaDatos();
+                Validaciones val = new Validaciones();
+                bool IngresoValido = true;
 
-                nuevo.Nombre = txtNombre.Text;
+                if(val.validarTextos(txtNombre.Text) == false)
+                {
+                    lblErrorSubCategoria.Visible = true;
+                    lblErrorSubCategoria.Text = "No puede estar vacio, no se permiten caracteres especiales ni solo numeros";
+                    IngresoValido = false;
+                } else
+                {
+                    lblErrorSubCategoria.Visible = false;
+                }
+
+                List<SubCategoria> subcategorias = manager.listarSubCategorias();
+
+
+                foreach (var item in subcategorias)
+                {
+                    if(item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower() )
+                    {
+                        lblErrorSubCategoria.Visible = true;
+                        lblErrorSubCategoria.Text = "Subcategoria repetida";
+                        IngresoValido = false;
+                        break;
+                    }
+                }
+
+
+                if(ddlCategoriaPadre.SelectedValue == "0")
+                {
+                    lblErrorDDL.Visible = true;
+                    lblErrorDDL.Text = "Debe seleccionar una categoria";
+                    IngresoValido = false;
+                } else
+                {
+                    lblErrorDDL.Visible = false;
+
+                }
+
+
+                if (IngresoValido == false)
+                {
+                    return;
+                }
+
+
+                nuevo.Nombre = txtNombre.Text.Trim();
                 nuevo.IdCategoriaPadre = int.Parse(ddlCategoriaPadre.SelectedValue);
 
                 if (Request.QueryString["id"] != null)

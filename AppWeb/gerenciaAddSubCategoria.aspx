@@ -20,10 +20,14 @@
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Nombre</label>
                         <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                        <asp:Label ID="lblErrorSubCategoria" runat="server" ForeColor="Red" Visible="false" />
+
                     </div>
                     <div class="mb-3">
                         <label for="ddlCategoriaPadre" class="form-label ">Categoria a la que pertenece</label>
                         <asp:DropDownList ID="ddlCategoriaPadre" runat="server" CssClass="form-select" />
+                         <asp:Label ID="lblErrorDDL" runat="server" ForeColor="Red" Visible="false" />
+
                     </div>
                     <asp:Button Text="Aceptar" ID="btnAceptarSubCate" runat="server" OnClick="btnAceptarSubCate_Click" />
                     <asp:Button Text="Volver" ID="btnVolverSubCate" runat="server"  OnClick="btnVolverSubCate_Click"/>
