@@ -60,9 +60,18 @@ namespace AppWeb
                 List<Categoria> categorias = manager.listarCategorias();
 
 
+                Categoria cate = null;
+
+                if (Request.QueryString["id"] != null)
+                {
+                    int id = int.Parse(Request.QueryString["id"].ToString());
+                    cate = manager.GetCategoria(id);
+                }
+                    
+
                 foreach (var item in categorias)
                 {
-                    if (item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower())
+                    if (item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower() && (cate==null || item.Id != cate.Id))
                     {
                         lblErrorCategoria.Visible = true;
                         lblErrorCategoria.Text = "Categoria repetido";

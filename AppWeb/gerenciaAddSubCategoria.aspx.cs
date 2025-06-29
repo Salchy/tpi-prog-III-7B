@@ -73,9 +73,17 @@ namespace AppWeb
                 List<SubCategoria> subcategorias = manager.listarSubCategorias();
 
 
+                SubCategoria Subcate = null;
+
+                if (Request.QueryString["id"] != null)
+                {
+                    int id = int.Parse(Request.QueryString["id"].ToString());
+                    Subcate = manager.GetSubCategoria(id);
+                }
+
                 foreach (var item in subcategorias)
                 {
-                    if(item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower() )
+                    if(item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower() && (Subcate == null || item.Id != Subcate.Id))
                     {
                         lblErrorSubCategoria.Visible = true;
                         lblErrorSubCategoria.Text = "Subcategoria repetida";

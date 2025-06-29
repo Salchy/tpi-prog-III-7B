@@ -112,9 +112,18 @@ namespace AppWeb
                 List<dominio.MenuItem> menu = manager.listarMenu();
 
 
+                dominio.MenuItem itemMenu = null;
+
+                if (Request.QueryString["id"] != null)
+                {
+                    int id = int.Parse(Request.QueryString["id"].ToString());
+                    itemMenu = manager.GetItem(id);
+                }
+
+
                 foreach (var item in menu)
                 {
-                    if (item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower())
+                    if (item.Nombre.Trim().ToLower() == txtNombre.Text.Trim().ToLower() && (itemMenu == null || item.IdMenuItem != itemMenu.IdMenuItem))
                     {
                         lblErrorNombre.Visible = true;
                         lblErrorNombre.Text = "Menu repetido";

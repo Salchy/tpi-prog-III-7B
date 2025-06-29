@@ -20,41 +20,41 @@
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Item</label>
                         <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
-                         <asp:Label ID="lblErrorNombre" runat="server" ForeColor="Red" Visible="false" />
+                         <asp:Label ID="lblErrorNombre" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
 
                     </div>
 
                     <div class="mb-3">
                         <label for="txtPrecio" class="form-label">Precio</label>
                         <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" />
-                        <asp:Label runat="server"  ID="lblErrorPrecio" ForeColor="Red" Visible ="false"/>
+                        <asp:Label runat="server"  ID="lblErrorPrecio" ForeColor="Red" Visible ="false" Style="font-size: 12px;"/>
 
                     </div>
 
                     <div class="mb-3">
                         <label for="txtDescripcion" class="form-label">Descripción</label>
                         <asp:TextBox ID="txtDescripcion" runat="server" TextMode="MultiLine" Rows="3" CssClass="form-control" />
-                        <asp:Label ID="lblErrorDescripcion" runat="server" ForeColor="Red" Visible="false" />
+                        <asp:Label ID="lblErrorDescripcion" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
                     </div>
 
                     <div class="mb-3">
                         <label for="ddlCategoria" class="form-label">Categoría</label>
                         <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" />
-                        <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" />
+                        <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
 
                     </div>
 
                     <div class="mb-3">
                         <label for="ddlSubcategoria" class="form-label ">Subcategoría</label>
                         <asp:DropDownList ID="ddlSubcategoria" runat="server" CssClass="form-select" />
-                        <asp:Label ID="lblErrorSubCategoria" runat="server" ForeColor="Red" Visible="false" />
+                        <asp:Label ID="lblErrorSubCategoria" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
 
                     </div>
 
                     <div class="mb-3">
                         <label for="txtStock" class="form-label">Stock</label>
                         <asp:TextBox ID="txtStock" runat="server" CssClass="form-control" />
-                        <asp:Label ID="lblErrorStock" runat="server" ForeColor="Red" Visible="false" />
+                        <asp:Label ID="lblErrorStock" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
                     </div>
 
                     <div class="mb-3">
