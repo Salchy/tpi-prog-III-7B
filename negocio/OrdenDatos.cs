@@ -63,7 +63,7 @@ namespace negocio
 
         }
 
-        public void EliminarOrden(int id)
+        public void EliminarOrden(int idOrden)
         {
 
             database = new Database();
@@ -71,7 +71,7 @@ namespace negocio
             try
             {
                 database.setQuery("update Ordenes set Estado=0 Where id_Orden=@id and Estado=1");
-                database.setParameter("@id", id);
+                database.setParameter("@id", idOrden);
 
                 database.execQuery();
             }
@@ -100,14 +100,14 @@ namespace negocio
             aux.id = (int)data["id_Orden"];
 
         }
-        public List<Orden> getOrdenesPedido(int id)
+        public List<Orden> getOrdenesPedido(int idPedido)
         {
             List<Orden> Pedidas = new List<Orden>();
             database = new Database();
             try
             {
                 database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido=@id and Estado=1");//tambien agregar filtrado de estado
-                database.setParameter("@id", id);
+                database.setParameter("@id", idPedido);
                 database.execQuery();
 
                 while (database.Reader.Read())
@@ -127,8 +127,34 @@ namespace negocio
             {
                 database.closeConnection();
             }
-           
-
         }
+
+        public Orden getOrden(int idOrden)
+        {
+            database = new Database();
+            Orden aux = new Orden();
+            try
+            {
+                database.setQuery("SELECT * FROM Ordenes WHERE id_Orden=@id and Estado=1");
+                database.setParameter("@id", idOrden);
+                database.execQuery();
+
+                if (database.Reader.Read())
+                {
+                    setOrdenData(aux, database.Reader);
+                }
+                return aux;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
     }
 }
