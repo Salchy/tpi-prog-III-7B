@@ -48,20 +48,20 @@ namespace AppWeb
 
         protected void dgvMesas_asignadas_SelectedIndexChanged(object sender, EventArgs e) //es igual el de ordenes pero salta error, al buscar la lista de ordenes de la mesa
         {
-            /*OrdenDatos orden = new OrdenDatos();
+            OrdenDatos orden = new OrdenDatos();
             PedidoDatos pedido = new PedidoDatos();
+           
+            int idmesa = Convert.ToInt32(dgvMesas_asignadas.SelectedDataKey.Value.ToString());
+            int idpedido = pedido.getIdPedidoFromIdMesa(idmesa);
+            
+            dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+            dgvOrdenes.DataBind();
 
-            int idmesa = int.Parse(dgvMesas_asignadas.SelectedDataKey.Value.ToString());
-            int idpedido = pedido.getIdPedidoMesaAbierta(idmesa);
-
-            dvgOrdenes.DataSource= orden.getOrdenesPedido(idpedido);
-            dvgOrdenes.DataBind();*/
         }
         protected void btnAgregarOrden_Click(object sender, EventArgs e)
         {
             Response.Redirect("Ordenes.aspx", false);
-        }
 
-        
+        }
     }
 }

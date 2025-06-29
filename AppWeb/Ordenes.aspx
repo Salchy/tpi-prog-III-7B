@@ -43,6 +43,7 @@
         <asp:BoundField HeaderText="Menu" DataField="Nombre" />
         <asp:BoundField HeaderText="Precio" DataField="Precio" />
         <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
+           <asp:BoundField HeaderText="Stock" DataField="Stock" />
         <asp:CommandField  ShowSelectButton="true" ButtonType="Button" SelectText="Seleccionar"/>
     </Columns>
 </asp:GridView>

@@ -103,10 +103,10 @@ namespace negocio
         public List<Orden> getOrdenesPedido(int id)
         {
             List<Orden> Pedidas = new List<Orden>();
-
+            database = new Database();
             try
             {
-                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido= @id and Estado=1");//tambien agregar filtrado de estado
+                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido=@id and Estado=1");//tambien agregar filtrado de estado
                 database.setParameter("@id", id);
                 database.execQuery();
 

@@ -38,11 +38,15 @@ namespace AppWeb
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+
+                    Session.Remove("Paginaorigen");//por si es secion quedo guardada alguna pagina distinta a la actual
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                Session.Add("error", "Error al cargar las mesas o las categorias del menu: " + ex.Message);
+                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -86,15 +90,17 @@ namespace AppWeb
 
                 }
 
-                //OrdenDatos orden = new OrdenDatos();
-                // dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
-                //dgvOrdenes.DataBind();
+                OrdenDatos orden = new OrdenDatos();
+                 dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+                dgvOrdenes.DataBind();
 
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", "Error al cargar el pedido: " + ex.Message);
+                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -117,7 +123,9 @@ namespace AppWeb
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", "Error al cargar las subcategorias del menu: " + ex.Message);
+                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -140,7 +148,9 @@ namespace AppWeb
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", "Error al cargar los menues asociados a la subcategorias seleccionada: " + ex.Message);
+                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -172,7 +182,9 @@ namespace AppWeb
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", "Error al obtener el nombre del menu seleccionado: " + ex.Message);
+                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Response.Redirect("Error.aspx", false);
             }
         }
 

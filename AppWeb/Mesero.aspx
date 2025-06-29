@@ -21,7 +21,7 @@
 </div>
 <div> 
     <h1>Pedido de la mesa</h1>
-    <asp:GridView ID="dvgOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table table-dark table-striped" DataKeyNames="id">
+    <asp:GridView ID="dgvOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table table-dark table-striped" DataKeyNames="id">
         <Columns>
             <asp:BoundField DataField="id" HeaderStyle-CssClass="oculto" ItemStyle-CssClass="oculto"/>
             <asp:BoundField HeaderText="Menu" DataField="Menu.Nombre" />
