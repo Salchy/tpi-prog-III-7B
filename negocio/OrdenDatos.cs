@@ -87,6 +87,25 @@ namespace negocio
 
         }
 
+        public void EliminarOrdenesdelPedido(int idPedido)
+        {
+                     
+            try
+            {
+                OrdenDatos orden = new OrdenDatos();
+                List<Orden> Pedidas = orden.getOrdenesPedido(idPedido);
+
+                foreach (var item in Pedidas)
+                {
+                    orden.EliminarOrden(item.id);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void setOrdenData(Orden aux, SqlDataReader data)
         {
            menuItemDatos menu = new menuItemDatos();

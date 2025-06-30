@@ -22,7 +22,7 @@ namespace AppWeb
             }
             nivelUsuario = ((Usuario)Session["Usuario"]).NivelUsuario;
 
-            switch (nivelUsuario)
+            /*switch (nivelUsuario)
             {
                 case 0:
                     this.MasterPageFile = "~/masterPageGerencia.Master";
@@ -36,7 +36,8 @@ namespace AppWeb
                 default:
                     this.MasterPageFile = "~/masterPageMesero.master";
                     return;
-            }
+            }*/
+            this.MasterPageFile = "~/masterPageMesero.master";
         }
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,28 +49,99 @@ namespace AppWeb
             }
             Usuario Mesero = (Usuario)Session["Usuario"];
             List<Mesa> mesasAsignadas;
-            if (((Usuario)Session["Usuario"]).NivelUsuario < 2) // Es Admin o Gerente
-                mesasAsignadas = mesaDatos.getMesas();
-            else
-                mesasAsignadas = mesaDatos.getMesasAsignadas(Mesero.Id);
-
+            mesasAsignadas = mesaDatos.getMesasAsignadas(Mesero.Id);
             dgvMesas_asignadas.DataSource = mesasAsignadas;
             dgvMesas_asignadas.DataBind();
 
             Session["MesasAsignadas"] = mesasAsignadas;
         }
 
-        protected void dgvMesas_asignadas_SelectedIndexChanged(object sender, EventArgs e) //es igual el de ordenes pero salta error, al buscar la lista de ordenes de la mesa
+                protected void dgvMesas_asignadas_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            /*OrdenDatos orden = new OrdenDatos();
+            int idMesa = Convert.ToInt32(e.CommandArgument);
             PedidoDatos pedido = new PedidoDatos();
+            if (e.CommandName == "Eliminar Pedido")
+            {
 
-            int idmesa = int.Parse(dgvMesas_asignadas.SelectedDataKey.Value.ToString());
-            int idpedido = pedido.getIdPedidoMesaAbierta(idmesa);
+                try
+                {
+                   
+                    int idPedido = pedido.getIdPedidoFromIdMesa(idMesa);
+                    if (idPedido != 0)
+                    {
+                        pedido.EliminarPedido(idPedido);
 
-            dvgOrdenes.DataSource= orden.getOrdenesPedido(idpedido);
-            dvgOrdenes.DataBind();*/
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Session.Add("error", "Error al eliminar el pedido: " + ex.Message);
+                    Session["Paginaorigen"] = "mesas.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                    Response.Redirect("Error.aspx", false);
+                }
+
+            }
+            else
+            {
+                if (e.CommandName == "Cerrar Pedido")
+                {
+                    try
+                    {
+
+                        int idPedido = pedido.getIdPedidoFromIdMesa(idMesa);
+
+
+                        if (idPedido != 0)
+                        {
+                            OrdenDatos ordenes = new OrdenDatos();
+                            decimal importe = 0;
+                            importe = pedido.ImportePedido(idPedido);
+                            pedido.ModificarPedido(idPedido, importe, false);
+                            ordenes.EliminarOrdenesdelPedido(idPedido);
+
+
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Session.Add("error", "Error al cerrar el pedido: " + ex.Message);
+                        Session["Paginaorigen"] = "mesas.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                        Response.Redirect("Error.aspx", false);
+                    }
+                }
+                else
+                {
+
+                    try
+                    {
+                                            
+
+                        PedidoDatos nuevo = new PedidoDatos();
+                        int idpedido = nuevo.getIdPedidoFromIdMesa(idMesa);
+                        if (idpedido == 0)
+                        {
+                            nuevo.CrearPedido(idMesa);
+
+                        }
+                        Session["MesaAbierta"] =idMesa;
+                        Response.Redirect("Ordenes.aspx", false);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Session.Add("error", "Error al cargar el pedido: " + ex.Message);
+                        Session["Paginaorigen"] = "mesas.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                        Response.Redirect("Error.aspx", false);
+                    }
+                }
+
+
+
+            }
+
         }
-
     }
 }

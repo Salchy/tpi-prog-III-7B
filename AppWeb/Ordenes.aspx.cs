@@ -33,11 +33,45 @@ namespace AppWeb
                     ddlCategoria.DataBind();
                     ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
 
+                   
                     ddlMesaActiva.DataSource = ((List<Mesa>)Session["MesasAsignadas"]);
                     ddlMesaActiva.DataTextField = "NumeroMesa";
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+                    if ( Session["MesaAbierta"].ToString() != null)
+                    {
+                        ddlMesaActiva.SelectedValue = Session["MesaAbierta"].ToString();
+                        try
+                        {
+                            int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
+                            if (idmesa == 0)
+                            {
+                                return;
+                            }
+
+                            PedidoDatos nuevo = new PedidoDatos();
+                            int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
+                            if (idpedido == 0)
+                            {
+                                nuevo.CrearPedido(idmesa);
+
+                            }
+
+                            OrdenDatos orden = new OrdenDatos();
+                            dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+                            dgvOrdenes.DataBind();
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Session.Add("error", "Error al cargar el pedido: " + ex.Message);
+                            Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                            Response.Redirect("Error.aspx", false);
+                        }
+                    }
+                    
 
                     Session.Remove("Paginaorigen");//por si es secion quedo guardada alguna pagina distinta a la actual
                 }
@@ -50,25 +84,13 @@ namespace AppWeb
             }
         }
 
-        protected void btnEliminarOrden_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             Response.Redirect("Mesero.aspx", false);
         }
-
-        protected void btnAgregar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void btnEnviar_Click(object sender, EventArgs e)
-        {
-
-        }
+               
+       
 
         protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
         {

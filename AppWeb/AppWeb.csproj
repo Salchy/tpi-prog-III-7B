@@ -159,7 +159,7 @@
     <Content Include="login.aspx" />
     <Content Include="gerencia.aspx" />
     <Content Include="mesas.aspx" />
-    <Content Include="Mesero.aspx" />
+    <Content Include="pedidos.aspx" />
     <Content Include="gerenciaPersonal.aspx" />
     <Content Include="gerenciaRestablecerPassword.aspx" />
     <Content Include="gerenciaMesas.aspx" />
@@ -330,12 +330,12 @@
     <Compile Include="mesas.aspx.designer.cs">
       <DependentUpon>mesas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Mesero.aspx.cs">
-      <DependentUpon>Mesero.aspx</DependentUpon>
+    <Compile Include="pedidos.aspx.cs">
+      <DependentUpon>pedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Mesero.aspx.designer.cs">
-      <DependentUpon>Mesero.aspx</DependentUpon>
+    <Compile Include="pedidos.aspx.designer.cs">
+      <DependentUpon>pedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="gerenciaPersonal.aspx.cs">
       <DependentUpon>gerenciaPersonal.aspx</DependentUpon>

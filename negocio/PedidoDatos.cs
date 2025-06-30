@@ -58,7 +58,7 @@ namespace negocio
             }
         }
 
-        public void ModificarPedido(int id, float importe, bool estado)
+        public void ModificarPedido(int id, decimal importe, bool estado)
         {
 
             database = new Database();
@@ -94,12 +94,7 @@ namespace negocio
                 database.execQuery();
 
                 OrdenDatos orden = new OrdenDatos();
-                List<Orden> Pedidas = orden.getOrdenesPedido(idPedido);
-
-                foreach (var item in Pedidas)
-                {
-                    orden.EliminarOrden(item.id);
-                }
+                orden.EliminarOrdenesdelPedido(idPedido);                
 
             }
             catch (Exception ex)
@@ -139,6 +134,34 @@ namespace negocio
                 setPedidoData(aux, database.Reader);
                 return aux;
 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+        public decimal ImportePedido(int idPedido)
+        {
+            database = new Database();
+
+            try
+            {
+                OrdenDatos orden = new OrdenDatos();
+                List<Orden> Pedidas = orden.getOrdenesPedido(idPedido);
+
+                decimal importe= 0;
+
+                foreach (var item in Pedidas)
+                {
+                    importe = importe + (item.Cantidad * item.Menu.Precio);
+                    
+                }
+
+                return importe;
             }
             catch (Exception ex)
             {

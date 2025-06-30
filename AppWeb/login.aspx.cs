@@ -23,7 +23,7 @@ namespace AppWeb
                 }
                 else if (user.NivelUsuario == 2)
                 {
-                    Response.Redirect("Mesero.aspx");
+                    Response.Redirect("mesas.aspx");
                 }
             }
         }
@@ -59,10 +59,10 @@ namespace AppWeb
                     Response.Redirect("Gerencia.aspx");
                     break;
                 case 2:
-                    Response.Redirect("Mesero.aspx");
+                    Response.Redirect("mesas.aspx");
                     break;
                 default:
-                    Response.Redirect("Mesero.aspx");
+                    Response.Redirect("mesas.aspx");
                     return;
             }
         }

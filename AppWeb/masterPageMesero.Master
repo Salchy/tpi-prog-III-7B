@@ -25,6 +25,12 @@
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="mesas.aspx">Mesas</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="pedidos.aspx">Pedidos</a>
+                            </li>
+                            <li class="nav-item">
+                               <a class="nav-link active" aria-current="page" href="ordenes.aspx">Ordenes</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
