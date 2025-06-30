@@ -60,7 +60,7 @@
                     <asp:Button ID="btnEditar" runat="server" Text="Editar"
                         CommandName="Editar"
                         CommandArgument='<%# Eval("Id") %>'
-                        CssClass="btn btn-info" />
+                        CssClass="btn btn-warning" />
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -84,5 +84,5 @@
       </Columns>
     </asp:GridView>
 
-    <asp:Button Text="AGREGAR" ID="btnAgregarSub" runat="server" CssClass="btn btn-success" OnClick="btnAgregarSub_Click" />
+    <asp:Button Text="Agregar Subcategoria" ID="btnAgregarSub" runat="server" CssClass="btn btn-success" OnClick="btnAgregarSub_Click" />
 </asp:Content>

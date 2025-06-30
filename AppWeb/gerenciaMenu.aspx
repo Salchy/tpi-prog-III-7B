@@ -64,7 +64,7 @@
                     <asp:Button ID="btnEditar" runat="server" Text="Editar"
                         CommandName="Editar"
                         CommandArgument='<%# Eval("IdMenuItem") %>'
-                        CssClass="btn btn-info" />
+                        CssClass="btn btn-warning" />
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -91,5 +91,5 @@
 
    
 
-    <asp:Button Text="AGREGAR" ID="btnAgregar" runat="server" CssClass="btn btn-success" OnClick="btnAgregar_Click" />
+    <asp:Button Text="Agregar Item" ID="btnAgregar" runat="server" CssClass="btn btn-success" OnClick="btnAgregar_Click" />
 </asp:Content>

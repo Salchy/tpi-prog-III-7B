@@ -11,6 +11,9 @@
 </head>
 <body class="bg-dark text-white">
     <form id="form1" runat="server">
+          <div class="text-center">
+            <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblTitle" runat="server">Registrar nuevo Item</asp:Label>
+        </div>
         <div class="container mt-5">
             <div class="row ">
                 <div class="col-md-6 text-center">
@@ -58,8 +61,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" />
-                        <asp:Button Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_Click" runat="server" />
+                        <asp:Button Text="Agregar Item" ID="btnAceptar" OnClick="btnAceptar_Click" runat="server" CssClass="btn btn-success mx-auto"/>
+                        <asp:Button Text="Cancelar" ID="btnCancelar" OnClick="btnCancelar_Click" runat="server" CssClass="btn btn-danger mx-auto"/>
                     </div>
                 </div>
             </div>

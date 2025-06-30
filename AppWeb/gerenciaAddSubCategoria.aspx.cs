@@ -32,6 +32,8 @@ namespace AppWeb
                     {
                         int id = int.Parse(Request.QueryString["id"].ToString());
                         SubCategoriaDatos manager = new SubCategoriaDatos();
+                        btnAceptarSubCate.Text = "Modificar Subcategoria";
+                        lblTitle.Text = "Modificar Subcategoria existente";
 
                         SubCategoria sub = manager.GetSubCategoria(id);
                         txtNombre.Text = sub.Nombre;

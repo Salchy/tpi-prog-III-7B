@@ -54,17 +54,17 @@ namespace negocio
 
                 if (campo == "Ítem")
                 {
-                    consulta += "WHERE Nombre_Menu like '" + filtro + "%' ";
+                    consulta += "WHERE Nombre_Menu like '%" + filtro + "%' ";
 
 
                 }
                 else if (campo == "Categoria")
                 {
-                    consulta += "WHERE Nombre_Categoria like '" + filtro + "%' ";
+                    consulta += "WHERE Nombre_Categoria like '%" + filtro + "%' ";
                 }
                 else if (campo == "SubCategoria")
                 {
-                    consulta += "WHERE NombreSubCategoria like '" + filtro + "%' ";
+                    consulta += "WHERE NombreSubCategoria like '%" + filtro + "%' ";
                 }
 
                 if (estado == "Activo")

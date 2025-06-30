@@ -11,6 +11,9 @@
 </head>
 <body class="bg-dark text-white">
     <form id="form1" runat="server">
+        <div class="text-center">
+            <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblTitle" runat="server">Registrar nueva Subcategoria</asp:Label>
+        </div>
         <div class="container mt-5">
             <div class="row ">
                 <div class="col-md-6 text-center">
@@ -29,8 +32,8 @@
                          <asp:Label ID="lblErrorDDL" runat="server" ForeColor="Red" Visible="false" />
 
                     </div>
-                    <asp:Button Text="Aceptar" ID="btnAceptarSubCate" runat="server" OnClick="btnAceptarSubCate_Click" />
-                    <asp:Button Text="Volver" ID="btnVolverSubCate" runat="server"  OnClick="btnVolverSubCate_Click"/>
+                    <asp:Button Text="Agregar Categoria" ID="btnAceptarSubCate" runat="server" OnClick="btnAceptarSubCate_Click" CssClass="btn btn-success mx-auto" />
+                    <asp:Button Text="Cancelar" ID="btnVolverSubCate" runat="server"  OnClick="btnVolverSubCate_Click" CssClass="btn btn-danger mx-auto"/>
                 </div>
             </div>
         </div>

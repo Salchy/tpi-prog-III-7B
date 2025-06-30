@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
     <asp:Panel runat="server" ID="panelCategorias" DefaultButton="btnBuscarCategorias">
     <div class="row">
         <div class="col-4">
@@ -51,7 +50,7 @@
                     <asp:Button ID="btnEditar" runat="server" Text="Editar"
                         CommandName="Editar"
                         CommandArgument='<%# Eval("Id") %>'
-                        CssClass="btn btn-info" />
+                        CssClass="btn btn-warning" />
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -75,5 +74,5 @@
         </Columns>
     </asp:GridView>
 
-    <asp:Button ID="btnAgregarCate" runat="server" Text="AGREGAR" CssClass="btn btn-success" OnClick="btnAgregarCate_Click" />
+    <asp:Button ID="btnAgregarCate" runat="server" Text="Agregar Categoria" CssClass="btn btn-success" OnClick="btnAgregarCate_Click" />
 </asp:Content>

@@ -11,7 +11,9 @@
 </head>
 <body class="bg-dark text-white">
     <form id="form1" runat="server">
-
+        <div class="text-center">
+            <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblTitle" runat="server">Registrar nueva categoria</asp:Label>
+        </div>
         <div class="container mt-5">
             <div class="row ">
                 <div class="col-md-6 text-center">
@@ -21,10 +23,10 @@
                     <div class="mb-3">
                         <label for="txtNombre" class="form-label">Nombre</label>
                         <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
-                         <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" />
+                        <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" />
                     </div>
-                    <asp:Button Text="Aceptar" ID="btnAceptarCate" runat="server" OnClick="btnAceptarCate_Click" />
-                    <asp:Button Text="Volver" ID="btnVolverCate" OnClick="btnVolverCate_Click" runat="server" />
+                    <asp:Button Text="Agregar Categoria" ID="btnAceptarCate" runat="server" OnClick="btnAceptarCate_Click" CssClass="btn btn-success mx-auto" />
+                    <asp:Button Text="Cancelar" ID="btnVolverCate" OnClick="btnVolverCate_Click" runat="server" CssClass="btn btn-danger mx-auto" />
                 </div>
             </div>
         </div>

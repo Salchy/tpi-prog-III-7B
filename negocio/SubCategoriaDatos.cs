@@ -56,13 +56,13 @@ namespace negocio
 
                 if (campo == "Nombre")
                 {
-                    consulta += "WHERE S.nombreSubCategoria like '" + filtro + "%' ";
+                    consulta += "WHERE S.nombreSubCategoria like '%" + filtro + "%' ";
 
 
                 }
                 else if (campo == "Categoria asociada")
                 {
-                    consulta += "WHERE C.Nombre_Categoria like '" + filtro + "%' ";
+                    consulta += "WHERE C.Nombre_Categoria like '%" + filtro + "%' ";
                 }
 
                 if (estado == "Activo")

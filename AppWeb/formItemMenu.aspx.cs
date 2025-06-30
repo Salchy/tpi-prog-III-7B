@@ -40,6 +40,9 @@ namespace AppWeb
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
                     txtStock.Text = seleccionado.Stock.ToString();
 
+                    lblTitle.Text = "Modificar item existente";
+                    btnAceptar.Text = "Modificar item";
+
                     // NECESITO EL DDL CARGADO PARA QUE LO PUEDA ASIGNAR  
                     SubCategoriaDatos datos = new SubCategoriaDatos();
                     List<SubCategoria> todas = datos.listarSubCategorias();

@@ -22,6 +22,8 @@ namespace AppWeb
             {
                 int id = int.Parse(Request.QueryString["id"].ToString());
                 CategoriasDatos manager = new CategoriasDatos();
+                btnAceptarCate.Text = "Modificar Categoria";
+                lblTitle.Text = "Modificar Categoria existente";
 
                 try
                 {

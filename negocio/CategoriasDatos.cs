@@ -52,7 +52,7 @@ namespace negocio
             {
                 string consulta = " SELECT id_Categoria, Nombre_Categoria, Estado From Categoria_Menu ";
                 
-                 consulta += "WHERE Nombre_Categoria like '" + filtro + "%' ";
+                 consulta += "WHERE Nombre_Categoria like '%" + filtro + "%' ";
 
 
                 if (estado == "Activo")
