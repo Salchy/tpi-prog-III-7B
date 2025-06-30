@@ -15,47 +15,99 @@ namespace AppWeb
         {
             if (!IsPostBack)
             {
-                CategoriasDatos lista = new CategoriasDatos();
 
-                List<Categoria> todasCategorias = lista.listarCategorias();
-                List <Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
-
-                ddlCategoria.DataSource = activas;
-                ddlCategoria.DataTextField = "Nombre";     // VISUAL
-                ddlCategoria.DataValueField = "Id";        // QUE SE GUARDA
-                ddlCategoria.DataBind();
-
-                ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-
-
-                if (Request.QueryString["id"] != null)
+                try
                 {
-                    int id = int.Parse(Request.QueryString["id"].ToString());
+                    CategoriasDatos lista = new CategoriasDatos();
 
-                    menuItemDatos manager = new menuItemDatos();
-                    dominio.MenuItem seleccionado = manager.GetItem(id);
-                    txtNombre.Text = seleccionado.Nombre;
-                    txtPrecio.Text = seleccionado.Precio.ToString();
-                    txtDescripcion.Text = seleccionado.Descripcion;
-                    ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-                    txtStock.Text = seleccionado.Stock.ToString();
+                    List<Categoria> todasCategorias = lista.listarCategorias();
 
-                    lblTitle.Text = "Modificar item existente";
-                    btnAceptar.Text = "Modificar item";
 
-                    // NECESITO EL DDL CARGADO PARA QUE LO PUEDA ASIGNAR  
-                    SubCategoriaDatos datos = new SubCategoriaDatos();
-                    List<SubCategoria> todas = datos.listarSubCategorias();
 
-                    List<SubCategoria> filtradas = todas.Where(x => x.Estado==true && x.IdCategoriaPadre == seleccionado.Categoria.Id) .ToList();
+                    if (Request.QueryString["id"] != null)
+                    {
+                        int id = int.Parse(Request.QueryString["id"].ToString());
 
-                    ddlSubcategoria.DataSource = filtradas;
-                    ddlSubcategoria.DataTextField = "Nombre";
-                    ddlSubcategoria.DataValueField = "Id";
-                    ddlSubcategoria.DataBind();
+                        menuItemDatos manager = new menuItemDatos();
+                        dominio.MenuItem seleccionado = manager.GetItem(id);
+                        txtNombre.Text = seleccionado.Nombre;
+                        txtPrecio.Text = seleccionado.Precio.ToString();
+                        txtDescripcion.Text = seleccionado.Descripcion;
+                        txtStock.Text = seleccionado.Stock.ToString();
+                        lblTitle.Text = "Modificar item existente";
+                        btnAceptar.Text = "Modificar item";
 
-                    ddlSubcategoria.SelectedValue = seleccionado.SubCategoria.Id.ToString();
+                        // cuando estoy modificando me traigo las cateegorias activas mas la propia si esta inactiva.
+
+                        List<Categoria> ActivasMasActual = todasCategorias.Where(c => c.Estado == true || c.Id == seleccionado.Categoria.Id).ToList();
+
+                        foreach (var item in ActivasMasActual)
+                        {
+                            if (item.Id == seleccionado.Categoria.Id)
+                            {
+                                if (item.Estado == false)
+                                {
+                                    item.Nombre += " (Inactiva)";
+                                }
+                            }
+                        }
+
+
+                        ddlCategoria.DataSource = ActivasMasActual;
+                        ddlCategoria.DataTextField = "Nombre";
+                        ddlCategoria.DataValueField = "Id";
+                        ddlCategoria.DataBind();
+                        ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
+                        ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+
+                        // NECESITO EL DDL CARGADO PARA QUE LO PUEDA ASIGNAR  
+                        SubCategoriaDatos datos = new SubCategoriaDatos();
+                        List<SubCategoria> todas = datos.listarSubCategorias();
+
+
+                        // cuando estoy modificando me traigo las subcategorias activas mas la propia si esta inactiva(relacionadas a la categoria padre)
+                        List<SubCategoria> filtradas = todas.Where(x => (x.Estado == true || x.Id == seleccionado.SubCategoria.Id) && x.IdCategoriaPadre == seleccionado.Categoria.Id).ToList();
+
+
+                        foreach (var item in filtradas)
+                        {
+                            if (item.Id == seleccionado.SubCategoria.Id)
+                            {
+                                if (item.Estado == false)
+                                {
+                                    item.Nombre += " (Inactiva)";
+                                }
+                            }
+                        }
+
+
+                        ddlSubcategoria.DataSource = filtradas;
+                        ddlSubcategoria.DataTextField = "Nombre";
+                        ddlSubcategoria.DataValueField = "Id";
+                        ddlSubcategoria.DataBind();
+
+                        ddlSubcategoria.SelectedValue = seleccionado.SubCategoria.Id.ToString();
+                    }
+                    else
+                    {
+                        // cuando agrego solo me traigo las categorias activas
+
+                        List<Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
+
+                        ddlCategoria.DataSource = activas;
+                        ddlCategoria.DataTextField = "Nombre";     // VISUAL
+                        ddlCategoria.DataValueField = "Id";        // QUE SE GUARDA
+                        ddlCategoria.DataBind();
+                        ddlCategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+
+                    }
                 }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                
             }
 
 
@@ -73,12 +125,12 @@ namespace AppWeb
 
                 List<SubCategoria> filtradas = todas.Where(x => x.Estado == true && x.IdCategoriaPadre == idCategoriaPadre).ToList();
 
+                ddlSubcategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
                 ddlSubcategoria.DataSource = filtradas;
                 ddlSubcategoria.DataTextField = "Nombre";
                 ddlSubcategoria.DataValueField = "Id";
                 ddlSubcategoria.DataBind();
 
-                ddlSubcategoria.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
             }
             catch (Exception ex)
             {

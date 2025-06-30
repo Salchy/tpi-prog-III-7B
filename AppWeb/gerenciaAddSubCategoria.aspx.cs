@@ -19,14 +19,7 @@ namespace AppWeb
                 {
                     CategoriasDatos lista = new CategoriasDatos();
                     List<Categoria> todasCategorias = lista.listarCategorias();
-                    List<Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
-
-                    ddlCategoriaPadre.DataSource = activas;
-                    ddlCategoriaPadre.DataTextField = "Nombre";     // VISUAL
-                    ddlCategoriaPadre.DataValueField = "Id";        // QUE SE GUARDA
-                    ddlCategoriaPadre.DataBind();
-
-                    ddlCategoriaPadre.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+                  
 
                     if (Request.QueryString["id"] != null)
                     {
@@ -37,7 +30,43 @@ namespace AppWeb
 
                         SubCategoria sub = manager.GetSubCategoria(id);
                         txtNombre.Text = sub.Nombre;
+
+
+                        // cuando estoy modificando me traigo las cateegorias activas mas la propia si esta inactiva.
+
+                        List<Categoria> ActivasMasActual = todasCategorias.Where(c => c.Estado == true || c.Id == sub.IdCategoriaPadre).ToList();
+
+                        foreach (var item in ActivasMasActual)
+                        {
+                            if (item.Id == sub.IdCategoriaPadre)
+                            {
+                                if (item.Estado == false)
+                                {
+                                    item.Nombre += " (Inactiva)";
+                                }
+                            }
+                        }
+
+
+                        ddlCategoriaPadre.DataSource = ActivasMasActual;
+                        ddlCategoriaPadre.DataTextField = "Nombre";
+                        ddlCategoriaPadre.DataValueField = "Id";
+                        ddlCategoriaPadre.DataBind();                   
+
+                        ddlCategoriaPadre.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
                         ddlCategoriaPadre.SelectedValue = sub.IdCategoriaPadre.ToString();
+                    } else
+                    {
+
+                        // cuando agrego solo me traigo las categorias activas
+                        List<Categoria> activas = todasCategorias.Where(x => x.Estado == true).ToList();
+
+                        ddlCategoriaPadre.DataSource = activas;
+                        ddlCategoriaPadre.DataTextField = "Nombre";     // VISUAL
+                        ddlCategoriaPadre.DataValueField = "Id";        // QUE SE GUARDA
+                        ddlCategoriaPadre.DataBind();
+
+                        ddlCategoriaPadre.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
                     }
                 }
                 catch (Exception ex)
