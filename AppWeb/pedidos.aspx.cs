@@ -39,6 +39,39 @@ namespace AppWeb
                 ddlMesasAsignadas.DataValueField = "IdMesa";
                 ddlMesasAsignadas.DataBind();
                 ddlMesasAsignadas.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+
+                if (Session["MesaAbierta"] != null && Session["MesaAbierta"].ToString() != "0")
+                {
+                    ddlMesasAsignadas.SelectedValue = Session["MesaAbierta"].ToString();
+                    try
+                    {
+                        int idmesa = Convert.ToInt32(ddlMesasAsignadas.SelectedValue);
+                        if (idmesa == 0)
+                        {
+                            return;
+                        }
+
+                        PedidoDatos nuevo = new PedidoDatos();
+                        int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
+                        if (idpedido == 0)
+                        {
+                            nuevo.CrearPedido(idmesa);
+
+                        }
+
+                        OrdenDatos orden = new OrdenDatos();
+                        dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+                        dgvOrdenes.DataBind();
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Session.Add("error", "Error al cargar el pedido: " + ex.Message);
+                        Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                        Response.Redirect("Error.aspx", false);
+                    }
+                }
             }
 
 
@@ -49,10 +82,13 @@ namespace AppWeb
             try
             {
                 int idmesa = Convert.ToInt32(ddlMesasAsignadas.SelectedValue);
-
+                if (idmesa == 0)
+                {
+                    return;
+                }
                 PedidoDatos nuevo = new PedidoDatos();
                 int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
-                if (idpedido == 0)
+                if (idpedido == 0 )
                 {
                     nuevo.CrearPedido(idmesa);
 
@@ -61,6 +97,7 @@ namespace AppWeb
                 OrdenDatos orden = new OrdenDatos();
                 dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                 dgvOrdenes.DataBind();
+                Session["MesaAbierta"] = idmesa;
 
             }
             catch (Exception ex)

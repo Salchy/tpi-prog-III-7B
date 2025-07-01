@@ -40,7 +40,7 @@ namespace AppWeb
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-                    if ( Session["MesaAbierta"] != null)
+                    if ( Session["MesaAbierta"] != null && Session["MesaAbierta"].ToString() != "0")
                     {
                         ddlMesaActiva.SelectedValue = Session["MesaAbierta"].ToString();
                         try
@@ -89,6 +89,9 @@ namespace AppWeb
         protected void btnPedidos_Click(object sender, EventArgs e)
         {
             Response.Redirect("pedidos.aspx", false);
+
+            int idMesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
+            Session["MesaAbierta"] = idMesa;
         }
 
 
@@ -286,8 +289,7 @@ namespace AppWeb
                 Session.Add("error", "Error al cargar la orden: " + ex.Message);
                 Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usarno en un boton de volveren la pagina de error
                 Response.Redirect("Error.aspx", false);
-               // throw ex;
-                
+              
             }
         }
 
