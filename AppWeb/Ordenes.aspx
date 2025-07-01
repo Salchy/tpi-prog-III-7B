@@ -32,7 +32,8 @@
                 </div>
                 <div class="col-3">
                     <div class="mb-3">
-                        <asp:TextBox runat="server" ID="txtMenu" CssClass="form-control" placeholder="Menu" OnTextChanged="txtMenu_TextChanged" AutoPostBack="true" />
+                        <asp:TextBox runat="server" ID="txtMenu" CssClass="form-control" placeholder="Menu" OnTextChanged="txtMenu_TextChanged" AutoPostBack="true" ReadOnly="true" />
+                        <asp:Label ID="lblErrorMenu" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
                     </div>
                 </div>
 
@@ -52,7 +53,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="mb-3">
-                        <asp:Label Text="Menu" runat="server" ID="lblMenu"></asp:Label>
+                        <asp:Label Text="Menu" runat="server" ID="lblMenu" Visible="false"></asp:Label>
 
                     </div>
                 </div>
@@ -68,6 +69,7 @@
         <div class="col-1">
             <div class="mb-3">
                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" placeholder="Cantidad" ReadOnly="false" AutoPostBack="false"></asp:TextBox>
+                <asp:Label ID="lblErrorCantidad" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
             </div>
         </div>
         <div class="col-3">

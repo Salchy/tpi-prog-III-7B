@@ -141,6 +141,9 @@ namespace AppWeb
                     Orden selecionada = new Orden();
                     selecionada = orden.getOrden(idOrden);
                     lblMenu.Text = selecionada.Menu.Nombre;
+                    lblMenu.Visible = true;
+                    txtCantidad.Visible = true;
+                    btnModificarOrden.Visible = true;
 
                 }
                 catch (Exception ex)
@@ -167,7 +170,7 @@ namespace AppWeb
                 int cantMax = (selecionada.Pedido.mesa.NumeroComensales) * 6;
                 //la cantidad maxima de un menu que se toma en una orden es 6 veces el numero de comensales de la mesa
 
-                if (validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
+                if (lblMenu.Text != "Menu" && validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
                 {
                     
                     selecionada.Cantidad = int.Parse(txtCantidad.Text);
@@ -177,10 +180,15 @@ namespace AppWeb
                     dgvOrdenes.DataBind();
 
                     txtCantidad.Text = "";
+                    lblMenu.Text = "Menu";
+                    lblErrorCantidad.Visible = false;
                 }
                 else
                 {
                     txtCantidad.Text = "";
+                   
+                    lblErrorCantidad.Visible = true;
+                    lblErrorCantidad.Text = "Ingrese un numero mayor 0 y menor que " + cantMax + " .";
                 }            
 
             }

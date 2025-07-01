@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Xml.Linq;
 using dominio;
 using System.Web.DynamicData;
+using Microsoft.Ajax.Utilities;
 
 namespace AppWeb
 {
@@ -162,9 +163,9 @@ namespace AppWeb
                 int id = Convert.ToInt32(ddlSubCategoria.SelectedValue);
                 Session.Add("Submenu", submenu.listarSubMenu(id));
                 dgvMenu.DataSource = Session["Submenu"];
-
-
                 dgvMenu.DataBind();
+
+                txtMenu.ReadOnly = false;
 
             }
             catch (Exception ex)
@@ -178,11 +179,23 @@ namespace AppWeb
 
         protected void txtMenu_TextChanged(object sender, EventArgs e)
         {
+            Validaciones val = new Validaciones();
             List<dominio.MenuItem> submenu = (List<dominio.MenuItem>)Session["Submenu"];
 
-            List<dominio.MenuItem> MenuBuscado = submenu.FindAll(x => x.Nombre.ToUpper().Contains(txtMenu.Text.ToUpper()));
-            dgvMenu.DataSource = MenuBuscado;
-            dgvMenu.DataBind();
+            if (val.validarTextos(txtMenu.Text) == false)
+            {
+                txtMenu.Text = "";
+                lblErrorMenu.Visible = true;
+                lblErrorMenu.Text = "Valor ingresado invalido, no se permiten caracteres especiales ni solo numeros";
+            }
+            else
+            {
+                lblErrorMenu.Visible = false;
+                List<dominio.MenuItem> MenuBuscado = submenu.FindAll(x => x.Nombre.ToUpper().Contains(txtMenu.Text.ToUpper()));
+                dgvMenu.DataSource = MenuBuscado;
+                dgvMenu.DataBind();
+            }
+            
         }
 
         protected void dgvMenu_SelectedIndexChanged(object sender, EventArgs e)
@@ -194,11 +207,13 @@ namespace AppWeb
                 {
                     menuItemDatos menu = new menuItemDatos();
                     dominio.MenuItem item = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
+                    lblMenu.Visible = true;
                     lblMenu.Text = item.Nombre;
+                    //txtCantidad.Visible = true;
+                    //btnAgregarOrden.Visible = true;
+
 
                 }
-
-
 
             }
             catch (Exception ex)
@@ -226,8 +241,9 @@ namespace AppWeb
             //la cantidad maxima de un menu que se toma en una orden es 6 veces el numero de comensales de la mesa
             try
             {
-                if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
+                if (lblMenu.Text != "Menu" && ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
                 {
+                    
                     orden1.Menu = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value));
                     orden1.Estado = true;
                     orden1.Pedido = nuevo.BuscarPedido(nuevo.getIdPedidoFromIdMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)));
@@ -243,15 +259,21 @@ namespace AppWeb
                     dgvOrdenes.DataBind();
 
                     txtMenu.Text = "";
+                    txtMenu.ReadOnly = true;
+                    lblErrorMenu.Visible = false;
                     ddlCategoria.SelectedValue = "0";
                     txtCantidad.Text = "";
+                    lblErrorCantidad.Visible = false;
                     lblMenu.Text = "Menu";
                     ddlSubCategoria.SelectedValue = "0";
+                    
 
                 }
                 else
                 {
                     txtCantidad.Text = "";
+                    lblErrorCantidad.Visible = true;
+                    lblErrorCantidad.Text = "Ingrese un numero mayor 0 y menor que " + cantMax + " .";
                 }
 
 
