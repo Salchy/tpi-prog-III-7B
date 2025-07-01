@@ -9,17 +9,17 @@ EXEC SP_CrearUsuario '123456', 'Gerencia', 'Gerente', '68E059127789EA920AD39F186
 EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', 'EF9BD64654BB3D8826C9892CFCC3B01FA73774247DBFB1E7AA09A6271E76D80D', 2;
 
 -- Por defecto, se asignan las mesas al user Admin
-INSERT INTO Mesas (numeroMesa, id_Usuario) VALUES
-	('Mesa 01', 1),
-	('Mesa 02', 1),
-	('Mesa 03', 1),
-	('Mesa 04', 1),
-	('Mesa 05', 1),
-	('Mesa 06', 1),
-	('Mesa 07', 1),
-	('Mesa 08', 1),
-	('Mesa 09', 1),
-	('Mesa 10', 1);
+INSERT INTO Mesas (numeroMesa, id_Usuario, Numero_Comensales) VALUES
+	('Mesa 01', 1, 4),
+	('Mesa 02', 1, 4),
+	('Mesa 03', 1, 4),
+	('Mesa 04', 1, 4),
+	('Mesa 05', 1, 4),
+	('Mesa 06', 1, 4),
+	('Mesa 07', 1, 4),
+	('Mesa 08', 1, 4),
+	('Mesa 09', 1, 4),
+	('Mesa 10', 1, 4);
 GO
 
 -- Insert de Categorías
@@ -343,6 +343,6 @@ GO
 --SELECT * FROM Menu;
 
 -- Consulta para obtener el menú, con sus categorías
---SELECT Nombre_Menu, SCM.NombreSubCategoria, CM.Nombre_Categoria FROM Menu AS M
+--SELECT Nombre_Menu, SCM.NombreSubCategoria, CM.Nombre_Categoria, M.Stock FROM Menu AS M
 --INNER JOIN SubCategoriaMenu AS SCM ON M.idSubCategoria = SCM.idSubCategoria
 --INNER JOIN Categoria_Menu AS CM ON SCM.idCategoriaPrincipal = CM.id_Categoria;

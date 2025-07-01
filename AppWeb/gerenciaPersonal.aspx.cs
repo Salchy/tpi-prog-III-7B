@@ -73,5 +73,10 @@ namespace AppWeb
             dataGridEmpleados.PageIndex = e.NewPageIndex;
             dataGridEmpleados.DataBind();
         }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

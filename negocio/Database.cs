@@ -24,14 +24,14 @@ namespace negocio
             {
                 //connection = new SqlConnection(ConfigurationManager.AppSettings["databaseConnection"]);
                 connection = new SqlConnection("server =.\\SQLEXPRESS; database = RestoBar; integrated security = true");
-                
+
                 command = new SqlCommand();
             }
             catch (Exception Ex)
             {
                 throw Ex;
             }
-            
+
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace negocio
                 throw ex;
             }
         }
-        
+
         /// <summary>
         /// Para ejecutar consultas de tipo SCALAR (Retorna un valor entero), Funciones de resumen de SQL
         /// </summary>
@@ -100,7 +100,13 @@ namespace negocio
             try
             {
                 connection.Open();
-                return int.Parse(command.ExecuteScalar().ToString());
+                object result = command.ExecuteScalar();
+
+                if (result == null || result == DBNull.Value)
+                {
+                    return 0;
+                }
+                return int.Parse(result.ToString());
             }
             catch (Exception ex)
             {
