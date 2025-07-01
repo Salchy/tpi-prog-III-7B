@@ -71,6 +71,7 @@ CREATE TABLE [Pedidos] (
 	[id_Mesa] TINYINT NOT NULL,
 	[Importe] MONEY NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
+	[Fecha] DATETIME NOT NULL DEFAULT GETdate(),
 	PRIMARY KEY([id_Pedido])
 );
 GO
