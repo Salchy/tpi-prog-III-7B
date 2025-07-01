@@ -125,7 +125,7 @@ namespace AppWeb
                             nuevo.CrearPedido(idMesa);
 
                         }
-                        Session["MesaAbierta"] =idMesa;
+                        //Session["MesaAbierta"] =idMesa;
                         Response.Redirect("Ordenes.aspx", false);
 
                     }

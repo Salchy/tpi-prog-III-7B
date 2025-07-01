@@ -95,5 +95,5 @@
         
     
    
-     <asp:Button Text="Volver" CssClass="btn btn-primary btn-sm" ID="btnVolver" OnClick="btnVolver_Click" runat="server" />
+     <asp:Button Text="Pedidos" CssClass="btn btn-primary btn-sm" ID="btnPedidos" OnClick="btnPedidos_Click" runat="server" />
 </asp:Content>

@@ -39,7 +39,7 @@ namespace AppWeb
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-                    if ( Session["MesaAbierta"].ToString() != null)
+                    if ( Session["MesaAbierta"] != null)
                     {
                         ddlMesaActiva.SelectedValue = Session["MesaAbierta"].ToString();
                         try
@@ -84,13 +84,13 @@ namespace AppWeb
             }
         }
 
-        
-        protected void btnVolver_Click(object sender, EventArgs e)
+
+        protected void btnPedidos_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Mesero.aspx", false);
+            Response.Redirect("pedidos.aspx", false);
         }
-               
-       
+
+
 
         protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -270,5 +270,7 @@ namespace AppWeb
                 
             }
         }
+
+        
     }
 }

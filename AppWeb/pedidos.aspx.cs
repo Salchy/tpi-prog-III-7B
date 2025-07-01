@@ -31,40 +31,46 @@ namespace AppWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            MesaDatos mesaDatos = new MesaDatos();
 
-            if (IsPostBack)
+            if (!IsPostBack)
             {
-                return;
+                ddlMesasAsignadas.DataSource = ((List<Mesa>)Session["MesasAsignadas"]);
+                ddlMesasAsignadas.DataTextField = "NumeroMesa";
+                ddlMesasAsignadas.DataValueField = "IdMesa";
+                ddlMesasAsignadas.DataBind();
+                ddlMesasAsignadas.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
             }
-            Usuario Mesero = (Usuario)Session["Usuario"];
-            List<Mesa> mesasAsignadas;
-            mesasAsignadas = mesaDatos.getMesasAsignadas(Mesero.Id);
 
-            dgvMesas_asignadas.DataSource = mesasAsignadas;
-            dgvMesas_asignadas.DataBind();
 
-            Session["MesasAsignadas"] = mesasAsignadas;
         }
 
-        protected void dgvMesas_asignadas_SelectedIndexChanged(object sender, EventArgs e)
+        protected void ddlMesasAsignadas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            OrdenDatos orden = new OrdenDatos();
-            PedidoDatos pedido = new PedidoDatos();
+            try
+            {
+                int idmesa = Convert.ToInt32(ddlMesasAsignadas.SelectedValue);
 
-            int idmesa = Convert.ToInt32(dgvMesas_asignadas.SelectedDataKey.Value.ToString());
-            int idpedido = pedido.getIdPedidoFromIdMesa(idmesa);
+                PedidoDatos nuevo = new PedidoDatos();
+                int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
+                if (idpedido == 0)
+                {
+                    nuevo.CrearPedido(idmesa);
 
-            dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
-            dgvOrdenes.DataBind();
+                }
 
+                OrdenDatos orden = new OrdenDatos();
+                dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
+                dgvOrdenes.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", "Error al cargar el pedido: " + ex.Message);
+                Session["Paginaorigen"] = "pedidos.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Response.Redirect("Error.aspx", false);
+            }
         }
-        protected void btnAgregarOrden_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Ordenes.aspx", false);
-
-        }
-
         
 
         protected void dgvMesas_asignadas_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -87,7 +93,7 @@ namespace AppWeb
                 catch (Exception ex)
                 {
                     Session.Add("error", "Error al cerrar el pedido: " + ex.Message);
-                    Session["Paginaorigen"] = "Mesero.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                    Session["Paginaorigen"] = "pedidos.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                     Response.Redirect("Error.aspx", false);
                 }
 
@@ -106,7 +112,10 @@ namespace AppWeb
                 {
                     OrdenDatos orden=new OrdenDatos();  
                     Orden eliminada = new Orden();
+                    menuItemDatos menuseleccionado = new menuItemDatos();
                     eliminada = orden.getOrden(idOrden);
+                    eliminada.Menu.Stock = eliminada.Menu.Stock + eliminada.Cantidad;
+                    menuseleccionado.ModificarItem(eliminada.Menu);
 
                     orden.EliminarOrden(idOrden);
 
@@ -118,7 +127,7 @@ namespace AppWeb
                 catch (Exception ex)
                 {
                     Session.Add("error", "Error al eliminar la orden: " + ex.Message);
-                    Session["Paginaorigen"] = "Mesero.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                    Session["Paginaorigen"] = "pedidos.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                     Response.Redirect("Error.aspx", false);
                 }
 
@@ -138,7 +147,7 @@ namespace AppWeb
                 {
 
                     Session.Add("error", "Error al obtener el nombre del menu de la orden seleccionada: " + ex.Message);
-                    Session["Paginaorigen"] = "Mesero.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                    Session["Paginaorigen"] = "pedidos.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                     Response.Redirect("Error.aspx", false);
                 }
 
@@ -179,9 +188,11 @@ namespace AppWeb
             {
 
                 Session.Add("error", "Error al modificar la orden seleccionada: " + ex.Message);
-                Session["Paginaorigen"] = "Mesero.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                Session["Paginaorigen"] = "pedidos.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                 Response.Redirect("Error.aspx", false);
             }                      
         }
+
+       
     }
 }
