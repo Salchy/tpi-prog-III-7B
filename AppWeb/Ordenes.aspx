@@ -14,6 +14,12 @@
             </asp:DropDownList>
         </div>
     </div>
+    <div class="=row">
+       <div class="col">
+         <asp:Label ID="lblMesaSinPedido" runat="server" ForeColor="Red" Visible="false" Style="font-size: 30px;"/>
+         <asp:Button Text="Volver" runat="server" CssClass="btn btn-primary" ID="btnVolver" OnClick="btnVolver_Click" Visible="false" />
+       </div>
+    </div>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
             <h2>Menu disponible</h2>

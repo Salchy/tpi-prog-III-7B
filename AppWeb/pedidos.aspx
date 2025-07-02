@@ -12,7 +12,12 @@
                 </asp:DropDownList>
             </div>
         </div>
-
+        <div class="=row">
+            <div class="col">
+                 <asp:Label ID="lblMesaSinPedido" runat="server" ForeColor="Red" Visible="false" Style="font-size: 30px;"/>
+                 <asp:Button Text="Volver" runat="server" CssClass="btn btn-primary" ID="btnVolver" OnClick="btnVolver_Click" Visible="false" />
+           </div>
+        </div>
     </div>
 
 
@@ -56,7 +61,7 @@
         <div class="col-1">
             <div class="mb-3">
                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" placeholder="Cantidad" ReadOnly="false" AutoPostBack="false"  Visible="false" ></asp:TextBox>
-                <asp:Label ID="lblErrorCantidad" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
+                <asp:Label ID="lblErrorCantidad" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;" />
             </div>
         </div>
         <div class="col-3">

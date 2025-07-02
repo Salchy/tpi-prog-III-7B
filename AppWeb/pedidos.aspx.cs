@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AppWeb
 {
@@ -39,6 +40,8 @@ namespace AppWeb
                 ddlMesasAsignadas.DataValueField = "IdMesa";
                 ddlMesasAsignadas.DataBind();
                 ddlMesasAsignadas.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+                
+
 
                 if (Session["MesaAbierta"] != null && Session["MesaAbierta"].ToString() != "0")
                 {
@@ -55,10 +58,15 @@ namespace AppWeb
                         int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
                         if (idpedido == 0)
                         {
-                            nuevo.CrearPedido(idmesa);
+                            
+                            lblMesaSinPedido.Visible = true;
+                            lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                            btnVolver.Visible = true;
 
                         }
-
+                        lblMesaSinPedido.Visible = false;
+                        lblMesaSinPedido.Text = "";
+                        btnVolver.Visible = false;
                         OrdenDatos orden = new OrdenDatos();
                         dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                         dgvOrdenes.DataBind();
@@ -90,10 +98,16 @@ namespace AppWeb
                 int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
                 if (idpedido == 0 )
                 {
-                    nuevo.CrearPedido(idmesa);
+                    
+                    lblMesaSinPedido.Visible = true;
+                    lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                    btnVolver.Visible = true;
 
                 }
 
+                lblMesaSinPedido.Visible = false;
+                lblMesaSinPedido.Text = "";
+                btnVolver.Visible = false;
                 OrdenDatos orden = new OrdenDatos();
                 dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                 dgvOrdenes.DataBind();
@@ -110,33 +124,7 @@ namespace AppWeb
         }
         
 
-        protected void dgvMesas_asignadas_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            int idMesa = Convert.ToInt32(e.CommandArgument);
-            if (e.CommandName == "Cerrar Pedido")
-            {
-
-                try
-                {
-                    PedidoDatos pedido = new PedidoDatos();
-                    int idPedido = pedido.getIdPedidoFromIdMesa(idMesa);
-                    if (idPedido != 0)
-                    {
-                        pedido.EliminarPedido(idPedido);
-
-                    }
-                    
-                }
-                catch (Exception ex)
-                {
-                    Session.Add("error", "Error al cerrar el pedido: " + ex.Message);
-                    Session["Paginaorigen"] = "pedidos.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
-                    Response.Redirect("Error.aspx", false);
-                }
-
-            }
-
-        }
+        
         
         protected void dgvOrdenes_RowCommand(object sender, GridViewCommandEventArgs e)
         {
@@ -237,7 +225,10 @@ namespace AppWeb
                 Response.Redirect("Error.aspx", false);
             }                      
         }
-
-       
+               
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("mesas.aspx", false);
+        }
     }
 }

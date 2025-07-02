@@ -55,10 +55,14 @@ namespace AppWeb
                             int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
                             if (idpedido == 0)
                             {
-                                nuevo.CrearPedido(idmesa);
+                                lblMesaSinPedido.Visible = true;
+                                lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                                btnVolver.Visible = true;
 
                             }
-
+                            lblMesaSinPedido.Visible = false;
+                            lblMesaSinPedido.Text = "";
+                            btnVolver.Visible = false;
                             OrdenDatos orden = new OrdenDatos();
                             dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                             dgvOrdenes.DataBind();
@@ -112,10 +116,13 @@ namespace AppWeb
                 int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
                 if (idpedido == 0)
                 {
-                    nuevo.CrearPedido(idmesa);
-
+                    lblMesaSinPedido.Visible = true;
+                    lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                    btnVolver.Visible = true;
                 }
-
+                lblMesaSinPedido.Visible = false;
+                lblMesaSinPedido.Text = "";
+                btnVolver.Visible = false;
                 OrdenDatos orden = new OrdenDatos();
                  dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                 dgvOrdenes.DataBind();
@@ -240,10 +247,11 @@ namespace AppWeb
             Validaciones validar = new Validaciones();
             MesaDatos mesaselecionada = new MesaDatos();
 
-            int cantMax = (mesaselecionada.getMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)).NumeroComensales) * 6;
+            
             //la cantidad maxima de un menu que se toma en una orden es 6 veces el numero de comensales de la mesa
             try
             {
+                int cantMax = (mesaselecionada.getMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)).NumeroComensales) * 6;
                 if (lblMenu.Text != "Menu" && ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
                 {
                     
@@ -294,5 +302,10 @@ namespace AppWeb
         }
 
         
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("mesas.aspx", false);
+        }
     }
 }

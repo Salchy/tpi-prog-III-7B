@@ -94,7 +94,10 @@ namespace negocio
                 database.execQuery();
 
                 OrdenDatos orden = new OrdenDatos();
-                orden.EliminarOrdenesdelPedido(idPedido);                
+                MesaDatos mesa = new MesaDatos();
+                orden.EliminarOrdenesdelPedido(idPedido);
+                mesa.ComensalesMesa(0, BuscarPedido(idPedido));
+                
 
             }
             catch (Exception ex)

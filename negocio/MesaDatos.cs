@@ -171,5 +171,21 @@ namespace negocio
                 throw Ex;
             }
         }
+        public void ComensalesMesa(int comensales, Pedido pedido)
+        {
+            try
+            {
+                database.setQuery("UPDATE Mesas SET Numero_Comensales = @comensales WHERE id_Mesa = @idMesa;");
+                database.setParameter("@comensales", comensales);
+                database.setParameter("@idMesa",pedido.mesa.IdMesa);
+                database.execNonQuery();
+                
+            }
+            catch (Exception Ex)
+            {
+
+                throw Ex;
+            }
+        }
     }
 }
