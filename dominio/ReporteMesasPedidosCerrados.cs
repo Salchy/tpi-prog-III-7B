@@ -8,7 +8,7 @@ namespace dominio
 {
     public class ReporteMesasPedidosCerrados
     {
-        public int IDMesa { get; set; }
+        public string numeroMesa { get; set; }
         public int TotalPedidos { get; set; }
     }
 }

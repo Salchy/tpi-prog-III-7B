@@ -29,7 +29,7 @@
                 <div class="card-header">MESA CON MAS PEDIDOS CERRADOS (DIARIO)</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PedidosCerrados" runat="server"></h5>
-                    <a href="reporteMesasPedidosCerrados.aspx">MAS DETALLES</a>
+                    <a href="reporteMesasPedidosCerrados.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
                 </div>
             </div>
         </div>

@@ -16,10 +16,16 @@
                 <div class="col-md-4 text-center">
                     <img src="img/logo.png" class="img-fluid" style="max-height: 400px;" alt="Logo" />
                 </div>
-                <asp:GridView runat="server">
-
-                </asp:GridView>
-            </div>
+                <div class="col-md-4 text-center" style="margin-top:50px;margin-left:40px;">
+                    <asp:GridView ID="dgvReporte" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" Height="100%">
+                        <Columns>
+                            <asp:BoundField HeaderText="Mesa" DataField="numeroMesa" />
+                            <asp:BoundField HeaderText="Cantidad de pedidos" DataField="TotalPedidos" />
+                        </Columns>
+                    </asp:GridView>
+                </div>
+        </div>
+        <asp:Button Text="VOLVER A REPORTES" CssClass="btn btn-primary" runat="server" ID="btnVolver" OnClick="btnVolver_Click" Style="margin-left: 480px; margin-top:-60px;" />
         </div>
     </form>
 </body>
