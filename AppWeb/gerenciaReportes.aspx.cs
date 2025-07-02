@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
 
 namespace AppWeb
 {
@@ -14,7 +15,7 @@ namespace AppWeb
         {
             ocupacionMesaCantidad.InnerText = getPedidosActivos().ToString() + "/" + getMesasHabilitadas().ToString();
             estadoOrdenesCantidad.InnerText = getOrdenesActivas().ToString();
-            PedidosCerrados.InnerText = MesaMasPedidos().ToString();
+            PedidosCerrados.InnerText = MesaMasPedidos();
             //estadoOrdenesCantidad.InnerText = "1";
         }
 
@@ -75,13 +76,22 @@ namespace AppWeb
         }
 
 
-        private int MesaMasPedidos()
+        private string MesaMasPedidos()
         {
             Database database = new Database();
             try
             {
-                database.setQuery("SELECT TOP 1 id_Mesa,COUNT(*) as TotalPedidos FROM Pedidos WHERE CONVERT (DATE,Fecha) = CONVERT(DATE,GETDATE()) AND IMPORTE <> 0 AND Estado = 0 GROUP BY id_Mesa ORDER BY TotalPedidos DESC");
-                return database.execScalar();
+                database.setQuery("SELECT TOP 1 id_Mesa,COUNT(*) as TotalPedidos FROM Pedidos WHERE CONVERT (DATE,Fecha) = CONVERT(DATE,GETDATE()) AND Importe <> 0 AND Estado = 0 GROUP BY id_Mesa ORDER BY TotalPedidos DESC");
+                int id = database.execScalar();
+
+                if (id == 0)
+                {
+                    return "Sin datos";
+                }
+                MesaDatos manager = new MesaDatos();
+                Mesa mesa = manager.getMesa(id);
+
+                return mesa.NumeroMesa;
             }
             catch (Exception ex)
             {
