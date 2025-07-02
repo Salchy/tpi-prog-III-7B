@@ -24,6 +24,24 @@ namespace AppWeb
         protected global::System.Web.UI.ScriptManager scmCategorias;
 
         /// <summary>
+        /// Control lblTitle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTitle;
+
+        /// <summary>
+        /// Control lblMesaSelecionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMesaSelecionada;
+
+        /// <summary>
         /// Control ddlMesaActiva.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVolver;
+
+        /// <summary>
+        /// Control lblMenuDisponible.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMenuDisponible;
 
         /// <summary>
         /// Control lblCategoria.
@@ -105,6 +132,15 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.GridView dgvMenu;
 
         /// <summary>
+        /// Control lblOrdenNueva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrdenNueva;
+
+        /// <summary>
         /// Control lblMenu.
         /// </summary>
         /// <remarks>
@@ -139,6 +175,15 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarOrden;
+
+        /// <summary>
+        /// Control lblOrdenesPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrdenesPedido;
 
         /// <summary>
         /// Control dgvOrdenes.

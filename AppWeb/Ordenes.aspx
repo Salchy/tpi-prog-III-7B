@@ -5,11 +5,17 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="scmCategorias" runat="server"></asp:ScriptManager>
 
-    <h1>Carga de Ordenes</h1>
+    <div class="text-center">
+       <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblTitle" runat="server">Carga de Ordenes</asp:Label>
+    </div>
 
     <div class="=row">
         <div class="col">
-            <h2>Mesa</h2>
+
+            <div class="text-center">
+               <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblMesaSelecionada" runat="server" Visible="true">Mesa</asp:Label>
+           </div>
+
             <asp:DropDownList ID="ddlMesaActiva" runat="server" OnSelectedIndexChanged="ddlMesaActiva_SelectedIndexChanged" AutoPostBack="true" class="btn btn-secondary dropdown-toggle">
             </asp:DropDownList>
         </div>
@@ -22,7 +28,9 @@
     </div>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
-            <h2>Menu disponible</h2>
+            <div class="text-center">
+              <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblMenuDisponible" runat="server" Visible="true">Menu disponible</asp:Label>
+            </div>
             <div class="row">
                 <div class="col-3">
                     <div class="mb-3">
@@ -55,7 +63,10 @@
                 </Columns>
             </asp:GridView>
 
-            <h2>Orden a agregar</h2>
+            <div class="text-center">
+                <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblOrdenNueva" runat="server" Visible="true">Agregar orden</asp:Label>
+            </div>
+
             <div class="row">
                 <div class="col-3">
                     <div class="mb-3">
@@ -87,7 +98,9 @@
 
 
 
-    <h2>Ordenes del Pedido</h2>
+    <div class="text-center">
+    <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblOrdenesPedido" runat="server">Ordenes del pedido</asp:Label>
+     </div>
 
     <asp:GridView ID="dgvOrdenes" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false">
 

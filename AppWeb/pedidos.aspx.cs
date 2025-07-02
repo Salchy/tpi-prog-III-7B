@@ -40,8 +40,11 @@ namespace AppWeb
                 ddlMesasAsignadas.DataValueField = "IdMesa";
                 ddlMesasAsignadas.DataBind();
                 ddlMesasAsignadas.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
-                
-
+                lblMesaSinPedido.Visible = false;
+                lblMesaSinPedido.Text = "";
+                btnVolver.Visible = false;
+                lblPedido.Visible = false;
+                lblOrdenModificada.Visible = false;
 
                 if (Session["MesaAbierta"] != null && Session["MesaAbierta"].ToString() != "0")
                 {
@@ -60,13 +63,13 @@ namespace AppWeb
                         {
                             
                             lblMesaSinPedido.Visible = true;
-                            lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                            lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
                             btnVolver.Visible = true;
+                            lblPedido.Visible = false;
+                            lblOrdenModificada.Visible = false;
 
                         }
-                        lblMesaSinPedido.Visible = false;
-                        lblMesaSinPedido.Text = "";
-                        btnVolver.Visible = false;
+                        
                         OrdenDatos orden = new OrdenDatos();
                         dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                         dgvOrdenes.DataBind();
@@ -89,6 +92,14 @@ namespace AppWeb
         {
             try
             {
+                lblMesaSinPedido.Visible = false;
+                lblMesaSinPedido.Text = "";
+                btnVolver.Visible = false;
+                lblPedido.Visible = true;
+                lblMenu.Visible = false;
+                txtCantidad.Visible = false;
+                btnModificarOrden.Visible = false;
+                lblOrdenModificada.Visible = false;
                 int idmesa = Convert.ToInt32(ddlMesasAsignadas.SelectedValue);
                 if (idmesa == 0)
                 {
@@ -100,14 +111,19 @@ namespace AppWeb
                 {
                     
                     lblMesaSinPedido.Visible = true;
-                    lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                    lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
                     btnVolver.Visible = true;
+                    lblPedido.Visible = false;
+                    lblMenu.Visible = false;
+                    txtCantidad.Visible = false;
+                    btnModificarOrden.Visible = false;
+                    lblOrdenModificada.Visible = false;
+
+
 
                 }
 
-                lblMesaSinPedido.Visible = false;
-                lblMesaSinPedido.Text = "";
-                btnVolver.Visible = false;
+
                 OrdenDatos orden = new OrdenDatos();
                 dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                 dgvOrdenes.DataBind();
@@ -147,6 +163,14 @@ namespace AppWeb
                     dgvOrdenes.DataSource = orden.getOrdenesPedido(eliminada.Pedido.Id);
                     dgvOrdenes.DataBind();
 
+                    txtCantidad.Text = "";
+                    lblMenu.Text = "Menu";
+                    lblErrorCantidad.Visible = false;
+                    lblOrdenModificada.Visible = false;
+                    lblMenu.Visible = false;
+                    txtCantidad.Visible = false;
+                    btnModificarOrden.Visible = false;
+
 
                 }
                 catch (Exception ex)
@@ -169,6 +193,8 @@ namespace AppWeb
                     lblMenu.Visible = true;
                     txtCantidad.Visible = true;
                     btnModificarOrden.Visible = true;
+                    lblOrdenModificada.Visible = true;
+
 
                 }
                 catch (Exception ex)
@@ -207,6 +233,10 @@ namespace AppWeb
                     txtCantidad.Text = "";
                     lblMenu.Text = "Menu";
                     lblErrorCantidad.Visible = false;
+                    lblOrdenModificada.Visible = false;
+                    lblMenu.Visible = false;
+                    txtCantidad.Visible = false;
+                    btnModificarOrden.Visible = false;
                 }
                 else
                 {

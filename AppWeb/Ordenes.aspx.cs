@@ -45,6 +45,9 @@ namespace AppWeb
                         ddlMesaActiva.SelectedValue = Session["MesaAbierta"].ToString();
                         try
                         {
+                            lblMesaSinPedido.Visible = false;
+                            lblMesaSinPedido.Text = "";
+                            btnVolver.Visible = false;
                             int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
                             if (idmesa == 0)
                             {
@@ -56,13 +59,11 @@ namespace AppWeb
                             if (idpedido == 0)
                             {
                                 lblMesaSinPedido.Visible = true;
-                                lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                                lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
                                 btnVolver.Visible = true;
 
                             }
-                            lblMesaSinPedido.Visible = false;
-                            lblMesaSinPedido.Text = "";
-                            btnVolver.Visible = false;
+                           
                             OrdenDatos orden = new OrdenDatos();
                             dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                             dgvOrdenes.DataBind();
@@ -110,19 +111,19 @@ namespace AppWeb
                 {
                     return;
                 }
+                lblMesaSinPedido.Visible = false;
+                lblMesaSinPedido.Text = "";
+                btnVolver.Visible = false;
 
-              
                 PedidoDatos nuevo = new PedidoDatos();
                 int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
                 if (idpedido == 0)
                 {
                     lblMesaSinPedido.Visible = true;
-                    lblMesaSinPedido.Text = "No exixte ningun pedido abierto asignado a la mesa";
+                    lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
                     btnVolver.Visible = true;
                 }
-                lblMesaSinPedido.Visible = false;
-                lblMesaSinPedido.Text = "";
-                btnVolver.Visible = false;
+                
                 OrdenDatos orden = new OrdenDatos();
                  dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
                 dgvOrdenes.DataBind();

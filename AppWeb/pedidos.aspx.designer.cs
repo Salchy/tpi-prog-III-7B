@@ -15,6 +15,15 @@ namespace AppWeb
     {
 
         /// <summary>
+        /// Control lblMesaSelecionada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMesaSelecionada;
+
+        /// <summary>
         /// Control ddlMesasAsignadas.
         /// </summary>
         /// <remarks>
@@ -42,6 +51,15 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.Button btnVolver;
 
         /// <summary>
+        /// Control lblPedido.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPedido;
+
+        /// <summary>
         /// Control dgvOrdenes.
         /// </summary>
         /// <remarks>
@@ -49,6 +67,15 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvOrdenes;
+
+        /// <summary>
+        /// Control lblOrdenModificada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrdenModificada;
 
         /// <summary>
         /// Control lblMenu.
