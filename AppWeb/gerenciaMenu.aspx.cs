@@ -19,17 +19,17 @@ namespace AppWeb
                 try
                 {
                     menuItemDatos menu = new menuItemDatos();
-                    dgvMenu.DataSource = menu.filtrar("Ítem","","Activo");
+                    dgvMenu.DataSource = menu.filtrar("Ítem", "", "Activo");
                     dgvMenu.DataBind();
 
-                   
+
                 }
                 catch (Exception ex)
                 {
 
                     throw ex;
                 }
-               
+
             }
         }
 
@@ -66,7 +66,7 @@ namespace AppWeb
 
             if (e.CommandName == "Editar")
             {
-                Response.Redirect("formItemMenu.aspx?id=" + id,false);
+                Response.Redirect("formItemMenu.aspx?id=" + id, false);
             }
 
             else if (e.CommandName == "Estado")
@@ -98,17 +98,12 @@ namespace AppWeb
         {
             try
             {
-               
-                    menuItemDatos manager = new menuItemDatos();
-                    dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedValue,
-                      txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
-                    dgvMenu.DataBind();
-                
-                    
+                menuItemDatos manager = new menuItemDatos();
+                dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedValue, txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
+                dgvMenu.DataBind();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -122,13 +117,11 @@ namespace AppWeb
                 ddlEstado.SelectedValue = "Activo";
                 ddlCampo.SelectedValue = "Ítem";
 
-                dgvMenu.DataSource = manager.filtrar("Ítem",
-                  txtFiltroAvanzado.Text, "Activo");
+                dgvMenu.DataSource = manager.filtrar("Ítem", txtFiltroAvanzado.Text, "Activo");
                 dgvMenu.DataBind();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

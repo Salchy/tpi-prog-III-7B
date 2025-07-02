@@ -209,6 +209,64 @@ namespace negocio
             }
         }
 
+        /// <summary>
+        /// Para obtener todos los usuarios de la base de datos de manera filtrada (criterio, texto a bucar, habilitado/deshabilitado)
+        /// </summary>
+        /// <returns></returns>
+        public List<Usuario> getUsuarios(string criterio, string toFind, bool state)
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+
+            string query = "SELECT * FROM Usuarios WHERE";
+
+            if (toFind != "")
+            {
+                if (criterio == "Nombre")
+                    query += " Nombre Like '%" + toFind + "%'";
+                else if (criterio == "Apellido")
+                    query += " Apellido Like '%" + toFind + "%'";
+                else if (criterio == "Nombre y Apelllido")
+                    query += " Nombre Like '%" + toFind + "%' OR Apellido Like '%" + toFind + "%'";
+                else if (criterio == "DNI")
+                    query += " DNI Like '%" + toFind + "%'";
+                // TODO: Todavía no hay definido nombre de niveles y cargos
+                //else if (criterio == "Cargo")
+                //    query += "WHERE DNI Like '%" + toFind + "%'";
+                query += " AND";
+            }
+
+            if (state)
+                query += " Estado = 1";
+            else
+                query += " Estado = 0";
+
+            try
+            {
+                database.setQuery(query);
+                database.execQuery();
+
+                while (database.Reader.Read())
+                {
+                    string dni = database.Reader["dni"].ToString();
+                    if (dni == "Admin")
+                    {
+                        continue; // Para que no añada al usuario Admin a la lista
+                    }
+                    Usuario usuario = new Usuario(Convert.ToInt32(database.Reader["id_Usuario"]), dni, database.Reader["nombre"].ToString(), database.Reader["apellido"].ToString(), Convert.ToInt32(database.Reader["Permisos"]), (bool)database.Reader["Estado"]);
+                    usuarios.Add(usuario);
+                }
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
         public bool modificarUsuario(Usuario usuario)
         {
             try

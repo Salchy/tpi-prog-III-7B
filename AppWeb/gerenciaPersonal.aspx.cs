@@ -21,7 +21,7 @@ namespace AppWeb
             }
             reloadDataBind();
         }
-        
+
         protected void dataGridEmpleados_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName != "Modify" && e.CommandName != "ToggleEstado" && e.CommandName != "RestorePassword")
@@ -76,7 +76,20 @@ namespace AppWeb
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
-
+            UsuarioDatos usuarioDatos = new UsuarioDatos();
+            string parametro = dropDownFindParameter.SelectedValue;
+            string filtro = textToFind.Text.Trim();
+            string estado = dropDownEstado.SelectedValue;
+            try
+            {
+                dataGridEmpleados.DataSource = usuarioDatos.getUsuarios(parametro, filtro, estado == "Habilitado");
+                dataGridEmpleados.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", "Error al aplicar el filtro: " + ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
