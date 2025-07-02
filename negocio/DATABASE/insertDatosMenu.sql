@@ -10,16 +10,16 @@ EXEC SP_CrearUsuario '654321', 'Empleado', 'Mesero', 'EF9BD64654BB3D8826C9892CFC
 
 -- Por defecto, se asignan las mesas al user Admin
 INSERT INTO Mesas (numeroMesa, id_Usuario, Numero_Comensales) VALUES
-	('Mesa 01', 1, 4),
-	('Mesa 02', 1, 4),
-	('Mesa 03', 1, 4),
-	('Mesa 04', 1, 4),
-	('Mesa 05', 1, 4),
-	('Mesa 06', 1, 4),
-	('Mesa 07', 1, 4),
-	('Mesa 08', 1, 4),
-	('Mesa 09', 1, 4),
-	('Mesa 10', 1, 4);
+	('Mesa 01', 1, 0),
+	('Mesa 02', 1, 0),
+	('Mesa 03', 1, 0),
+	('Mesa 04', 1, 0),
+	('Mesa 05', 1, 0),
+	('Mesa 06', 1, 0),
+	('Mesa 07', 1, 0),
+	('Mesa 08', 1, 0),
+	('Mesa 09', 1, 0),
+	('Mesa 10', 1, 0);
 GO
 
 -- Insert de Categorías

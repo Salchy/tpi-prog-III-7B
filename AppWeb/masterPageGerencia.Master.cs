@@ -12,6 +12,8 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (IsPostBack)
+                return;
             if (!UsuarioDatos.SesionActiva(Session["Usuario"]))
             {
                 Response.Redirect("login.aspx", false);

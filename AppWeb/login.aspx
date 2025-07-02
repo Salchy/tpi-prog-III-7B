@@ -26,7 +26,7 @@
                         <asp:TextBox ID="txtBarPassword" TextMode="Password" class="form-control" runat="server"></asp:TextBox>
                     </div>
                     <div class="mb-3 position-relative">
-                        <asp:Button ID="Button1" class="btn btn-primary position-relative bottom-0 start-50 translate-middle-x" runat="server" Text="Iniciar Sesion" OnClientClick="login" OnClick="Button1_Click" />
+                        <asp:Button ID="Button1" class="btn btn-primary position-relative bottom-0 start-50 translate-middle-x" runat="server" Text="Iniciar Sesion" OnClick="Button1_Click" />
                     </div>
                 </div>
             </div>

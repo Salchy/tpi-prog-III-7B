@@ -61,7 +61,6 @@ namespace AppWeb
             Database database = new Database();
             try
             {
-
                 database.setQuery("SELECT SUM(Cantidad) AS Cantidad FROM Ordenes WHERE Estado = 1");
                 return database.execScalar();
             }

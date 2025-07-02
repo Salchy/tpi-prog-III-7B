@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Panel runat="server" ID="panelMenu" DefaultButton="btnBuscar">
+    <asp:Panel runat="server" ID="panelMenu">
         <div class="row">
             <div class="col-2">
                 <div class="mb-3">
