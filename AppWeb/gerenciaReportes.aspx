@@ -24,5 +24,14 @@
                 </div>
             </div>
         </div>
+        <div class="col-5">
+            <div class="card text-bg-secondary mb-2" style="max-width: 24rem;">
+                <div class="card-header">MESA CON MAS PEDIDOS CERRADOS (DIARIO)</div>
+                <div class="card-body">
+                    <h5 class="card-title" id="PedidosCerrados" runat="server"></h5>
+                    <a href="reporteMesasPedidosCerrados.aspx">MAS DETALLES</a>
+                </div>
+            </div>
+        </div>
     </div>
 </asp:Content>

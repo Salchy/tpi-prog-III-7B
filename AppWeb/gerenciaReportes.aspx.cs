@@ -14,6 +14,7 @@ namespace AppWeb
         {
             ocupacionMesaCantidad.InnerText = getPedidosActivos().ToString() + "/" + getMesasHabilitadas().ToString();
             estadoOrdenesCantidad.InnerText = getOrdenesActivas().ToString();
+            PedidosCerrados.InnerText = MesaMasPedidos().ToString();
             //estadoOrdenesCantidad.InnerText = "1";
         }
 
@@ -61,6 +62,25 @@ namespace AppWeb
             {
 
                 database.setQuery("SELECT SUM(Cantidad) AS Cantidad FROM Ordenes WHERE Estado = 1");
+                return database.execScalar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
+
+        private int MesaMasPedidos()
+        {
+            Database database = new Database();
+            try
+            {
+                database.setQuery("SELECT TOP 1 id_Mesa,COUNT(*) as TotalPedidos FROM Pedidos WHERE CONVERT (DATE,Fecha) = CONVERT(DATE,GETDATE()) AND IMPORTE <> 0 AND Estado = 0 GROUP BY id_Mesa ORDER BY TotalPedidos DESC");
                 return database.execScalar();
             }
             catch (Exception ex)
