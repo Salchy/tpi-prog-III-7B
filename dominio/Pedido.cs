@@ -19,12 +19,12 @@ namespace dominio
         {
             mesa = mesaAbierta;
             Estado = true;
-            Importe = -1;
+            Importe = 0;
         }
         public Pedido()
         {
             Estado = true;
-            Importe = -1;
+            Importe = 0;
         }
     }
 }

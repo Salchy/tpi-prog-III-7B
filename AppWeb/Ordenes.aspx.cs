@@ -9,11 +9,14 @@ using System.Xml.Linq;
 using dominio;
 using System.Web.DynamicData;
 using Microsoft.Ajax.Utilities;
+using System.Runtime.InteropServices;
 
 namespace AppWeb
 {
     public partial class Ordenes : System.Web.UI.Page
     {
+        public bool ver { get; set; }
+        public bool ver2 { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             CategoriasDatos categoria = new CategoriasDatos();
@@ -40,14 +43,30 @@ namespace AppWeb
                     ddlMesaActiva.DataValueField = "IdMesa";
                     ddlMesaActiva.DataBind();
                     ddlMesaActiva.Items.Insert(0, new ListItem("-- Seleccione --", "0")); // PREDETERMINADO
+
+                    
+                   
+
+                    lblMesaSinPedido.Visible = false;
+                    lblMesaSinPedido.Text = "";
+                    btnVolver.Visible = false;
+                    //lblMenuDisponible
+                    //lblCategoria
+                    //lblSubCategoria
+                    //txtMenu
+
+
+
+                    ver2 = false;
+
+                    btnPedidos.Visible = false;
+
                     if ( Session["MesaAbierta"] != null && Session["MesaAbierta"].ToString() != "0")
                     {
                         ddlMesaActiva.SelectedValue = Session["MesaAbierta"].ToString();
                         try
                         {
-                            lblMesaSinPedido.Visible = false;
-                            lblMesaSinPedido.Text = "";
-                            btnVolver.Visible = false;
+                            
                             int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
                             if (idmesa == 0)
                             {
@@ -58,16 +77,49 @@ namespace AppWeb
                             int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
                             if (idpedido == 0)
                             {
+
                                 lblMesaSinPedido.Visible = true;
                                 lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
                                 btnVolver.Visible = true;
+                                btnPedidos.Visible = false;
+                                ver = false;                                                       
 
                             }
-                           
-                            OrdenDatos orden = new OrdenDatos();
-                            dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
-                            dgvOrdenes.DataBind();
+                            else
+                            {
 
+                                ver = true;
+                                lblMesaSinPedido.Visible = false;
+                                lblMesaSinPedido.Text = "";
+                                btnVolver.Visible = false;
+                                
+                                OrdenDatos orden = new OrdenDatos();
+                                List<Orden> Pedidas = orden.getOrdenesPedido(idpedido);
+                                dgvOrdenes.DataSource = Pedidas;
+                                dgvOrdenes.DataBind();
+                                Session["MesaAbierta"] = idmesa;
+
+                                int cont = 0;
+
+                                foreach (var item in Pedidas)
+                                {
+                                    cont++;
+
+                                }
+                                if (cont == 0)
+                                {
+                                    
+                                    lblOrdenesPedido.Visible=false;
+                                    btnPedidos.Visible = false;
+                                }
+                                else
+                                {
+                                    lblOrdenesPedido.Visible = true;
+                                    btnPedidos.Visible = true;
+                                }
+
+                            }
+                            
                         }
                         catch (Exception ex)
                         {
@@ -104,38 +156,72 @@ namespace AppWeb
         protected void ddlMesaActiva_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            try
-            {
-                int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
-                if (idmesa == 0)
+           
+                try
                 {
-                    return;
-                }
-                lblMesaSinPedido.Visible = false;
-                lblMesaSinPedido.Text = "";
-                btnVolver.Visible = false;
 
-                PedidoDatos nuevo = new PedidoDatos();
-                int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
-                if (idpedido == 0)
+                    int idmesa = Convert.ToInt32(ddlMesaActiva.SelectedValue);
+                    if (idmesa == 0)
+                    {
+                        return;
+                    }
+
+                    PedidoDatos nuevo = new PedidoDatos();
+                    int idpedido = nuevo.getIdPedidoFromIdMesa(idmesa);
+                    if (idpedido == 0)
+                    {
+
+                        lblMesaSinPedido.Visible = true;
+                        lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
+                        btnVolver.Visible = true;
+                        btnPedidos.Visible = false;
+                        ver = false;
+
+                    }
+                    else
+                    {
+
+                        ver = true;
+                        lblMesaSinPedido.Visible = false;
+                        lblMesaSinPedido.Text = "";
+                        btnVolver.Visible = false;
+
+                        OrdenDatos orden = new OrdenDatos();
+                        List<Orden> Pedidas = orden.getOrdenesPedido(idpedido);
+                        dgvOrdenes.DataSource = Pedidas;
+                        dgvOrdenes.DataBind();
+                        Session["MesaAbierta"] = idmesa;
+
+                        int cont = 0;
+
+                        foreach (var item in Pedidas)
+                        {
+                            cont++;
+
+                        }
+                        if (cont == 0)
+                        {
+
+                            lblOrdenesPedido.Visible = false;
+                            btnPedidos.Visible = false;
+                        }
+                        else
+                        {
+                            lblOrdenesPedido.Visible = true;
+                            btnPedidos.Visible = true;
+                        }
+
+                    }
+
+                }
+                catch (Exception ex)
                 {
-                    lblMesaSinPedido.Visible = true;
-                    lblMesaSinPedido.Text = "No existe ningun pedido abierto asignado a la mesa";
-                    btnVolver.Visible = true;
+
+                    Session.Add("error", "Error al cargar el pedido: " + ex.Message);
+                    Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
+                    Response.Redirect("Error.aspx", false);
                 }
-                
-                OrdenDatos orden = new OrdenDatos();
-                 dgvOrdenes.DataSource = orden.getOrdenesPedido(idpedido);
-                dgvOrdenes.DataBind();
-
-            }
-            catch (Exception ex)
-            {
-
-                Session.Add("error", "Error al cargar el pedido: " + ex.Message);
-                Session["Paginaorigen"] = "Ordenes.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
-                Response.Redirect("Error.aspx", false);
-            }
+            
         }
 
 
@@ -144,6 +230,7 @@ namespace AppWeb
 
             try
             {
+                ver = true;
                 if (IsPostBack)
                 {
                     int id = Convert.ToInt32(ddlCategoria.SelectedValue);
@@ -169,7 +256,7 @@ namespace AppWeb
         {
             try
             {
-
+                ver = true;
                 menuItemDatos submenu = new menuItemDatos();
                 int id = Convert.ToInt32(ddlSubCategoria.SelectedValue);
                 Session.Add("Submenu", submenu.listarSubMenu(id));
@@ -190,6 +277,7 @@ namespace AppWeb
 
         protected void txtMenu_TextChanged(object sender, EventArgs e)
         {
+            ver = true;
             Validaciones val = new Validaciones();
             List<dominio.MenuItem> submenu = (List<dominio.MenuItem>)Session["Submenu"];
 
@@ -214,16 +302,14 @@ namespace AppWeb
 
             try
             {
+                ver = true;
                 if (ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0")
                 {
                     menuItemDatos menu = new menuItemDatos();
                     dominio.MenuItem item = menu.GetItem(Convert.ToInt32(dgvMenu.SelectedDataKey.Value.ToString()));
                     lblMenu.Visible = true;
                     lblMenu.Text = item.Nombre;
-                    //txtCantidad.Visible = true;
-                    //btnAgregarOrden.Visible = true;
-
-
+                    ver2 = true;
                 }
 
             }
@@ -247,11 +333,12 @@ namespace AppWeb
             Orden orden1 = new Orden();
             Validaciones validar = new Validaciones();
             MesaDatos mesaselecionada = new MesaDatos();
+            ver = true;
 
-            
             //la cantidad maxima de un menu que se toma en una orden es 6 veces el numero de comensales de la mesa
             try
             {
+                ver = true;
                 int cantMax = (mesaselecionada.getMesa(Convert.ToInt32(ddlMesaActiva.SelectedValue)).NumeroComensales) * 6;
                 if (lblMenu.Text != "Menu" && ddlCategoria.SelectedValue != "0" && ddlSubCategoria.SelectedValue != "0" && validar.SoloNumeros(txtCantidad.Text) > 0 && validar.SoloNumeros(txtCantidad.Text) < cantMax)
                 {
@@ -278,6 +365,9 @@ namespace AppWeb
                     lblErrorCantidad.Visible = false;
                     lblMenu.Text = "Menu";
                     ddlSubCategoria.SelectedValue = "0";
+                    ver2 = false;
+                    lblOrdenesPedido.Visible = true; 
+                    btnPedidos.Visible = true;
                     
 
                 }
@@ -286,6 +376,8 @@ namespace AppWeb
                     txtCantidad.Text = "";
                     lblErrorCantidad.Visible = true;
                     lblErrorCantidad.Text = "Ingrese un numero mayor 0 y menor que " + cantMax + " .";
+                    ver2 = true;
+
                 }
 
 
@@ -308,5 +400,7 @@ namespace AppWeb
         {
             Response.Redirect("mesas.aspx", false);
         }
+
+        
     }
 }

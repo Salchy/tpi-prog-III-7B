@@ -128,7 +128,7 @@ namespace negocio
             database = new Database();
             try
             {
-                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido=@id and Estado=1");//tambien agregar filtrado de estado
+                database.setQuery("SELECT * FROM Ordenes WHERE id_Pedido=@id and Estado=1");
                 database.setParameter("@id", idPedido);
                 database.execQuery();
 

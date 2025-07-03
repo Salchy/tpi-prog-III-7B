@@ -24,6 +24,15 @@ namespace AppWeb
         protected global::System.Web.UI.WebControls.Label lblMesaSelecionada;
 
         /// <summary>
+        /// Control lblmesas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblmesas;
+
+        /// <summary>
         /// Control ddlMesasAsignadas.
         /// </summary>
         /// <remarks>
@@ -58,6 +67,15 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPedido;
+
+        /// <summary>
+        /// Control lblPedidoVacio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPedidoVacio;
 
         /// <summary>
         /// Control dgvOrdenes.

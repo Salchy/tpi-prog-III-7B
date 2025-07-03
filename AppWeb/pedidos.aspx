@@ -9,7 +9,10 @@
         <div class="=row">
 
              <div class="text-center">
-                 <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblMesaSelecionada" runat="server" Visible="true">Mesa</asp:Label>
+                 <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblMesaSelecionada" runat="server" Visible="true">Pedidos</asp:Label>
+             </div>
+            <div >
+              <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblmesas" runat="server" Visible="true">Mesa</asp:Label>
              </div>
 
             <div class="col">
@@ -20,8 +23,11 @@
         <div class="=row">
             <div class="col">
                  <asp:Label ID="lblMesaSinPedido" runat="server" ForeColor="Red" Visible="false" Style="font-size: 30px;"/>
-                 <asp:Button Text="Volver" runat="server" CssClass="btn btn-primary" ID="btnVolver" OnClick="btnVolver_Click" Visible="false" />
+                 
            </div>
+             <div class="col">
+            <asp:Button Text="Volver" runat="server" CssClass="btn btn-primary" ID="btnVolver" OnClick="btnVolver_Click" Visible="false" />
+             </div>
         </div>
     </div>
 
@@ -30,6 +36,9 @@
          <div class="text-center">
           <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblPedido" runat="server" Visible="true">Pedido de la mesa</asp:Label>
         </div>
+         <div class="text-center">
+            <asp:Label  ID="lblPedidoVacio" runat="server" ForeColor="Red" Visible="false" Style="font-size: 30px;">No hay ordenes asignadas al pedido</asp:Label>
+         </div>
 
         <asp:GridView ID="dgvOrdenes" runat="server" AutoGenerateColumns="False" CssClass="table table-dark table-striped" DataKeyNames="id" OnRowCommand="dgvOrdenes_RowCommand">
             <Columns>
@@ -59,7 +68,7 @@
     </div>
 
     <div class="row">
-        <div class="text-center">
+        <div>
             <asp:Label CssClass="fs-2 fw-bold text-warning" ID="lblOrdenModificada" runat="server" Visible="true">Orden a modificar</asp:Label>
        </div>
         <div class="col-1">
