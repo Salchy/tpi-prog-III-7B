@@ -129,6 +129,7 @@
     <Content Include="Global.asax" />
     <Content Include="Ordenes.aspx" />
     <Content Include="reporteMesasPedidosCerrados.aspx" />
+    <Content Include="reporteMesasPedidosCerradosMensual.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="reporteMesasPedidosCerrados.aspx.designer.cs">
       <DependentUpon>reporteMesasPedidosCerrados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="reporteMesasPedidosCerradosMensual.aspx.cs">
+      <DependentUpon>reporteMesasPedidosCerradosMensual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reporteMesasPedidosCerradosMensual.aspx.designer.cs">
+      <DependentUpon>reporteMesasPedidosCerradosMensual.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

@@ -28,8 +28,35 @@
             <div class="card text-bg-secondary mb-2" style="max-width: 24rem;">
                 <div class="card-header">MESA CON MAS PEDIDOS CERRADOS (DIARIO)</div>
                 <div class="card-body">
-                    <h5 class="card-title" id="PedidosCerrados" runat="server"></h5>
+                    <h5 class="card-title" id="PedidosCerradosDia" runat="server"></h5>
                     <a href="reporteMesasPedidosCerrados.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card text-bg-secondary mb-2" style="max-width: 18rem;">
+                <div class="card-header">PLATO MAS PEDIDO DEL DIA</div>
+                <div class="card-body">
+                    <h5 class="card-title" id="H2" runat="server">0</h5>
+                    <p class="card-text" id="P1" runat="server">Platillos en cola</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card text-bg-secondary mb-2" style="max-width: 18rem;">
+                <div class="card-header">PLATO MAS PEDIDO DEL MES</div>
+                <div class="card-body">
+                    <h5 class="card-title" id="H3" runat="server">0</h5>
+                    <p class="card-text" id="P2" runat="server">Platillos en cola</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="card text-bg-secondary mb-2" style="max-width: 24rem;">
+                <div class="card-header">MESA CON MAS PEDIDOS CERRADOS (MES)</div>
+                <div class="card-body">
+                    <h5 class="card-title" id="PedidosCerradosMes" runat="server"></h5>
+                    <a href="reporteMesasPedidosCerradosMensual.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
                 </div>
             </div>
         </div>

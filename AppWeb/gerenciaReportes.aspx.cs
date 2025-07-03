@@ -15,7 +15,8 @@ namespace AppWeb
         {
             ocupacionMesaCantidad.InnerText = getPedidosActivos().ToString() + "/" + getMesasHabilitadas().ToString();
             estadoOrdenesCantidad.InnerText = getOrdenesActivas().ToString();
-            PedidosCerrados.InnerText = MesaMasPedidos();
+            PedidosCerradosDia.InnerText = MesaMasPedidosDiaMes("diario");
+            PedidosCerradosMes.InnerText = MesaMasPedidosDiaMes("mensual");
             //estadoOrdenesCantidad.InnerText = "1";
         }
 
@@ -75,12 +76,27 @@ namespace AppWeb
         }
 
 
-        private string MesaMasPedidos()
+        private string MesaMasPedidosDiaMes(string tipoReporte)
         {
             Database database = new Database();
             try
             {
-                database.setQuery("SELECT TOP 1 id_Mesa,COUNT(*) as TotalPedidos FROM Pedidos WHERE CONVERT (DATE,Fecha) = CONVERT(DATE,GETDATE()) AND Importe <> 0 AND Estado = 0 GROUP BY id_Mesa ORDER BY TotalPedidos DESC");
+                string consulta = "SELECT TOP 1 id_Mesa,COUNT(*) as TotalPedidos FROM Pedidos "; 
+                
+                if(tipoReporte == "diario")
+                {
+                    consulta += "WHERE CONVERT(DATE, Fecha) = CONVERT(DATE, GETDATE()) ";
+                } else if (tipoReporte == "mensual" )
+                {
+                    consulta += "WHERE MONTH(Fecha) = MONTH(GETDATE()) AND YEAR(Fecha) = YEAR(GETDATE()) ";
+                } else
+                {
+                   return "Tipo reporte invalido";
+                }
+
+                consulta += "AND Importe <> 0 AND Estado = 0 GROUP BY id_Mesa ORDER BY TotalPedidos DESC";
+
+                database.setQuery(consulta);
                 int id = database.execScalar();
 
                 if (id == 0)

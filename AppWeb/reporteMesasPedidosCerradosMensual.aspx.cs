@@ -5,22 +5,21 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
-using dominio;
 
 namespace AppWeb
 {
-    public partial class reporteMesasPedidosCerrados : System.Web.UI.Page
+    public partial class reporteMesasPedidosCerradosMensual : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             ReportesDatos manager = new ReportesDatos();
-            dgvReporte.DataSource = manager.listarRankingMasPedidosCerrados("diario");
-            DataBind();
+            dgvReporte.DataSource = manager.listarRankingMasPedidosCerrados("mensual");
+            dgvReporte.DataBind();
         }
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaReportes.aspx", false);
+            Response.Redirect("gerenciaReportes.aspx");
         }
     }
 }
