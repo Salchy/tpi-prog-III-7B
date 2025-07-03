@@ -17,6 +17,8 @@ namespace AppWeb
             estadoOrdenesCantidad.InnerText = getOrdenesActivas().ToString();
             PedidosCerradosDia.InnerText = MesaMasPedidosDiaMes("diario");
             PedidosCerradosMes.InnerText = MesaMasPedidosDiaMes("mensual");
+            PlatoMasPedidoDia.InnerText = MenuMasPedido("diario");
+            PlatoMasPedidoMes.InnerText = MenuMasPedido("mensual");
             //estadoOrdenesCantidad.InnerText = "1";
         }
 
@@ -117,5 +119,53 @@ namespace AppWeb
                 database.closeConnection();
             }
         }
+
+        private string MenuMasPedido(string tipoReporte)
+        {
+            Database database = new Database();
+            try
+            {
+                string consulta = "SELECT TOP 1 O.id_Menu,Sum(O.Cantidad) as TotalPedidos FROM Ordenes O INNER JOIN Menu M ON O.id_Menu = M.id_Menu_Item INNER JOIN Pedidos P ON O.id_Pedido = P.id_Pedido ";
+
+                if (tipoReporte == "diario")
+                {
+                    consulta += "WHERE CONVERT(DATE, P.Fecha) = CONVERT(DATE, GETDATE()) ";
+                }
+                else if (tipoReporte == "mensual")
+                {
+                    consulta += "WHERE MONTH(P.Fecha) = MONTH(GETDATE()) AND YEAR(P.Fecha) = YEAR(GETDATE()) ";
+                }
+                else
+                {
+                    return "Tipo reporte invalido";
+                }
+
+                consulta += "AND P.Importe <> 0 AND P.Estado = 0 GROUP BY O.id_Menu ORDER BY TotalPedidos DESC";
+
+                database.setQuery(consulta);
+                int id = database.execScalar();
+
+                if (id == 0)
+                {
+                    return "Sin datos";
+                }
+                menuItemDatos manager = new menuItemDatos();
+                dominio.MenuItem menu = new dominio.MenuItem();
+                menu = manager.GetItem(id);
+                
+                
+
+                return menu.Nombre;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                database.closeConnection();
+            }
+        }
+
     }
 }
