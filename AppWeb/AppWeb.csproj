@@ -128,6 +128,7 @@
     <Content Include="gerenciaSubCategorias.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Ordenes.aspx" />
+    <Content Include="reporteItemMasPedidoDiario.aspx" />
     <Content Include="reporteMesasPedidosCerrados.aspx" />
     <Content Include="reporteMesasPedidosCerradosMensual.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -276,6 +277,13 @@
       <DependentUpon>Ordenes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reporteItemMasPedidoDiario.aspx.cs">
+      <DependentUpon>reporteItemMasPedidoDiario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="reporteItemMasPedidoDiario.aspx.designer.cs">
+      <DependentUpon>reporteItemMasPedidoDiario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="reporteMesasPedidosCerrados.aspx.cs">
       <DependentUpon>reporteMesasPedidosCerrados.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

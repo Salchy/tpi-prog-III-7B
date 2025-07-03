@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
-    public class ReporteMesasPedidosCerrados
+    public class Reportes
     {
         public string numeroMesa { get; set; }
         public int TotalPedidos { get; set; }
+
+        public string NombreMenu { get; set; }
     }
 }

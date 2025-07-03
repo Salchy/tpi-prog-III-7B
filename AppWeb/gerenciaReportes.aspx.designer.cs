@@ -69,15 +69,6 @@ namespace AppWeb
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PlatoMasPedidoDia;
 
         /// <summary>
-        /// Control P1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl P1;
-
-        /// <summary>
         /// Control PlatoMasPedidoMes.
         /// </summary>
         /// <remarks>
@@ -85,15 +76,6 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PlatoMasPedidoMes;
-
-        /// <summary>
-        /// Control P2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl P2;
 
         /// <summary>
         /// Control PedidosCerradosMes.

@@ -38,7 +38,7 @@
                 <div class="card-header">ITEM MAS PEDIDO DEL DIA</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PlatoMasPedidoDia" runat="server">0</h5>
-                    <p class="card-text" id="P1" runat="server"></p>
+                    <a href="reporteItemMasPedidoDiario.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 <div class="card-header">ITEM MAS PEDIDO DEL MES</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PlatoMasPedidoMes" runat="server">0</h5>
-                    <p class="card-text" id="P2" runat="server"></p>
+                    <a href="gerenciaReportes.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
                 </div>
             </div>
         </div>
