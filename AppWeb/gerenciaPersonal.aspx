@@ -9,7 +9,7 @@
         }
     </style>
     <div class="mb-4">
-        <asp:Panel runat="server">
+        <asp:Panel runat="server" DefaultButton="btnBuscar">
             <div class="row d-flex align-items-center">
                 <div class="col-3">
                     <div class="mb-3">

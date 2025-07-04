@@ -55,8 +55,6 @@ namespace negocio
                 if (campo == "Ítem")
                 {
                     consulta += "WHERE Nombre_Menu like '%" + filtro + "%' ";
-
-
                 }
                 else if (campo == "Categoria")
                 {
@@ -196,13 +194,11 @@ namespace negocio
 
         }
 
-
         /// 
         public void setMenu(MenuItem aux, SqlDataReader data)
         {
             CategoriasDatos cat = new CategoriasDatos();
             SubCategoriaDatos subcat = new SubCategoriaDatos();
-
 
             aux.IdMenuItem = (int)database.Reader["id_Menu_Item"];
             aux.Nombre = database.Reader["Nombre_Menu"].ToString();
@@ -212,7 +208,6 @@ namespace negocio
             aux.SubCategoria = subcat.GetSubCategoria(Convert.ToInt32(database.Reader["idSubCategoria"]));
             aux.Estado = (bool)database.Reader["Estado"];
             aux.Categoria = cat.GetCategoria(aux.SubCategoria.IdCategoriaPadre);
-
         }
 
         /// 
@@ -233,7 +228,6 @@ namespace negocio
                 setMenu(item, database.Reader);
                 submenu.Add(item);
             }
-
             return submenu;
         }
 

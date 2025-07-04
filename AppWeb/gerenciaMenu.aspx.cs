@@ -15,21 +15,16 @@ namespace AppWeb
         {
             if (!IsPostBack)
             {
-
                 try
                 {
                     menuItemDatos menu = new menuItemDatos();
                     dgvMenu.DataSource = menu.filtrar("Ítem", "", "Activo");
                     dgvMenu.DataBind();
-
-
                 }
                 catch (Exception ex)
                 {
-
                     throw ex;
                 }
-
             }
         }
 
@@ -61,7 +56,6 @@ namespace AppWeb
 
         protected void dgvMenu_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-
             int id = int.Parse(e.CommandArgument.ToString());
 
             if (e.CommandName == "Editar")
@@ -99,7 +93,7 @@ namespace AppWeb
             try
             {
                 menuItemDatos manager = new menuItemDatos();
-                dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedValue, txtFiltroAvanzado.Text, ddlEstado.SelectedValue);
+                dgvMenu.DataSource = manager.filtrar(ddlCampo.SelectedValue, txtFiltroAvanzado.Text.Trim(), ddlEstado.SelectedValue);
                 dgvMenu.DataBind();
             }
             catch (Exception ex)
@@ -107,7 +101,6 @@ namespace AppWeb
                 throw ex;
             }
         }
-
         protected void btnLimpiarFiltros_Click(object sender, EventArgs e)
         {
             try

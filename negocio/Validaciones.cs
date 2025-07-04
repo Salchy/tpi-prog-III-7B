@@ -118,12 +118,10 @@ namespace negocio
             {
                 return false;
             }
-
             if (BoolSoloNumeros(str))
             {
                 return false;
             }
-
             // DOBLE ESPACIO JUNTO
             if (str.Contains("  "))
             {

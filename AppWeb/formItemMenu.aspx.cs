@@ -52,7 +52,6 @@ namespace AppWeb
                             }
                         }
 
-
                         ddlCategoria.DataSource = ActivasMasActual;
                         ddlCategoria.DataTextField = "Nombre";
                         ddlCategoria.DataValueField = "Id";
@@ -64,10 +63,8 @@ namespace AppWeb
                         SubCategoriaDatos datos = new SubCategoriaDatos();
                         List<SubCategoria> todas = datos.listarSubCategorias();
 
-
                         // cuando estoy modificando me traigo las subcategorias activas mas la propia si esta inactiva(relacionadas a la categoria padre)
                         List<SubCategoria> filtradas = todas.Where(x => (x.Estado == true || x.Id == seleccionado.SubCategoria.Id) && x.IdCategoriaPadre == seleccionado.Categoria.Id).ToList();
-
 
                         foreach (var item in filtradas)
                         {
@@ -79,7 +76,6 @@ namespace AppWeb
                                 }
                             }
                         }
-
 
                         ddlSubcategoria.DataSource = filtradas;
                         ddlSubcategoria.DataTextField = "Nombre";
@@ -104,13 +100,9 @@ namespace AppWeb
                 }
                 catch (Exception ex)
                 {
-
                     throw ex;
                 }
-                
             }
-
-
         }
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
@@ -137,7 +129,7 @@ namespace AppWeb
 
                 throw ex;
             }
-            
+
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -159,7 +151,8 @@ namespace AppWeb
                     lblErrorNombre.Visible = true;
                     lblErrorNombre.Text = "Valor ingresado invalido, no se permiten caracteres especiales ni solo numeros";
                     ingresoValido = false;
-                } else
+                }
+                else
                 {
                     lblErrorNombre.Visible = false;
                 }
@@ -200,7 +193,8 @@ namespace AppWeb
                     lblErrorPrecio.Visible = true;
                     lblErrorPrecio.Text = "No puede ser menor a 0";
                     ingresoValido = false; ;
-                } else
+                }
+                else
                 {
                     lblErrorPrecio.Visible = false;
 
@@ -212,12 +206,13 @@ namespace AppWeb
                     lblErrorDescripcion.Visible = true;
                     lblErrorDescripcion.Text = "Valor ingresado invalido, no se permiten caracteres especiales ni solo numeros";
                     ingresoValido = false;
-                } else
+                }
+                else
                 {
                     lblErrorDescripcion.Visible = false;
                 }
 
-               
+
 
 
 
@@ -231,8 +226,9 @@ namespace AppWeb
                 {
                     lblErrorStock.Visible = true;
                     lblErrorStock.Text = "No puede ser menor a 0";
-                    ingresoValido = false; 
-                } else
+                    ingresoValido = false;
+                }
+                else
                 {
                     lblErrorStock.Visible = false;
 
@@ -244,7 +240,8 @@ namespace AppWeb
                     lblErrorCategoria.Text = "Debe seleccionar una categoria";
                     ingresoValido = false;
 
-                } else
+                }
+                else
                 {
                     lblErrorCategoria.Visible = false;
                 }
@@ -254,12 +251,14 @@ namespace AppWeb
                     lblErrorSubCategoria.Visible = true;
                     lblErrorSubCategoria.Text = "Debe seleccionar una categoria";
                     ingresoValido = false;
-                } else if (ddlSubcategoria.SelectedValue == "0")
+                }
+                else if (ddlSubcategoria.SelectedValue == "0")
                 {
                     lblErrorSubCategoria.Visible = true;
                     lblErrorSubCategoria.Text = "Debe seleccionar una subcategoria";
                     ingresoValido = false;
-                } else
+                }
+                else
                 {
                     lblErrorSubCategoria.Visible = false;
                 }
@@ -273,13 +272,13 @@ namespace AppWeb
 
                 nuevo.Nombre = txtNombre.Text.Trim();
 
-                
+
 
 
                 lblErrorPrecio.Visible = false;
                 nuevo.Precio = decimal.Parse(txtPrecio.Text);
 
-                
+
 
                 nuevo.Descripcion = txtDescripcion.Text.Trim();
 
@@ -290,7 +289,7 @@ namespace AppWeb
                 nuevo.SubCategoria.Id = int.Parse(ddlSubcategoria.SelectedValue);
 
 
-                
+
 
                 nuevo.Stock = int.Parse(txtStock.Text);
 

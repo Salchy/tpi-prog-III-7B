@@ -20,7 +20,7 @@ namespace AppWeb
 
         protected void btnVolver_Click(object sender, EventArgs e)
         {
-            Response.Redirect("gerenciaReportes.aspx", false);
+            Response.Redirect("gerencia.aspx", false);
         }
     }
 }

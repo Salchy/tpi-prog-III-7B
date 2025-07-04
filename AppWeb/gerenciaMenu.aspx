@@ -3,8 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-
-    <asp:Panel runat="server" ID="panelMenu">
+    <asp:Panel runat="server" ID="panelMenu" DefaultButton="btnBuscar">
         <div class="row">
             <div class="col-2">
                 <div class="mb-3">
@@ -85,8 +84,5 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-
-
-
     <asp:Button Text="Agregar Item" ID="btnAgregar" runat="server" CssClass="btn btn-success" OnClick="btnAgregar_Click" />
 </asp:Content>

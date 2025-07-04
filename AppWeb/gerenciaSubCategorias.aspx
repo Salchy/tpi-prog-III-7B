@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Panel runat="server" ID="panelSub">       
+    <asp:Panel runat="server" ID="panelSub" DefaultButton="btnBuscarSubCategorias">       
     <div class="row">
         <div class ="col-2">
             <div class="mb-3">
