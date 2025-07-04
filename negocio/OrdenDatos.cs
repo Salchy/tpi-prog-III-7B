@@ -89,15 +89,13 @@ namespace negocio
 
         public void EliminarOrdenesdelPedido(int idPedido)
         {
-                     
             try
             {
                 OrdenDatos orden = new OrdenDatos();
                 List<Orden> Pedidas = orden.getOrdenesPedido(idPedido);
                 menuItemDatos menu = new menuItemDatos();
                 foreach (var item in Pedidas)
-                {
-                                       
+                {                
                     item.Menu.Stock = item.Menu.Stock + item.Cantidad;
                     menu.ModificarItem(item.Menu);
                     orden.EliminarOrden(item.id);

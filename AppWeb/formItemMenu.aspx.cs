@@ -219,20 +219,17 @@ namespace AppWeb
                     lblErrorDescripcion.Visible = false;
                 }
 
-
-
-
-
                 if (string.IsNullOrEmpty(txtStock.Text) || !int.TryParse(txtStock.Text.Trim(), out _)) // tryParse intenta convertir el numero en int, devuelve bool // out _ ignora la salida
                 {
                     lblErrorStock.Visible = true;
                     lblErrorStock.Text = "Valor ingresado invalido, debe ser numero";
                     ingresoValido = false; ;
                 }
-                else if (int.Parse(txtStock.Text) < 0)
+
+                else if (int.Parse(txtStock.Text) < 0 || int.Parse(txtStock.Text) > 255)
                 {
                     lblErrorStock.Visible = true;
-                    lblErrorStock.Text = "No puede ser menor a 0";
+                    lblErrorStock.Text = "Elije un rango válido (0 - 255)";
                     ingresoValido = false;
                 }
                 else
@@ -279,13 +276,8 @@ namespace AppWeb
 
                 nuevo.Nombre = txtNombre.Text.Trim();
 
-
-
-
                 lblErrorPrecio.Visible = false;
                 nuevo.Precio = decimal.Parse(txtPrecio.Text);
-
-
 
                 nuevo.Descripcion = txtDescripcion.Text.Trim();
 
@@ -294,9 +286,6 @@ namespace AppWeb
 
                 nuevo.SubCategoria = new SubCategoria();
                 nuevo.SubCategoria.Id = int.Parse(ddlSubcategoria.SelectedValue);
-
-
-
 
                 nuevo.Stock = int.Parse(txtStock.Text);
 

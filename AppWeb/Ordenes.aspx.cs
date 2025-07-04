@@ -332,6 +332,13 @@ namespace AppWeb
                     dgvOrdenes.DataSource = orden.getOrdenesPedido(orden1.Pedido.Id);
                     dgvOrdenes.DataBind();
 
+                    int id = Convert.ToInt32(ddlSubCategoria.SelectedValue);
+                    Session.Add("Submenu", menu.listarSubMenu(id));
+
+                    dgvMenu.DataSource = null;
+                    dgvMenu.DataSource = Session["Submenu"];
+                    dgvMenu.DataBind();
+
                     txtMenu.Text = "";
                     txtMenu.ReadOnly = true;
                     lblErrorMenu.Visible = false;
@@ -343,7 +350,6 @@ namespace AppWeb
                     ver2 = false;
                     lblOrdenesPedido.Visible = true;
                     btnPedidos.Visible = true;
-
 
                 }
                 else
