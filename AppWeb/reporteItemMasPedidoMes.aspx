@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reporteMesasPedidosCerradosMensual.aspx.cs" Inherits="AppWeb.reporteMesasPedidosCerradosMensual" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reporteItemMasPedidoMes.aspx.cs" Inherits="AppWeb.reporteItemMasPedidoMes" %>
 
 <!DOCTYPE html>
 
@@ -19,16 +19,19 @@
                 <div class="col-md-4 text-center" style="margin-top: 50px; margin-left: 40px;">
                     <asp:GridView ID="dgvReporte" runat="server" CssClass="table table-dark table-striped" AutoGenerateColumns="false" Height="100%">
                         <Columns>
-                            <asp:BoundField HeaderText="Mesa" DataField="numeroMesa" />
+                            <asp:BoundField HeaderText="Item" DataField="NombreMenu" />
                             <asp:BoundField HeaderText="Cantidad de pedidos" DataField="TotalPedidos" />
                         </Columns>
                     </asp:GridView>
                 </div>
                 <div class="col-md-2">
-                    <asp:Button Text="VOLVER A REPORTES" CssClass="btn btn-primary" runat="server" ID="btnVolver" OnClick="btnVolver_Click" style="margin-top:50px;"/>
+                    <asp:Button Text="VOLVER A REPORTES" CssClass="btn btn-primary" runat="server" ID="btnVolver" OnClick="btnVolver_Click" Style="margin-top: 50px;" />
                 </div>
             </div>
         </div>
     </form>
 </body>
 </html>
+
+
+

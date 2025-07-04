@@ -11,7 +11,7 @@ namespace AppWeb
 {
 
 
-    public partial class reporteItemMasPedidoDiario
+    public partial class reporteItemMasPedidoMes
     {
 
         /// <summary>
