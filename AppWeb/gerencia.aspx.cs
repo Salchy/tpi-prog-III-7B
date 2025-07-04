@@ -19,7 +19,46 @@ namespace AppWeb
             PedidosCerradosMes.InnerText = MesaMasPedidosDiaMes("mensual");
             PlatoMasPedidoDia.InnerText = MenuMasPedido("diario");
             PlatoMasPedidoMes.InnerText = MenuMasPedido("mensual");
-            //estadoOrdenesCantidad.InnerText = "1";
+
+            if (PedidosCerradosDia.InnerText == "Sin datos")
+            {
+                btnMesasDia.Visible = false;
+            }
+            else
+            {
+                btnMesasDia.Visible = true;
+            }
+
+            if(PedidosCerradosMes.InnerText == "Sin datos")
+            {
+                btnMesasMes.Visible = false;
+            } else
+            {
+                btnMesasMes.Visible = true;
+            }
+
+
+
+            if (PlatoMasPedidoDia.InnerText == "Sin datos")
+            {
+                btnItemDia.Visible = false;
+            }
+            else
+            {
+                btnItemDia.Visible = true;
+            }
+
+            if (PlatoMasPedidoMes.InnerText == "Sin datos")
+            {
+                btnItemMes.Visible = false;
+            } else
+            {
+                btnItemMes.Visible = true;
+            }
+
+           
+
+
         }
 
         // Me devuelve la cantidad de mesas totales habilitadas.
@@ -167,5 +206,24 @@ namespace AppWeb
             }
         }
 
+        protected void btnMesasDia_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("reporteMesasPedidosCerrados.aspx", false);
+        }
+
+        protected void btnItemDia_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("reporteItemMasPedidoDiario.aspx", false);
+        }
+
+        protected void btnItemMes_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("reporteItemMasPedidoMes.aspx", false);
+        }
+
+        protected void btnMesasMes_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("reporteMesasPedidosCerradosMensual.aspx", false);
+        }
     }
 }

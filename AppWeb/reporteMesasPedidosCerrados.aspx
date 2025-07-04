@@ -12,6 +12,9 @@
 <body class="bg-dark text-white">
     <form id="form1" runat="server">
         <div class="container mt-5">
+            <div class="text-center">
+                <h1>CANTIDAD DE PEDIDOS CERRADOS POR MESA HOY</h1>
+            </div>
             <div class="row ">
                 <div class="col-md-4 text-center">
                     <img src="img/logo.png" class="img-fluid" style="max-height: 400px;" alt="Logo" />
@@ -25,7 +28,7 @@
                     </asp:GridView>
                 </div>
                 <div class="col-md-2">
-                    <asp:Button Text="VOLVER A REPORTES" CssClass="btn btn-primary" runat="server" ID="btnVolver" OnClick="btnVolver_Click" Style="margin-top: 50px;"/>
+                    <asp:Button Text="VOLVER A REPORTES" CssClass="btn btn-primary" runat="server" ID="btnVolver" OnClick="btnVolver_Click" Style="margin-top: 50px;" />
                 </div>
             </div>
         </div>

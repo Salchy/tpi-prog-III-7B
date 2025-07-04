@@ -60,6 +60,15 @@ namespace AppWeb
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PedidosCerradosDia;
 
         /// <summary>
+        /// Control btnMesasDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMesasDia;
+
+        /// <summary>
         /// Control PlatoMasPedidoDia.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PlatoMasPedidoDia;
+
+        /// <summary>
+        /// Control btnItemDia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnItemDia;
 
         /// <summary>
         /// Control PlatoMasPedidoMes.
@@ -78,6 +96,15 @@ namespace AppWeb
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PlatoMasPedidoMes;
 
         /// <summary>
+        /// Control btnItemMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnItemMes;
+
+        /// <summary>
         /// Control PedidosCerradosMes.
         /// </summary>
         /// <remarks>
@@ -85,5 +112,14 @@ namespace AppWeb
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl PedidosCerradosMes;
+
+        /// <summary>
+        /// Control btnMesasMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnMesasMes;
     }
 }

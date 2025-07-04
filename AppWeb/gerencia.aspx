@@ -40,7 +40,7 @@
                 <div class="card-header">MESA CON MAS PEDIDOS CERRADOS (DIARIO)</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PedidosCerradosDia" runat="server"></h5>
-                    <a href="reporteMesasPedidosCerrados.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
+                <asp:Button ID="btnMesasDia" runat="server" Text="MAS DETALLES" CssClass="btn btn-light btn-sm" OnClick="btnMesasDia_Click"/>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <div class="card-header">ITEM MAS PEDIDO DEL DIA</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PlatoMasPedidoDia" runat="server">0</h5>
-                    <a href="reporteItemMasPedidoDiario.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
+                    <asp:Button ID="btnItemDia" Text="MAS DETALLES" CssClass="btn btn-light btn-sm" OnClick="btnItemDia_Click" runat="server" />
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <div class="card-header">ITEM MAS PEDIDO DEL MES</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PlatoMasPedidoMes" runat="server">0</h5>
-                    <a href="reporteItemMasPedidoMes.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
+                     <asp:Button ID="btnItemMes" Text="MAS DETALLES" CssClass="btn btn-light btn-sm" Onclick="btnItemMes_Click" runat="server" />
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 <div class="card-header">MESA CON MAS PEDIDOS CERRADOS (MES)</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PedidosCerradosMes" runat="server"></h5>
-                    <a href="reporteMesasPedidosCerradosMensual.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
+                     <asp:Button ID="btnMesasMes" Text="MAS DETALLES" CssClass="btn btn-light btn-sm" Onclick="btnMesasMes_Click" runat="server" />
                 </div>
             </div>
         </div>
