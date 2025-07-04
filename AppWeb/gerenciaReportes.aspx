@@ -1,6 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPageGerencia.Master" AutoEventWireup="true" CodeBehind="gerenciaReportes.aspx.cs" Inherits="AppWeb.gerenciaReportes" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>  
+        .row .card-header {
+            color:#FFFFFF;
+            background-color:#8B1C1C;
+            font-weight:bold;
+        }
+
+        .row .card-body {
+            background-color: #8B1C1C;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
@@ -47,7 +58,7 @@
                 <div class="card-header">ITEM MAS PEDIDO DEL MES</div>
                 <div class="card-body">
                     <h5 class="card-title" id="PlatoMasPedidoMes" runat="server">0</h5>
-                    <a href="gerenciaReportes.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
+                    <a href="reporteItemMasPedidoMes.aspx" style="text-decoration:underline;color:inherit;">MAS DETALLES</a>
                 </div>
             </div>
         </div>
