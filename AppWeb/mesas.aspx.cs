@@ -92,8 +92,18 @@ namespace AppWeb
                             decimal importe = 0;
                             importe = pedido.ImportePedido(idPedido);
                             pedido.ModificarPedido(idPedido, importe, false);
-                            ordenes.EliminarOrdenesdelPedido(idPedido);
+                            //ordenes.EliminarOrdenesdelPedido(idPedido);
                             mesa.ComensalesMesa(0, pedido.BuscarPedido(idPedido));
+
+                            OrdenDatos orden = new OrdenDatos();
+                            List<Orden> Pedidas = orden.getOrdenesPedido(idPedido);
+                            menuItemDatos menu = new menuItemDatos();
+                            foreach (var item in Pedidas)
+                            {
+
+                               
+                                orden.EliminarOrden(item.id);
+                            }
 
 
 
