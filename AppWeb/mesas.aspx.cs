@@ -66,23 +66,23 @@ namespace AppWeb
         {
             int idMesa = Convert.ToInt32(e.CommandArgument);
             PedidoDatos pedido = new PedidoDatos();
-            if (e.CommandName == "Eliminar Pedido")
+            MesaDatos mesa= new MesaDatos();
+            if (e.CommandName == "Abrir Pedido")
             {
 
                 try
                 {
-                   
-                    int idPedido = pedido.getIdPedidoFromIdMesa(idMesa);
-                    if (idPedido != 0)
-                    {
-                        pedido.EliminarPedido(idPedido);
 
-                    }
+                    lblComensales.Visible = true;
+                    txtCantidad.Visible = true;
+                    btnConfirmar.Visible = true;
+                    Session["MesaAbierta"] = idMesa;
 
                 }
                 catch (Exception ex)
                 {
-                    Session.Add("error", "Error al eliminar el pedido: " + ex.Message);
+
+                    Session.Add("error", "Error al abrir mesa: " + ex.Message);
                     Session["Paginaorigen"] = "mesas.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                     Response.Redirect("Error.aspx", false);
                 }
@@ -101,13 +101,14 @@ namespace AppWeb
                         if (idPedido != 0)
                         {
                             OrdenDatos ordenes = new OrdenDatos();
-                            MesaDatos mesa = new MesaDatos();
+                           
                             
                             decimal importe = 0;
                             importe = pedido.ImportePedido(idPedido);
                             pedido.ModificarPedido(idPedido, importe, false);
                             ordenes.EliminarOrdenesdelPedido(idPedido);
                             mesa.ComensalesMesa(0, pedido.BuscarPedido(idPedido));
+
 
 
                         }
@@ -122,31 +123,43 @@ namespace AppWeb
                 }
                 else
                 {
-
+                    ////////////////////
                     try
                     {
-                       
-                        lblComensales.Visible = true;
-                        txtCantidad.Visible= true;
-                        btnConfirmar.Visible = true;
-                        Session["MesaAbierta"] =idMesa;                       
+
+                        int idPedido = pedido.getIdPedidoFromIdMesa(idMesa);
+                        if (idPedido != 0)
+                        {
+                            pedido.EliminarPedido(idPedido);
+
+                        }
 
                     }
                     catch (Exception ex)
                     {
-
-                        Session.Add("error", "Error al abrir mesa: " + ex.Message);
+                        Session.Add("error", "Error al eliminar el pedido: " + ex.Message);
                         Session["Paginaorigen"] = "mesas.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                         Response.Redirect("Error.aspx", false);
                     }
+                    ///////////////
+                    
                 }
 
 
+                Usuario Mesero = (Usuario)Session["Usuario"];
+                List<Mesa> mesasAsignadas;
+                mesasAsignadas = mesa.getMesasAsignadas(Mesero.Id);
+                dgvMesas_asignadas.DataSource = mesasAsignadas;
+                dgvMesas_asignadas.DataBind();
+
+                Session["MesasAsignadas"] = mesasAsignadas;
+                lblComensales.Visible = false;
+                txtCantidad.Visible = false;
+                btnConfirmar.Visible = false;
 
             }
            
-            dgvMesas_asignadas.DataSource = Session["MesasAsignadas"];
-            dgvMesas_asignadas.DataBind();
+            
         }
 
         protected void dgvMesas_asignadas_RowDataBound(object sender, GridViewRowEventArgs e)

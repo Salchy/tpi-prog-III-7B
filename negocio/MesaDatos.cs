@@ -170,6 +170,10 @@ namespace negocio
 
                 throw Ex;
             }
+            finally
+            {
+                database.closeConnection();
+            }
         }
         public void ComensalesMesa(int comensales, Pedido pedido)
         {
@@ -185,6 +189,10 @@ namespace negocio
             {
 
                 throw Ex;
+            }
+            finally
+            {
+                database.closeConnection();
             }
         }
     }
