@@ -211,7 +211,7 @@ namespace negocio
         }
 
         /// 
-        public List<MenuItem> listarSubMenu(int id)
+        public List<MenuItem> listarSubMenu(int id, bool mostrarOcultos)
         {
             List<MenuItem> submenu = new List<MenuItem>();
 
@@ -226,6 +226,10 @@ namespace negocio
             {
                 MenuItem item = new MenuItem();
                 setMenu(item, database.Reader);
+                if (!mostrarOcultos && !item.Estado)
+                {
+                    continue;
+                }
                 submenu.Add(item);
             }
             return submenu;

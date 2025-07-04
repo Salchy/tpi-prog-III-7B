@@ -44,7 +44,6 @@
                         <label for="ddlCategoria" class="form-label">Categoría</label>
                         <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged" AutoPostBack="true" />
                         <asp:Label ID="lblErrorCategoria" runat="server" ForeColor="Red" Visible="false" Style="font-size: 12px;"/>
-
                     </div>
 
                     <div class="mb-3">

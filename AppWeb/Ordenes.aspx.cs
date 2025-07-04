@@ -233,7 +233,7 @@ namespace AppWeb
                 ver = true;
                 menuItemDatos submenu = new menuItemDatos();
                 int id = Convert.ToInt32(ddlSubCategoria.SelectedValue);
-                Session.Add("Submenu", submenu.listarSubMenu(id));
+                Session.Add("Submenu", submenu.listarSubMenu(id, false));
                 dgvMenu.DataSource = null;
                 dgvMenu.DataSource = Session["Submenu"];
                 dgvMenu.DataBind();
@@ -333,7 +333,7 @@ namespace AppWeb
                     dgvOrdenes.DataBind();
 
                     int id = Convert.ToInt32(ddlSubCategoria.SelectedValue);
-                    Session.Add("Submenu", menu.listarSubMenu(id));
+                    Session.Add("Submenu", menu.listarSubMenu(id, false));
 
                     dgvMenu.DataSource = null;
                     dgvMenu.DataSource = Session["Submenu"];
