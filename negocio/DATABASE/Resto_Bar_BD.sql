@@ -72,6 +72,7 @@ CREATE TABLE [Pedidos] (
 	[Importe] MONEY NOT NULL,
 	[Estado] BIT NOT NULL DEFAULT 1,
 	[Fecha] DATETIME NOT NULL DEFAULT GETdate(),
+	[id_Usuario] TINYINT NOT NULL,
 	PRIMARY KEY([id_Pedido])
 );
 GO
@@ -113,6 +114,12 @@ GO
 ALTER TABLE [Pedidos]
 ADD FOREIGN KEY([id_Mesa])
 REFERENCES [Mesas]([id_Mesa])
+ON UPDATE NO ACTION ON DELETE NO ACTION;
+GO
+
+ALTER TABLE [Pedidos]
+ADD FOREIGN KEY([id_Usuario])
+REFERENCES [Usuarios]([id_Usuario])
 ON UPDATE NO ACTION ON DELETE NO ACTION;
 GO
 

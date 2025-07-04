@@ -17,7 +17,7 @@ namespace negocio
 
             try
             {
-                database.setQuery("INSERT INTO Pedidos (id_Mesa,Estado,Importe) OUTPUT inserted.id_Pedido VALUES (@mesa,1,0)");
+                database.setQuery("INSERT INTO Pedidos (id_Mesa,Estado,Importe,id_Usuario) OUTPUT inserted.id_Pedido VALUES (@mesa,1,0,(SELECT id_Usuario FROM mesas WHERE id_Mesa = @mesa))");
                 database.setParameter("@mesa", idMesa);
                 return database.execScalar();
             }
