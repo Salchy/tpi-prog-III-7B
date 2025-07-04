@@ -9,8 +9,6 @@ namespace negocio
 {
     public class Validaciones
     {
-
-
         public int SoloNumeros(string str)
         {
             int aux = 0;
@@ -18,43 +16,40 @@ namespace negocio
             {
                 if (!char.IsDigit(c))
                 {
-
                     return aux;
                 }
             }
-            aux=int.Parse(str);
+            aux = int.Parse(str);
             return aux;
         }
 
         public bool CampoVacio(string str)
         {
-           
             if (string.IsNullOrWhiteSpace(str))
             {
-               return false;
+                return false;
             }
             return true;
         }
 
-        public string SoloLetras(string str) 
+        public string SoloLetras(string str)
         {
             string aux = "";
-            foreach (char c in str) 
+            foreach (char c in str)
             {
                 if (!char.IsLetter(c))
                 {
                     return aux;
                 }
-
             }
-            aux=str;
+            aux = str;
             return aux;
 
         }
 
         public string LetrasNumeros(string str)
         {
-            string aux ="";
+            string aux = "";
             foreach (char c in str)
             {
                 if (!char.IsLetterOrDigit(c))
@@ -67,38 +62,34 @@ namespace negocio
 
         }
 
-       
         public string SinCaracteresEspeciales(string str)
         {
             string aux = "";
             foreach (char c in str)
             {
-                if  (!char.IsLetterOrDigit(c) && !char.IsWhiteSpace(c))
-                    {
-                        return aux;
-                    }
+                if (!char.IsLetterOrDigit(c) && !char.IsWhiteSpace(c))
+                {
+                    return aux;
+                }
             }
             aux = str;
             return aux;
 
         }
 
-
         public bool BooleanSinCaracteresEspeciales(string str)
         {
-            
             foreach (char c in str)
             {
-                if (!char.IsLetter(c) && !char.IsDigit(c) && !char.IsWhiteSpace(c) && c!=',')
+                if (!char.IsLetter(c) && !char.IsDigit(c) && !char.IsWhiteSpace(c) && c != ',')
                 {
                     return false;
                 }
             }
-            
+
             return true;
 
         }
-
 
         public bool BoolSoloNumeros(string str)
         {
@@ -118,25 +109,26 @@ namespace negocio
         public bool validarTextos(string str)
         {
 
-            if(string.IsNullOrEmpty(str))
+            if (string.IsNullOrEmpty(str))
             {
                 return false;
             }
 
-            if(BooleanSinCaracteresEspeciales(str) == false)
+            if (BooleanSinCaracteresEspeciales(str) == false)
             {
                 return false;
             }
 
-            if(BoolSoloNumeros(str)) {
+            if (BoolSoloNumeros(str))
+            {
                 return false;
             }
-            
 
             // DOBLE ESPACIO JUNTO
-            if (str.Contains ("  ")) {
+            if (str.Contains("  "))
+            {
                 return false;
-               
+
             }
 
             return true;
