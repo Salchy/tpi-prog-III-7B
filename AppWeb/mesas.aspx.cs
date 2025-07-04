@@ -24,21 +24,7 @@ namespace AppWeb
             }
             nivelUsuario = ((Usuario)Session["Usuario"]).NivelUsuario;
 
-            /*switch (nivelUsuario)
-            {
-                case 0:
-                    this.MasterPageFile = "~/masterPageGerencia.Master";
-                    break;
-                case 1:
-                    this.MasterPageFile = "~/masterPageGerencia.Master";
-                    break;
-                case 2:
-                    this.MasterPageFile = "~/masterPageMesero.master";
-                    break;
-                default:
-                    this.MasterPageFile = "~/masterPageMesero.master";
-                    return;
-            }*/
+            
             this.MasterPageFile = "~/masterPageMesero.master";
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -123,7 +109,7 @@ namespace AppWeb
                 }
                 else
                 {
-                    ////////////////////
+                    
                     try
                     {
 
@@ -141,7 +127,7 @@ namespace AppWeb
                         Session["Paginaorigen"] = "mesas.Aspx";//guarda la pagina donde se origina el error para usar lo en un boton de volver en la pagina de error
                         Response.Redirect("Error.aspx", false);
                     }
-                    ///////////////
+                    
                     
                 }
 
@@ -234,10 +220,8 @@ namespace AppWeb
                     }
 
 
-
-
              }
-            catch (Exception ex)
+             catch (Exception ex)
              {
 
                     Session.Add("error", "Error al definir comensales y crear el pedido: " + ex.Message);
@@ -246,7 +230,6 @@ namespace AppWeb
 
              }
                 
-
 
         }
     }
