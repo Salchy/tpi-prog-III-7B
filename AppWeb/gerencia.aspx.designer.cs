@@ -11,7 +11,7 @@ namespace AppWeb
 {
 
 
-    public partial class gerenciaReportes
+    public partial class gerencia
     {
 
         /// <summary>

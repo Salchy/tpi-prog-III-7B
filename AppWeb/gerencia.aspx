@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPageGerencia.Master" AutoEventWireup="true" CodeBehind="gerenciaReportes.aspx.cs" Inherits="AppWeb.gerenciaReportes" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/masterPageGerencia.Master" AutoEventWireup="true" CodeBehind="gerencia.aspx.cs" Inherits="AppWeb.gerencia" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>  
