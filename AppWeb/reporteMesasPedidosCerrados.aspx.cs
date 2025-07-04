@@ -13,6 +13,13 @@ namespace AppWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (UsuarioDatos.GetLevel(Session["Usuario"]) > 1)
+            {
+                Session.Add("error", "Mensaje de error");
+                Response.Redirect("Error.aspx", false);
+                return;
+            }
+
             ReportesDatos manager = new ReportesDatos();
             dgvReporte.DataSource = manager.listarRankingMasPedidosCerrados("diario");
             DataBind();
